@@ -10,14 +10,14 @@
 <section class="body">
 <form>
         
-    <label>Name</label>
-    <input name="name" placeholder="Type Here">
+    <label>Argument 1:</label>
+    <input name="arg1" placeholder="Type Here">
             
-    <label>Email</label>
-    <input name="email" type="email" placeholder="Type Here">
+    <label>Relation:</label>
+    <input name="arg2" type="email" placeholder="Type Here">
             
-    <label>Message</label>
-    <textarea name="message" placeholder="Type Here"></textarea>
+    <label>Argument 2:</label>
+    <input name="arg2" placeholder="Type Here">
             
     <input id="submit" name="submit" type="submit" value="Submit">
         
