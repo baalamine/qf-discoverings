@@ -1,4 +1,5 @@
 \documentclass{sig-alternate}
+\usepackage[utf8]{inputenc}
 \usepackage{csquotes}
 \usepackage{tikz}
 \usetikzlibrary{matrix,shapes.multipart, arrows, shapes.geometric,fit,scopes}
@@ -8,7 +9,7 @@
   rs/.style={rectangle split, draw, rectangle split parts=#1},
   ou/.style={draw, inner xsep=1em, inner ysep=1ex, fit=#1}
 }
-
+\usepackage[english, francais]{babel}
 \newcommand{\lamine}[1]{\textbf{[Lamine: {\textcolor{red}{#1}}]}}
 \newcommand{\laure}[1]{\textbf{[Laure: \textcolor{green}{#1}]}}
 \newcommand{\tbd}[1]{\textbf{[TODO: \textcolor{blue}{#1}]}}
@@ -16,7 +17,7 @@
 \begin{document}
 \conferenceinfo{}{}
 
-\title{Combining Truth Discovery and Open Information Extraction\\ with Active Ensembling}
+\title{Combining Truth Discovery and Open Information\\ Extraction with Active Ensembling}
 
 \numberofauthors{2} 
 \author{
@@ -47,8 +48,13 @@ Laure Berti-Equille\\
 \begin{abstract}
 Web search engines or open information extraction systems usually reply to
 users' queries with a set of candidate answers that are often conflicting 
-because they are claimed by multiple information sources. In this context, estimating information veracity is difficult for the users  especially when they have no prior knowledge about the trustworthiness of the sources. In this demo, we showcase a system that supports event/entity and relation extraction based on keyword-search from the Web, processes the conflicting outputs, combines multiple truth finding algorithms with active learning to provide the most likely true answers and determine the most trustworthy sources. 
-%Our system is built on top of AllegatorTrack which is a framework that implements a set of well-established truth finding techniques. Our system has also the ability to account for users' feedbacks, based on its knowledge of the correct instances for some searched relations, in order to improve the truth finding process.
+because they are claimed by multiple information sources. In this context, 
+estimating information veracity is difficult for the users  especially when
+they have no prior knowledge about the trustworthiness of the sources. In this
+demonstration paper, we showcase a system that supports event/entity and relation
+extraction based on keyword-search from the Web, processes the conflicting outputs, 
+combines multiple truth finding algorithms with active learning to provide the most 
+likely true answers and determine the most trustworthy sources. 
 \end{abstract}
 
 % A category with the (minimum) three required fields
@@ -63,9 +69,11 @@ because they are claimed by multiple information sources. In this context, estim
 % Introduction
 \input{intro}
 
-% Active Truth Finding for relevant information search
-\input{active_truth_finding}
+% Open Information Extraction
+\input{open_extraction}
 
+% Active ensembling for Truth Finding
+\input{active_truth_finding}
 
 % Demonstration system
 \input{demonstration}
