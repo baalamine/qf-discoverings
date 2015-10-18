@@ -1,0 +1,373 @@
+\documentclass[a4paper,10pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\renewcommand{\rmdefault}{ptm}
+\usepackage{bera}% optional: just to have a nice mono-spaced font
+\usepackage{listings}
+\usepackage{xcolor}
+
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+%opening
+\title{DAFNA API DOCUMENTATION}
+\author{}
+
+\begin{document}
+
+\maketitle
+\newpage
+% tableofcontents
+\tableofcontents
+\newpage
+
+% Authentication
+\section{Authentication}
+Users who would like to use DAFNA API, or integrate it in their own applications,
+need to first get the necessary credentials to access the API.
+DAFNA uses the standard
+\href{http://oauth.net/2/}{oAuth2} protocol to authenticate 3rd party 
+API clients on behalf of the end users. Every 3rd party developper must request
+for an access token, consisting of
+a pair of API Access Key and Secret Key from DAFNA developpers by contacting
+\href{dafna@qcri.org}{dafna@qcri.org} after registration on \href{http://dafna.qcri.org/allegatortrack}{http://dafna.qcri.org/allegatortrack}.
+The 3rd party client will receive from DAFNA developpers the following access credentials.
+\begin{itemize}
+ \item Authentication token: API user's Access Key
+ \item Encrypted password: User's Secret Key
+\end{itemize}
+
+% Request format
+\section{Request Format}
+% Scheme
+\subsection{Scheme}
+Requests to the API endpoints are done using plain HTTP. While HTTPS requests are not yet
+supported by the API, it should do in the future to guarantee a more secure transmission of
+the Access Token. However, supporting HTTPS might yield requests/responses little bit slower.
+
+% Methods
+\subsection{Methods}
+The current version of DAFNA API supports three methods, i.e., \textbf{GET}, \textbf{POST}, and \textbf{DELETE}, 
+depending on the actions, e.g.., creation, listing, or deletion, that the 3rd party would like to perform.
+% Base Url
+\subsection{Base URLs}
+\begin{itemize}
+ \item \href{http://dafna.qrci.org/}{http://dafna.qrci.org/}
+ \item \href{http://localhost:4000/}{http://localhost:4000/}
+\end{itemize}
+All \textbf{GET} and \textbf{DELETE} endpoint URLs are appended to the first base URL, while \textbf{POST} endpoint
+URLs must be appended to the second base URL. As an example, one must use following endpoint URLs in order to 
+list and create datasets, respectively. 
+\begin{description}
+ \item POST \href{http://localhost:4000/datasets/}{http://localhost:4000/datasets/} \\
+ \item GET \href{http://dafna.qcri.org/datasets/}{http://dafna.qcri.org/datasets/} 
+\end{description}
+
+% Access Token Exchange
+\subsection{Access Token Exchange}
+All requests should send the Access Token using the \href{http://oauth2.thephpleague.com/token-types/}{Bearer Token}
+mechanism that requires clients to send it either as query string (?user\_token=some\_string\_here)
+or as an HTTP header (Authorization: Bearer some\_string\_here): some\_string\_here is the
+token placeholder and should be replaced by the real token acquired in the authentication phase.
+Normally, it is a unique token that identifies the client and the user on which
+requests are to be made on behalf of. Continuing with the example above, the complete
+URLs should be (using query string): 
+\begin{itemize}
+ \item POST \href{http://localhost:4000/datasets?user\_token=some\_string\_here}{http://localhost:4000/datasets?user\_token=some\_string\_here} \\
+  \item GET \href{http://dafna.qcri.org/datasets?user\_token=some\_string\_here}{http://dafna.qcri.org/datasets?user\_token=some\_string\_here} 
+\end{itemize}
+
+
+% Request content type
+\subsection{Request Content Type}
+Either (1) ``application/x-www-form-urlencoded” or (2) ``application/json” can be used as the request content type (HTTP request “Content-Type” header value). 
+If (1) is used, all parameters should be encoded in the URL as a query string with proper escapes and separated by \&. If (2) is used, the request body should 
+be a well-formed JSON object. 
+
+\begin{description}
+ \item Example for (1)
+ \item POST \href{http://localhost:4000/runsets?checked\_algo=array\_of\_parameters}{http://localhost:4000/runsets?checked\_algo=array\_of\_parameters}
+ \item Example for (2)
+ \item POST \href{http://localhost:4000/runsets}{http://localhost:4000/runsets}
+ \item \{checked\_algo: array\_of\_parameters, general\_config: array\_numerical\_values\}
+\end{description}
+The above line should be sent in the request body.
+
+
+Remark that the method used to encode request parameters might be also dictated by the way the request is issued. For e.g., if a given 3rd party client uses
+\href{http://curl.haxx.se/}{'Curl'} to issue his requests, the following two syntaxes are both valid.
+\begin{description}
+ \item curl -X DELETE http://localhost:4000/runsets/1/ -d ``user\_token=some\_string\_here"\\
+ \item and \\
+ \item curl -X POST http://localhost:4000/runsets -H ``Content-type: application/json" -d `\{``user\_token": ``some\_string\_here" , ``checked\_algo": \{``Accu": [``0.2", ``0", ``100", ``0.5", ``false", ``true", ``true", ``false"] \}, ``general\_config":[``0.001", ``0.8", ``1", ``0.4"]\}' 
+\end{description}
+% Response format
+\section{Response Format}
+% http status code
+\subsection{HTTP Status Codes}
+\begin{itemize}
+ \item \textbf{200:} Successful Requests (otherwise, an internal error will occur)
+ \item \textbf{401:} Unauthorized Access, e.g., missing, invalid, or expired token
+ \item \textbf{403:} Forbidden Access to the resource requested by the client
+ \item \textbf{404:} Not Found Resource requested by the user
+ \item \textbf{422:} Invalid Action on the accessed resource
+ 
+\end{itemize}
+
+% Response body format
+\subsection{Response Body Format}
+Currently, all responses are returned in JSON format. In the future, more formats could be 
+supported (like XML). The requested format can be explicitly specified in the request, but if omitted,
+JSON will be assumed. The example above can be written as:
+\begin{description}
+ \item GET \href{http://dafna.qcri.org/datasets.json?user\_token=some\_string\_here}{http://dafna.qcri.org/datasets.json?user\_token=some\_string\_here}
+\end{description}
+
+% endpoints 
+\section{Endpoints}
+The current version of the API provides 8 endpoints, 4 among them are accessed via GET, 2 via POST, and 2 via DELETE:
+% post endpoints
+\subsection{POST Endpoints}
+\begin{enumerate}
+ \item \textbf{/datasets}
+\begin{description}
+ \item Requests the creation of a Dataset
+\end{description}
+\textbf{Parameters}
+\begin{itemize}
+\item \textbf{user\_token}: Secret Token provided to client for authentication 
+\item \textbf{s3\_key}: your file's s3 key if uploaded at Amazon's s3
+\item \textbf{other\_url}: URL if dataset file is located somewhere else
+\item \textbf{kind}: claims, truth (type of dataset)
+\item \textbf{original\_filename}: name of the file 
+\end{itemize}
+\textbf{Response}
+\begin{description}
+ \item None. It is enough to check for HTTP status code of 200 for success.	
+\end{description}
+\textbf{Notes}
+\begin{description}
+ \item The \textbf{s3\_key} and \textbf{other\_url} parameters are both optional.
+\end{description}
+%
+ \item \textbf{/runsets}
+ \begin{description}
+ \item Creating a Runset, i.e., performing truth discovering over a given dataset
+\end{description}
+\textbf{Parameters}
+\begin{itemize}
+ \item \textbf{user\_token}: Secret Token provided to client for authentication 
+ \item  \textbf{checked\_algo}: Algorithm name(s) followed by respective arrays of parameters. E.g. ``checked\_algo": \{``Accu": [``0.2", ``0", ``100", ``0.5", ``false", ``true", ``true", ``false"] , ``Cosine": [``1", ``0.2"] \}
+ \item \textbf{general\_config}: an array of numerical values, e.g. [``0.001", ``0.8", ``1", ``0.4"]
+\end{itemize}
+\textbf{Response}
+\begin{description}
+ \item None. It is enough to check for HTTP status code of 200 for success.	
+\end{description}
+\end{enumerate}
+
+% get endpoints
+\subsection{GET Endpoints}
+\begin{enumerate}
+ \item \textbf{/datasets}
+\begin{description}
+ \item Listing Datasets 
+\end{description}
+\textbf{Parameters}
+\begin{itemize}
+\item \textbf{user\_token}: Secret Token provided to client for authentication
+\end{itemize}
+\textbf{Response}
+\begin{description}
+ \item \{DS1, DS22, ...\} where the format of DSn is:\\
+ \{
+  draw: $<$draw$>$,
+  recordsTotal: $<$Number of Records$>$,
+  recordsFiltered: $<$Number of filtered Records$>$,
+  data: $<$data$>$,
+  s3\_direct\_post: $<$date\_time$>$,
+  fields: $<$date\_time$>$,
+  key: $<$date\_tim$e>$,
+  policy: $<$policy$>$,
+  signature: $<$signatur$>$,
+  success\_action\_status: $<$status$>$,
+\}
+\end{description}
+%
+\item \textbf{/runsets}
+\begin{description}
+ \item Listing Runsets
+\end{description}
+\textbf{Parameters}
+\begin{itemize}
+ \item \textbf{user\_token}: Secret Token provided to client for authentication
+\end{itemize}
+\textbf{Response:}
+\begin{description}
+ \item \{RS1, RS22, ...\} where the format of RSn is:\\
+\{
+  id: $<$runset id$>$,
+  created\_at: $<$Time of creation$>$,
+  runs:[ 
+\{
+  id: $<$runset id$>$,
+  algo: $<$Time of creation$>$,
+  crated\_at: $<>$,
+  status: $<$whether finished$>$,
+  duration: $<$Duration of run$>$,
+\}
+,\{\},\{\}...]
+\}	
+\end{description}
+%
+\item \textbf{/runsets/<id>/results}
+\begin{description}
+ \item Listing Results of runsets having id=<id>
+\end{description}
+\textbf{Parameters}
+\begin{itemize}
+ \item \textbf{user\_token}: Secret Token provided to client for authentication
+ \item \textbf{id}: identier of the runsets
+\end{itemize}
+\textbf{Response}
+\begin{description}
+ \item
+ \{
+  draw: $<$draw$>$,
+  recordsTotal: $<$Total Number of Records$>$,
+  recordsFiltered: $<$Filtered Records$>$,
+  data: 
+
+\}
+\end{description}
+%
+\item \textbf{/runs}
+\begin{description}
+\item Listing Runs
+\end{description}
+\textbf{Parameters}
+\begin{itemize}
+ \item \textbf{user\_token}: Secret Token provided to client for authentication
+\end{itemize}
+\textbf{Response}
+\begin{description}
+\item 
+\{
+  draw: $<$draw$>$,
+  recordsTotal: $<$Total Number of Records$>$,
+  recordsFiltered: $<$Filtered Records$>$,
+  data:[ \{
+  id: $<$run id$>$,
+  algorithm: $<$Name of the algorithm$>$,
+  created\_at: $<$Time of creation$>$,
+  runset\_id: $<$Runset ID$>$,
+  display: $<$Algorithm name and parameters in paranthesis (in order)$>$,
+  status: $<$whether finished$>$,
+  duration: $<$Duration of run$>$,
+\}
+,\{\},\{\}...]
+\}	
+\end{description}
+\end{enumerate}
+
+% post endpoints
+\subsection{DELETE Endpoints}
+\begin{enumerate}
+\item \textbf{/datasets/<id>}
+\begin{description}
+ \item Deleting a Dataset having id=<id>
+\end{description}
+\textbf{Parameters}
+\begin{itemize}
+ \item \textbf{user\_token}: Secret Token provided to client for authentication
+ \item \textbf{id}: identier of the dataset to be deleted 
+\end{itemize}
+\textbf{Response}
+\begin{description}
+ \item None. It is enough to check for HTTP status code of 200 for success.	
+\end{description}
+%
+\item \textbf{/runsets/<id>}
+\begin{description}
+\item Deleting a Runset having id=<id>
+\end{description}
+\textbf{Parameters}
+\begin{itemize}
+  \item \textbf{user\_token}: Secret Token provided to client for authentication
+ \item \textbf{id}: identier of the runset to be deleted 
+\end{itemize}
+\textbf{Response}
+\begin{description}
+\item  None. It is enough to check for HTTP status code of 200 for success.	
+\end{description}
+\end{enumerate}
+
+% Job Monitoring 
+\section{Job Monitoring}
+Some of the jobs you submit (for e.g. dataset upload, run algorithm(s)) take time to finish. 
+To make the things easier for your application, we have a channel on \href{https://pusher.com/}{Pusher},
+which your application can subscribe to and be notified for the events it has been binded to. If there is any notification 
+(such as job completion), your applicaton will be notified of this. Please note that, repeatedly requesting
+run statuses rather than listening to the push messages will eventually overwhelm our server, and we may choose
+to suspend your account. So, please go through the documentation of Pusher to get a sense of how things work. Your 
+application can subscribe to the notifications using app\_id = "79143". You need to contact us for a key. We will send 
+you the key through email to enable you to subscribe to the channel. Once you have configured your application using the 
+app\_id and key, you can bind to particular events, you wish to be notified for. for e.g. 
+
+\begin{itemize}
+ \item \textbf{channel.bind(`run\_change', function(run){}):} will notifiy in case of any change in the status of a run.
+ \item \textbf{channel.bind(`dataset\_change', function(dataset){}):} will notify you in case of any change in the status of a dataset. 
+\end{itemize}
+You may find the following pages to be particularly useful:
+\begin{enumerate}
+ \item \href{https://pusher.com/docs/client_api_guide/client_channels}{Client Channel}
+ \item \href{https://pusher.com/docs/client_api_guide/client_public_channels}{Client Public Channels}
+ \item \href{https://pusher.com/docs/client_api_guide/client_connect}{Client Connect}
+ \item \href{https://pusher.com/docs/client_api_guide/client_events}{Client Events}
+\end{enumerate}
+
+% Ongoing development
+\section{Ongoing Development}
+Currently, the API is still in improvements and many new other aspects of truth finding and endpoints are still under investigation, based on recent
+proposed development in the field, discussions with early adopter developers, and users' feedbacks. For example, the scheme may support HTTPS in the 
+future, the response body format may support other output formatting like XML.Most importantly, the API must be extended in order to propose broader 
+class of truth finding algorithms, in particular the new ones.
+in the future.
+% AllegatorTrack application
+\section{AllegatorTrack Application}
+The main goal of DAFNA project is to design a scalable and accurate truth discovery system to score the veracity of information extracted from multiple 
+online sources.  We design DAFNA API as the first proposed API that allows users to tests and compares a large class of well-known truth finding algorithms
+on different scenarios and datasets. AllegatorTrack is the first application that uses DAFNA API and provides to users
+an online plateform for testing the different features of the API. AllegatorTrack application is accessible via \href{http://dafna.qcri.org/users/sign\_in}{http://dafna.qcri.org/users/sign\_in}.
+\end{document}
