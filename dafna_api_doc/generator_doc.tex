@@ -5,7 +5,7 @@
 \usepackage{bera}% optional: just to have a nice mono-spaced font
 \usepackage{listings}
 \usepackage{xcolor}
-
+\usepackage{graphicx}
 \colorlet{punct}{red!60!black}
 \definecolor{background}{HTML}{EEEEEE}
 \definecolor{delim}{RGB}{20,105,176}
@@ -39,6 +39,8 @@
       {[}{{{\color{delim}{[}}}}{1}
       {]}{{{\color{delim}{]}}}}{1},
 }
+\newcommand{\shellcmd}[1]{\vspace*{1cm}\\\indent\indent\texttt{\# #1}\vspace*{1cm}}
+\newcommand{\claim}[1]{\vspace*{0.5cm}\\\indent\indent\texttt{#1}\vspace*{0.5cm}}
 
 %opening
 \title{SYNTHETIC DATASET GENERATOR}
@@ -52,5 +54,125 @@
 % tableofcontents
 \tableofcontents
 \newpage
+
+% Introduction
+\section{Introduction}
+In order to provide to users the ability to test and compare multiple truth finding algorithms on various data set settings, some of them 
+being not easy to obtain in practice, we provide the \href{http://daqcri.github.io/dafna/#/dafna/apidoc/gettingstarted.html}{DAFNA API} 
+together with a synthetic dataset generator. The synthetic dataset generator allows to simulate a large variety of scenarios where sources
+present different behaviors in terms of coverage, error rate, reliability level, conflicting information, ect. More importantly, the generator
+guarantees a ground truth for the evaluation of the accuracy of compared truth finding algorithms. 
+% Free Jar
+\section{JAVA Set Up}
+The synthetic dataset generator has been implemented in JAVA. The correspond jar file is made avaible for free download on \url{http://daqcri.github.io/dafna/#/dafna/exp\_sections/realworldDS/synthetic/syntheticDs.html}
+with the name DAFNA-DataSetGenerator.jar. Please verify you have a recent version of JAVA JRE installed in your computer before using the jar file.
+
+% Types of datasets
+\section{Types of datasets}
+The synthetic dataset generator can produce various types of datasets in function of
+the excepted source coverage, ground truth distribution, distinct values distribution, 
+and level of similarity between distinct of the same data items. It also offers the ability 
+to capture both extreme optimistic and pessimistic scenarios by playing on ground truth distribution 
+controller.
+
+% Inputs parameters
+\section{Generator Usage}
+The synthetic dataset generator is used by running the following command line, e.g.
+on a UNIX terminal.
+\shellcmd{java -jar DAFNA-DataSetGenerator.jar param\_1 param\_2 \ldots param\_n}
+
+\noindent param\_1, param\_2, \ldots, param\_1 correspond to the different input parameters
+of the generator.
+
+
+
+% Mandatory parameters
+\subsection{Input parameters}
+The synthetic dataset generator considers as input 10 parameters.
+All parameters are mandaratory for a successful generation. Each 
+parameter controls a given characteristic of the datasets to be generated.
+Below details the semantics of each parameter.
+
+\begin{itemize}
+ \item[\textbf{-src}:] The number of sources providing claims
+ \item[\textbf{-obj}:] The number of objects covered by sources
+ \item[\textbf{-prop}:] The number of properties describing each object
+ \item[\textbf{-cov}:] Value from $0$ to $1$ representing the uniform percentage 
+ of data items covered by sources in the Uniform coverage Distribution.
+ \item[\textbf{-ctrlC}:] The source coverage distribution which is either \textbf{uniform} or \textbf{Exp} (i.e. Random).
+ An uniform distribution means that the number of values provided by the sources is uniformly
+ distributed given the source coverage value. In the same spirit, the number of values provided 
+ by the sources is exponentially distributed when its coverage distribution is exponential.
+ \item[\textbf{-ctrlT}:] The Ground Truth Distribution per Source. It can be set to one of the following distribution:
+ \begin{itemize}
+  \item[R:] Random Distribution in which the number of true positive claims per source is randomly chosen.
+  \item[Uniform:] Uniform Distribution where each source provides the same number of true positive claims.
+  \item[FP:] Fully Pessimistic Distribution which considers that 80\% of the sources provide always false claims
+  while 20\% of the sources provide always true positive claims.
+  \item[FO:] Fully Optimistic Distribution which considers that 80\% of the sources provide always true claims
+  while 20\% of the sources provide always false positive claims.
+  \item[80P:] 80\% Pessimistic Distribution in which 80\% of the sources provide 20\% true positive claims whereas
+  20\% of the sources provide 80\% false positive claims. 
+  \item[80O:] 80\% Optimistic Distribution which considers that 80\% of the sources provide 80\% true positive claims 
+  and only 20\% of the sources provide 20\% true positive claims.
+  \item[Exp] Exponential Distribution in which the number of true positive values provided by the sources is exponentially
+  distributed.
+ \end{itemize}
+ \item[\textbf{-v}:] The number of distinct value per data item. The specified value will be used as a constant for the uniform 
+ model, and as the maximum number of distinct values in the exponential model.
+ \item[\textbf{-ctrlV}:] The distinct values distribution per data item. It can be set either uniform  or exponential.
+ \begin{itemize}
+  \item [Uniform:] All data items have the same number of distinct values claimed by the set of sources.
+  \item [Exp:]  Each data item has a number of distinct values that is exponentially distributed.
+ \end{itemize}
+  \item[\textbf{-s}:] Similarity level between the different values of the same data item. It must be set either to \textbf{sim} or 
+ to \textbf{dissSim}.
+  \begin{itemize}
+   \item [Sim] Distinct values for data items will be highly similar.
+   \item [dissSim] Distinct values for data items will be highly diss-similar.
+  \end{itemize}
+ \item[\textbf{-f}:] The output folder where the data set will be created and saved.
+\end{itemize}
+
+% generator output
+\subsection{Outputted Datasets}
+Given the required input parameters, the synthetic dataset generator proceeds to the generation 
+of the dataset with the desired characteristics. After completion, it creates the two following
+folders into the main directotry specified by the user with the parameter \textbf{-f}.
+\begin{itemize}
+ \item[claims/] Folder which contains the dataset file 
+ \item[truth/]  Folder which contains the ground truth file
+\end{itemize}
+
+The dataset file produced by the generator contains the sources together with the set of claims.
+It corresponds to a csv file in which each line	contains the following fields:
+\claim{ClaimId, Object, Property, Claim, Source, TimeStamp}
+
+\noindent where claimId, Object, Property, Claim, Source, and TimeStamp are respectively the identifer of the claim,
+the real world object, one of its properties, a claim about this property, the source who made the claim, and
+the time when the claim has been made.
+
+The ground truth file contains the ground truth associated to the generated dataset. It is also a csv file in which each line
+contains the following fields:
+\claim{Object, property, Trueclaim}
+where Object, property, and TrueClaim represent respectively an object, one among its set of properties, and the true claim about
+this given property.
+
+% Example of generation
+\section{Example of generation}
+The use of the synthetic dataset generator requires to instanciate all the  parameters presented above. As an example of a generation,
+suppose we would like to obtain a dataset consisting of 10 sources which fully cover  10 objects having 5 properties. We also 
+want to constrain the distribution of the distinct values per data item and the ground truth distribution to be both exponential.
+We do not care about similar distinct values. Finally, we would like to set the default directotry for the output as ``./Test". 
+We obtain the needed configuration by running the synthetic dataset generator as follows.
+\shellcmd{java -jar DAFNA-DataSetGenerator.jar -src 10 -obj 10 -prop 5 -cov 1.00 -ctrlC Exp -ctrlT Exp -v 3 -ctrlV Exp -s dissSim -f "./Test"}
+
+Figures~(a) and (b) respectively show an excerpt of the dataset file and the ground truth file produced by the generator after completion.\\
+
+
+\begin{tabular}{cc}
+\includegraphics[height=0.4\textheight]{claims}&\includegraphics[height=0.4\textheight]{truths}\\
+(a) Excerpt of the dataset file & (b) Excerpt of the ground truth File\\
+\end{tabular}
 
 \end{document}
