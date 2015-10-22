@@ -1,13 +1,13 @@
 % Information Extraction Technique
+\selectlanguage{english}
 \section{Open Information Extraction}
-\laure{
 \begin{itemize}
  \item décrire le type d'information auquel on s'intéresse par exemple "factoid claim"
  \item decrire le systeme sur lequel on se base
  \item décrire comment on transforme l'output de OpenIE
  \item donner qq exemples
 \end{itemize}
-}
+
 
 In this study, we are interested on truth discovering on the large number of ``factoid" statements
 (or claims) made by multiple Web sources in the same real-world domain. A ``factoid" claim is
@@ -22,17 +22,17 @@ from a Web corpus. We then format this output in such a way that fits our truth 
 
 
 % OIE Input and Ouput
-\paragraph*{TextRunner System}
-TextRunner system relies on an unsupervised extraction procedure which queries, using a single and data-driven 
+\paragraph*{TextRunner extractor}
+The extraction engine relies on an unsupervised extraction procedure which queries, using a single and data-driven 
 pass, an entire Web corpus of unstructured texts and extracts a list of candidate relational tuples which might
-satisfy a given user input query. Such a user input query consists typically of a sentence formed by two real-world
-\emph{entities} and a certain \emph{relation}. Its semantics being that the user is looking for a set of 
-claims on the Web that support or not the relation specified between the two entities. Formally, a user query
-$\query$ in TextRunner can be defined as a triplet $(\e{1}, \rel{}, \e{2})$ where $\e{1}$, $\e{2}$ represent
-are real-world entities and $\rel{}$ is a relation; $\rel{}$ specifies a possible relationship between the
-two given entities. If any of the components of the query is empty, we say that the query is \emph{incomplete}.
+satisfy a given user input query. A user query, in this setting, consists typically of a sentence formed by three
+components: two real-world \emph{entities} and a certain \emph{relation}. The goal of TextRunner being to find and
+gather the set of possible claims on the Web which support or not the specified relation between the two entities. 
+A user query $\query$ can be defined formally with the help of a triplet $(\e{1}, \rel{}, \e{2})$ where $\e{1}$ and $\e{2}$ 
+are real-world entities and $\rel{}$ is a relation; $\rel{}$ indicates a possible relationship between the
+two given entities. If any of the components of the query is not given by the user, we say that the query is \emph{incomplete}.
 Note that the extactor accepts \emph{incomplete} queries as they represent most common queries in real scenarios.
-Indeed, incomplete queries, in particular those in which the second is unspecified, happen in practice in the sense 
+Indeed, incomplete queries, in particular those in which the second entity is unspecified, happen in practice in the sense 
 that users are often looking for claims about unknow facts.
 
 TextRunner outputs a list of candidate claims, ranked with respect to their supported
