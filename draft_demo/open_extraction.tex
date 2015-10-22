@@ -36,9 +36,8 @@ knowledge of the real world: this motivates us the use of information extractors
 Note that the information extraction systems do also well in the case of \emph{incomplete} queries.
 
 TextRunner outputs a list of candidate claims, ranked according to the number of sources. The extractor also provides a pointer
-for accessing the different sources of each outputted claim in so that it is possible to retrieve the set of sources. Given this input,
-the extractor searches into a corpus, consisting of several thousand of sentences, the collections of relational tuples that might satisfy
-the searched relation. In other terms, the extractor outputs a set of tuples $<(e_i, r_{i,j}, e_j)>$.
+for accessing the different sources of each outputted claim in so that it is possible to retrieve the set of sources. Let denote
+by $\claim{1}\ldots \claim{n}$ the set of $n$ conflicting claims extracted by TextRunner about a user query $\query$.
 
 \paragraph*{Formatting of Data Sources}
 We use TextRunner for the extraction of the set of 
