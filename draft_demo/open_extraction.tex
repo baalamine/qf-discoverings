@@ -23,19 +23,23 @@ from a Web corpus. We then format this output in such a way that fits our truth 
 
 % OIE Input and Ouput
 \paragraph*{TextRunner System}
-TextRunner relies on an unsupervised extraction procedure which queries, using a single and data-driven 
-pass, an entire Web corpus of unstructured texts and extracts a list of candidate relational tuples with 
-respect to user input. Such a user input query consists typically of a sentence formed by
-two \emph{entities} and a certain \emph{relation}. Its semantics being that the user is looking for a set 
-of claims on the Web that support or not the relation specified between the two entities. Formally, a user
-query in TextRunner can be defined as a triplet $(\e{1}, \rel{1,2}, \e{2})$ where $\e{1}$ and $\e{2}$ correspond 
-to the entities of the query and $\rel{1,2}$ represents the specified relationship between them. Note that the 
-extactor accepts an \emph{incomplete} query, that is, a query that does not contain all the three components. In 
-real scenarios, a given user is often searching for claims about incomplete relations. 
- 
-Given this input, the extractor searches into a corpus, consisting
-of several thousand of sentences, the collections of relational tuples that might satisfy the searched relation.
-In other terms, the extractor outputs a set of tuples $<(e_i, r_{i,j}, e_j)>$.
+TextRunner system relies on an unsupervised extraction procedure which queries, using a single and data-driven 
+pass, an entire Web corpus of unstructured texts and extracts a list of candidate relational tuples which might
+satisfy a given user input query. Such a user input query consists typically of a sentence formed by two real-world
+\emph{entities} and a certain \emph{relation}. Its semantics being that the user is looking for a set of 
+claims on the Web that support or not the relation specified between the two entities. Formally, a user query
+$\query$ in TextRunner can be defined as a triplet $(\e{1}, \rel{}, \e{2})$ where $\e{1}$, $\e{2}$ represent
+are real-world entities and $\rel{}$ is a relation; $\rel{}$ specifies a possible relationship between the
+two given entities. If any of the components of the query is empty, we say that the query is \emph{incomplete}.
+Note that the extactor accepts \emph{incomplete} queries as they represent most common queries in real scenarios.
+Indeed, incomplete queries, in particular those in which the second is unspecified, happen in practice in the sense 
+that users are often looking for claims about unknow facts.
+
+TextRunner outputs a list of candidate claims, ranked with respect to their supported
+number of sources. The extractor also provides a pointer towards the different sources for each outputted claim in so
+that it is possible to retrieve the set of sources. Given this input, the extractor searches into a corpus, consisting
+of several thousand of sentences, the collections of relational tuples that might satisfy the searched relation. In other
+terms, the extractor outputs a set of tuples $<(e_i, r_{i,j}, e_j)>$.
 
 \paragraph*{Formatting of Data Sources}
 We use TextRunner for the extraction of the set of 
