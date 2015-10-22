@@ -5,8 +5,18 @@
 - décrire comment on transforme l'output de OpenIE
 - donner qq exemples
 
-In this study, we are interested on ``factoid claims" about the same real-world objects
-made by multiple conflicting Web sources.
+We rely in this study on open information Web extractors in order to candidates tuples 
+related to ``factoid claims" about real-world topics from multiple conflicting Web sources.
+Open information extractors are unsupervised extraction system that makes a single, data-driven
+pass over an entire corpus (unstructured texts) and extract a large set of relational tuples without 
+any human intervention.
+
+The input $t$ of the extraction system is a triplet $(e_i, r_{i,j}, e_j)$ where $e_i$ and $e_j$ are called
+\emph{entities} and $r_{i,j}$ is a \emph{relation}. The semantics of $r_{i,j}$ is that that of a certain 
+relationship between the two given entities. Given this input, the extractor searches into a corpus, consisting
+of several thousand of sentences, the collections of relational tuples that might satisfy the searched relation.
+In other terms, the extractor outputs a set of tuples $<(e_i, r_{i,j}, e_j)>$.
+
 \paragraph*{Factoid claims} a piece of unverified or inaccurate information that is
 presented in the present as factual, often as part of a publicity effort, and that is 
 then accepted as true because of frequent repetition.
