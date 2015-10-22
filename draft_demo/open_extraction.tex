@@ -9,29 +9,31 @@
 \end{itemize}
 }
 
-In this study, we are interested on truth discovering over a set of ``factoid" statements
+In this study, we are interested on truth discovering on the large number of ``factoid" statements
 (or claims) made by multiple Web sources in the same real-world domain. A ``factoid" claim is
 a piece of unverified or inaccurate information that is presented as factual, often
 as part of a publicity effort. Such type of claims  is usually accepted as true  because of its
-frequent redundancy over multiple sources. We focus on conflicting factoid claims provided by open
-Web information extraction systems as answers to users' queries. Specifically, given a user's input, 
-we retrieve the set of candidates claims, together with the associated sources, returned by TextRunner
-from a Web corpus. 
+frequent redundancy over multiple sources. We focus on conflicting factoid claims provided by typical 
+open Web information extraction systems as answers to users' queries. Concretly, given user input, 
+we retrieve the set of candidates claims, together with the associated sources, returned by TextRunner~\footnote{TextRunner is an online
+at \href{http://openie.allenai.org/}{http://openie.allenai.org/}}
+from a Web corpus. We then format this output in such a way that fits our truth discovering process.
 
 
 
 % OIE Input and Ouput
-\paragraph*{TextRunner Input and Output}
-TextRunner system performs an unsupervised extraction by requying, in a single and data-driven manner,
-an entire Web corpus of unstructured texts and by extracting a list of relational tuples without 
-any human intervention.
+\paragraph*{TextRunner System}
+TextRunner relies on an unsupervised extraction procedure which queries, using a single and data-driven 
+pass, an entire Web corpus of unstructured texts and extracts a list of candidate relational tuples with 
+respect to user input. Such a user input consists typically of two entities which are bound by a certain 
+relation. Its semantics being that the user is looking for a set of claims on the Web that support or not
+the relation specified between the two entities. Formally, the user input to TextRunner can be defined as a triplet $(e_1, R_{1,2}, e_2)$ 
+where $e_1$ and $e_2$ correspond to the entities and $R_{1,2}$ is the relation between them. 
 
-The input $t$ of the extraction system is a triplet $(e_i, r_{i,j}, e_j)$ where $e_i$ and $e_j$ are called
-\emph{entities} and $r_{i,j}$ is a \emph{relation}. The semantics of $r_{i,j}$ is that that of a certain 
-relationship between the two given entities. Given this input, the extractor searches into a corpus, consisting
+Given this input, the extractor searches into a corpus, consisting
 of several thousand of sentences, the collections of relational tuples that might satisfy the searched relation.
 In other terms, the extractor outputs a set of tuples $<(e_i, r_{i,j}, e_j)>$.
 
-\paragraph*{Source and Claim Formatting}
+\paragraph*{Formatting of Data Sources}
 We use TextRunner for the extraction of the set of 
 candidates claims that might correspond to the user query.

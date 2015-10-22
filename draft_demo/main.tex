@@ -1,8 +1,18 @@
 \documentclass{sig-alternate}
 \usepackage[utf8]{inputenc}
+\usepackage[english, francais]{babel}
+\usepackage{microtype}
+\usepackage{xspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{paralist}
+\usepackage{booktabs}
+\usepackage{wrapfig}
 \usepackage{csquotes}
 \usepackage{tikz}
-\usepackage{hyperref}
+\usepackage[pdfborder={0 0 0}, pdfpagelabels=false]{hyperref}
 \usetikzlibrary{matrix,shapes.multipart, arrows, shapes.geometric,fit,scopes}
 \tikzset{
   >= latex,
@@ -10,10 +20,10 @@
   rs/.style={rectangle split, draw, rectangle split parts=#1},
   ou/.style={draw, inner xsep=1em, inner ysep=1ex, fit=#1}
 }
-\usepackage[english, francais]{babel}
 \newcommand{\lamine}[1]{\textbf{[Lamine: {\textcolor{red}{#1}}]}}
 \newcommand{\laure}[1]{\textbf{[Laure: \textcolor{green}{#1}]}}
 \newcommand{\tbd}[1]{\textbf{[TODO: \textcolor{blue}{#1}]}}
+
 
 
 \begin{document}
