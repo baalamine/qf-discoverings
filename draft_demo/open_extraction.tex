@@ -25,11 +25,14 @@ from a Web corpus. We then format this output in such a way that fits our truth 
 \paragraph*{TextRunner System}
 TextRunner relies on an unsupervised extraction procedure which queries, using a single and data-driven 
 pass, an entire Web corpus of unstructured texts and extracts a list of candidate relational tuples with 
-respect to user input. Such a user input consists typically of two entities which are bound by a certain 
-relation. Its semantics being that the user is looking for a set of claims on the Web that support or not
-the relation specified between the two entities. Formally, the user input to TextRunner can be defined as a
-triplet $(\e{1}, \rel{1,2}, \e{2})$ where $e_1$ and $e_2$ are entities and $R_{1,2}$ the relationship between them.
-
+respect to user input. Such a user input query consists typically of a sentence formed by
+two \emph{entities} and a certain \emph{relation}. Its semantics being that the user is looking for a set 
+of claims on the Web that support or not the relation specified between the two entities. Formally, a user
+query in TextRunner can be defined as a triplet $(\e{1}, \rel{1,2}, \e{2})$ where $\e{1}$ and $\e{2}$ correspond 
+to the entities of the query and $\rel{1,2}$ represents the specified relationship between them. Note that the 
+extactor accepts an \emph{incomplete} query, that is, a query that does not contain all the three components. In 
+real scenarios, a given user is often searching for claims about incomplete relations. 
+ 
 Given this input, the extractor searches into a corpus, consisting
 of several thousand of sentences, the collections of relational tuples that might satisfy the searched relation.
 In other terms, the extractor outputs a set of tuples $<(e_i, r_{i,j}, e_j)>$.
