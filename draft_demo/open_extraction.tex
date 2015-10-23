@@ -10,7 +10,8 @@
 
 
 In this study, we are interested on truth discovering on the large number of ``factoid" statements
-(or claims) made by multiple Web sources in the same real-world domain. A ``factoid" claim is
+(or claims) made by multiple Web sources in the same real-world domain. A ``factoid" claim , e.g., 
+\emph{Barack Obama was born in Kenya}, is
 a piece of unverified or inaccurate information that is presented as factual, often
 as part of a publicity effort. Such type of claims  is usually accepted as true  because of its
 frequent redundancy over multiple sources. We focus on conflicting factoid claims provided by typical 
@@ -43,5 +44,9 @@ such the way that it fits the input of our differents truth finding algorithms. 
 formatting is realized.
 
 \paragraph*{Data formatting}
-We consider the result of TextRunner and format it in such the way 
-that it fit the input of our truth finding process.
+Let given a user input tuple $\query=(\e{1}, \rel{},\e{2})$ on TextRunner. We refer to the set 
+of $n$ claims returned by the system as $\claim{1}\ldots \claim{n}$ as candidate answers the query
+$\query$. We suppose that the query admits only one true answers, thereby we are in the presence of
+$n$ conflicting answers. For each returned claim, we go through the linked pointer and extract the
+corresponding source by using hand-written mapping rule. We denote the set of $m$ sources queried by 
+the extraction system in order to answer $\query$ by $\source{1}, \ldots, \source{m}$.
