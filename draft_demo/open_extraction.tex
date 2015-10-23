@@ -35,9 +35,12 @@ say that the query is \emph{incomplete}. Incomplete queries are common in Web se
 knowledge of the real world: this motivates us the use of information extractors in order to complete his knowledge.
 Note that the information extraction systems do also well in the case of \emph{incomplete} queries.
 
-TextRunner outputs a list of candidate claims, ranked according to the number of sources. The extractor also provides a pointer
-for accessing the different sources of each outputted claim in so that it is possible to retrieve the set of sources. Let denote
-by $\claim{1}\ldots \claim{n}$ the set of $n$ conflicting claims extracted by TextRunner about a user query $\query$.
+The output of TextRunner is a set of candidate claims which are ranked according to their number of sources.A claim in this
+context can correspond to a tuple, a relation, or an real-world entity.
+The system also offer the possibility, through pointers, to access to these sources and the full corpus in which the each
+has been extracted. We would harness these pointers in order to format the result obtained from the extraction system  in
+such the way that it fits the input of our differents truth finding algorithms. We show in the following how such a 
+formatting is realized.
 
 \paragraph*{Data formatting}
 We consider the result of TextRunner and format it in such the way 
