@@ -14,9 +14,25 @@ of the process when users' feedbacks arrive into the system.
 
 
 Ensembling, or commonly an ensemble-based active learning, is a supervised learning approach that learns
-about an appropriate combinaison of multiple classifier types for a given task. In our study, we are interesting
+about an appropriate combinaison of multiple classifier types for a given task. In our setting, we are interesting
 on discovering the best combinaison among several possible truth finding algorithms. This combinaison is excepted 
-to maximize the precision of truth finding process over a given dataset characteristics.
+to maximize the precision of truth finding process over a given dataset characteristics. An ensembling technique 
+might enable to find a more accurate hybrid truth finding approach that will outperform any individual algorithm.
+One well known lack, e.g., see in~\cite{Li12, Wagui14}, of existing truth discovering algorithms is the fact that
+they are mostly sensitive to given application domains and data characteristics.
+
+
+
+We learn on various classes of truth finding techniques, ranging from naive classes to more elaborated ones. We
+briefly detail each class in the following.
+\begin{enumerate}
+ \item Naive techniques
+ \item Iterative techniques
+ \item EM based techniques
+ \item Dependency detection based techniques
+\end{enumerate}
+
+
 
 \subsection{Active Learning Process}
 \begin{itemize}
