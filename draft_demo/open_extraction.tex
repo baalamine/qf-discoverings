@@ -44,9 +44,10 @@ such the way that it fits the input of our differents truth finding algorithms. 
 formatting is realized.
 
 \paragraph*{Data formatting}
-Let given a user input tuple $\query=(\e{1}, \rel{},\e{2})$ on TextRunner. We refer to the set 
-of $n$ claims returned by the system as $\claim{1}\ldots \claim{n}$ as candidate answers the query
-$\query$. We suppose that the query admits only one true answers, thereby we are in the presence of
+Given a user input tuple $\query=(\e{1}, \rel{},\e{2})$, we refer to the
+set of $n$ claims $\claim{1}\ldots \claim{n}$ extracted and returned by the
+extration engine as potential answers. 
+We assume that the query admits only one true answers, thereby we are in the presence of
 $n$ conflicting answers. For each returned claim, we go through the linked pointer and extract the
 corresponding source by using hand-written mapping rule. We denote the set of $m$ sources queried by 
 the extraction system in order to answer $\query$ by $\source{1}, \ldots, \source{m}$.
