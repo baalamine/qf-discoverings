@@ -23,24 +23,32 @@ from a Web corpus. We then format this output in such a way that fits our truth 
 
 
 % OIE Input and Ouput
-\paragraph*{TextRunner extractor}
-The extraction engine relies on an unsupervised extraction procedure which queries, using a single and data-driven 
-pass, an entire Web corpus of unstructured texts and extracts a list of candidate relational tuples which might
-satisfy a given user input query. A user query, in this setting, consists typically of a sentence formed by three
-components: two real-world \emph{entities} and a certain \emph{relation}. The goal of TextRunner being to find and
-gather the set of possible claims on the Web which support or not the specified relation between the two entities. 
-A user query $\query$ can be defined formally with the help of a triplet $(\e{1}, \rel{}, \e{2})$ where $\e{1}$ and $\e{2}$ 
-are real-world entities and $\rel{}$ is a relation; $\rel{}$ indicates a possible relationship between the
-two given entities. If some components, i.e., the second entity, of the query are not provided by the user, we 
-say that the query is \emph{incomplete}. Incomplete queries are common in Web search as human often has a partial
-knowledge of the real world: this motivates us the use of information extractors in order to complete his knowledge.
-Note that the information extraction systems do also well in the case of \emph{incomplete} queries.
+\paragraph*{TextRunner system}
+TextRunner is an open Web information extraction system 
+relying on an unsupervised extraction process on a Web corpus 
+of unstructured textual data. It performs, for efficiency reasons,
+a single data-driven pass on this corpus and then extracts a list of
+candidate relational tuples which might reply a user input query about 
+a given fact. In TextRunner, a user input query is typically a set of keywords
+consisting  of two real-world \emph{entities} and a \emph{relation}. Formally, 
+such a user input query $\query$ can be defined with the help of a triplet $(\e{1}, \rel{}, \e{2})$
+where $\e{1}$ and $\e{2}$ are real-world entities and $\rel{}$ is a relation. The argument $\rel{}$ 
+specifies a possible relationship that might exist between the two given entities. None of the three 
+arguments is mandatory, meaning that some of them can be not specified by the user when issuing 
+his query. This captures the fact the user has a partial knowledge about the real world, which is 
+common in practice. Let denote the fact the user input query $\query$ is referred to by $\fact{\query}$. 
+TextRunner will find and extract a collection of Web claims related to this fact.
 
-The output of TextRunner is a set of candidate claims which are ranked according to their number of sources.A claim in this
-context can correspond to a tuple, a relation, or an real-world entity.
-The system also offer the possibility, through pointers, to access to these sources and the full corpus in which the each
-has been extracted. We would harness these pointers in order to format the result obtained from the extraction system  in
-such the way that it fits the input of our differents truth finding algorithms. We show in the following how such a 
+%If some components, i.e., the second entity, of the query are not provided by the user, we 
+%say that the query is \emph{incomplete}. Incomplete queries are common in Web search as human often has a partial
+%knowledge of the real world: this motivates us the use of information extractors in order to complete his knowledge.
+%Note that the information extraction systems do also well in the case of \emph{incomplete} queries.
+
+Given a user input to TextRunner, the output of the system is thus a set of candidate claims which are ranked according 
+to their number of sources. A claim in this context can correspond to a tuple, a relation, or an real-world entity with respect
+to the given keywords. The system
+also offer the possibility, through pointers, to access to these sources and the full corpus in which the each has been extracted.
+We would harness these pointers in order to format the result obtained from the extraction system  in such the way that it fits the input of our differents truth finding algorithms. We show in the following how such a 
 formatting is realized.
 
 \paragraph*{Data formatting}
