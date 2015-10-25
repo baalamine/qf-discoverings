@@ -24,16 +24,17 @@ in order to obtain an optimal hybrid truth finding approach that outperform any 
 finding process become more tricky in practical scenarios in the sense that there usually exists no \emph{ground truth data}
 against which one can evaluate the precision of the different algorithms. However, users have often some knowledge background
 of the truth about certain real world facts. These valuable feebacks from the user could serve as partial gold standard in order
-to estimate the accuracy of each truth finding algorithm or the combinaison of thereof during the learning.
+to estimate the accuracy of each truth finding algorithm.  As we shall show in later, we actively query users for labeled data to 
+use in our active approach.
 
-Several query strategies, e.g., uncertainty sampling or query by committee, could be adopted in order to perform ensemble-based active
-learning; see~\cite{burr12} for more details about active learning. In this study, we have used query by committee approach which is proven
-to be very effective in many different settings.
+Several query strategies, e.g., uncertainty sampling or query by committee, could be adopted in order to obtain from users labeled
+examples for the active learning process; see~\cite{burr12} for more details about active learning. In this study, we have used query 
+by committee approach which is proven to be very effective in many different settings.
 
 
 
-We learn on various classes of truth finding techniques, ranging from naive classes to more elaborated ones. We
-briefly detail each class in the following.
+We learn about an optimal ensembling on a set of twelve well established truth finding algorithms, ranging from naive classes to more elaborated
+ones. We briefly introduce each considered class of truth discovering in the following.
 \begin{enumerate}
  \item Naive techniques
  \item Iterative techniques
@@ -43,7 +44,7 @@ briefly detail each class in the following.
 
 
 
-\subsection{Active Learning Process}
+\subsection{Active Learning Strategy}
 \begin{itemize}
  \item notre approche que l'on défend ici dans la démo est  semi supervisée en impliquant de l'utiliseur de façon active
 en lui demandant s'il peut confirmer des faits (facts)
