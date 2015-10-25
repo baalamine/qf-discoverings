@@ -9,18 +9,25 @@
 \end{itemize}
 
 
-In this study, we are interested on truth discovering on the large number of ``factoid" statements
-(or claims) made by multiple Web sources in the same real-world domain. A ``factoid" claim , e.g., 
-\emph{Barack Obama was born in Kenya}, is
-a piece of unverified or inaccurate information that is presented as factual, often
-as part of a publicity effort. Such type of claims  is usually accepted as true  because of its
-frequent redundancy over multiple sources. We focus on conflicting factoid claims provided by typical 
-open Web information extraction systems as answers to users' queries. Concretly, given user input, 
-we retrieve the set of candidates claims, together with the associated sources, returned by TextRunner~\footnote{TextRunner
-is accessible online at \href{http://openie.allenai.org/}{http://openie.allenai.org/}}
+In this study, we are interested on truth discovering over the huge number of ``factoid" statements
+(or claims) about real-world facts returned by information extraction systems. These claims are extracted
+from unreliable Web sources. A ``factoid" claim , e.g., \emph{Barack Obama was born in Kenya}, is a piece 
+of unverified or inaccurate information that is presented as factual, often as part of a publicity effort. 
+Such type of claims  is usually accepted as true  because of its frequent redundancy over multiple sources. 
+We focus on conflicting factoid claims provided by typical open Web information extraction systems as answers 
+to users' queries. Concretly, given user input, we retrieve the set of candidates claims, together with the associated
+sources, returned by TextRunner~\footnote{TextRunner is accessible online at \href{http://openie.allenai.org/}{http://openie.allenai.org/}}
 from a Web corpus. We then format this output in such a way that fits our truth discovering process.
 
 
+\begin{figure*}[!ht]
+\begin{subfigure}[TextRunner Extraction]{Un exemple d'extraction avec TextRunner}
+\end{subfigure}
+\hfill
+\begin{subfigure}[Extracted Triplets]{Un exemple de tripl\'es extraites}
+\end{subfigure}
+\label{open}\caption{Data collection and formatting}
+\end{figure*}
 
 % OIE Input and Ouput
 \paragraph*{Data collection} We analyze claims about real-world facts
@@ -46,17 +53,8 @@ claim. A claim in this context can correspond to a tuple, a relation, or an real
 with respect to the given keywords. TextRunner also offers the ability, through Web hyperlinks, 
 to access to the meta-data, e.g., the source, the type, the full corpus, etc., associated to each 
 returned claim for further exploration. 
-%We would harness these pointers in order to format the result obtained from the extraction system  in such the way that it 
-%fits the input of our differents truth finding algorithms. We show in the following how such a formatting is realized.
 
 \paragraph*{Data formatting}
-%Given a user input tuple $\query=(\e{1}, \rel{},\e{2})$, we refer to the
-%set of $n$ claims $\claim{1}\ldots \claim{n}$ extracted and returned by the
-%extration engine as potential answers. 
-%We assume that the query admits only one true answers, thereby we are in the presence of
-%$n$ conflicting answers. For each returned claim, we go through the linked pointer and extract the
-%corresponding source by using hand-written mapping rule. We denote the set of $m$ sources queried by 
-%the extraction system in order to answer $\query$ by $\source{1}, \ldots, \source{m}$.
 Given a user query $\query$ about a fact $\fact{\query}$, we consider the set $\claimset$ of $n$ 
 claims $\claim{1}, \ldots, \claim{n}$ extracted by TextRunner as answers. For each claim $\claim{i}$,
 $1\leq i\leq n$, we go through the attached Web hyperlink and extract the set $\sset{\claim{i}}$ of 
@@ -64,8 +62,8 @@ sources which support it. We achieve such a extraction by using hand-written map
 assumed that the system returns only one claim per source for a given query, i.e., $\sset{\claim{i}}
 \cap \sset{\claim{j}}=\emptyset$ for all $i\neq j$ with $1\leq i\leq j\leq n$. We have now, for the query
 $\query$ about the fact $\fact{\query}$, the set of claims together with the sources. In order to fit to 
-the input of our truth finding algorithms, we need to format the data collected from TextRunner about the 
+the input of the truth finding process, we need to format the data collected from TextRunner about the 
 facts in a certain manner. As a consequence, for the fact $\fact{\query}$, we therefore consider every extracted 
 claim $\claim{i}$ and generate a triplet $(\fact{\query}, \claim{i}, \source{j})$ for each source $\source{j}\in \sset{\claim{i}}$.
-We finally obtain a collection of triplet $\{(\fact{\query}, \claim{}, \source{})\mid \claim{}\in \claimset, \source{} \in \sset{\claim{}}\}$ 
+We finally obtain a collection of triplets $\{(\fact{\query}, \claim{}, \source{})\mid \claim{}\in \claimset, \source{} \in \sset{\claim{}}\}$ 
 as the final formatting of the output of TextRunner regarding a given user input query $\query$ about a fact $\fact{\query}$. 
