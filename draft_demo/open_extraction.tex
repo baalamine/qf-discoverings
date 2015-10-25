@@ -23,7 +23,8 @@ from a Web corpus. We then format this output in such a way that fits our truth 
 
 
 % OIE Input and Ouput
-\paragraph*{TextRunner system}
+\paragraph*{Data collection} We analyze claims about real-world facts
+from TextRunner.
 TextRunner is an open Web information extraction system relying
 on an unsupervised extraction process on a Web corpus of unstructured textual
 data. For more efficiency, it performs a single data-driven pass on 
@@ -39,12 +40,14 @@ his query. This captures the fact the user has a partial knowledge about the rea
 common in practice. Let denote the fact the user input query $\query$ is referred to by $\fact{\query}$. 
 TextRunner will find and extract a collection of Web claims related to this fact.
 
-TextRunner's output is thus a set of candidate claims about a specific real-world fact. This set of claims
-is ranked by the system according to their number of sources. A claim in this context can correspond to a tuple,
-a relation, or an real-world entity with respect to the given keywords. The system also offer the possibility, 
-through pointers, to access to these sources and the full corpus in which the each has been extracted. We would 
-harness these pointers in order to format the result obtained from the extraction system  in such the way that it 
-fits the input of our differents truth finding algorithms. We show in the following how such a formatting is realized.
+TextRunner's output is thus a set of candidate claims about a specific real-world fact.
+This output is ranked by the system according to the number of sources that supports each
+claim. A claim in this context can correspond to a tuple, a relation, or an real-world entity 
+with respect to the given keywords. TextRunner also offer the possibility, through Web hyperlinks, 
+to access to meta-data, e.g., the source, the type, the full corpus, etc., associated to each extracted claim
+for further more deeper exploration tasks. 
+%We would harness these pointers in order to format the result obtained from the extraction system  in such the way that it 
+%fits the input of our differents truth finding algorithms. We show in the following how such a formatting is realized.
 
 \paragraph*{Data formatting}
 Given a user input tuple $\query=(\e{1}, \rel{},\e{2})$, we refer to the
