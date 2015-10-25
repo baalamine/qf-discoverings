@@ -13,7 +13,7 @@ of the process when users' feedbacks arrive into the system.
 \end{itemize}
 
 
-Ensembling, or commonly an \emph{ensemble-based active learning}, is a supervised learning approach that learns
+Ensembling, or more commonly an \emph{ensemble-based active learning}, is a supervised learning approach that learns
 about an appropriate combinaison of multiple classifier types for a given task. In our setting, we are interesting
 on discovering the best combinaison among several possible truth finding algorithms. This combinaison is excepted 
 to maximize the precision of truth finding process over a given dataset characteristics.
@@ -25,6 +25,10 @@ finding process become more tricky in practical scenarios in the sense that ther
 against which one can evaluate the precision of the different algorithms. However, users have often some knowledge background
 of the truth about certain real world facts. These valuable feebacks from the user could serve as partial gold standard in order
 to estimate the accuracy of each truth finding algorithm or the combinaison of thereof during the learning.
+
+Several query strategies, e.g., uncertainty sampling or query by committee, could be adopted in order to perform ensemble-based active
+learning; see~\cite{burr12} for more details about active learning. In this study, we have used query by committee approach which is proven
+to be very effective in many different settings.
 
 
 
