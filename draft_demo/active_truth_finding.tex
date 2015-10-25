@@ -1,8 +1,8 @@
 % Active Ensembling for Truth Finding
 \section{Active Ensembling for Truth Finding}
 We describe in this section our use of active ensembling in the context of truth finding
-for discovering gradually the optimal algorithm that maximizes the accuracy of the process
-when users' feedbacks arrive into the system.
+for discovering gradually the optimal set of algorithms that together maximizes the accuracy
+of the process when users' feedbacks arrive into the system.
 
 \subsection{Ensembling }
 \begin{itemize}
@@ -12,9 +12,15 @@ when users' feedbacks arrive into the system.
 \item expliquer quelles méthodes on combine avec leurs avantages et inconvénients
 \end{itemize}
 
-An ensemble is a supervised learning algorithm in the sense that is can be trained and then used to make predictions.
-An ensembling, or  commonly an ensemble-based active learning, is a learning process selecting one classifier type, or appropriate combinaisons 
-of multiple classifier types, to construct ensembles for a given tasks.
+
+Ensembling, or commonly an ensemble-based active learning, is a supervised learning approach that learns
+about an appropriate combinaison of multiple classifier types for a given task. In our study, we are interesting
+on discovering the best combinaison among several possible truth finding algorithms. This combinaison is excepted 
+to maximize the precision of truth finding process over a given dataset characteristics.
+
+%An ensemble is a supervised learning algorithm in the sense that is can be trained and then used to make predictions.
+%An ensembling, or  commonly an ensemble-based active learning, is a learning process selecting one classifier type, or appropriate combinaisons 
+%of multiple classifier types, to construct ensembles for a given tasks.
 
 \subsection{Active Learning Process}
 \begin{itemize}
