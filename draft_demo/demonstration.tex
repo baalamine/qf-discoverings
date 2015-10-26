@@ -33,7 +33,7 @@ among the twelve, to use with respect to the type of entities or relations searc
 the user.
 
 % knwoledge bases
-\paragraph*{Knowledge Base}The knowledge base contains the information used for the learning
+\paragraph*{Repository of Labeled Facts}The knowledge base contains the information used for the learning
 phase the truth finding procedure. These information include the true facts for some relations
 which have been learnt based on the feedbacks of the users. In addition, our knowledge base could
 be enriched with ground truth about some facts from reliable sources such as Wikipedia. Based on 
@@ -45,9 +45,9 @@ consider for a better boostrapping of the process.
 \begin{tikzpicture}[auto, line/.style ={draw,  thick, shorten <=0pt}]
   \matrix[matrix of nodes, row sep=5ex, column sep=1em] (mx) {
     User I/O Interface &\\
-    OI Module &  AllegatorTrack\\
+    IE Module &  Truth Finding Module\\
     & Learning Module\\ 
-    & knowledge bases \\
+    & Repository of Labeled Facts\\
   };
   %\node[ou=(mx-1-3)] (empty) {};
   \node[ou=(mx-2-1)] (oi) {};
