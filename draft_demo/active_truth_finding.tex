@@ -13,19 +13,24 @@ of the process when users' feedbacks arrive into the system.
 \end{itemize}
 
 
-Ensembling, also known as ensemble-based active learning, is a supervised learning approach that learns
-about an appropriate combinaison of multiple classifier types for a given task. In our setting, we are interesting
-on discovering the best combinaison among several possible truth finding algorithms. This combinaison is excepted 
-to maximize the precision of truth finding process over a given dataset characteristics.
-One well known lack, e.g., see in~\cite{Li12, Wagui14}, of existing truth discovering algorithms is the fact that
-they are mostly sensitive to given application domains and data characteristics. As a consequence, there is no approach 
-that outperforms the others on all types of dataset.  An ensembling technique might enable  us to combine multiple algorithm
-in order to obtain an optimal hybrid truth finding approach that outperform any individual approach. Furthermore, the truth
-finding process become more tricky in practical scenarios in the sense that there usually exists no \emph{ground truth data}
-against which one can evaluate the precision of the different algorithms. However, users have often some knowledge background
-of the truth about certain real world facts. These valuable feebacks from the user could serve as partial gold standard in order
-to estimate the accuracy of each truth finding algorithm.  As we shall show in later, we actively query users for labeled data to 
-use in our active approach.
+Ensembling, or commonly ensemble-based active learning, is a semi-supervised learning method that learns
+about an appropriate combinaison of multiple classifier types for a given task by interactively querying users (or other types of sources)
+for \emph{labeled examples}. 
+
+In our setting, we are interesting on discovering the optimal combinaison among several possible truth finding algorithms.
+This combinaison is excepted to maximize the precision of the truth finding process on claims outputted by TextRunner as 
+possible answers with respect to a user's query about a given real-world fact.
+A well known lack, e.g., see in~\cite{Li12, Wagui14}, of existing truth discovering algorithms is that they are mostly sensitive
+to given application domains and data characteristics. As a consequence, there is no approach that outperforms the others on all 
+types of datasets. Furthermore, the truth finding process is harder in practical scenarios in the sense that there exists usually 
+no labeled examples, or \emph{ground truth data}, against which one can evaluate the precision of the different algorithms in order to choose
+the more accurate one on a data of interest. However, users have often
+some knowledge background of the truth about certain real world facts. These valuable feebacks from the user could serve as partial gold 
+standard in order to estimate the accuracy of each truth finding algorithm.  As we shall show in later, we actively query users for labeled
+data to use in our active approach.
+
+An ensembling technique might enable  us to combine multiple algorithm in order to obtain an optimal hybrid truth 
+finding approach that outperform any individual approach. 
 
 Several query strategies, e.g., uncertainty sampling or query by committee, could be adopted in order to obtain from users labeled
 examples for the active learning process; see~\cite{burr12} for more details about active learning. In this study, we have used query 
