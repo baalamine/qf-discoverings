@@ -22,12 +22,12 @@ several Web sources in order to returns the relevant answers. In our
 system, we rely on TextRunner in order to extract information from Web corpus.
 
 % Truth finding engine
-\paragraph*{Truth Finding Engine} It corresponds to AllegatorTrack which contains
+\paragraph*{Truth Finding Module} It corresponds to AllegatorTrack which contains
 twelve truth finding algorithms with different accuracy according to the types of 
 claims and the characteristics of sources.
 
 % Learning module
-\paragraph*{Learning Module} We have also a learning method that uses our knwoledge
+\paragraph*{Active Ensembling Module} We have also a learning method that uses our knwoledge
 bases of users feedbacks. It enables to learn about the best truth finding algorithms,
 among the twelve, to use with respect to the type of entities or relations searched by 
 the user.
@@ -46,7 +46,7 @@ consider for a better boostrapping of the process.
   \matrix[matrix of nodes, row sep=5ex, column sep=1em] (mx) {
     User I/O Interface &\\
     IE Module &  Truth Finding Module\\
-    & Learning Module\\ 
+    & Ensembling Module\\ 
     & Repository of Labeled Facts\\
   };
   %\node[ou=(mx-1-3)] (empty) {};
