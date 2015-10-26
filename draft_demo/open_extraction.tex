@@ -35,13 +35,14 @@ from TextRunner.
 TextRunner is an open Web information extraction system relying
 on an unsupervised extraction process on a fixed collection of 
 Web corpus consisting of Google, ClueWeb, News, Nell, and Wikipedia 
-corpus. Each corpus contains information from multiple Web sources. 
-When a query is issued, TextRunner first determined the relevant
-corpus, and then extract the possible answers from them. 
+corpus. Each particular corpus aggregates information from multiple 
+other Web sources which can be of different nature, e.g. domain specific
+sources. When a query is issued, TextRunner first searches for the relevant
+corpus to query, and it then extracts the possible answers from them. 
 To do so, it performs, for efficiency concerns, a single data-driven
 pass on the corpus to obtain the list of candidate relational tuples 
-which might reply a user input query about a given fact. In TextRunner, 
-a user input query is typically a set of keywords
+which might satisfy the user input query about a given real-world fact. 
+In TextRunner, a user input query is typically a set of keywords
 consisting  of two real-world \emph{entities} and a \emph{relation}. Such
 a user input query $\query$ can be defined formally as a triplet $(\e{1}, \rel{}, \e{2})$
 where $\e{1}$ and $\e{2}$ are real-world entities and $\rel{}$ is a relation. The argument $\rel{}$ 
