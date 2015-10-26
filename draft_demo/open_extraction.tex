@@ -33,9 +33,13 @@ from a Web corpus. We then format this output in such a way that fits our truth 
 \paragraph*{Data collection} We analyze claims about real-world facts
 from TextRunner.
 TextRunner is an open Web information extraction system relying
-on an unsupervised extraction process on a Web corpus of unstructured textual
-data. For more efficiency, it performs a single data-driven pass on 
-this corpus and then extracts a list of candidate relational tuples 
+on an unsupervised extraction process on a fixed collection of 
+Web corpus consisting of Google, ClueWeb, News, Nell, and Wikipedia 
+corpus. Each corpus contains information from multiple Web sources. 
+When a query is issued, TextRunner first determined the relevant
+corpus, and then extract the possible answers from them. 
+To do so, it performs, for efficiency concerns, a single data-driven
+pass on the corpus to obtain the list of candidate relational tuples 
 which might reply a user input query about a given fact. In TextRunner, 
 a user input query is typically a set of keywords
 consisting  of two real-world \emph{entities} and a \emph{relation}. Such
@@ -67,3 +71,7 @@ facts in a certain manner. As a consequence, for the fact $\fact{\query}$, we th
 claim $\claim{i}$ and generate a triplet $(\fact{\query}, \claim{i}, \source{j})$ for each source $\source{j}\in \sset{\claim{i}}$.
 We finally obtain a collection of triplets $\{(\fact{\query}, \claim{}, \source{})\mid \claim{}\in \claimset, \source{} \in \sset{\claim{}}\}$ 
 as the final formatting of the output of TextRunner regarding a given user input query $\query$ about a fact $\fact{\query}$. 
+
+\tbd{Quelle types de requ\^etes souhaitons nous supporter?}
+
+\tbd{Si on consid\'ere chaque requ\^ete s\'epar\'ee, on se retrouve \'a traiter un seul claim \'a chaque fois. G\'en\'eraliser \'a $k$ requ\^etes utilisateurs?}
