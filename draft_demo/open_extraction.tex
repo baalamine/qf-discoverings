@@ -61,11 +61,11 @@ to access to the meta-data, e.g., the source, the type, the full corpus, etc., a
 returned claim for further exploration. 
 
 \paragraph*{Data formatting}
-Given a user query $\query$ about a fact $\fact{\query}$, we consider the set $\claimset$ of $n$ 
-claims $\claim{1}, \ldots, \claim{n}$ extracted by TextRunner as answers. For each claim $\claim{i}$,
-$1\leq i\leq n$, we go through the attached Web hyperlink and extract the set $\sset{\claim{i}}$ of 
-sources which support it. We achieve such a extraction by using hand-written mapping rules. We have also
-assumed that the system returns only one claim per source for a given query, i.e., $\sset{\claim{i}}
+Given a user query $\query$ about a fact $\fact{\query}$, we consider the set $\claimset_{\query}$ 
+of $n$ claims $\claim{1}, \ldots, \claim{n}$ extracted by TextRunner as answers to the query $\query$.
+For each claim $\claim{i}$, $1\leq i\leq n$, we go through the attached Web hyperlink and extract the set
+$\sset{\claim{i}}$ of sources which support it. We achieve such a extraction by using hand-written mapping 
+rules. We have also assumed that the system returns only one claim per source for a given query, i.e., $\sset{\claim{i}}
 \cap \sset{\claim{j}}=\emptyset$ for all $i\neq j$ with $1\leq i\leq j\leq n$. We have now, for the query
 $\query$ about the fact $\fact{\query}$, the set of claims together with the sources. In order to fit to 
 the input of the truth finding process, we need to format the data collected from TextRunner about the 
