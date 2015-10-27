@@ -15,8 +15,8 @@ of the process when users' feedbacks arrive into the system.
 \medskip
 
 Ensembling, or commonly ensemble-based active learning, is a semi-supervised learning method that learns
-about an appropriate combinaison of multiple classifier types for a given task by interactively querying users (or other types of sources)
-for \emph{labeled examples}. 
+about an appropriate combinaison of multiple classifier types for a given task by interactively querying 
+users (or other types of sources) for \emph{labeled examples}. 
 
 In our setting, we are interesting on discovering the optimal combinaison among several possible truth finding algorithms
 which correspond to our classifier types.
@@ -30,8 +30,8 @@ the more accurate one on data of interest.  Fortunately, however, human being ha
 The user knowledge is a valuable source of labeled examples that should be harnessed as partial standard for evaluating the accuracy of our truth finding 
 process. Indeed, even though a partial ground truth data could be obtained from the users, an optimal truth finding strategy change over time as we obtain
 more data from sources, for instance when claims are continuously extracted from Web sources by TextRunner.
-To tackle the aformentionned lacks of exsisting truth finding algorithms, in particular in real applications such as information extracted systems, 
-we will use an ensembling in truth finding in order to continuously discover an optimal hybrid truth finding approach when the extractor is gradually
+To tackle the aformentionned lacks of exsisting truth finding algorithms, especially in real applications like information extracted systems, 
+we will use an active ensembling in truth finding in order to continuously discover an optimal hybrid truth finding approach when the extractor is gradually
 queried and users' feedbacks arrive. As we shall show later, we will actively involve users for labeled example in our ensemble-based learning process.
 
 Querying sources, e.g., users, in active learning is a challenging problem and several query strategies, e.g., uncertainty sampling or query by committee, 
