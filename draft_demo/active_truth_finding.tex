@@ -67,8 +67,10 @@ en lui demandant s'il peut confirmer des faits (facts)
 
 \medskip
 
-We rely on an ensemble-based semi-supervised learning process for defining an hybrid, i.e., ensemble, of truth
+We rely on an ensemble-based semi-supervised learning process for discovering an hybrid, i.e., an optimal ensemble of truth
 finding algorithms for information extraction systems. Let denote by $\qset$ the set of successive user queries processed 
-by the information extraction system. For each query $\query$ in $\qset$ we have the corresponding set of claims $\claimset_{\query}$
-returned by the extractor. We refer to the entire set of all claims by $\claimset$ regarding $\qset$.
-
+by the information extraction system. For each query $\query$ in $\qset$ about the fact $\fact{\query}$ we have the corresponding
+sets of claims $\claimset_{\query}$ returned by the extractor. We refer to the entire set of all claims by $\claimset$ regarding $\qset$.
+We assume that $\claimset$ contains labeled and unlabeled claims where labeled claims are those for which we  know whether they are correct
+or not by querying the user. In contrast, we do not know yet the truth about unlabeled claims and would like to discover by using the best 
+ensemble of truth finding algorithms. We refer respectively to labeled and unlabeled set of claims by $\claimset^{\mathsf{L}}$ and $\claimset^{\mathsf{U}}$.
