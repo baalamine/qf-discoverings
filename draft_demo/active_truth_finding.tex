@@ -80,11 +80,11 @@ a fixed size $m$ of a sampling, we perform ensembling on our set of truth findin
 
 \begin{enumerate}
  \item We first select a committee of classifiers (here, truth finding techniques) using 
- our base learning algorithm and the labeled claims $\claimset^{\mathsf{L}}$ \lamine{How the base learning algorithm is supposed to work?}
+ our base learning algorithm and the labeled claims $\claimset^{\mathsf{L}}$ \lamine{How the base learning algorithm should be implemented?}
  \item We then discover the true values for unlabeled claims in $\claimset^{\mathsf{U}}$
  using the chosen committee
  \item We select a subset $\mathsf{T}$ of
- $m$ true claims  \lamine{The selection is randomly or not?}
+ $m$ true claims  \lamine{How the selection strategy should be defined?}
  \item We request labels for these claims to the user (our oracle here).
  \item We lastly remove claims in $\mathsf{T}$ from $\claimset$ and them to $\claimset^{\mathsf{L}}$.
 \end{enumerate}
