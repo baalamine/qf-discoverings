@@ -58,7 +58,7 @@ We briefly present each class of considered truth discovering algorithms in the 
 une meilleure classification.}
 
 
-\subsection{Active Learning Strategy}
+\subsection{Active Learning Process}
 \begin{itemize}
  \item notre approche que l'on défend ici dans la démo est  semi supervisée en impliquant de l'utilisateur de façon active
 en lui demandant s'il peut confirmer des faits (facts)
@@ -71,6 +71,19 @@ We rely on an ensemble-based semi-supervised learning process for discovering an
 finding algorithms for information extraction systems. Let denote by $\qset$ the set of successive user queries processed 
 by the information extraction system. For each query $\query$ in $\qset$ about the fact $\fact{\query}$ we have the corresponding
 sets of claims $\claimset_{\query}$ returned by the extractor. We refer to the entire set of all claims by $\claimset$ regarding $\qset$.
-We assume that $\claimset$ contains labeled and unlabeled claims where labeled claims are those for which we  know whether they are correct
-or not by querying the user. In contrast, we do not know yet the truth about unlabeled claims and would like to discover by using the best 
-ensemble of truth finding algorithms. We refer respectively to labeled and unlabeled set of claims by $\claimset^{\mathsf{L}}$ and $\claimset^{\mathsf{U}}$.
+We assume that $\claimset$ contains labeled and unlabeled claims where labeled claims, corresponding to our partial ground truth, are those 
+for which we  know whether they are correct or not by querying the user. In contrast, we do not know yet the truth about unlabeled claims and
+would like to discover by using the best ensemble of truth finding algorithms. We refer respectively to labeled and unlabeled set of claims by 
+$\claimset^{\mathsf{L}}$ and $\claimset^{\mathsf{U}}$. Given a base learning algorithm $\mathsf{X}$, a number $k$ of fixed act iterations, and 
+a fixed size $m$ of a sampling, we perform ensembling on our set of truth finding algorithms as follows.
+
+\begin{enumerate}
+ \item We first select a committee of classifiers (here, truth finding techniques) using 
+ our base learning algorithm and the labeled claims $\claimset^{\mathsf{L}}$.
+ \item We then discover the true values for unlabeled claims in $\claimset^{\mathsf{U}}$
+ using the chosen committee
+ \item We select a subset $\mathsf{T}$ of
+ $m$ true claims 
+ \item We request labels for these claims to the user (our oracle here).
+ \item We lastly remove claims in $\mathsf{T}$ from $\claimset$ and them to $\claimset^{\mathsf{L}}$.
+\end{enumerate}
