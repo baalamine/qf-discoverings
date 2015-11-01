@@ -14,6 +14,11 @@ of the process when users' feedbacks arrive into the system.
 
 \medskip
 
+\paragraph*{Our assumption} Ensembling should allow to perform truth discovery consistently well across datasets
+without having to determine a \emph{priori} a suitable truth finding algorithm.
+
+\medskip
+
 Ensembling, or commonly ensemble-based active learning, is a semi-supervised learning method that learns
 about an appropriate combinaison of multiple classifier types for a given task by interactively querying 
 users (or other types of sources) for \emph{labeled examples}. 
@@ -42,6 +47,7 @@ committee (with respect to the predicted truth) are selected as the most informa
 points for which the ``committee" disagree. Query by committee is known to be a very effective active learning approach that has been successfully applied to different classification problems.
 
 \lamine{J'ai juste mentionn\'e ``query by committee" in guise d'exemple. La strat\'egie utilis\'ee doit \^etre choisie.}
+\lamine{Basic QBC or Bagging or Boosting ?}
 
 
 We use and compare twelve well established truth finding algorithms in the literature,
@@ -76,17 +82,19 @@ We assume that $\claimset$ contains labeled and unlabeled claims where labeled c
 for which we  know whether they are correct or not by querying the user. In contrast, we do not know yet the truth about unlabeled claims and
 would like to discover by using the best ensemble of truth finding algorithms. We refer respectively to labeled and unlabeled set of claims by 
 $\claimset^{\mathsf{L}}$ and $\claimset^{\mathsf{U}}$. Given a base learning algorithm $\mathsf{X}$, a number $k$ of fixed act iterations, and 
-a fixed size $m$ of a sampling, we perform ensembling on our set of truth finding algorithms as follows.
+a fixed size $m$ of a sampling, we perform truhth finding with ensembling on our set of truth finding algorithms as follows.
 
 \begin{enumerate}
- \item We first select a committee of classifiers (here, truth finding techniques) using 
- our base learning algorithm and the labeled claims $\claimset^{\mathsf{L}}$ \lamine{How the base learning algorithm should be implemented?}
- \item We then discover the true values for unlabeled claims in $\claimset^{\mathsf{U}}$
- using the chosen committee
- \item We select a subset $\mathsf{T}$ of
- $m$ true claims  \lamine{How the selection strategy should be defined?}
- \item We request labels for these claims to the user (our oracle here).
- \item We lastly remove claims in $\mathsf{T}$ from $\claimset$ and them to $\claimset^{\mathsf{L}}$.
+ \item We first train our ensemble of truth finding algorithms (representing here our set of classifiers)  on the current set of labeled claims
+ $\claimset^{\mathsf{L}}$ \lamine{How the base learning algorithm should be implemented?}
+ \item We then pass our set of unlabeled claims in $\claimset^{\mathsf{U}}$ to the ensemble of truth finding algorithms
+ \item Each algorithm in the current ensemble predicts the label of each claim
+ \item The claims that induce the most label prediction disagreement are queried for their labels and added to the training set
+ \item We select a subset $\mathsf{T}$ of the $m$ claims that induce the most label prediction disagreement
+ \item We request the labels of these $m$ claims to the user 
+ \item We lastly remove claims in $\mathsf{T}$ from $\claimset$ and add them together with their acquired truth labels to $\claimset^{\mathsf{L}}$.
 \end{enumerate}
 
-We repeat the process above $k$ times and we return the ensemble at the end.
+We repeat the process above $k$ times or until the ensemble meets some pre-defined criteria, e.g. when the size of the ensemble
+reaches a certain pre-defined value. At the end of the active learning process, the prediction, i.e., truth discovery, is made 
+by taking the majority vote of the resulting ensemble members. 
