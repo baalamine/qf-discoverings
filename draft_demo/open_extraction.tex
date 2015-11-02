@@ -63,7 +63,7 @@ known ones by querying the Web.
 The outcome of TextRunner, given a user query, is indeed a set of candidate answers which is ranked according 
 to the number of sources supporting each. TextRunner also enables to access, via Web hyperlinks, to the source
 and the document associated to each extracted answer. Our demonstration system (see Section~\ref{demonstration})
-will follow these links and will extract the different sources of each potential answer for truth finding.
+will follow these links and will extract the different sources of each potential answer for truth finding purposes.
 
 \paragraph*{Information processing}
 We consider a truth discovery process that takes, as input data, a set of claims 
@@ -72,13 +72,10 @@ and infer, as outputs result, a \emph{Boolean truth label} for each claim in whi
 the query the claim is referred to and \textsf{claimValue} is the answer given by the source for the query. 
 We detail below how these claims are inferred from the outcome of OpenIE TextRunner.
 
-Assume a user query $\query$ and the set of $n$ answers $v_1\ldots v_n$ returned by TextRunner for this query.
-
-Given a user query $\query$ about a fact $\fact{\query}$, we consider the set $\claimset_{\query}$ 
-of $n$ claims $\claim{1}, \ldots, \claim{n}$ extracted by TextRunner as answers to the query $\query$.
-For each claim $\claim{i}$, $1\leq i\leq n$, we go through the attached Web hyperlink and extract the set
-$\sset{\claim{i}}$ of sources which support it. We achieve such a extraction by using hand-written mapping 
-rules. We have also assumed that the system returns only one claim per source for a given query, i.e., $\sset{\claim{i}}
+Assume a user query $\query$ about a real-word fact $\fact{\query}$ and the set of $n$ answers $v_1^{\query}\ldots v_n^{\query}$
+returned by TextRunner for $\query$. Let now denote by $\sset{i}^{\query}$ the set of sources supporting each answer $v_i^{\query}$,
+for $1\leq i\leq n$. Recall that we extract this set of sources by following Web hyperlinks attached to answers by TextRunner and by 
+using hand-written mapping rules. In addition note that for the same query, TextRunner returns only one answer per source, i.e., $\sset{\claim{i}}
 \cap \sset{\claim{j}}=\emptyset$ for all $i\neq j$ with $1\leq i\leq j\leq n$. We have now, for the query
 $\query$ about the fact $\fact{\query}$, the set of claims together with the sources. In order to fit to 
 the input of the truth finding process, we need to format the data collected from TextRunner about the 
