@@ -75,9 +75,15 @@ We detail below how these claims are inferred from the outcome of OpenIE TextRun
 Assume a user query $\query$ about a real-word fact $\fact{\query}$ and the set of $n$ answers $v_1^{\query}\ldots v_n^{\query}$
 returned by TextRunner for $\query$. Let now denote by $\sset{i}^{\query}$ the set of sources supporting each answer $v_i^{\query}$,
 for $1\leq i\leq n$. Recall that we extract this set of sources by following Web hyperlinks attached to answers by TextRunner and by 
-using hand-written mapping rules. In addition note that for the same query, TextRunner returns only one answer per source, i.e., $\sset{\claim{i}}
-\cap \sset{\claim{j}}=\emptyset$ for all $i\neq j$ with $1\leq i\leq j\leq n$. We have now, for the query
-$\query$ about the fact $\fact{\query}$, the set of claims together with the sources. In order to fit to 
+using hand-written mapping rules. In addition note that for the same query, TextRunner returns only one answer per source, i.e. $\sset{i}^{\query}
+\cap \sset{j}^{\query}=\emptyset$ for all $i\neq j$ with $1\leq i\leq j\leq n$. We have the set of potential answers along with their
+respective sets of sources for the user query $\query$ about the fact $\fact{\query}$. We can now proceed to the generation of the corresponding claims.
+To do so, we consider each answer $v_i^{\query}$, for $1\leq i\leq n$, and loop on its set of sources $\sset{i}^{\query}$. For each source 
+$\source{} \in \sset{i}^{\query}$, we create a new claim $(\textsf{claimID}, \source{}, \query, v_i^{\query})$ with an automatically generated unique claim 
+identifier $\textsf{claimID}$, a claim source $\textsf{source}$ corresponding to $s$,  $\query$ as the claim query $\textsf{claimQuery}$, and a claim value $\textsf{claimValue}$ equals 
+to  $v_i^{\query}$. In other words, we create as many claims as the number of sources of a given answer from TextRunner.
+
+In order to fit to 
 the input of the truth finding process, we need to format the data collected from TextRunner about the 
 facts in a certain manner. As a consequence, for the fact $\fact{\query}$, we therefore consider every extracted 
 claim $\claim{i}$ and generate a triplet $(\fact{\query}, \claim{i}, \source{j})$ for each source $\source{j}\in \sset{\claim{i}}$.
