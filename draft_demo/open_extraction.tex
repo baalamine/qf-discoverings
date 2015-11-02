@@ -19,7 +19,7 @@ information that is accepted as true, without any prior verification, because of
 over numerous sources. Multiple conflicting Web claims of such a type related to a specific real life fact 
 are simultaneously available in practice. We draw, therefore, our attention on those conflicting claims 
 returned by a common open Web information extraction system, here \emph{TextRunner}, as possible answers to users' queries. 
-Concretely speaking, given a user input query (or key phrase), our main goal is to consider and improve the result of \emph{TextRunner}~\footnote{TextRunner is accessible online at \href{http://openie.allenai.o, rg/}{http://openie.allenai.org/}}
+Concretely speaking, given a user input query (or key phrase), our main goal is to consider and improve the result of \emph{TextRunner}~\footnote{\href{http://openie.allenai.o, rg/}{http://openie.allenai.org/}}
 by running truth discovery in order to provide to the user the most reliable information.
 We next briefly present \emph{TextRunner} system. Then, we detail how we format its output in such a that
 it fits the input of our truth discovering process.
@@ -58,17 +58,11 @@ specifies a possible relationship between the two given entities $\e{1}$ and $\e
 at least one among the three arguments is unkown, which captures a partial knowledge about the real world. 
 In this context, \emph{TextRunner} tries to find out the actual possible values of unkown arguments given 
 known ones by querying the Web.
-%Let denote the fact the user input query $\query$ is referred to by $\fact{\query}$. 
-%TextRunner will find and extract a collection of Web claims related to this fact.
 
-The answer of \emph{TextRunner}, given a user query, is indeed a set of candidate claims 
-which is ranked according to the number of sources supporting each possible claim. An answer, representing a claim made by a source, can correspond
-a tuple, a relation, or a real-world entity.
-%The system actually ranks this set of answers according to the
-%number of sources  supporting each claim. 
-A claim in this context can correspond to  TextRunner also offers the ability, through Web hyperlinks, 
-to access to the meta-data, e.g., the source, the type, the full corpus, etc., associated to each 
-returned claim for further exploration. 
+
+The outcome of \emph{TextRunner}, given a user query, is indeed a set of candidate claims which is ranked according 
+to the number of sources supporting each. \emph{TextRunner} also enables to access, via Web hyperlinks, to the source
+and the complete textual corpus associated to each extracted claim.
 
 \paragraph*{Information processing}
 Given a user query $\query$ about a fact $\fact{\query}$, we consider the set $\claimset_{\query}$ 
