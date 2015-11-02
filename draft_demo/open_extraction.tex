@@ -18,7 +18,7 @@ A ``factoid" claim, e.g.,  \textsf{Barack Obama was born in Kenya}, often refers
 information that is accepted as true, without any prior verification, because of its frequent redundancy
 over numerous sources. Multiple conflicting Web claims of such a type related to a specific real life fact 
 are simultaneously available in practice. We draw, therefore, our attention on those conflicting claims 
-returned by a common open Web information extraction system, here \emph{TextRunner}, as possible answers to users' queries. 
+returned by a common open Web information extraction system, \emph{TextRunner} in our special case, as possible answers to users' queries. 
 Concretely speaking, given a user input query (or key phrase), our main goal is to consider and improve the result of TextRunner~\footnote{\href{http://openie.allenai.o, rg/}{http://openie.allenai.org/}}
 by running truth discovery in order to provide to the user the most reliable information.
 We next briefly present TextRunner system. Then, we detail how we format its output in such a that
@@ -60,11 +60,17 @@ In this context, TextRunner tries to find out the actual possible values of unko
 known ones by querying the Web.
 
 
-The outcome of TextRunner, given a user query, is indeed a set of candidate claims which is ranked according 
+The outcome of TextRunner, given a user query, is indeed a set of candidate answers which is ranked according 
 to the number of sources supporting each. TextRunner also enables to access, via Web hyperlinks, to the source
-and the complete textual corpus associated to each extracted claim.
+and the document associated to each extracted answer.
 
 \paragraph*{Information processing}
+We consider a truth discovery process that takes, as input data, a set of claims 
+in the form of quadruplets $(\textsf{claimID}, \textsf{source}, \textsf{claimQuery},\textsf{claimValue})$
+and infer, as outputs result, a \emph{Boolean truth label} for each claim. 
+We detail below how these claims are inferred from the outcome of OpenIE TextRunner.
+
+Assume a user query $\query$ and the set of $n$ answers $v_1\ldots v_n$ returned by TextRunner for this query.
 Given a user query $\query$ about a fact $\fact{\query}$, we consider the set $\claimset_{\query}$ 
 of $n$ claims $\claim{1}, \ldots, \claim{n}$ extracted by TextRunner as answers to the query $\query$.
 For each claim $\claim{i}$, $1\leq i\leq n$, we go through the attached Web hyperlink and extract the set
