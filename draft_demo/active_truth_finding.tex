@@ -1,10 +1,11 @@
 % Active Ensembling for Truth Finding
-\section{Active Ensembling for Truth Finding}
-We describe in this section our use of active ensembling in the context of truth finding
-for discovering gradually the optimal set of algorithms that together maximizes the accuracy
-of the process when users' feedbacks arrive into the system.
+\section{Ensembling for Truth Finding}\label{ensembling}
+We explain in this section our adaptive truth finding approach which uses active ensembling in order to 
+adaptively learn about an optimal set of truth finding algorithms that outperforms any individual
+technique on any given dataset. Our learning approach will actively involve users for 
+feedbacks about the truth labels of some carefully chosen claims.
 
-\subsection{Ensembling }
+\subsection{Ensemble-Based Active Learning}
 \begin{itemize}
 \item donner idée générale pour introduire  ce qu'est l'ensembling
 \item on a besoin de le faire dans le contexte de truth discovery car aucune methode ne bat toutes les autres dans tous les cas de figure
@@ -65,7 +66,7 @@ We briefly present each class of considered truth discovering algorithms in the 
 une meilleure classification.}
 
 
-\subsection{Active Learning Process}
+\subsection{Our Active Learning Strategie}
 \begin{itemize}
  \item notre approche que l'on défend ici dans la démo est  semi supervisée en impliquant de l'utilisateur de façon active
 en lui demandant s'il peut confirmer des faits (facts)

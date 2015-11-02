@@ -78,17 +78,18 @@ for $1\leq i\leq n$. Recall that we extract this set of sources by following Web
 using hand-written mapping rules. In addition note that for the same query, TextRunner returns only one answer per source, i.e. $\sset{i}^{\query}
 \cap \sset{j}^{\query}=\emptyset$ for all $i\neq j$ with $1\leq i\leq j\leq n$. We have the set of potential answers along with their
 respective sets of sources for the user query $\query$ about the fact $\fact{\query}$. We can now proceed to the generation of the corresponding claims.
-To do so, we consider each answer $v_i^{\query}$, for $1\leq i\leq n$, and loop on its set of sources $\sset{i}^{\query}$. For each source 
+To do so, we consider each answer $v_i^{\query}$, for each $1\leq i\leq n$, and loop on its set of sources $\sset{i}^{\query}$. For each source 
 $\source{} \in \sset{i}^{\query}$, we create a new claim $(\textsf{claimID}, \source{}, \query, v_i^{\query})$ with an automatically generated unique claim 
 identifier $\textsf{claimID}$, a claim source $\textsf{source}$ corresponding to $s$,  $\query$ as the claim query $\textsf{claimQuery}$, and a claim value $\textsf{claimValue}$ equals 
-to  $v_i^{\query}$. In other words, we create as many claims as the number of sources of a given answer from TextRunner.
+to  $v_i^{\query}$. In other words, we create as many claims as the number of sources of a given answer from TextRunner. The total number of generated claims for the query $\query$ being 
+equals to $\sum_{1\leq i\leq n} | \sset{i}^{\query} |$.
 
-In order to fit to 
-the input of the truth finding process, we need to format the data collected from TextRunner about the 
-facts in a certain manner. As a consequence, for the fact $\fact{\query}$, we therefore consider every extracted 
-claim $\claim{i}$ and generate a triplet $(\fact{\query}, \claim{i}, \source{j})$ for each source $\source{j}\in \sset{\claim{i}}$.
-We finally obtain a collection of triplets $\{(\fact{\query}, \claim{}, \source{})\mid \claim{\query}\in \claimset, \source{} \in \sset{\claim{}}\}$ 
-as the final formatting of the output of TextRunner regarding a given user input query $\query$ about a fact $\fact{\query}$. 
+
+Let us assume the set of $m$ successive user queries $\query_1,\ldots, \query_m$. We finally suppose that when the 
+query is successively issued in TextRunner and answered by the system, the aforementioned formatting procedure transforms its set
+of possible answers to the corresponding set of claims. We refer to the overall set of resulting claims for queries $\query_1,\ldots, \query_m$
+with $\claimset$.
+ 
 
 \lamine{Quelle types de requ\^etes souhaitons nous supporter?}
 
