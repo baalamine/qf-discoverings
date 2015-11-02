@@ -10,14 +10,16 @@
 
 \medskip
 
-In this study, we are interested on truth discovering over the huge number of ``factoid" statements
-(or claims) about real-world facts returned by information extraction systems. These claims are extracted
-from unreliable Web sources. A ``factoid" claim , e.g., \emph{Barack Obama was born in Kenya}, is a piece 
-of unverified or inaccurate information that is presented as factual, often as part of a publicity effort. 
-Such type of claims  is usually accepted as true  because of its frequent redundancy over multiple sources. 
-We focus on conflicting factoid claims provided by typical open Web information extraction systems as answers 
-to users' queries. Concretly, given user input, we retrieve the set of candidates claims, together with the associated
-sources, returned by TextRunner~\footnote{TextRunner is accessible online at \href{http://openie.allenai.org/}{http://openie.allenai.org/}}
+We are seeking to demonstrate in this paper the usefulness of truth discovery on large sets of 
+``factoid" claims about real-world facts which are obtained when querying open information extraction
+systems. These claims are usually extracted by information extractors from unreliable and conflicting 
+Web sources.
+A ``factoid" claim, e.g.,  \textsf{Barack Obama was born in Kenya}, often refers to piece of 
+information that is accepted as true, without any prior verification, because of its frequent redundancy
+over multiple different sources. Multiple distinct Web claims of such a kind about a given real life fact 
+are simultaneously available in practice. We focus, therefore, on conflicting claims returned by a common
+open Web information extraction system, here TextRunner, as possible answers to users' queries. Concretly, given user input, we retrieve the set of candidates claims, together with the associated
+sources, returned by TextRunner~\footnote{TextRunner is accessible online at \href{http://openie.allenai.o, rg/}{http://openie.allenai.org/}}
 from a Web corpus. We then format this output in such a way that fits our truth discovering process.
 
 
