@@ -11,17 +11,17 @@
 \medskip
 
 We are seeking to demonstrate in this paper the usefulness of truth discovery on large sets of 
-``factoid" claims about real-world facts which are obtained when querying open information extraction (OpenIE)
-systems. These claims are usually extracted by information extractors from unreliable and conflicting 
-Web sources.
+\emph{``factoid" claims} about real-world facts which are obtained when querying \emph{open information
+extraction} (OpenIE) systems. These claims are usually extracted by information extractors from unreliable
+and conflicting Web sources.
 A ``factoid" claim, e.g.,  \textsf{Barack Obama was born in Kenya}, often refers to a piece of 
 information that is accepted as true, without any prior verification, because of its frequent redundancy
-over numerous sources. Multiple distinct Web claims of such a kind about a given real life fact 
+over numerous sources. Multiple contradictory Web claims of such a type about a given real-life fact 
 are simultaneously available in practice. We draw, therefore, our attention on those conflicting claims 
-returned by a common open Web information extraction system, here \textsf{TextRunner}, as possible answers to users' queries. Concretely, 
-given a user input query (or key phrase), we consider and improve the result of \textsf{TextRunner}~\footnote{TextRunner is accessible online at \href{http://openie.allenai.o, rg/}{http://openie.allenai.org/}}
-by performing truth discovery in order to provide to the user the most reliable information.
-We next briefly present \textsf{TextRunner} system. Then, we detail how we format its output in such a that
+returned by a common open Web information extraction system, here \emph{TextRunner}, as possible answers to users' queries. 
+Concretely speaking, given a user input query (or key phrase), our main goal is to consider and improve the result of \emph{TextRunner}~\footnote{TextRunner is accessible online at \href{http://openie.allenai.o, rg/}{http://openie.allenai.org/}}
+by running truth discovery in order to provide to the user the most reliable information.
+We next briefly present \emph{TextRunner} system. Then, we detail how we format its output in such a that
 it fits the input of our truth discovering process.
 
 
@@ -36,22 +36,25 @@ it fits the input of our truth discovering process.
 
 % OIE Input and Ouput
 \paragraph*{Information extraction} We consider and analyze 
-conflicting claims about the same real-world facts from \textsf{TextRunner}.
-\textsf{TextRunner}~\cite{Yates07, Etzioni08} is an OpenIE system relying
+conflicting claims about the same real-world facts from \emph{TextRunner}.
+\emph{TextRunner}~\cite{Yates07, Etzioni08} is an OpenIE system relying
 on an unsupervised Web extraction process over a predefined 
 set of Web corpus consisting of \emph{Google}, \emph{ClueWeb}, \emph{News}, \emph{Nell}, and 
-\emph{Wikipedia} corpus. Each particular corpus aggregates information from multiple 
-other Web sources which can be of different nature, e.g. domain specific
-sources. When a query is issued, TextRunner first searches for the relevant
-corpus to query, and it then extracts the possible answers from them. 
+\emph{Wikipedia} corpus. Each particular corpus aggregates data from multiple 
+other Web sources which are of various nature, for instance domain-specific Websites.
+Queries are sent to \emph{TextRunner} by users through a form where 
+they also can optionally specify their trusted corpus on the predefined set.
+When a user query arrives, \emph{TextRunner} first finds the relevant
+sources in the set of corpus, and then it extracts each possible answer from them
+using natural language processing techniques and ontologies. 
 To do so, it performs, for efficiency concerns, a single data-driven
 pass on the corpus to obtain the list of candidate relational tuples 
-which might satisfy the user input query about a given real-world fact. 
-In TextRunner, a user input query is typically a set of keywords
-consisting  of two real-world \emph{entities} and a \emph{relation}. Such
-a user input query $\query$ can be defined formally as a triplet $(\e{1}, \rel{}, \e{2})$
+which might satisfy the arguments of the user input query. 
+A typical user query in \emph{TextRunner} is often about 
+two real-world \emph{entities} and a certain \emph{relation} between them.
+As a consequence, such a user query $\query$ can be defined formally as a triplet $(\e{1}, \rel{}, \e{2})$
 where $\e{1}$ and $\e{2}$ are real-world entities and $\rel{}$ is a relation. The argument $\rel{}$ 
-specifies a possible relationship that might exist between the two given entities. None of the three 
+specifies a possible relationship between the two given entities $\e{1}$ and $\e{2}$. None of the three 
 arguments is mandatory, meaning that some of them can be not specified by the user when issuing 
 his query. This captures the fact the user has a partial knowledge about the real world, which is 
 common in practice. Let denote the fact the user input query $\query$ is referred to by $\fact{\query}$. 
