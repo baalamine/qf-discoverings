@@ -74,19 +74,26 @@ en lui demandant s'il peut confirmer des faits (facts)
 We introduce an adaptive truth finding approach using active ensembling in order to discover an hybrid, i.e., an optimal
 ensemble of truth finding algorithms, on which we could efficiently tells the truth for the output of OpenIE systems.
 Our approach first searches for the optimal subset of truth finding algorithms using active ensembling and then it 
-tells the truth by \emph{majority voting} on the predictions of the obtained ensemble. As we detail below, we follow an idea
-similar to the adaptive strategy, proposed in~\cite{Lu15}, using QBC in order to perform active ensemble over our set of heterogeneous 
+tells the truth by \emph{majority voting} on the predictions of the obtained ensemble. As we detail below, we follow the intuition
+the adaptive strategy, proposed in~\cite{Lu15}, using QBC in order to perform active ensemble over our set of heterogeneous 
 ensembles of truth finding algorithms. \lamine{Adaptative ou non-adaptative apprentissage active?}
 
 
-Let denote by $\qset$ the set of successive user queries processed 
-by the information extraction system. For each query $\query$ in $\qset$ about the fact $\fact{\query}$ we have the corresponding
-sets of claims $\claimset_{\query}$ returned by the extractor. We refer to the entire set of all claims by $\claimset$ regarding $\qset$.
-We assume that $\claimset$ contains labeled and unlabeled claims where labeled claims, corresponding to our partial ground truth, are those 
-for which we  know whether they are correct or not by querying the user. In contrast, we do not know yet the truth about unlabeled claims and
-would like to discover by using the best ensemble of truth finding algorithms. We refer respectively to labeled and unlabeled set of claims by 
-$\claimset^{\mathsf{L}}$ and $\claimset^{\mathsf{U}}$. Given a base learning algorithm $\mathsf{X}$, a number $k$ of fixed act iterations, and 
-a fixed size $m$ of a sampling, we perform truhth finding with ensembling on our set of truth finding algorithms as follows.
+Our active ensembling algorithm considers, as input, the set of claims $\claimset{}$ as training set, a testing set $\claimset_{T}$,
+an adaptation set which is used for adapting the configuration of the ensemble, an initial ensemble size, a vector where each element
+represents the initial number of instances of a type of truth finding algorithms, a window size and a stopping criteria. Similarly to~\cite{Lu15},
+the algorithm is iterative and it chooses a set of claims of the same query for labeling at each iteration. Once the requested labels are obtained
+from the user, the algorithm puts the claims along with their labels into the training set.
+
+
+%Let denote by $\qset$ the set of successive user queries processed 
+%by the information extraction system. For each query $\query$ in $\qset$ about the fact $\fact{\query}$ we have the corresponding
+%sets of claims $\claimset_{\query}$ returned by the extractor. We refer to the entire set of all claims by $\claimset$ regarding $\qset$.
+%We assume that $\claimset$ contains labeled and unlabeled claims where labeled claims, corresponding to our partial ground truth, are those 
+%for which we  know whether they are correct or not by querying the user. In contrast, we do not know yet the truth about unlabeled claims and
+%would like to discover by using the best ensemble of truth finding algorithms. We refer respectively to labeled and unlabeled set of claims by 
+%$\claimset^{\mathsf{L}}$ and $\claimset^{\mathsf{U}}$. Given a base learning algorithm $\mathsf{X}$, a number $k$ of fixed act iterations, and 
+%a fixed size $m$ of a sampling, we perform truth finding with ensembling on our set of truth finding algorithms as follows.
 
 \begin{enumerate}
  \item We first train our ensemble of truth finding algorithms (representing here our set of classifiers)  on the current set of labeled claims
