@@ -33,16 +33,15 @@ to $\TRUE$ or $\FALSE$. A good truth finding algorithm provides  predictions tha
 %This combinaison is excepted to maximize the precision of the truth finding process on claims outputted by TextRunner as 
 %possible answers with respect to a user's query about a given real-world fact.
 Unfortunately, a well known property, e.g., as shown in~\cite{Li12, Wagui14}, of existing truth discovering algorithms is their specificity
-to certain application domains or datasets. As a consequence, there is no approach that outperforms the others on all 
-types of datasets. Furthermore, the truth finding process is harder in practical scenarios in the sense that there usually exists
-no labeled examples, or \emph{ground truth data}, against which one can evaluate the precision of the different algorithms in order to choose
-the more accurate one on data of interest.  Fortunately, however, human being has often a certain knowledge background about certain real world facts.
-The user knowledge is a valuable source of labeled examples that should be harnessed as partial standard for evaluating the accuracy of our truth finding 
-process. Indeed, even though a partial ground truth data could be obtained from the users, an optimal truth finding strategy change over time as we obtain
-more data from sources, for instance when claims are continuously extracted from Web sources by TextRunner.
-To tackle the aformentionned lacks of exsisting truth finding algorithms, especially in real applications like information extracted systems, 
-we will use an active ensembling in truth finding in order to continuously discover an optimal hybrid truth finding approach when the extractor is gradually
-queried and users' feedbacks arrive. As we shall show later, we will actively involve users for labeled example in our ensemble-based learning process.
+to certain application domains or datasets. As a consequence, there is no actual approach that outperforms the others on all types of datasets. On the other hand,
+truth finding is hard in practical scenarios because there usually no prior knowledge that can guide to the selection beforehand of an optimal algorithm. More
+importantly, a large set of labeled examples (or \emph{ground truth}) for evaluating the precisions of the algorithms is expensive to obtain in real applications. 
+Fortunately, however, human being has often a certain knowledge background about certain real world facts. The user knowledge is a valuable source of labeled examples
+that should be harnessed as partial standard for evaluating the accuracy of our truth finding process. Indeed, even though a partial ground truth data could be obtained from the users, an 
+optimal truth finding strategy change over time as we obtain more data from sources, for instance when claims are continuously extracted from Web sources by TextRunner. 
+To tackle the aformentionned lacks of exsisting truth finding algorithms, especially in real applications like information extracted systems, we will use an active ensembling
+in truth finding in order to continuously discover an optimal hybrid truth finding approach when the extractor is gradually queried and users' feedbacks arrive. As we shall 
+show later, we will actively involve users for labeled example in our ensemble-based learning process.
 
 Determining the optimal sample of unlabeled items to send to the sources, e.g., users, for labels during an active learning problem is a challenging problem.
 Several query strategies, e.g., uncertainty sampling or query by committee, or Support vector machine (SVM) models have been proposed for the definition of such a optimal sample of data. Note that 
