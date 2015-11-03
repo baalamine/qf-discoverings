@@ -83,29 +83,18 @@ Our active ensembling algorithm considers, as input, the set of claims $\claimse
 an adaptation set which is used for adapting the configuration of the ensemble, an initial ensemble size, a vector where each element
 represents the initial number of instances of a type of truth finding algorithms, a window size and a stopping criteria. Similarly to~\cite{Lu15},
 the algorithm is iterative and it chooses a set of claims of the same query for labeling at each iteration. Once the requested labels are obtained
-from the user, the algorithm puts the claims along with their labels into the training set.
-
-
-%Let denote by $\qset$ the set of successive user queries processed 
-%by the information extraction system. For each query $\query$ in $\qset$ about the fact $\fact{\query}$ we have the corresponding
-%sets of claims $\claimset_{\query}$ returned by the extractor. We refer to the entire set of all claims by $\claimset$ regarding $\qset$.
-%We assume that $\claimset$ contains labeled and unlabeled claims where labeled claims, corresponding to our partial ground truth, are those 
-%for which we  know whether they are correct or not by querying the user. In contrast, we do not know yet the truth about unlabeled claims and
-%would like to discover by using the best ensemble of truth finding algorithms. We refer respectively to labeled and unlabeled set of claims by 
-%$\claimset^{\mathsf{L}}$ and $\claimset^{\mathsf{U}}$. Given a base learning algorithm $\mathsf{X}$, a number $k$ of fixed act iterations, and 
-%a fixed size $m$ of a sampling, we perform truth finding with ensembling on our set of truth finding algorithms as follows.
+from the user, the algorithm puts the claims along with their labels into the training set. \lamine{Une esquisse du process d'apprentissage active}
 
 \begin{enumerate}
- \item We first train our ensemble of truth finding algorithms (representing here our set of classifiers)  on the current set of labeled claims
- $\claimset^{\mathsf{L}}$ \lamine{How the base learning algorithm should be implemented?}
- \item We then pass our set of unlabeled claims in $\claimset^{\mathsf{U}}$ to the ensemble of truth finding algorithms
- \item Each algorithm in the current ensemble predicts the label of each claim
- \item The claims that induce the most label prediction disagreement are queried for their labels and added to the training set
- \item We select a subset $\mathsf{T}$ of the $m$ claims that induce the most label prediction disagreement
- \item We request the labels of these $m$ claims to the user 
- \item We lastly remove claims in $\mathsf{T}$ from $\claimset$ and add them together with their acquired truth labels to $\claimset^{\mathsf{L}}$.
+\item The algorithm starts with an \emph{initialization phase} where it sets initial values of some parameters and trains an initial ensemble over an initial 
+training set.
+ \item The algorithm then records the vote entropy of each query based on the truth told by each algorithm in the committee on the claims in $\claimset{}$
+ \item It selects the set of claims associated the query with the maximum vote entropy and queries their truth labels from the user
+ \item The set of acquired truth labels, together with the corresponding claims, are added into the training set
+ \item At this stage the algorithm uses an \emph{adaptation algorithm} in order to update the parameter of the ensemble
+ \item The newly generated ensemble is trained on the training set 
 \end{enumerate}
 
-We repeat the process above $k$ times or until the ensemble meets some pre-defined criteria, e.g. when the size of the ensemble
-reaches a certain pre-defined value. At the end of the active learning process, the prediction, i.e., truth discovery, is made 
-by taking the majority vote of the resulting ensemble members. 
+The steps 2--6 of the active learning algorithm are repeated until the stop criteria is satisfied. 
+At the end of the active learning process, the truth discovery is finally realized by performing 
+a majority vote on the predictions of the final inferred ensemble. 
