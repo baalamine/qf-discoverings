@@ -2,8 +2,8 @@
 \section{Ensembling for Truth Finding}\label{ensembling}
 We present in this section an adaptive truth finding approach which uses active ensembling in order to 
 adaptively learn about an optimal set of truth finding algorithms that outperforms any individual
-technique on any given dataset. Our learning approach will actively involve users for knowing the correct
-labels (or answers) about some queries which cause a large disagreement regarding the predictions of the algorithms.
+technique on any given dataset. Our learning approach will actively involve users for the correct
+labels (or answers) of a sample of queries that cause maximal disagreement amongst our classifiers.
 
 \subsection{Ensemble-Based Active Learning}
 \begin{itemize}
@@ -15,43 +15,42 @@ labels (or answers) about some queries which cause a large disagreement regardin
 
 \medskip
 An ensemble-based active learning, or commonly ensembling, is a semi-supervised learning approach that tries
-to figure out an optimal ensemble of classifiers for a given classification process by actively querying an 
+to figure out an optimal ensemble of classifiers for a given classification problem by actively querying an 
 oracle, e.g., a human being, about the labels of a sample of data items. Ensembling, thereby, enables to perform
 classification consistently well across datasets without having to determine a \emph{priori} a suitable classifier 
 type.
 
 In our context, the truth finding algorithms correspond to our set of classifiers. The underlying \emph{binary classification} 
-task consists of discovery the correct truth label of a set of claims about given user queries. Indeed, a truth finding 
-algorithm is formally a mapping $\textsf{TF}:~\claimset \mapsto \{\TRUE, \FALSE\}$ which associates each claim in $\claimset$
-to $\TRUE$ or $\FALSE$. A good truth finding algorithm provides  predictions that are close to the actual world. Unfortunately, 
-a well known property, e.g., as shown in~\cite{Li12, Wagui14}, of existing truth discovering algorithms is their specificity to 
-certain application domains or datasets. As a consequence, there is no actual approach that outperforms the others on all types 
+problem consists of assigning the correct truth label to a set of claims about given user queries. Indeed, a truth finding 
+algorithm is formally a mapping $\textsf{TF}:~\claimset \mapsto \{\TRUE, \FALSE\}$ which associates to each claim in $\claimset$
+either $\TRUE$ or $\FALSE$. A good truth finding algorithm provides  predictions that are close to the actual world. Unfortunately, 
+a well known property, e.g., as shown in~\cite{Li12, Wagui14}, of existing truth discovering algorithms remains their sentivity
+to certain application domains or datasets. As a consequence, there is no actual approach that outperforms the others on all types 
 of datasets. On the other hand, truth finding is hard in practical scenarios because there is often no prior knowledge guiding to
-the selection beforehand of an optimal algorithm, in particular when the context is dynamic. More importantly, a large set of labeled 
+the selection, beforehand, of an optimal algorithm, in particular when the context is dynamic. More importantly, a large set of labeled 
 examples (or ground truth) for evaluating the precisions of the algorithms is expensive to obtain in real applications. 
 
 In general, human being has a certain background knowledge about some real-world facts. Such a knowledge can serve as a valuable and inexpensive source of labels for a 
 rather reasonable number of data items. However, having this partial ground truth from users is not sufficient in order to definitively decide about an optimal truth
-finding strategy because it can change over time as we obtain more details from sources, e.g. when claims are continuously extracted by TextRunner in order to answer new 
-queries. Therefore, there is a need for an adaptive approach able to dynamically figure out the optimal truth finding process when users' feedbacks and new knowledge about 
-the world are available. We believe that active ensembling should be helpful to this end.
+finding strategy because it can change over time as we obtain more information from sources, e.g. when claims are continuously extracted by TextRunner for answering
+new incoming queries. Therefore, there is a need for an adaptive approach able to dynamically figure out the optimal truth finding strategy when users' feedbacks and 
+new knowledge about the world are available. We believe that active ensembling should be helpful to this end.
 
-We further propose an approach that combines truth discovery and open information extraction with ensemble-based active learning for adaptively learning about the optimal 
+We put forward and demonstrate an approach which combines truth discovery and open information extraction with ensemble-based active learning for adaptively learning about the optimal 
 ensemble of truth finding algorithms when the OpenIE system is gradually querying and labeled examples from users are available.
-As we shall show later, we will actively involve users to obtain the truth about a sample of particular facts in the learning process. The way this sampling is defined and
+As we shall show later, we will actively involve users to obtain the truth about a sample of particular facts during the learning process. The way this sampling is defined and
 chosen is crucial for the effectiveness of the active learning. Several sample selection strategies, e.g., random sampling, query by committee, or support vector machine models,
 have been proposed for the definition of the type of selected data items along the size of the sample; we defer to~\cite{burr12} for more details about active machine learning.
-In this study, we use \emph{query by committee} (QBC) for ensemble-based active learning. In QBC, an ensemble of hypotheses is learned and examples that cause maximum disagreement amongst this committee (with respect to the predicted truth) are selected as the 
-most informative. 
-%points for which the ``committee" disagree. 
-%Query by committee is known to be a very effective active learning approach that has been successfully applied to different 
-%classification problems.
-
+In this study, we use \emph{query by committee} (QBC) for ensemble-based active learning. QBC states that the best data items to select for labels are those that cause 
+the \emph{maximal disagreement} among the predictions of an ensemble of diverse but partially accurate classifiers during active learning. Furthermore, we seek to provide
+an adaptive active learning by looking for an optimal ensemble given a larger set of input classifiers.
 \lamine{Peut \^etre qu'il y a mieux que QBC ?}
 
-We use and compare twelve well established truth finding algorithms in the literature,
-which we cluster in different classes according to their specificities.
-We briefly present each class of considered truth discovering algorithms in the following.
+To learn about an optimal ensemble from a diverse set of classifiers, we have considered
+twelve well established truth finding algorithms in the literature, having three different types 
+according to their specificities. Note that diversity offers better result in active learning than
+using homogenoeus classifiers (see~\cite{Lu15}). We briefly present each considered class of truth
+discovering algorithms in the following.
 
 \begin{enumerate}
  \item \textbf{Iterative techniques:} TruthFinder~\cite{YinHY08}, Cosine, 2-Estimates and 3-Estimates~\cite{GallandAMS10}, 
@@ -60,11 +59,10 @@ We briefly present each class of considered truth discovering algorithms in the 
  \item \textbf{Dependency detection based techniques:} Depen, Accu, and AccuSim~\cite{DongBS09}
 \end{enumerate}
 
-\lamine{La classification des algorithmes est juste une proposition. Peut \^etre qu'il existe 
-une meilleure classification.}
+\lamine{Peut \^etre qu'il existe une meilleure classification ?}
 
 
-\subsection{Our Active Learning Strategie}
+\subsection{Truth Finding with Active Ensembling}
 \begin{itemize}
  \item notre approche que l'on défend ici dans la démo est  semi supervisée en impliquant de l'utilisateur de façon active
 en lui demandant s'il peut confirmer des faits (facts)
