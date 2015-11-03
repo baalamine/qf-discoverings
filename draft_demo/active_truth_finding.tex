@@ -71,8 +71,12 @@ en lui demandant s'il peut confirmer des faits (facts)
 
 \medskip
 
-We rely on an ensemble-based semi-supervised learning process for discovering an hybrid, i.e., an optimal ensemble of truth
-finding algorithms for information extraction systems. Let denote by $\qset$ the set of successive user queries processed 
+We propose an adaptive truth finding approach using active ensembling in order to discover an hybrid, i.e., an optimal
+ensemble of truth finding algorithms, on which we could efficiently tells the truth for the output of OpenIE systems.
+Our approach first searches for the optimal subset of truth finding algorithms using active ensembling and then it 
+tells the truth by \emph{majority voting} on the predictions of the obtained ensemble.
+
+Let denote by $\qset$ the set of successive user queries processed 
 by the information extraction system. For each query $\query$ in $\qset$ about the fact $\fact{\query}$ we have the corresponding
 sets of claims $\claimset_{\query}$ returned by the extractor. We refer to the entire set of all claims by $\claimset$ regarding $\qset$.
 We assume that $\claimset$ contains labeled and unlabeled claims where labeled claims, corresponding to our partial ground truth, are those 
