@@ -106,4 +106,7 @@ a majority vote on the predictions of the final inferred ensemble.
 
 \lamine{Esquisse de la m\'ethode d'adaptation}
 In the adaptive phase of the learning, the algorithm tries to determine the optimal ensemble of 
-truth finding algorithms which will guarantee the highest prediction accuracy  at the end. 
+truth finding algorithms which will guarantee the highest prediction accuracy  at the end. To do
+so, we assume that our algorithm starts with an initial ensemble including one algorithm from each class.
+At each iteration, the adaptive process creates variants of the current ensemble by discarding one algorithm
+from the ensemble. 
