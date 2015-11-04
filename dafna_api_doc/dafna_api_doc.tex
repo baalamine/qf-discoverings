@@ -78,20 +78,21 @@ the Access Token. However, supporting HTTPS might yield requests/responses littl
 
 % Methods
 \subsection{Methods}
-The current version of DAFNA API supports three methods, i.e., \textbf{GET}, \textbf{POST}, and \textbf{DELETE}, 
-depending on the actions, e.g.., creation, listing, or deletion, that the 3rd party would like to perform.
+The current version of DAFNA API supports three HTTP Requests, i.e., \textbf{GET}, \textbf{POST}, and \textbf{DELETE}, 
+with respect to the operations, for instance creation, listing, or removal of datasets, the 3rd party applications would
+like to perform on the behalf on the client.
 % Base Url
-\subsection{Base URLs}
+\subsection{Base URL}
 \begin{itemize}
  \item \href{http://dafna.qrci.org/}{http://dafna.qrci.org/}
- \item \href{http://localhost:4000/}{http://localhost:4000/}
+ %\item \href{http://localhost:4000/}{http://localhost:4000/}
 \end{itemize}
-All \textbf{GET} and \textbf{DELETE} endpoint URLs are appended to the first base URL, while \textbf{POST} endpoint
-URLs must be appended to the second base URL. As an example, one must use following endpoint URLs in order to 
-list and create datasets, respectively. 
+All the endpoint provided by the API are appended to the base URL.
+To respectively create and list the datasets, one must use the following URLs with some parameters
+as we will see in the next. 
 \begin{description}
- \item POST \href{http://localhost:4000/datasets/}{http://localhost:4000/datasets/} \\
- \item GET \href{http://dafna.qcri.org/datasets/}{http://dafna.qcri.org/datasets/} 
+\item GET \href{http://dafna.qcri.org/datasets/}{http://dafna.qcri.org/datasets/} \\
+ \item POST \href{http://dafna.qcri.org/datasets/}{http://dafna.qcri.org/datasets/}
 \end{description}
 
 % Access Token Exchange
@@ -104,7 +105,7 @@ Normally, it is a unique token that identifies the client and the user on which
 requests are to be made on behalf of. Continuing with the example above, the complete
 URLs should be (using query string): 
 \begin{itemize}
- \item POST \href{http://localhost:4000/datasets?user\_token=some\_string\_here}{http://localhost:4000/datasets?user\_token=some\_string\_here} \\
+ \item POST \href{http://dafna.qcri.org/datasets?user\_token=some\_string\_here}{http://dafna.qcri.org/datasets?user\_token=some\_string\_here} \\
   \item GET \href{http://dafna.qcri.org/datasets?user\_token=some\_string\_here}{http://dafna.qcri.org/datasets?user\_token=some\_string\_here} 
 \end{itemize}
 
@@ -116,21 +117,21 @@ If (1) is used, all parameters should be encoded in the URL as a query string wi
 be a well-formed JSON object. 
 
 \begin{description}
- \item Example for (1)
- \item POST \href{http://localhost:4000/runsets?checked\_algo=array\_of\_parameters}{http://localhost:4000/runsets?checked\_algo=array\_of\_parameters}
- \item Example for (2)
- \item POST \href{http://localhost:4000/runsets}{http://localhost:4000/runsets}
+ \item url-encoded form:
+ \item POST \href{http://dafna.qcri.org/runsets?checked\_algo=array\_of\_parameters}{http://dafna.qcri.org/runsets?checked\_algo=array\_of\_parameters}
+ \item json formatting:
+ \item POST \href{http://dafna.qcri.org/runsets}{http://dafna.qcri.org/runsets}
  \item \{checked\_algo: array\_of\_parameters, general\_config: array\_numerical\_values\}
 \end{description}
-The above line should be sent in the request body.
 
 
-Remark that the method used to encode request parameters might be also dictated by the way the request is issued. For e.g., if a given 3rd party client uses
+Note that the method used to pass the parameters of a given request is somehow dictated by the manner the request is issued.
+For instance, if a given 3rd party client uses
 \href{http://curl.haxx.se/}{'Curl'} to issue his requests, the following two syntaxes are both valid.
 \begin{description}
- \item curl -X DELETE http://localhost:4000/runsets/1/ -d ``user\_token=some\_string\_here"\\
+ \item curl -X DELETE http://dafna.qcri.org/runsets/1/ -d ``user\_token=some\_string\_here"\\
  \item and \\
- \item curl -X POST http://localhost:4000/runsets -H ``Content-type: application/json" -d `\{``user\_token": ``some\_string\_here" , ``checked\_algo": \{``Accu": [``0.2", ``0", ``100", ``0.5", ``false", ``true", ``true", ``false"] \}, ``general\_config":[``0.001", ``0.8", ``1", ``0.4"]\}' 
+ \item curl -X POST http://dafna.qcri.org/runsets -H ``Content-type: application/json" -d `\{``user\_token": ``some\_string\_here" , ``checked\_algo": \{``Accu": [``0.2", ``0", ``100", ``0.5", ``false", ``true", ``true", ``false"] \}, ``general\_config":[``0.001", ``0.8", ``1", ``0.4"]\}' 
 \end{description}
 % Response format
 \section{Response Format}
@@ -207,6 +208,9 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \textbf{Parameters}
 \begin{itemize}
 \item \textbf{user\_token}: Secret Token provided to client for authentication
+\item \textbf{kind}: either claims or truth (the type of requested datasets)
+\item \textsf{start} 
+\item \textsf{length}
 \end{itemize}
 \textbf{Response}
 \begin{description}
@@ -224,6 +228,13 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
   success\_action\_status: $<$status$>$,
 \}
 \end{description}
+\textsf{Notes}
+\begin{description}
+ \item \textsf{start} and \textsf{end} parameters are optional. Note that 
+ when the parameter \textsf{kind} is not provided, the user will get an empty 
+ set of datasets.
+\end{description}
+
 %
 \item \textbf{/runsets}
 \begin{description}
