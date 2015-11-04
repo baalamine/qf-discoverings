@@ -86,17 +86,18 @@ a training set of labeled claims $\claimset_{TR}$, testing set of claims $\claim
 set which is used for adapting the configuration of the ensemble, a  and a stopping criteria. At each iteration, the algorithm chooses exactly one
 set of claims about the same query for asking their labels to the user. Once these labels are acquired from the user, the algorithm  adds the claims 
 along with their truth labels into the training set, adapts the ensemble of truth finding algorithms for an optimal one, discards the old one and trains
-the new ensemble against the actual training set.
+the new ensemble against the actual training set. We detail the learning procedure below.
 \lamine{Une esquisse du process d'apprentissage active}
 
 \begin{enumerate}
 \item The algorithm starts with an \emph{initialization phase} initial initial values of parameters are set, an initial training set and ensemble of truth finding
 algorithm are defined. Such an ensemble is trained on this initial training set.
- \item The algorithm then records the vote entropy of each query based on the truth told by each algorithm in the committee on the claims in $\claimset{}$
- \item It selects the set of claims associated the query with the maximum vote entropy and queries their truth labels from the user
- \item The set of acquired truth labels, together with the corresponding claims, are added into the training set
- \item At this stage the algorithm uses an \emph{adaptation algorithm} in order to update the parameter of the ensemble
- \item The newly generated ensemble is trained on the training set 
+ \item The algorithm pursues by giving the claims in $\claimset{}$ to the truth finding algorithm in the current ensemble for label predictions and then 
+ it records the vote entropy of each query, thereby the underlying fact, according to the predictions of the committee.
+ \item It chooses the set of claims associated to the query having the maximum vote entropy for label querying
+ \item The set of acquired truth labels, together with the corresponding claims, are added into the training set and then discarded from $\claimset{}$.
+ \item At this stage the algorithm uses an \emph{adaptation procedure} in order to tune the ensemble of truth finding algorithm towards an optimal one.
+ \item The newly generated ensemble is trained on the updated training set of labeled claims.
 \end{enumerate}
 
 The steps 2--6 of the active learning algorithm are repeated until the stop criteria is satisfied. 
