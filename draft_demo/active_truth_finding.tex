@@ -84,8 +84,8 @@ types and the smallest size using \emph{random search} on a given search space.
 As a consequence and similarly to~\cite{Lu15}, we rely on an iterative active ensembling process which considers the set of claims $\claimset{}$, a set of testing claims
 $\claimset_{GT}$, an adaptation set which is used for adapting the configuration of the ensemble, an initial ensemble size, a vector where each element
 represents the initial number of instances of a type of truth finding algorithms, a window size and a stopping criteria. At each iteration, the algorithm
-chooses the set of claims about the same query for asking labels to the user. Once the requested labels are obtained from the user, the algorithm puts the claims
-along with their labels into the training set. \lamine{Une esquisse du process d'apprentissage active}
+chooses exactly one set of claims about the same query for asking their labels to the user. Once these labels are acquired from the user, the algorithm  adds
+the claims along with their truth labels into the training set. \lamine{Une esquisse du process d'apprentissage active}
 
 \begin{enumerate}
 \item The algorithm starts with an \emph{initialization phase} where it sets initial values of some parameters and trains an initial ensemble over an initial 
