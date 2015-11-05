@@ -42,7 +42,7 @@
 \pagestyle{fancyplain}
 \fancyhead{}														% No page header
 \fancyfoot[C]{\thepage}										% Pagenumbering at center of footer
-\fancyfoot[R]{\small \texttt{HowToTeX.com}}	% You can remove/edit this line 
+\fancyfoot[R]{\small }	% You can remove/edit this line 
 \renewcommand{\headrulewidth}{0pt}				% Remove header underlines
 \renewcommand{\footrulewidth}{0pt}				% Remove footer underlines
 \setlength{\headheight}{13.6pt}
@@ -56,7 +56,7 @@
 %%% Title	
 \title{ \vspace{-1in} 	\usefont{OT1}{bch}{b}{n}
 		\huge \strut Data Forensics with Analytics\strut \\
-		\Large \bfseries \strut Checking Veracity of Facts in Qatar\strut
+		\Large \bfseries \strut Checking veracity of facts in Qatar\strut
 }
 \author{ 									\usefont{OT1}{bch}{m}{n}
         Mouhamadou Lamine Ba and Laure Berti-Equille\\		\usefont{OT1}{bch}{m}{n}
@@ -70,19 +70,21 @@
 \begin{document}
 \maketitle
  
- Data foresentics with Analytics, shortly DAFNA, is an ambitious project of the data analytics group of Qatar Computing Research
- Institute. It main goal is to provide efficient and effective algorithms and tools which enable user applications to be aware of 
- the veracity level of redundant information from multiple untrustworthy sources they consume. One concrete targeted application
+ Data forensics with Analytics, or DAFNA for short, is an ambitious project of the data analytics group of Qatar Computing Research
+ Institute. It main goal is to provide an end-to-end pipeline data integration and analysis system whose the core will be an efficient 
+ and effective truth discovery approach in order to have the ability to figure out the veracity level of redundant information from
+ multiple untrustworthy sources they consume. One concrete targeted application
  of this project is to build an end-to-end truth discovery systems that provides reliable information about facts in Qatar, given 
- some extraction and integration phases. This challenge asks for dealing with diverses research sub-problems related to fact extraction,
- studys of existing truth finding algorithms, and inferrence of an efficient approach.
+ some extraction and integration phases. This is challenging and asks for facing diverses research topics related to efficient fact
+ extraction, efficient truth finding strategies, and how truth finders could be coupled with real existing systems.
 
  
  
- We will present our ongoing study to compare existing truth discovery algorithms, providing an API for using those algorithms, and finally
- the coupling of the truth finding process with real information extraction systems.
+ We will present our ongoing study on extensively comparing twelve existing truth discovery algorithms, releasing the first API that will 
+ enable user applications to transparently access to the truth finders, and finally integrating truth finding in the process of quality information 
+ retrieval based on Web extraction systems.
  
  \paragraph*{Comparative evaluation}
- \paragraph*{Release of a free API}
+ \paragraph*{First API for Truth Finders}
  \paragraph*{Coupling with Web extractors}
 \end{document}
