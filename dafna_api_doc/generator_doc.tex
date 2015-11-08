@@ -44,7 +44,7 @@
 \newcommand{\claim}[1]{\vspace*{0.5cm}\\\indent\indent\texttt{#1}\vspace*{0.5cm}}
 
 %opening
-\title{SYNTHETIC DATASET GENERATOR FOR TRUTH DISCOVERY SCENARIOS}
+\title{Synthetic Dataset Generator for Truth Discovery Scenarios}
 \subtitle{Documentation}
 \author{Mouhamadou Lamine BA and Laure BERTI-EQUILLE}
 \date{\begin{tabular}{ll}Creation date~:& November 5, 2015 \\ Revision date~:& \today \\\end{tabular}}
@@ -74,7 +74,7 @@ Kindly, verify you have installed JAVA JRE 1.7 or a higher version in your compu
 \section{Types of datasets}
 The synthetic dataset generator can produce various types of datasets in function of
 the source coverage, ground truth distribution, distinct values distribution, 
-and level of similarity between distinct values of the same data items. It also offers the ability 
+and level of similarity between distinct values of the same data item. It also offers the ability 
 to capture both extreme optimistic and pessimistic scenarios by playing on ground truth distribution 
 controller.
 
@@ -88,25 +88,65 @@ on a UNIX terminal.
 of the generator.
 
 
+% Example of generation
+\subsection{Generation Example}
+The use of the synthetic dataset generator requires to instanciate all the  parameters in a certain order, as we will see in the next.
+As an example of a generation, suppose we would like to obtain a dataset consisting of 10 sources which fully cover  10 objects having 5 
+properties. We also want to constrain the distribution of the distinct values per data item and the ground truth distribution to be both exponential.
+We do not care about similar distinct values. Finally, we would like to set the default directotry for the output as ``./Test". 
+We obtain the needed configuration by running the synthetic dataset generator as follows.
+\shellcmd{java -jar DAFNA-DataSetGenerator.jar -src 10 -obj 10 -prop 5 -cov 1.00 -ctrlC Exp -ctrlT Exp -v 3 -ctrlV Exp -s dissSim -f "./Test"}
+
+Figures~(a) and (b) respectively show an excerpt of the dataset file and the ground truth file produced by the generator after completion.\\
+
+
+\begin{tabular}{cc}
+\includegraphics[height=0.4\textheight]{claims}&\includegraphics[height=0.4\textheight]{truths}\\
+(a) Excerpt of the dataset file & (b) Excerpt of the GT dataset\\
+\end{tabular}
+
 
 % Mandatory parameters
-\subsection{Input parameters}
+\subsection{Input Parameters}
 The synthetic dataset generator considers as input 10 parameters.
 All parameters are mandaratory for a successful generation. Each 
-parameter controls a given characteristic of the datasets to be generated.
-Below details the semantics of each parameter.
+parameter controls a given characteristic of the dataset to be generated.
+Below the details of each parameter.
 
+% number of sources
+\subsubsection{Number of sources}
 \begin{itemize}
- \item[\textbf{-src}:] The number of sources providing claims
- \item[\textbf{-obj}:] The number of objects covered by sources
- \item[\textbf{-prop}:] The number of properties describing each object
- \item[\textbf{-cov}:] Value from $0$ to $1$ representing the uniform percentage 
+ \item[\textbf{-src}] specifies the number of sources providing claims. Its value must be a non null integer.
+ \end{itemize}
+% number of objects
+\subsubsection{Number of objects}
+ \begin{itemize}
+ \item[\textbf{-obj}] specifies the number of objects covered by the sources. Its value must be a non null integer.
+ Note that it should correspond to the higher bound of the amount of objects covered by the sources.
+ \end{itemize}
+ % number of properties 
+\subsubsection{Number of properties}
+ \begin{itemize}
+ \item[\textbf{-prop}] specifies the number of properties describing each object. Its value must a be a non null integer.
+ \end{itemize}
+ % Data item source coverage 
+ \subsubsection{Data item source coverage}
+ \begin{itemize}
+ \item[\textbf{-cov}] corresponds to a value from $0$ to $1$ representing the uniform percentage 
  of data items covered by sources in the Uniform coverage Distribution.
- \item[\textbf{-ctrlC}:] The source coverage distribution which is either \textbf{uniform} or \textbf{Exp} (i.e. Random).
+\end{itemize}
+% Source coverage distribution
+\subsubsection{Source coverage distribution}
+\begin{itemize}
+\item[\textbf{-ctrlC}] sets the source coverage distribution which is either \textbf{uniform} or \textbf{Exp} (i.e. Random).
  An uniform distribution means that the number of values provided by the sources is uniformly
  distributed given the source coverage value. In the same spirit, the number of values provided 
  by the sources is exponentially distributed when its coverage distribution is exponential.
- \item[\textbf{-ctrlT}:] The Ground Truth Distribution per Source. It can be set to one of the following distribution:
+\end{itemize}
+% Ground truth distribution per source
+\subsubsection{Ground truth distribution per source}
+\begin{itemize}
+ \item[\textbf{-ctrlT}] specifies the Ground Truth Distribution per Source. It can be set to one of the following distribution:
  \begin{itemize}
   \item[R:] Random Distribution in which the number of true positive claims per source is randomly chosen.
   \item[Uniform:] Uniform Distribution where each source provides the same number of true positive claims.
@@ -121,21 +161,40 @@ Below details the semantics of each parameter.
   \item[Exp] Exponential Distribution in which the number of true positive values provided by the sources is exponentially
   distributed.
  \end{itemize}
- \item[\textbf{-v}:] The number of distinct value per data item. The specified value will be used as a constant for the uniform 
+\end{itemize}
+% Number of distinct values per data item
+\subsubsection{Number of distinct values per data item}
+\begin{itemize}
+ \item[\textbf{-v}] sets the number of distinct value per data item. The specified value will be used as a constant for the uniform 
  model, and as the maximum number of distinct values in the exponential model.
- \item[\textbf{-ctrlV}:] The distinct values distribution per data item. It can be set either uniform  or exponential.
+\end{itemize}
+% Distinct value distribution per data item
+\subsubsection{Distinct value distribution per data item}
+\begin{itemize}
+ \item[\textbf{-ctrlV}] specifies the distinct values distribution per data item. It can be set either uniform  or exponential.
  \begin{itemize}
   \item [Uniform:] All data items have the same number of distinct values claimed by the set of sources.
   \item [Exp:]  Each data item has a number of distinct values that is exponentially distributed.
  \end{itemize}
+\end{itemize}
+% Value similarity
+\subsubsection{Value similarity}
+\begin{itemize}
   \item[\textbf{-s}:] Similarity level between the different values of the same data item. It must be set either to \textbf{sim} or 
  to \textbf{dissSim}.
   \begin{itemize}
    \item [Sim] Distinct values for data items will be highly similar.
    \item [dissSim] Distinct values for data items will be highly diss-similar.
   \end{itemize}
- \item[\textbf{-f}:] The output folder where the data set will be created and saved.
 \end{itemize}
+% Output folder
+\subsubsection{Output folder}
+\begin{itemize}
+ \item[\textbf{-f}] specifies the output folder where the data set will be created and saved.
+\end{itemize}
+
+\paragraph{Important:}When running the dataset generator, \textbf{all the parameters above need to be valued and listed in the required ordering}.
+Otherwise, the generator will not work properly.
 
 % generator output
 \subsection{Output Datasets}
@@ -143,8 +202,8 @@ Given the required input parameters, the synthetic dataset generator proceeds to
 of the dataset with the desired characteristics. After completion, it creates the two following
 folders into the main directotry specified by the user with the parameter \textbf{-f}.
 \begin{itemize}
- \item[claims/] Folder which contains the dataset file 
- \item[truth/]  Folder which contains the ground truth file
+ \item \textbf{claim/}~Folder which contains the dataset file 
+ \item \textbf{truth/}~Folder which contains the ground truth file
 \end{itemize}
 
 The dataset file produced by the generator contains the sources together with the set of claims.
@@ -161,21 +220,11 @@ contains the following fields:
 where Object, property, and TrueClaim represent respectively an object, one among its set of properties, and the true claim about
 this given property.
 
-% Example of generation
-\section{Example of generation}
-The use of the synthetic dataset generator requires to instanciate all the  parameters in a certain order, as we will see in the next.
-As an example of a generation, suppose we would like to obtain a dataset consisting of 10 sources which fully cover  10 objects having 5 
-properties. We also want to constrain the distribution of the distinct values per data item and the ground truth distribution to be both exponential.
-We do not care about similar distinct values. Finally, we would like to set the default directotry for the output as ``./Test". 
-We obtain the needed configuration by running the synthetic dataset generator as follows.
-\shellcmd{java -jar DAFNA-DataSetGenerator.jar -src 10 -obj 10 -prop 5 -cov 1.00 -ctrlC Exp -ctrlT Exp -v 3 -ctrlV Exp -s dissSim -f "./Test"}
+% Questions or Feebacks
+\section{Questions or Feebacks}
+For any questions or feebacks about the generator, please feel free to contact us by email on \href{mailto:lberti@qf.org.qa}{dafna.qf.org.qa}
+or visit the website of the DAFNA project by the following the link below.
 
-Figures~(a) and (b) respectively show an excerpt of the dataset file and the ground truth file produced by the generator after completion.\\
-
-
-\begin{tabular}{cc}
-\includegraphics[height=0.4\textheight]{claims}&\includegraphics[height=0.4\textheight]{truths}\\
-(a) Excerpt of the dataset file & (b) Excerpt of the ground truth File\\
-\end{tabular}
+\href{http://daqcri.github.io/dafna/\#/dafna/home\_sections/home.html}{http://daqcri.github.io/dafna/\#/dafna/home\_sections/home.html}.
 
 \end{document}
