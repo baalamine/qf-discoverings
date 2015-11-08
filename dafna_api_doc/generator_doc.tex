@@ -42,6 +42,10 @@
 }
 \newcommand{\shellcmd}[1]{\vspace*{1cm}\\\indent\indent\texttt{\# #1}\vspace*{1cm}}
 \newcommand{\claim}[1]{\vspace*{0.5cm}\\\indent\indent\texttt{#1}\vspace*{0.5cm}}
+\newcommand{\cov}[1]{\ensuremath{\mathrm{Cov}(#1)}}
+\newcommand{\expo}[1]{\ensuremath{\mathrm{e}^{#1}}}
+\newcommand{\nbDistinctValue}[1]{\ensuremath{\mathrm{NbDistinctV}(#1)}}
+\newcommand{\maxNbDistinctV}{\ensuremath{\mathsf{maxNbDistinctV}}}
 
 %opening
 \title{Synthetic Dataset Generator for Truth Discovery Scenarios}
@@ -59,7 +63,7 @@
 
 % Introduction
 \section{Introduction}
-In order to provide to users the ability to test and compare multiple truth finding algorithms on various data set settings, some of them 
+In order to provide to users the ability to test and compare multiple truth finding algorithms on various dataset settings, some of them 
 being not easy to obtain in practice, we provide the \href{http://daqcri.github.io/dafna/#/dafna/apidoc/gettingstarted.html}{DAFNA API} 
 together with a synthetic dataset generator. The synthetic dataset generator allows to simulate a large variety of scenarios where sources
 present different behaviors in terms of coverage, error rate, reliability level, conflicting information, ect. More importantly, the generator
@@ -71,7 +75,7 @@ The synthetic dataset generator has been implemented under JAVA 1.7\_0.65. The c
 Kindly, verify you have installed JAVA JRE 1.7 or a higher version in your computer before using the jar file.
 
 % Types of datasets
-\section{Types of datasets}
+\section{Types of Datasets}
 The synthetic dataset generator can produce various types of datasets in function of
 the source coverage, ground truth distribution, distinct values distribution, 
 and level of similarity between distinct values of the same data item. It also offers the ability 
@@ -80,7 +84,7 @@ controller.
 
 % Inputs parameters
 \section{Generator Usage}
-The synthetic dataset generator is used by running the following command line, e.g.
+The synthetic dataset generator is used with the following command line, e.g.
 on a UNIX terminal.
 \shellcmd{java -jar DAFNA-DataSetGenerator.jar param\_1 param\_2 \ldots param\_n}
 
@@ -97,7 +101,8 @@ We do not care about similar distinct values. Finally, we would like to set the 
 We obtain the needed configuration by running the synthetic dataset generator as follows.
 \shellcmd{java -jar DAFNA-DataSetGenerator.jar -src 10 -obj 10 -prop 5 -cov 1.00 -ctrlC Exp -ctrlT Exp -v 3 -ctrlV Exp -s dissSim -f "./Test"}
 
-Figures~(a) and (b) respectively show an excerpt of the dataset file and the ground truth file produced by the generator after completion.\\
+Figures~(a) and (b) respectively show an excerpt of the dataset file and the corresponding ground truth (GT) dataset produced by the generator
+after completion.\\
 
 
 \begin{tabular}{cc}
@@ -142,6 +147,13 @@ Below the details of each parameter.
  An uniform distribution means that the number of values provided by the sources is uniformly
  distributed given the source coverage value. In the same spirit, the number of values provided 
  by the sources is exponentially distributed when its coverage distribution is exponential.
+ 
+ In the case of an exponential distribution, the coverage of a given source $i$ is defined as follows.
+ \[
+  \cov{i} = 1 + (|D|-1)\times \frac{\expo{\frac{4i}{(|S|-1)}} - 1}{\expo{4}-i}~\forall i=0,\ldots,(|S| -1)
+ \]
+where $S$ and $D$ are respectively the set of source and the set of data items. 
+ 
 \end{itemize}
 % Ground truth distribution per source
 \subsubsection{Ground truth distribution per source}
@@ -174,7 +186,13 @@ Below the details of each parameter.
  \item[\textbf{-ctrlV}] specifies the distinct values distribution per data item. It can be set either uniform  or exponential.
  \begin{itemize}
   \item [Uniform:] All data items have the same number of distinct values claimed by the set of sources.
-  \item [Exp:]  Each data item has a number of distinct values that is exponentially distributed.
+  \item [Exp:]  Each data item has a number of distinct values that is exponentially distributed. In such a case, many data 
+  items have very few conflicts, while few data items have lots of conflits. An exponential distinct value distribution for 
+  data item $j$ is defined as follows.
+  \[
+   \nbDistinctValue{j} = (\maxNbDistinctV - 1)\times \frac{\expo{(\frac{2i}{|D|})-1}{zzzz} + 1}{×}
+  \]
+
  \end{itemize}
 \end{itemize}
 % Value similarity
@@ -183,14 +201,14 @@ Below the details of each parameter.
   \item[\textbf{-s}:] Similarity level between the different values of the same data item. It must be set either to \textbf{sim} or 
  to \textbf{dissSim}.
   \begin{itemize}
-   \item [Sim] Distinct values for data items will be highly similar.
-   \item [dissSim] Distinct values for data items will be highly diss-similar.
+   \item [Sim:] Distinct values for data items will be highly similar.
+   \item [dissSim:] Distinct values for data items will be highly diss-similar.
   \end{itemize}
 \end{itemize}
 % Output folder
 \subsubsection{Output folder}
 \begin{itemize}
- \item[\textbf{-f}] specifies the output folder where the data set will be created and saved.
+ \item[\textbf{-f}] specifies the output folder where the dataset will be created and saved.
 \end{itemize}
 
 \paragraph{Important:}When running the dataset generator, \textbf{all the parameters above need to be valued and listed in the required ordering}.
@@ -212,13 +230,13 @@ It corresponds to a csv file in which each line	contains the following fields:
 
 \noindent where claimId, Object, Property, Claim, Source, and TimeStamp are respectively the identifer of the claim,
 the real world object, one of its properties, a claim about this property, the source who made the claim, and
-the time when the claim has been made.
+the time when the claim has been made (Cf. Figure~a) above).
 
-The ground truth file contains the ground truth associated to the generated dataset. It is also a csv file in which each line
+The ground truth dataset contains the ground truth associated to the generated dataset. It is also a csv file in which each line
 contains the following fields:
 \claim{Object, property, Trueclaim}
 where Object, property, and TrueClaim represent respectively an object, one among its set of properties, and the true claim about
-this given property.
+this given property (Cf.\ Figure~b) above).
 
 % Questions or Feebacks
 \section{Questions or Feebacks}
