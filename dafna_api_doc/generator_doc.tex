@@ -6,6 +6,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{graphicx}
+\usepackage{filemod}
 \colorlet{punct}{red!60!black}
 \definecolor{background}{HTML}{EEEEEE}
 \definecolor{delim}{RGB}{20,105,176}
@@ -43,9 +44,10 @@
 \newcommand{\claim}[1]{\vspace*{0.5cm}\\\indent\indent\texttt{#1}\vspace*{0.5cm}}
 
 %opening
-\title{SYNTHETIC DATASET GENERATOR}
+\title{SYNTHETIC DATASET GENERATOR FOR TRUTH DISCOVERY SCENARIOS}
 \subtitle{Documentation}
-\author{}
+\author{Mouhamadou Lamine BA and Laure BERTI-EQUILLE}
+\date{\begin{tabular}{ll}Creation date~:& November 5, 2015 \\ Revision date~:& \today \\\end{tabular}}
 
 \begin{document}
 
@@ -135,7 +137,7 @@ Below details the semantics of each parameter.
 \end{itemize}
 
 % generator output
-\subsection{Outputted Datasets}
+\subsection{Output Datasets}
 Given the required input parameters, the synthetic dataset generator proceeds to the generation 
 of the dataset with the desired characteristics. After completion, it creates the two following
 folders into the main directotry specified by the user with the parameter \textbf{-f}.
@@ -160,9 +162,9 @@ this given property.
 
 % Example of generation
 \section{Example of generation}
-The use of the synthetic dataset generator requires to instanciate all the  parameters presented above. As an example of a generation,
-suppose we would like to obtain a dataset consisting of 10 sources which fully cover  10 objects having 5 properties. We also 
-want to constrain the distribution of the distinct values per data item and the ground truth distribution to be both exponential.
+The use of the synthetic dataset generator requires to instanciate all the  parameters in a certain order, as we will see in the next.
+As an example of a generation, suppose we would like to obtain a dataset consisting of 10 sources which fully cover  10 objects having 5 
+properties. We also want to constrain the distribution of the distinct values per data item and the ground truth distribution to be both exponential.
 We do not care about similar distinct values. Finally, we would like to set the default directotry for the output as ``./Test". 
 We obtain the needed configuration by running the synthetic dataset generator as follows.
 \shellcmd{java -jar DAFNA-DataSetGenerator.jar -src 10 -obj 10 -prop 5 -cov 1.00 -ctrlC Exp -ctrlT Exp -v 3 -ctrlV Exp -s dissSim -f "./Test"}
