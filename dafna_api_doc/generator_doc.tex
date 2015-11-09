@@ -46,6 +46,7 @@
 \newcommand{\expo}[1]{\ensuremath{\mathrm{e}^{#1}}}
 \newcommand{\nbDistinctValue}[1]{\ensuremath{\mathrm{NbDistinctV}(#1)}}
 \newcommand{\maxNbDistinctV}{\ensuremath{\mathsf{maxNbDistinctV}}}
+\newcommand{\gt}[1]{\ensuremath{\mathrm{GT}(#1)}}
 
 %opening
 \title{Synthetic Dataset Generator for Truth Discovery Scenarios}
@@ -150,7 +151,7 @@ Below the details of each parameter.
  
  In the case of an exponential distribution, the coverage of a given source $i$ is defined as follows.
  \[
-  \cov{i} = 1 + (|D|-1)\times \frac{\expo{\frac{4i}{(|S|-1)}} - 1}{\expo{4}-i}~\forall i=0,\ldots,(|S| -1)
+  \cov{i} = 1 + (|D|-1)\times \frac{\expo{\frac{4\times i}{(|S|-1)}} - 1}{\expo{4}-1}~\forall i=0,\ldots,(|S| -1)
  \]
 where $S$ and $D$ are respectively the set of source and the set of data items. 
  
@@ -171,7 +172,11 @@ where $S$ and $D$ are respectively the set of source and the set of data items.
   \item[80O:] 80\% Optimistic Distribution which considers that 80\% of the sources provide 80\% true positive claims 
   and only 20\% of the sources provide 20\% true positive claims.
   \item[Exp] Exponential Distribution in which the number of true positive values provided by the sources is exponentially
-  distributed.
+  distributed. Such an exponential distribution ground truth is defined and estimated for a given source $i$ as follows.
+  \[
+   \gt{i} = |D_{s_i}| \times \frac{\expo{\frac{i}{|S|}} - \expo{\frac{1}{|S|}}}{\expo{} - \expo{\frac{i}{|S|}}}~\forall i= 1, \ldots,|S|
+  \]
+in where $S$ and $D_{s_i}$ are respectively the set of sources and the set of data items covered by the source $i$.
  \end{itemize}
 \end{itemize}
 % Number of distinct values per data item
@@ -190,9 +195,9 @@ where $S$ and $D$ are respectively the set of source and the set of data items.
   items have very few conflicts, while few data items have lots of conflits. An exponential distinct value distribution for 
   data item $j$ is defined as follows.
   \[
-   \nbDistinctValue{j} = (\maxNbDistinctV - 1)\times \frac{\expo{(\frac{2i}{|D|})-1}{zzzz} + 1}{×}
+   \nbDistinctValue{j} = (\maxNbDistinctV - 1)\times \frac{\expo{\frac{2\times j}{|D|}-1}}{\expo{\frac{2\times(|D|-1)}{|D|} -1}} + 1
   \]
-
+where $D$ is the set of data items.
  \end{itemize}
 \end{itemize}
 % Value similarity
