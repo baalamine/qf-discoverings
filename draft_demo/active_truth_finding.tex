@@ -74,12 +74,13 @@ en lui demandant s'il peut confirmer des faits (facts)
 We present an adaptive truth finding algorithm based on active ensembling in order to learn about an optimal
 ensemble over a set of existing truth finding algorithms, on which one can efficiently find the truth for the output 
 of OpenIE systems. Our approach first obtains from the learning procedure intuitions about the best algorithm to use 
-for each incoming fact and then it performs the union of the result of the ensemble of best returned truth finding algorithms
-for a set of facts. The best truth finding algorithm for a fact, i.e., the algorithm that has the highest chance to reliability
-discover the truth among a set of candidates claims about this fact, will be found by the learner by evaluating the accuracy of 
-each competing technique on labeled claims from the user. We sketch in the following the procedure by assuming that all the input
-truth finding algorithms are used with their optimal initial parameters which are deemed known beforehand.
+for each incoming fact (or a query about it) and then it performs the union of the result of the ensemble of best truth finding
+algorithms returned for a collection of facts. The best truth finding algorithm for a fact, i.e., the algorithm that has the highest
+chance to reliability discover the truth among a set of candidates claims about this fact, will be found by the learner by evaluating
+the accuracy of each competing technique on labeled claims from the user. We sketch in the following the procedure by assuming that all
+the input truth finding algorithms are used with their optimal initial parameters which are deemed known beforehand.
 
+\lamine{A sketch of the active learning process for truth finding}
 Our ensemble-based learning process relies on QBC for label querying and aims at finding an optimal combinaison of the result
 of the different truth finding algorithm involved in the process. Such a learning process is iterative. Consider the set of 
 all claims $\claimset{}$ and the set of labeled claims $\claimset_{GT}$. The claims in $\claimset{}$ are progressively obtained
@@ -97,7 +98,7 @@ claims from the unlabeled set $\claimset{}$. The learning procedure finally dete
 the newly labeled claims in order to know the best technique for truth discovery. 
 
 \begin{enumerate}
-\item The algorithm starts with an \emph{initialization phase} in which values for the initial parameters of the learner and the different truth 
+\item The algorithm starts with an initialization phase in which values the initial parameters of the learner and the different truth 
 finding algorithm are set.
  \item The algorithm pursues by giving the claims in $\claimset{}$ to the set of truth finding algorithms for label predictions and then 
  it records the vote entropy of each query (thereby the underlying fact) according to the predictions of the committee.
@@ -111,9 +112,3 @@ The steps 2--5 of the active learning algorithm are repeated until the stop crit
 At the end of the active learning process, the truth discovery is finally realized by performing 
 the union of the predictions of the ensemble of best truth finding algorithms for each kind of claims. 
 
-%\lamine{Esquisse de la m\'ethode d'adaptation (\'a finir)}
-%In the adaptation step, the algorithm tries to determine the optimal ensemble of 
-%truth finding algorithms which will guarantee the highest prediction accuracy  at the end. To do
-%so, we assume that our algorithm starts with an initial ensemble including one algorithm from each class.
-%At each iteration, the adaptation process creates variants of the current ensemble by discarding one algorithm
-%from the ensemble. 
