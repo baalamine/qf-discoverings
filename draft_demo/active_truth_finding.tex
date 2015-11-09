@@ -73,8 +73,14 @@ en lui demandant s'il peut confirmer des faits (facts)
 
 We present an adaptive truth finding algorithm based on active ensembling in order to learn about an optimal
 ensemble over a set of existing truth finding algorithms, on which one can efficiently find the truth for the output 
-of OpenIE systems. Our approach first searches for the optimal subset of truth finding algorithms using active ensembling and then it 
-tells the truth by \emph{majority voting} on the predictions of the obtained ensemble. As we detail below, we follow the intuition
+of OpenIE systems. Our approach first obtains from the learning procedure intuitions about the best algorithm to use 
+for each incoming fact and then it performs the union of the result of the ensemble of best returned truth finding algorithms
+for a set of facts. The best truth finding algorithm for a fact, i.e., the algorithm that has the highest chance to reliability
+discover the truth among a set of candidates claims about this fact, will be found by the learner by evaluating the accuracy of 
+each competing technique on labeled claims from the user. We sketch in the following the procedure by assuming that all the input
+truth finding algorithms are used with their optimal initial parameters which are deemed known beforehand.
+
+As we detail below, we follow the intuition
 the adaptive strategy, proposed in~\cite{Lu15}, using QBC in order to perform active ensemble over our set of heterogeneous 
 ensembles of truth finding algorithms. Such a strategy efficiently finds an optimal ensemble with the best ratio of classifier
 types and the smallest size using \emph{random search} on a given search space.
