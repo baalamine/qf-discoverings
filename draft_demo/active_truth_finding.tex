@@ -91,45 +91,29 @@ parameters for each truth finding algorithm.
 The algorithm starts by evaluating the truth finding algorithms on the available unlabeled claims in $\claimset{}$ for determining
 the prediction of each technique. It then compare the set of the different algorithms on each set of claims about the same query (or fact)
 and determines the queries causing the maximal disagreement among the members of the committee. Those queries are determined by computing 
-the vote entropy of each query. The algorithm requests to the user labels for the set of candidates claims of those queries. Once it obtained
-labels from the user, it adds them into $\claimset_{GT}$ and then discards them from $\claimset{}$.
-
-At each iteration, the algorithm chooses exactly one set of claims about the same query for asking their labels to the user. Once
-these labels are acquired from the user, the algorithm  adds the claims along with their truth labels into the training set, adapts 
-the ensemble of truth finding algorithms for an optimal one, discards the old one and trains the new ensemble against the actual training 
-set. We detail the learning procedure below. \lamine{Une esquisse du process d'apprentissage active}
-
-%As we detail below, we follow the intuition
-%the adaptive strategy, proposed in~\cite{Lu15}, using QBC in order to perform active ensemble over our set of heterogeneous 
-%ensembles of truth finding algorithms. Such a strategy efficiently finds an optimal ensemble with the best ratio of classifier
-%types and the smallest size using \emph{random search} on a given search space.
-%\lamine{Adaptative ou non-adaptative apprentissage active?}
-
-
-As a consequence and similarly to~\cite{Lu15}, we rely on an iterative active ensembling process which considers the set of claims  
-a training set of labeled claims $\claimset_{TR}$, testing set of claims , an ensemble of truth finding algorithms, an adaptation
-set which is used for adapting the configuration of the ensemble, a  and a stopping criteria .
-
-
+the vote entropy of each query. The algorithm requests to the user labels for the set of candidates claims of those queries. Once the labels
+are acquired from the user, the algorithm adds those labels along the associated claims into the labeled set $\claimset_{GT}$ and discards the
+claims from the unlabeled set $\claimset{}$. The learning procedure finally determinates the accuracy of each input truth finding algorithm on
+the newly labeled claims in order to know the best technique for truth discovery. 
 
 \begin{enumerate}
-\item The algorithm starts with an \emph{initialization phase} initial initial values of parameters are set, an initial training set and ensemble of truth finding
-algorithm are defined. Such an ensemble is trained on this initial training set.
- \item The algorithm pursues by giving the claims in $\claimset{}$ to the truth finding algorithm in the current ensemble for label predictions and then 
- it records the vote entropy of each query, thereby the underlying fact, according to the predictions of the committee.
+\item The algorithm starts with an \emph{initialization phase} in which values for the initial parameters of the learner and the different truth 
+finding algorithm are set.
+ \item The algorithm pursues by giving the claims in $\claimset{}$ to the set of truth finding algorithms for label predictions and then 
+ it records the vote entropy of each query (thereby the underlying fact) according to the predictions of the committee.
  \item It chooses the set of claims associated to the query having the maximum vote entropy for label querying
- \item The set of acquired truth labels, together with the corresponding claims, are added into the training set and then discarded from $\claimset{}$.
- \item At this stage the algorithm uses an \emph{adaptation procedure} in order to tune the ensemble of truth finding algorithm towards an optimal one.
- \item The newly generated ensemble is trained on the updated training set of labeled claims.
+ \item The set of acquired truth labels, together with the corresponding claims, are added into  $\claimset_{GT}$ and then discarded from $\claimset{}$.
+ \item At this stage the algorithm estimates the accuracy of the different truth finding algorithm on  $\claimset_{GT}$ in order to determine the best one
+ for truth discover over those claims.
 \end{enumerate}
 
-The steps 2--6 of the active learning algorithm are repeated until the stop criteria is satisfied. 
+The steps 2--5 of the active learning algorithm are repeated until the stop criteria is satisfied. 
 At the end of the active learning process, the truth discovery is finally realized by performing 
-a majority vote on the predictions of the final inferred ensemble. 
+the union of the predictions of the ensemble of best truth finding algorithms for each kind of claims. 
 
-\lamine{Esquisse de la m\'ethode d'adaptation (\'a finir)}
-In the adaptation step, the algorithm tries to determine the optimal ensemble of 
-truth finding algorithms which will guarantee the highest prediction accuracy  at the end. To do
-so, we assume that our algorithm starts with an initial ensemble including one algorithm from each class.
-At each iteration, the adaptation process creates variants of the current ensemble by discarding one algorithm
-from the ensemble. 
+%\lamine{Esquisse de la m\'ethode d'adaptation (\'a finir)}
+%In the adaptation step, the algorithm tries to determine the optimal ensemble of 
+%truth finding algorithms which will guarantee the highest prediction accuracy  at the end. To do
+%so, we assume that our algorithm starts with an initial ensemble including one algorithm from each class.
+%At each iteration, the adaptation process creates variants of the current ensemble by discarding one algorithm
+%from the ensemble. 
