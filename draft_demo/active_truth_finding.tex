@@ -80,20 +80,37 @@ discover the truth among a set of candidates claims about this fact, will be fou
 each competing technique on labeled claims from the user. We sketch in the following the procedure by assuming that all the input
 truth finding algorithms are used with their optimal initial parameters which are deemed known beforehand.
 
-As we detail below, we follow the intuition
-the adaptive strategy, proposed in~\cite{Lu15}, using QBC in order to perform active ensemble over our set of heterogeneous 
-ensembles of truth finding algorithms. Such a strategy efficiently finds an optimal ensemble with the best ratio of classifier
-types and the smallest size using \emph{random search} on a given search space.
-\lamine{Adaptative ou non-adaptative apprentissage active?}
+Our ensemble-based learning process relies on QBC for label querying and aims at finding an optimal combinaison of the result
+of the different truth finding algorithm involved in the process. Such a learning process is iterative. Consider the set of 
+all claims $\claimset{}$ and the set of labeled claims $\claimset_{GT}$. The claims in $\claimset{}$ are progressively obtained
+and processed, like in a streaming manner, as from the information extraction system as long as it receives queries.
+The set $\claimset_{GT}$, initially empty, contains
+claims whose labels are known for sure by asking the user. We also assume a stop criteria (e.g., a predefined number of iterations 
+or accuracy changes between two iterations) for our iterative learning algorithm for truth finding and the set of optimal initial
+parameters for each truth finding algorithm.
+The algorithm starts by evaluating the truth finding algorithms on the available unlabeled claims in $\claimset{}$ for determining
+the prediction of each technique. It then compare the set of the different algorithms on each set of claims about the same query (or fact)
+and determines the queries causing the maximal disagreement among the members of the committee. Those queries are determined by computing 
+the vote entropy of each query. The algorithm requests to the user labels for the set of candidates claims of those queries. Once it obtained
+labels from the user, it adds them into $\claimset_{GT}$ and then discards them from $\claimset{}$.
+
+At each iteration, the algorithm chooses exactly one set of claims about the same query for asking their labels to the user. Once
+these labels are acquired from the user, the algorithm  adds the claims along with their truth labels into the training set, adapts 
+the ensemble of truth finding algorithms for an optimal one, discards the old one and trains the new ensemble against the actual training 
+set. We detail the learning procedure below. \lamine{Une esquisse du process d'apprentissage active}
+
+%As we detail below, we follow the intuition
+%the adaptive strategy, proposed in~\cite{Lu15}, using QBC in order to perform active ensemble over our set of heterogeneous 
+%ensembles of truth finding algorithms. Such a strategy efficiently finds an optimal ensemble with the best ratio of classifier
+%types and the smallest size using \emph{random search} on a given search space.
+%\lamine{Adaptative ou non-adaptative apprentissage active?}
 
 
-As a consequence and similarly to~\cite{Lu15}, we rely on an iterative active ensembling process which considers the set of claims $\claimset{}$, 
-a training set of labeled claims $\claimset_{TR}$, testing set of claims $\claimset_{GT}$, an ensemble of truth finding algorithms, an adaptation
-set which is used for adapting the configuration of the ensemble, a  and a stopping criteria (e.g., a predefined number of iterations or accuracy changes
-between two iterations). At each iteration, the algorithm chooses exactly one set of claims about the same query for asking their labels to the user. Once
-these labels are acquired from the user, the algorithm  adds the claims along with their truth labels into the training set, adapts the ensemble of truth 
-finding algorithms for an optimal one, discards the old one and trains the new ensemble against the actual training set. We detail the learning procedure below.
-\lamine{Une esquisse du process d'apprentissage active}
+As a consequence and similarly to~\cite{Lu15}, we rely on an iterative active ensembling process which considers the set of claims  
+a training set of labeled claims $\claimset_{TR}$, testing set of claims , an ensemble of truth finding algorithms, an adaptation
+set which is used for adapting the configuration of the ensemble, a  and a stopping criteria .
+
+
 
 \begin{enumerate}
 \item The algorithm starts with an \emph{initialization phase} initial initial values of parameters are set, an initial training set and ensemble of truth finding
