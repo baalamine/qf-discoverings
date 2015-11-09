@@ -24,27 +24,31 @@ recieve answers from the truth finding module or  label requests
 from the active ensembling module. When a label request is sent 
 is sent to the user, she (or he) also provides his answers through 
 this component.
-The final result of the 
-overall process will be also show to the users through this component.
-Finally, the user gives it feebacks via the user I/O interface through
-the button options or the form.
+
 
 % Information extraction module
-\paragraph*{OpenIE component} This is the information 
-extraction module which considers the input of the user and browsers
-several Web sources in order to returns the relevant answers. In our 
-system, we rely on TextRunner in order to extract information from Web corpus.
+\paragraph*{OpenIE component} OpenIE is responsible to the extraction 
+of information from the Web. It considers, as an input, a user query and queries
+several Web corpus in order to returns the relevant set of candidate answers. Our
+OpenIE component relies on TextRunner engine for the extraction of the set of candidate
+Web claims with respect to a user query about a given real-world fact.
+
+% Learning module
+\paragraph*{Active Ensembling Module} This is the core component of our system which discovers
+an optimal ensemble for truth finding over candidate claims extracted with the OpenIE 
+component. The active ensembling module, as described in Section~3, evaluates set of twelves
+truth finding algorithms on unlabeled claims, figures out the most controversal claims, and requests
+labels from the user. Once it obtained feebacks from the user, it estimates the accuracy of the competing
+algorithms on the labeled claims, and finally decides about the best one to use for each set of claims related 
+to the same query or fact. The module returns an ensemble since one can have distinct good truth finding techniques
+for various sets of claims about different facts.
 
 % Truth finding engine
 \paragraph*{Truth Finding Module} It corresponds to AllegatorTrack which contains
 twelve truth finding algorithms with different accuracy according to the types of 
 claims and the characteristics of sources.
 
-% Learning module
-\paragraph*{Active Ensembling Module} We have also a learning method that uses our knwoledge
-bases of users feedbacks. It enables to learn about the best truth finding algorithms,
-among the twelve, to use with respect to the type of entities or relations searched by 
-the user.
+
 
 % knwoledge bases
 \paragraph*{Storage Module}The knowledge base contains the information used for the learning
