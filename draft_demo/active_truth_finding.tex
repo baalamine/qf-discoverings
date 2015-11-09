@@ -81,24 +81,24 @@ the accuracy of each competing technique on labeled claims from the user. We ske
 the input truth finding algorithms are used with their optimal initial parameters which are deemed known beforehand.
 
 \lamine{A sketch of the active learning process for truth finding}
-Our ensemble-based learning process relies on QBC for label querying and aims at finding an optimal combinaison of the result
-of the different truth finding algorithm involved in the process. Such a learning process is iterative. Consider the set of 
-all claims $\claimset{}$ and the set of labeled claims $\claimset_{GT}$. The claims in $\claimset{}$ are progressively obtained
-and processed, like in a streaming manner, as from the information extraction system as long as it receives queries.
+Our ensemble-based learning process relies on QBC for label querying and aims at finding an optimal combination of the results
+of the different truth finding algorithms involved in the process. Such a learning process is iterative and considers, as input,
+the set of unlabeled claims $\claimset{}$ and the set of labeled claims $\claimset_{GT}$. The claims in $\claimset{}$ are progressively
+obtained and processed, like in a streaming setting, from the information extraction system as it continuously receives queries.
 The set $\claimset_{GT}$, initially empty, contains
-claims whose labels are known for sure by asking the user. We also assume a stop criteria (e.g., a predefined number of iterations 
-or accuracy changes between two iterations) for our iterative learning algorithm for truth finding and the set of optimal initial
+claims whose labels are known for sure by asking the user. We also assume a stop criteria, e.g., a predefined number of iterations 
+or accuracy changes between two iterations, for our iterative learning algorithm for truth finding and the set of optimal initial
 parameters for each truth finding algorithm.
 The algorithm starts by evaluating the truth finding algorithms on the available unlabeled claims in $\claimset{}$ for determining
-the prediction of each technique. It then compare the set of the different algorithms on each set of claims about the same query (or fact)
+the prediction of each technique. It then compares those label predictions on each set of claims about the same query (thereby, an identical fact)
 and determines the queries causing the maximal disagreement among the members of the committee. Those queries are determined by computing 
-the vote entropy of each query. The algorithm requests to the user labels for the set of candidates claims of those queries. Once the labels
-are acquired from the user, the algorithm adds those labels along the associated claims into the labeled set $\claimset_{GT}$ and discards the
-claims from the unlabeled set $\claimset{}$. The learning procedure finally determinates the accuracy of each input truth finding algorithm on
-the newly labeled claims in order to know the best technique for truth discovery. 
+the vote entropy of each query. The algorithm requests to the user labels for the set of candidates claims of those highly controversial queries.
+Once the labels are acquired from the user, the algorithm adds those labels along the associated claims into the labeled set $\claimset_{GT}$ and 
+discards the claims from the unlabeled set $\claimset{}$. The learning procedure finally determines the accuracy of each input truth finding algorithm
+on the newly labeled claims in order to know the best technique for truth discovery. 
 
 \begin{enumerate}
-\item The algorithm starts with an initialization phase in which values the initial parameters of the learner and the different truth 
+\item The algorithm starts with an initialization phase in which values of the initial parameters of the learner and the different truth 
 finding algorithm are set.
  \item The algorithm pursues by giving the claims in $\claimset{}$ to the set of truth finding algorithms for label predictions and then 
  it records the vote entropy of each query (thereby the underlying fact) according to the predictions of the committee.
@@ -110,5 +110,6 @@ finding algorithm are set.
 
 The steps 2--5 of the active learning algorithm are repeated until the stop criteria is satisfied. 
 At the end of the active learning process, the truth discovery is finally realized by performing 
-the union of the predictions of the ensemble of best truth finding algorithms for each kind of claims. 
+the union of the predictions of the ensemble of best truth finding algorithms for the collection 
+of claims. 
 
