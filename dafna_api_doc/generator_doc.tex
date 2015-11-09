@@ -51,7 +51,7 @@
 %opening
 \title{Synthetic Dataset Generator for Truth Discovery Scenarios}
 \subtitle{Documentation}
-\author{Mouhamadou Lamine BA and Laure BERTI-EQUILLE}
+\author{Mouhamadou Lamine BA\\ Laure BERTI-EQUILLE}
 \date{\begin{tabular}{ll}Creation date~:& November 5, 2015 \\ Revision date~:& \today \\\end{tabular}}
 
 \begin{document}
@@ -97,8 +97,8 @@ of the generator.
 \subsection{Generation Example}
 The use of the synthetic dataset generator requires to instanciate all the  parameters in a certain order, as we will see in the next.
 As an example of a generation, suppose we would like to obtain a dataset consisting of 10 sources which fully cover  10 objects having 5 
-properties. We also want to constrain the distribution of the distinct values per data item and the ground truth distribution to be both exponential.
-We do not care about similar distinct values. Finally, we would like to set the default directotry for the output as ``./Test". 
+properties. We also want to constrain the distribution of the distinct values per data item and the ground truth distribution to be both exponentials.
+We do not care about similar distinct values. Finally, we would like to set the default directory for the output as ``./Test". 
 We obtain the needed configuration by running the synthetic dataset generator as follows.
 \shellcmd{java -jar DAFNA-DataSetGenerator.jar -src 10 -obj 10 -prop 5 -cov 1.00 -ctrlC Exp -ctrlT Exp -v 3 -ctrlV Exp -s dissSim -f "./Test"}
 
@@ -182,13 +182,13 @@ in where $S$ and $D_{s_i}$ are respectively the set of sources and the set of da
 % Number of distinct values per data item
 \subsubsection{Number of distinct values per data item}
 \begin{itemize}
- \item[\textbf{-v}] sets the number of distinct value per data item. The specified value will be used as a constant for the uniform 
+ \item[\textbf{-v}] sets the number of distinct values per data item. The specified value will be used as a constant for the uniform 
  model, and as the maximum number of distinct values in the exponential model.
 \end{itemize}
 % Distinct value distribution per data item
 \subsubsection{Distinct value distribution per data item}
 \begin{itemize}
- \item[\textbf{-ctrlV}] specifies the distinct values distribution per data item. It can be set either uniform  or exponential.
+ \item[\textbf{-ctrlV}] specifies the distinct values distribution (or conflict distribution) per data item. It can be set either uniform  or exponential.
  \begin{itemize}
   \item [Uniform:] All data items have the same number of distinct values claimed by the set of sources.
   \item [Exp:]  Each data item has a number of distinct values that is exponentially distributed. In such a case, many data 
@@ -246,7 +246,7 @@ this given property (Cf.\ Figure~b) above).
 % Questions or Feebacks
 \section{Questions or Feebacks}
 For any questions or feebacks about the generator, please feel free to contact us by email on \href{mailto:lberti@qf.org.qa}{dafna.qf.org.qa}
-or visit the website of the DAFNA project by the following the link below.
+or visit the website of the DAFNA project for more details by following the link below.
 
 \href{http://daqcri.github.io/dafna/\#/dafna/home\_sections/home.html}{http://daqcri.github.io/dafna/\#/dafna/home\_sections/home.html}.
 
