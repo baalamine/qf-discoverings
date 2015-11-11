@@ -16,7 +16,7 @@
 \usepackage{epstopdf}																	% Converts .eps to .pdf
 \usepackage{subfig}																		% Subfigures
 \usepackage{booktabs}																	% Nicer tables
-
+\usepackage{mathptmx}
 
 %%% Advanced verbatim environment
 \usepackage{verbatim}
@@ -83,7 +83,13 @@ and designing an hybrid truth discovery approach using active ensembling. Finall
 .
  
  \paragraph*{Efficient Truth Discovery}Truth discovery is a hard problem to deal with in practical as often there is no a-priori
- about the veracity of provided information and the reliabily level of the sources. 
+ about the veracity of provided information and the reliabily level of the sources. Thereby, the methodology followed by the majority
+ of the existing truth discovery algorithms in order to determine the veracity of information is driven by the application domain
+ and the characteristics of the dataset, e.g. the distribution of conflicts, the similarity of data item values, ect. Therefor,
+ the design of a general purpose (effective) truth discovery approach first requires a thorough understanding of the literature. A
+ new approach should take advantage of the benefits of each existing solution, while being built on realistic assumptions for an easy
+ use in real applications.
+ 
  The first challenge dealt by the DAFNA project was to provide a comprehensible study of existing
  truth discovery algorithms. 
  
