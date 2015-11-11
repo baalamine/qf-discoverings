@@ -1,0 +1,328 @@
+% v2-acmsmall-sample.tex, dated March 6 2012
+% This is a sample file for ACM small trim journals
+%
+% Compilation using 'acmsmall.cls' - version 1.3 (March 2012), Aptara Inc.
+% (c) 2010 Association for Computing Machinery (ACM)
+%
+% Questions/Suggestions/Feedback should be addressed to => "acmtexsupport@aptaracorp.com".
+% Users can also go through the FAQs available on the journal's submission webpage.
+%
+% Steps to compile: latex, bibtex, latex latex
+%
+% For tracking purposes => this is v1.3 - March 2012
+
+\documentclass[prodmode,acmtecs]{acmsmall} % Aptara syntax
+
+% Package to generate and customize Algorithm as per ACM style
+\usepackage[ruled]{algorithm2e}
+\renewcommand{\algorithmcfname}{ALGORITHM}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+\SetAlCapNameFnt{\small}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+
+% Metadata Information
+\acmVolume{6}
+\acmNumber{6}
+\acmArticle{6}
+\acmYear{2015}
+\acmMonth{1}
+
+% Document starts
+\begin{document}
+
+% Page heads
+\markboth{L. Berti-Equille}{Online Truth Discovery Challenges}
+
+% Title portion
+\title{Actionable Truth Discovery Challenges}
+\author{LAURE BERTI-EQUILLE, MOUHAMADOU LAMINE BA
+\affil{Qatar Computing Research Institute, Hamad Bin Khalifa University, Doha, Qatar}
+}
+\begin{abstract}
+
+In the Web, a massive amount of user-generated contents, public, open, or crowd-sourced information are available through various channels such as tweets, RSS, websites, DBs, multimedia-sharing platforms, social media and networks, etc. False information, rumors, and fake contents across multiple sources can be easily spread,  making it hard to distinguish between what is true and what is not. Given such a large number of multi-channel information sources and the vast volume of conflicting data, ascertaining the veracity of the information  available in the Web in a scalable and timely manner is extremely challenging and has only been preliminarily and partly addressed by existing work. In this paper, we present a set of research challenges related to truth discovery in the Web   and we propose some potential solutions for verifying the veracity of online information.  We also discuss how an integrative solution  should benefit from a variety of technologies such as natural language processing, information extraction, data integration, probabilistic inference and data analytics, to help users estimate the reliability of various sources, check the truthfulness of their information, 
+and turn this into actionable knowledge.
+
+\end{abstract}
+
+\category{H.3.3}{Information Storage and Retrieval}{Information Search and Retrieval}
+\category{H.2.0}{Database Management}{General}
+
+\terms{Algorithms, Management, Verification}
+
+\keywords{truth discovery, fact-checking, data quality, data fusion, information extraction}
+
+\acmformat{Laure Berti-Equille, Mouhamadou Lamine Ba,  2015. Actionable Truth Discovery Challenges.}
+% At a minimum you need to supply the author names, year and a title.
+% IMPORTANT:
+% Full first names whenever they are known, surname last, followed by a period.
+% In the case of two authors, 'and' is placed between them.
+% In the case of three or more authors, the serial comma is used, that is, all author names
+% except the last one but including the penultimate author's name are followed by a comma,
+% and then 'and' is placed before the final author's name.
+% If only first and middle initials are known, then each initial
+% is followed by a period and they are separated by a space.
+% The remaining information (journal title, volume, article number, date, etc.) is 'auto-generated'.
+
+\begin{bottomstuff}
+
+Author's address: L. Berti-Equille, M. L. Ba, Qatar Computing Research Institute(Current address), Hamad Bin Khalifa University, Tornado Tower 18th, P.O. Box 5825, Doha, Qatar.
+
+\end{bottomstuff}
+
+\maketitle
+
+
+\section{Introduction}
+As online user-generated content grows exponentially, the reliance on Web data and information from social 
+media and social networks is growing in many domains for a variety of private 
+as well as corporate usages. One of the fundamental difficulties is that data can be biased, noisy, 
+outdated, incorrect, misleading and thus unreliable. Massive data coming from multiple sources 
+amplifies this problem since conflicting information have to be ``aligned'', compared  and check to estimate 
+their veracity. For obvious reasons, truth discovery from the Web has significant practical importance: online rumor propagation 
+\cite{rumor-icdm2013}, mis- or disinformation can have tremendous impacts on our society, economy, politics, and homeland 
+security\footnote{\scriptsize{For example, the {\it Fog Computing} project from DARPA is 
+a prototype developed in response to Wikileaks for automatically generating and distributing believable
+ misinformation and then tracking access and attempted misuse of it - \url{http://www.dtic.mil/dtic/tr/fulltext/u2/a552461.pdf}}}. 
+Online fact-checkers (e.g., FactCheck\footnote{\scriptsize{\url{www.factcheck.org/}}}, Snopes\footnote{\scriptsize{\url{www.snopes.com/}}}, PolitiFact\footnote{\scriptsize{\url{www.politifact.com/}}}, TruthorFiction\footnote{\scriptsize{\url{www.truthorfiction.com/}}} or OpenSecrets\footnote{\scriptsize{\url{www.opensecrets.org/}}}) and humanitarian initiatives  (e.g., AIDR\footnote{\scriptsize{\url{http://aidr.qcri.org/}}} \cite{ImranECDM13}) have gained 
+unprecedented attention since they play an essential role in classifying and verifying  manually (or semi-automatically) online information.
+
+
+%, leveraging the Web of Data to provide appropriate analysis to support decision-making and timely response to crisis situations. 
+Beyond social media and computational journalism, the problem of truth discovery is also intellectually 
+and technically interesting enough to have attracted a lot of prior studies, from both the artificial 
+intelligence and the database communities, sometimes investigated under the names of  ``fact-checking''~\cite{GoasdoueKKLMZ13},
+``information trustworthiness''~\cite{Thirunarayan2014182}, ``information credibility''~\cite{PasternackR13} 
+or ``information corroboration''~\cite{GallandAMS10}. 
+
+
+
+
+Given a set of assertions claimed by multiple sources, the ultimate goal of 
+truth discovery is to label the claimed information items as true or false and compute the reliability of 
+their sources, with the assumption that no  {\it a priori} knowledge of the truthfulness of the individual assertions and sources is given. 
+Relaxing this assumption has led to one major line of previous work which proposed and extended fact-finding 
+models by incorporating prior knowledge either about the claimed assertions \cite{PasternackR13} or about the source 
+reputation via trust assessment \cite{BalakrishnanK11}. Another line of research aimed at iteratively computing 
+and updating the trustworthiness of a source as a function of the belief in its claims, and then the belief score of each 
+claim as a function of the trustworthiness of the 
+sources asserting it \cite{YinHY08}. In this line, several probabilistic models have been proposed to incorporate various aspects beyond source 
+trustworthiness and claim belief, namely: the dependence between sources \cite{DongBHS10a}, the temporal 
+dimension in discovering evolving truth  \cite{DongBS09a}, the difficulty of ascertaining the veracity of certain claims \cite{GallandAMS10}, 
+the management of complex  data structures such as collections of entities in a claim \cite{ZhaoRGH12} or linked data \cite{GoasdoueKKLMZ13}.
+ However, current approaches are still limited in scope and also suffer from substantial drawbacks: limiting  
+ assumptions in the truth discovery models, opacity, complex model parametrization, and lack of scalability  make them difficult to adapt or apply to the 
+ wide diversity of information available on the Web and for realistic scenarios where knowing the truth as soon as possible is critical. 
+ %Ascertaining the veracity of Web data coming from various channels %(e.g., Twitter, Facebook, LinkedIn, Wikipedia, websites, RSS, emails, DBs, shared multimedia contents, etc.)
+ %in a scalable and timely manner is extremely challenging and has only been partly and preliminarily 
+ %addressed by previous work \cite{LiDLMS12}.
+
+
+
+ We argue that the next-generation data-sharing systems need to manage not only heterogeneity but also conflicting and false 
+ information  coming from various channels, in different languages, formats, and at different paces. Truth discovery systems  have to be designed to help institutions and citizens with providing rigorous, scientific explanations and reports 
+ of their findings along with collected evidences. % (that can have a potential value in court similarly to data forensics outcomes). 
+  Although some preliminary work have addressed parts of this vision, e.g., \cite{DongS2013,DongBHS10a,LiDLMS12}, we argue that there is a need for a more fundamental paradigm shift in data management  to address the truth discovery problem natively. Formally, this goes beyond adding layers and extensions to data fusion heuristics, data provenance or truth discovery models. Technically, the challenges are not only to  design techniques and prototypes of truth discovery systems but also to democratize operational tools for Web scale {\it information  triage} and veracity verification.
+  
+  
+  
+  
+In this paper, we present a set of research chaleenges that together
+aim to effectively address the problem of truth discovery in real-world over-information scenarios. 
+We describe the challenges we face, propose our vision of a preliminary solution, and lay down a research agenda that goes beyond the Database community.
+
+
+ 
+%\vspace{-0.1cm}
+% ****************** ARCHITECTURE ****************************************
+\section{Actionable Truth Discovery}~\label{sect:challenges-solutions}
+%\vspace{-0.2cm}
+%To achieve this vision, our goal is to design a truth discovery system to extract information from multi-channel sources in different languages. 
+\subsection{ An Illustrative Example}
+
+
+``The first casualty when war comes, is truth,'' said American Senator Hiram Johnson in 1917. 
+For reporters, photographers, and cameramen captured the realities of wars and armed conflicts, sound 
+and verifiable data is extremely difficult to gather and determining the complete picture of what 
+occurred during a conflict is hard and perilous.
+Data is generally used effectively to answer a specific question (e.g., how many civilian casualties in Syria?) 
+but it is often stretched to answer a broader question for which it was not suited, blurring the 
+lines between ``what was observable'' and  ``what was true''. In this context, 
+sources of information can include victims or witness reports  and online volunteered information (e.g., in English or Arabic) 
+from personal and institutional Web pages, social and traditional media, NGOs', governmental and 
+administrative records\footnote{\scriptsize{e.g., \url{http://www.correlatesofwar.org/}}}. %The goal of any truth-seeker is to collect all information pieces and evidences available in various languages and formats, from various contexts and point-of-views,  and separate accurate information from the noise, detect collusion, source dependence, and conflicts of interest to understand the information in its context. 
+Seeking the truth is a tedious process manually done by war correspondents, United Nations experts and commissioners, 
+Truth Commissions\footnote{\scriptsize{\url{ http://www.truthcommission.org/}}}, human rights activists, journalists, and historians 
+ (e.g., WITNESS\footnote{\scriptsize{\url{http://www.witness.org}}}, StoryFul\footnote{\scriptsize{\url{http://storyful.com/}}}). 
+For this type of application, automating continuous truth discovery from the Web and social media networks to support decision-making and provide timely response to crisis situations goes far beyond data integrity checking, data quality, and data fusion. 
+%This opens up many directions for research.
+ % Indeed, we see many interesting research problems  for creating multi-channel truth discovery systems.
+
+
+
+
+ While the challenges identified hereafter  are by no means exhaustive, they are certainly important issues to address in priority for designing a truth discovery system.
+
+
+\subsection{Timely and Actionable Truth Discovery} 
+
+
+Discovering truth from past events and historical data is certainly useful and results may be validated more easily since ground truth and full data sets already exist before the time of analysis. However, from a humanitarian perspective, actionable truth discovery from quasi real-time data could save lives. % or help in determining responsibilities from a legal perspective.
+In this context, information extraction and triage as well as truth discovery computation need to be streamlined, prioritized,  and adjusted to the degree of emergency and incompleteness of available information. This important usage-driven aspect goes beyond consistency checking and constraints. For example, information such as ``The Chrysler building had an explosion and it affected the Empire State building'' can be automatically verified: these buildings are about 2~km away and hence this information can not be true. However, more often what journalists/emergency responders need, is to verify information such as ``The Chrysler building had an explosion'' when there are very few primary sources claiming it initially. Timely and actionable truth discovery requires the prioritization and adjustment of information checking tasks specifically to the communities that will use the data.
+%
+
+\subsection{Data Alignment Across Languages, Formats, and Channels} 
+
+
+Agility of a truth discovery system is of utmost importance both at the technical, structural, and semantic levels. Agility is defined as the ability of the system to efficiently extract and map information: {\it i)} from various languages, {\it ii)} in various formats and data structures, and {\it iii)} supported by various media and technologies. Traditional information extraction pipelines  require several analysis stages ranging from text preprocessing %(e.g., split the input text into sentences, tokenize the sentences, lemmatize the tokens, tag their part-of-speech, etc.)
+ to entity resolution and normalization.  
+For each content, once entities, attributes, and relations are recognized and extracted, statements are identified, and sentences are classified (e.g., forecast or not), they have to be linked across multiple contents in different languages and eventually translated into a common language (e.g., English). A number of applications have been deployed\footnote{\scriptsize{For example, Europe Media Monitor's News Explorer (\url{http://emm.newsexplorer.eu}) gathers news, clusters related news stories, and extracts names, locations, general person-person relations, and event types; Open-Calais from Thomson Reuters (\url{http://www.opencalais.com}) extracts a range of entity, relation, and event types from general and business news.}} for information extraction, but most of them have used hand-crafted lists of terms and regular expressions, rather than corpus-trained approaches. They are usually specific to a single channel/application/language and cannot be considered ``agile'' enough for extracting, gathering and aligning information from various languages, formats or channels.  Moreover, each stage of textual content analysis (from preprocessing, entity matching to classification) produces systematic and random errors that need to be considered in truth discovery computation. None of the very few attempts  to couple these applications to truth discovery systems (e.g., \cite{GoasdoueKKLMZ13}) has considered the uncertainty from information extraction and processing affecting the truth discovery results. Tracing and estimating the errors of information extraction, formatting, and linking  is one of the main challenges for automating truth discovery. 
+%These aspects have been somehow disconnected and underexploited in previous research.
+
+
+\subsection{Incomplete and Biased Observations}  
+
+
+Observation data may be incomplete 
+and biased for various reasons: 
+ some information sources may not give all their data for security or privacy concerns; 
+ some sources have format limitations; 
+ %some authoritative sources may be implicitly referred to for information;
+when the sources do not explicitly provide temporal or spatial information,
+the time and location values are missing and need to be inferred. % from previous snapshots, 
+%taken only periodically or occasionally.
+ Typically, the Open World assumption holds since  not all the real-world entities/events may have been observed and reported by the sources.
+%Missing or incomplete observations can again lead to incorrect conclusions about the truthfulness 
+%of extracted information, mis-inferring the context or ignoring the dependence between sources. 
+%Hence, 
+%any approach for determining truth needs to consider the possibility that the granularity 
+%of observations introduces a degree of uncertainty about the information provided by the sources and observers. 
+ Online sources have %different formats, data quality levels and most importantly,
+  various levels of {\it a priori} knowledge on how the observation data have been collected. In many cases, opportunistic (or volunteered) data are {\it biased by  observation effort} and the underlying observation method is unknown. It is thus important to explore how one can retrieve and quantify the observation effort from modeling the data provider's/observers' distribution. 
+%Tracking uncertainties: quantitative data have to deal with uncertainty resulting from sampling protocol design and measurement methods. Such uncertainties may be of various types: error in the raw data, gaps in data, classical statistical errors, and of their propagation in the chain of information processing. We will identify the limits of the spatial and temporal grain beyond which data cannot be extrapolated because of a lack of precision (in the same way that weather forecast have temporal and spatial limits). 
+Data %may lack precision but it 
+can be biased in many other ways. For example, data can be affected by a {\it selection bias} that is the extent to which a piece of information is claimed by a category of individuals who are likely to have access to and choose to use a certain type of media or channel\footnote{\scriptsize{e.g., social media users are usually younger, technologically savvy, motivated individuals versus individuals who are older, more remote, lacking access or ability or motivation to use technology and whose stories/observations are likely missing from this channel. }}. 
+Data may also suffer from the {\it observer's bias} (related to the individual's ability to accurately remember and describe events) and {\it disclosure bias} (related to witness's incentive  (or disincentive) to  include certain events or details). One challenge is to estimate the incompleteness and biases and take them into account in the truth discovery computation.
+%, not only using the set of conflicting and overlapping information but also contextual and historical information about the observers, the sources, and their information collection/production process.
+
+\subsection{Decontextualization and Distortion}  
+
+
+When a piece of information  is 
+extracted from its original content and channel, it may lose its context along with important 
+``semantic markers'' to understand {\it when, where, how, why,} and {\it for which purpose/audience} this particular piece of information 
+has been produced, what it is supposed to mean in the absolute sense and also relatively to 
+its particular context and  information channel (e.g., a tweet in a thread).  Information without context can be easily 
+distorted and misinterpreted. For example, ascertaining the veracity of a controversial
+ information that has been re-tweeted many times in different contexts by various users with different emotions and motivations is difficult without
+ the description of these contexts. Moreover, the pace has to be considered when information  updates from Twitter, Facebook, and Wikipedia have to be ``aligned'' with considering the source granularity ({\it i.e.}, a source can be an individual, an organization, a company, a government, etc.). Much research work has studied the formalization of contexts 
+ and rich context representations have been proposed \cite{eps270829}. However, current information extraction 
+ methods constrain the context representation and can usually not handle a wide, unpredictable 
+ range of topics. %;  context-sensitive information extraction methods have  to be also adapted to  the channel specificities. 
+ Ultimately, all meta-information about the context and sources' characteristics have to be encoded as evidences and analyzed for truth discovery computation.
+
+\subsection{Source Expertise and Information Correlation} 
+
+In many domains, some sources are more authoritative or specialized, providing
+accurate information for a small subset of real-world objects, while other
+sources are generalist with a wider coverage, providing a huge amount of information,
+some of which may be out-of-date or imprecise. 
+Determining truth between such sources based only on majority voting and similarity of values can easily lead to erroneous conclusions.
+Hence, any approach for determining truth needs to
+consider the possibility that sources have different levels of expertise, various updating policies, and they
+provide different coverages of information over time. Moreover, similar values across many sources may be due to the likelihood that some information items are either very specific (rare) or very general (popular) and/or sometimes highly correlated; this does not necessarily mean that the sources are dependent but information correlation and distribution have to be analyzed before truth discovery computation.
+
+
+\subsection{Limitations of Truth Discovery Models} 
+
+Most truth discovery models suffer from limiting assumptions on the claims, referred real-world objects, sources, and truth discovery results. For example, one important assumption on the claims is that the assertions made by the sources (and whose veracity is unknown) are organized into disjoint mutual exclusion sets and exactly one of the claims in each mutual exclusion set is assumed to be true. Claims are also assumed to be positive\footnote{\scriptsize{{\it i.e.,}  Cases such  as ``$S$ claims that $A$ is false'' or ``$S$ does not claim $A$ is true'' are not considered.}} and  independent, as well as real-world objects they refer to. Concerning the sources: a source is supposed to contribute uniformly to all the claims it expresses. Sources are assumed to be independent (except in \cite{DongBHS10a}), to make their assertions independently and do not provide conflicting claims. Moreover, the probability a source asserts a claim is independent of the truth of the claim and there is explicit correspondence between the sources and the claims ({\it i.e.,} the models do not consider cases such that ``$S_1$ claims that $S_2$ claims $A$''). Finally, each claim is assumed to be either true or false. No uncertainty, gradual result or ranking is supported by current models for labeling the truthfulness of claims. 
+% 
+%Information sources are of different qualities and they can  easily copy, reformat, and modify data from other sources 
+%(with or without their consent), propagating eventually  erroneous data and false information (voluntarily or not). 
+%Understanding the information flow between sources, their dependence and 
+Relaxing these assumptions constitutes a challenging research project that could be overreached by formally defining the semantics of truth discovery and making it operational in realistic cases. %This goes far beyond data lineage and provenance management research lines and needs to be addressed more thoroughly by the Database community. 
+
+%As emphasized in the challenges, error and uncertainty propagation is inherent to the complex, iterative process of truth discovery and it makes truthfulness computation unique and 
+
+
+
+\subsection{Multimodal Truth Discovery} 
+** Laure to complete **
+
+
+
+\subsection{Dynamics of Truth Discovery} 
+** Laure to complete **
+
+\section{Towards An Integrative Solution}
+
+
+\subsection{Semantics for Truth Discovery} 
+
+Truth discovery from multi-source data relies on the Open World Assumption with overlapping and conflicting data. Designing an appropriate data model for truth discovery requires a fine trade-off between tractability and expressiveness. The vision of DAFNA is to give a concrete and unified semantics to  truth discovery problem. One principled solution --which can: {\it i)} relax most limiting assumptions of previous models, {\it ii)} formally unify existing approaches, and {\it iii)} support inference-- is to define formal semantics of truth discovery systems in modal logics through axioms and canonical {\it Kripke} structures \cite{GorankoOtto06}. However, reasoning in modal logics can quickly become intractable \cite{Gottlob92}. This applies, in particular, to information items that include possibility in addition to certainty and impossibility (positive or negative claims). %In the notation of modal logics, statements of the form $\square_{S_1}\neg C$ (source $S_1$ claims that $C$ is impossible or false) can be expressed. %However, complexity would considerably  increase by allowing negations before the modal operators, e.g.: $\neg \square_{S_1}\neg C$ (source $S_1$ does not claim that $C$ is not true), which is equal to  $\square_{S_1} C$ ($S_1$ claims that $C$ is true). 
+In this work, we have chosen to define the semantics of a truth discovery system such as it supports fragments of modal logics to allow negations on claims (which is sufficient to express conflicts) and we introduce a particular {\it Kripke} structure that allows claim verification procedure and powerful inferring functionalities (for chaining evidences). 
+Few work in databases have considered modal logics before: % \cite{CalvaneseGLLR08,GatterbauerBKS09}.
+Calvanese {\it et al.} \cite{CalvaneseGLLR08} use the modal logic $K45^A_n$ to allow mappings between peers in the presence of conflicts. Gatterbauer et al. \cite{GatterbauerBKS09} introduce the notion of {\it belief database} to manage conflicting annotations. In our opinion, formal semantics and reasoning based on multi-agent epistemic logic for data integration deserves much more attention than it has received so far from the Database community. In DAFNA, our vision is to leverage modal logics for defining in a principled way the semantics of truth discovery and reasoning about multi-source conflicting claims. This constitutes a novel, alternative solution to current approaches in data fusion and integration. 
+
+\subsection{Continuous Truth Discovery, Inference, and Belief Revision }
+
+
+%Majority voting is misleading;
+None of the existing truth discovery models continuously incorporate new evidences, new claims, contextual metadata, prior beliefs, and background knowledge in their computation. They rely on {\it ad hoc} parametrization and do not provide revision, {\it what-if} analysis or explanation of their results. The vision of DAFNA is to automate claim verification continuously and adaptively for dynamic environments (e.g., for emergency response or humanitarian scenarios such as the one illustrated in Section~2). The system continuously searches and finds supporting and opposing evidences, as well as contextual meta-information from the Web of Data (B1); it adapts and revises its knowledge and belief of the sources/claims and recompute the truthfulness of the claims (B4). 
+%Several hardness results on inference in modal logics are well-known \cite{Cadoli93} and in \cite{CalvaneseGLLR08} inference is in co-NP and PTIME in \cite{GatterbauerBKS09}. 
+%We propose logics for reasoning about claims' truthfulness when sources have different degrees of reliability  
+%We present the formal semantics and axiomatic systems for truth discovery and discuss some applications of the proposed logical systems. 
+%and develop tableau proof systems for the logics and prove the complexity result for the satisfiability and validity problems. 
+DAFNA is in-line with recent work on continuous cleaning \cite{VCSM14} and belongs to the new family of dynamic data quality techniques in database systems. But it is intended to go beyond dynamic data consistency checking since the system incorporates contexts, evidences, and error estimates in addition to the set of claims; it supports evidence-based reasoning and inference with uncertainty and bias estimations and handles, in a scalable way, the complete information processing pipeline and truth discovery inference.
+
+\subsection{Diagnostics and Error Propagation Monitoring}
+
+
+ There is a large body of work on managing uncertain and incomplete information \cite{GreenT06,AgrawalSUW10}. Our work shares a similar motivation for information that is not certain. However, we do not only measure, track, evaluate uncertainty (and biases) of user-generated contents, but DAFNA system also monitors uncertainty generated by the system itself in the information processing. Errors are estimated at each stage of the truth discovery process and incorporated into the final results' computation by the key module (B5) {\it Diagnostics and Error Propagation} in Figure~1. DAFNA infrastructure supports aggregation of system state and allows the user to specify {\it ad hoc} monitoring tasks by using lightweight Event-Condition-Action (ECA) rules applied to each module: information extraction (B1),  data preprocessing and alignment (B2), data and source quality profiling (B3), and truth discovery  and revision (B4). In that sense,  DAFNA is a diagnostic system that is able to analyze information on its performance and accuracy at each stage and can incorporate this information in its results, either for validation, error estimation or for supporting and documenting clear  explanation and visualization of the results provided to the users by (F1), (F2), and (F3) front-end modules. % and can invoke appropriate tuning tool based on predefined rules. 
+
+%\vspace{0.1cm}
+% ****************** CONCLUSIONS ****************************************
+\section{Concluding Remarks}~\label{sect:conclusions}
+%\vspace{-0.1cm}
+
+
+The Web of Data has accelerated the rate at which information is
+produced and disseminated through various channels and medias, but 
+has also eased the ability to spread false information.  Whereas 
+previous work on fact-checking from multiple sources focused on one single 
+channel, one language, limiting assumptions, with important scalability issues, current approaches ignore information context, often assume 
+source independence, and fully accurate information extraction and entity linking. 
+In this paper, we have identified the main issues that are of
+particular interest for designing actionable truth 
+discovery systems, discussed preliminary ideas on how we can overcome 
+these challenges, and enumerated the key components in the design of an 
+integrative solution. We have outlined several research opportunities  
+that arise from taking a more principled view of actionable truth discover. 
+We expect research along this line can help users better understand and 
+ascertain online information veracity in the Web of Data. Actionable truth discovery gives clear opportunities
+to the Database community for joint research with natural language processing, logics, and social computing 
+communities, not only to reflect the entire process of truth discovery in 
+the Web of Data, but also to have a technological and human impact in providing operational 
+data veracity management systems that effectively support the fourth ``V'' (Veracity) of Big Data.
+
+
+% Bibliography
+\bibliographystyle{ACM-Reference-Format-Journals}
+\bibliography{references}
+                             % Sample .bib file with references that match those in
+                             % the 'Specifications Document (V1.5)' as well containing
+                             % 'legacy' bibs and bibs with 'alternate codings'.
+                             % Gerry Murray - March 2012
+
+% History dates
+\received{November 2015}{**** ****}{**** ****}
+
+
+\medskip
+
+\end{document}
+% End of v2-acmsmall-sample.tex (March 2012) - Gerry Murray, ACM
+
+
