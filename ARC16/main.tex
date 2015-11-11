@@ -70,24 +70,28 @@
 \begin{document}
 \maketitle
  
- Data Forensics with Analytics, or DAFNA for short, is an ambitious project initiated by the Data Analytics Research Group in Qatar Computing Research
- Institute. It main goal is to provide effective algorithms and tools for determining the veracity of structured information and the reliability level 
- of data sources. Being able to efficiently verify the veracity of data and sources in presence is an ubiquitous challenge in many real world scneraios,
- e.g., data fusion or social data analysis, in which human has a need to consume high quality information for personal or businness purposes. Therefore,
- DAFNA's vision is to fill the gap about information veracity management in real applications, in particular those related to everyday life in Qatar.
- This is challenging and asks for facing diverses research topics related to efficient fact
- extraction, efficient truth finding strategies, and how truth finders could be coupled with real existing systems.
+ Data Forensics with Analytics, or DAFNA for short, is an ambitious project initiated within the Data Analytics Research Group in Qatar Computing Research
+ Institute. It main goal is to provide effective algorithms and tools for determining the veracity of structured information when they originate from  
+ multiple untrustworthy sources. The ability to efficiently estimate the veracity of data, along with the reliability level of the sources in presence,
+ is an ubiquitous problem in many real world use cases, e.g., data fusion or social data analysis, in which human rely on an automated data acquisition
+ and integration process in order to consume high quality information for personal or business purposes. DAFNA's vision is to fill the gap of the  lack of 
+ a comprehensive framework for information veracity management, with a direct impact on applications related to Qatar. Such a challenge requires to investigate
+ various research topics such as a general purpose truth discovery algorithm and its applicability in practice.
 
+We will present our ongoing study on extensively comparing the state-of-the-art truth discovery algorithms, releasing the first REST API for truth discovery algorithms,
+and designing an hybrid truth discovery approach using active ensembling. Finally, we will briefly present real applications of truth discovery in Qatar.
+.
  
+ \paragraph*{Efficient Truth Discovery}Truth discovery is a hard problem to deal with in practical as often there is no a-priori
+ about the veracity of provided information and the reliabily level of the sources. 
+ The first challenge dealt by the DAFNA project was to provide a comprehensible study of existing
+ truth discovery algorithms. 
  
- We will present our ongoing study on extensively comparing twelve existing truth discovery algorithms, releasing the first API that will 
- enable user applications to transparently access to the truth finders, and finally integrating truth finding in the process of quality information 
- retrieval based on Web extraction systems.
- 
- \paragraph*{Roadmap of Truth Discovery Algorithms}The first challenge dealt by the DAFNA project was to provide an thorough roadmap of the existing 
- truth discovery algorithms with an extensive comparative evaluation of their performance.
- 
- 
- \paragraph*{RestFul API for 3-tier Applications}
- \paragraph*{Real Applications in Qatar}
+ \begin{itemize}
+  \item Comparative Study of existing truth discovery algorithms
+  \item Ensembling based active learning strategy 
+  \item Design and release of a RestFul API for third party applications
+ \end{itemize}
+ \paragraph*{Potential Applications in Qatar}Information about Qatar are now available on multiple places. General 
+ purposes Web applications 
 \end{document}
