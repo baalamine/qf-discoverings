@@ -58,12 +58,12 @@
 
 %%% Title	
 \title{ \vspace{-1in} 	\usefont{OT1}{bch}{b}{n}
-		\huge \strut Data Forensics with Analytics\strut \\
-		\Large \bfseries \strut Trust Discovery for Data Quality\strut
+		\huge \strut Discovering the truth in the Web Data\strut \\
+		\Large \bfseries \strut One Facet of Data Forensics\strut
 }
 \author{ 									\usefont{OT1}{bch}{m}{n}
-        Mouhamadou Lamine Ba and Laure Berti-Equille\\		\usefont{OT1}{bch}{m}{n}
-        Qatar Computing Research Institute\\	\usefont{OT1}{bch}{m}{n}
+        Mouhamadou Lamine Ba, Laure Berti-Equille, Hossam M. Hammady\\		\usefont{OT1}{bch}{m}{n}
+        Qatar Computing Research Institute, Hamad Bin Khalifa University\\	\usefont{OT1}{bch}{m}{n}
        % Random Department\\
         %\texttt{email@example.com}
 }
@@ -74,37 +74,36 @@
 \maketitle
  \vspace*{-1.5cm}
  
- Data Forensics with Analytics, or DAFNA for short, is an ambitious project initiated within the Data Analytics Research Group in Qatar Computing Research
- Institute. It main goal is to provide effective algorithms and tools for determining the veracity of structured information when they originate from  
- multiple untrustworthy sources. The ability to efficiently estimate the veracity of data, along with the reliability level of the sources in presence,
- is an ubiquitous problem in many real world use cases, e.g., data fusion or social data analysis, in which human rely on an automated data acquisition
- and integration process in order to consume high quality information for personal or business purposes. DAFNA's vision is to fill the gap of the  lack of 
- a comprehensive framework for information veracity management, with a direct impact on applications related to Qatar. Such a challenge requires to investigate
- various research topics such as a general purpose truth discovery algorithm and its applicability in practice.
+ Data Forensics with Analytics, or DAFNA for short, is an ambitious project initiated by the Data Analytics Research Group in Qatar Computing Research
+ Institute, Hamad. It main goal is to provide effective algorithms and tools for determining the veracity of structured information when they originate
+ from  multiple sources. The ability to efficiently estimate the veracity of data, along with the reliability level of the sources in presence, is a challenging
+ problem in many real world use cases (e.g., data fusion, social data analytics, rumor detection, etc.) in which users rely on an semi-automatic data extraction
+ and integration process in order to consume high quality information for personal or business purposes. DAFNA's vision is to provide a suite of tools for Data
+ Forensics and investigates various research topics such as fact-checking and truth discovery and their practical applicability.
 
-We will present our ongoing study on extensively comparing the state-of-the-art truth discovery algorithms, releasing the first REST API for truth discovery algorithms,
-and designing an hybrid truth discovery approach using active ensembling. Finally, we will briefly present real applications of truth discovery in Qatar.
+We will present our ongoing development (\url{dafna.qcri.org}) on extensively comparing the state-of-the-art truth discovery algorithms, releasing a new system and 
+the first REST API for truth discovery algorithms, and designing an hybrid truth discovery approach using active ensembling. Finally, we will briefly present real-world
+applications of truth discovery from the Web data.
  
- \paragraph*{Efficient Truth Discovery}Truth discovery is a hard problem to deal with in practical as often there is no a-priori
- about the veracity of provided information and the reliabily level of the sources. Thereby, the methodology followed by the majority
- of the existing truth discovery algorithms in order to determine the veracity of information is driven by the application domain
- and the characteristics of the dataset, e.g. the distribution of conflicts, the similarity of data item values, ect. This raises, therefore,
-some questions about a thorough understanding of the state-of-the-art truth discovery algorithms. 
- A new truth discovery approach, if needed, should be rather comprehensible and domain independent. In addition, it should take
- advantage of the benefits of existing solutions, while being built on realistic assumptions for an easy use in real applications.
- We propose a study to deal with open truth discovery challenges which consists of the following initial contributions:
+ \paragraph*{Efficient Truth Discovery}Truth discovery is a hard problem to deal with in practical since often there is no a priori knowledge about the veracity of provided 
+ information and the reliabily level of the sources. This raises many questions about a thorough understanding of the state-of-the-art truth discovery algorithms and their applicability
+ for \emph{actionable} truth discovery. A new truth discovery approach is needed and should be rather comprehensible and domain independent. In addition, it should take advantage of the 
+ benefits of existing solutions, while being built on realistic assumptions for an easy use in real applications. In this context, we propose a study to deal with open truth discovery challenges 
+ and consists of the following contributions:
  \begin{inparaenum}[(i)]
-  \item a thorough comparative study of twelve truth discovery algorithms;
-  \item a design and release of the first REST API for truth discovery algorithms and;
-  \item preliminary discussions about an hybrid truth discovery approach using active ensembling
+  \item The thorough comparative study of existing truth discovery algorithms;
+  \item The design and release of the first online truth discovery system and 
+  the first REST API for truth discovery available at \url{dafna.qcri.org};
+  \item An hybrid truth discovery approach using active ensembling; and 
+  \item An application to query answering related to Qatar where the veracity of information provided by multiple Web sources is estimated.
  \end{inparaenum}
- \paragraph*{Potential Applications in Qatar}An obvious example of applications in Qatar which might take advantage 
- of truth discovery algorithms is \emph{Qatar Living} and similar systems. Truth discovery
- could help, indeed, to improve the quality of some  information provided these applications.
-Given an increasing emergence of easy-to-use Web data extractors like \emph{DeepDive}, one 
-can imagine more general purpose Web applications for answering various types of requests about Qatar by simultaneously querying multiple
-sources such as Qatar Living, forums, blogs, social media, ect. We briefly propose a highlight of why truth discovery is incontournable in 
-these contexts.
+ %\paragraph*{Potential Applications in Qatar}An obvious example of applications in Qatar which might take advantage 
+ %of truth discovery algorithms is \emph{Qatar Living} and similar systems. Truth discovery
+ %could help, indeed, to improve the quality of some  information provided these applications.
+%Given an increasing emergence of easy-to-use Web data extractors like \emph{DeepDive}, one 
+%can imagine more general purpose Web applications for answering various types of requests about Qatar by simultaneously querying multiple
+%sources such as Qatar Living, forums, blogs, social media, ect. We briefly propose a highlight of why truth discovery is incontournable in 
+%these contexts.
  
  %\footnote{\url{http://deepdive.stanford.edu/}}
  %\footnote{\url{http://www.qatarliving.com/}}
