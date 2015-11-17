@@ -58,7 +58,7 @@
 
 %%% Title	
 \title{ \vspace{-1in} 	\usefont{OT1}{bch}{b}{n}
-		\huge \strut Discovering the truth in the Web Data\strut \\
+		\huge \strut Discovering the truth on the Web Data\strut \\
 		\Large \bfseries \strut One Facet of Data Forensics\strut
 }
 \author{ 									\usefont{OT1}{bch}{m}{n}
@@ -72,31 +72,31 @@
 %%% Begin document
 \begin{document}
 \maketitle
- \vspace*{-1.5cm}
- Data Forensics with Analytics, or DAFNA for short, is an ambitious project initiated by the Data Analytics Research Group in Qatar Computing Research
- Institute, Hamad Bin Khalifa University. Its main goal is to provide effective algorithms and tools for determining the veracity of structured information when they originate
- from  multiple sources. The ability to efficiently estimate the veracity of data, along with the reliability level of the sources in presence, is a challenging
- problem in many real world use cases (e.g., data fusion, social data analytics, rumor detection, etc.) in which users rely on a semi-automatic data extraction
- and integration process in order to consume high quality information for personal or business purposes. DAFNA's vision is to provide a suite of tools for Data
- Forensics and investigates various research topics such as fact-checking and their practical applicability.
+ \vspace*{-1.4cm}
+Data Forensics with Analytics, or DAFNA for short, is an ambitious project initiated by the Data Analytics Research Group in Qatar Computing Research
+ Institute, Hamad Bin Khalifa University. It main goal is to provide effective algorithms and tools for determining the veracity of structured information when they originate from  multiple  sources. The ability to efficiently estimate the veracity of data, along with the reliability level of the information sources,
+ is a challenging problem with many real-world use cases (e.g., data fusion, social data analytics, rumour detection, etc.) in which users rely on  a semi-automated data extraction  and integration process in order to consume high quality information for personal or business purposes. DAFNA's vision is to provide a suite of tools for Data Forensics and investigate various research topics such as fact-checking and truth discovery and their practical applicability.
 
 We will present our ongoing development (\url{dafna.qcri.org}) on extensively comparing the state-of-the-art truth discovery algorithms, releasing a new system and 
-the first REST API for truth discovery algorithms, and designing an hybrid truth discovery approach using active ensembling. Finally, we will briefly present real-world
-applications of truth discovery from the Web data.
+the first REST API for truth discovery, and designing a novel hybrid truth discovery approach using active ensembling. Finally, we will briefly present real-world
+applications of truth discovery from Web data.
  
- \paragraph*{Efficient Truth Discovery}Truth discovery is a hard problem to deal with in practical since there is no a priori knowledge about the veracity of provided 
- information and the reliabily level of the sources. This raises many questions about a thorough understanding of the state-of-the-art truth discovery algorithms and their applicability
- for \emph{actionable} truth discovery. A new truth discovery approach is needed and should be rather comprehensible and domain independent. In addition, it should take advantage of the 
- benefits of existing solutions, while being built on realistic assumptions for an easy use in real applications. In this context, we propose a study to deal with open truth discovery challenges 
- and consists of the following contributions:
+Truth discovery is a hard problem to deal with since there is no {\it a priori} knowledge about the veracity of provided information and the reliability level of online sources.
+This raises many questions about a thorough understanding of the state-of-the-art truth discovery algorithms and their applicability for {\it actionable} truth discovery.  A new 
+truth discovery approach is needed and it should be rather comprehensible and domain-independent. In addition, it should take  advantage of the benefits of existing solutions, while 
+being built on realistic assumptions for an easy use in real-world applications.  In this context, we propose an approach that deals with open truth discovery challenges and consists 
+of the following contributions:
  \begin{inparaenum}[(i)]
-  \item The thorough comparative study of existing truth discovery algorithms;
-  \item The design and release of the first online truth discovery system and 
-  the first REST API for truth discovery available at \url{dafna.qcri.org};
-  \item An hybrid truth discovery approach using active ensembling; and 
-  \item An application to query answering related to Qatar where the veracity of information provided by multiple Web sources is estimated.
+  \item The thorough comparative study of existing truth discovery algorithms;  
+ \item The design and release of the first online truth discovery system and the first REST API for truth discovery available at \url{dafna.qcri.org};
+ \item An hybrid truth discovery method using active ensembling; and
+ \item An application to query answering related to Qatar where the veracity of information provided by multiple  Web sources is estimated.
  \end{inparaenum}
- \cite{*}
+
+  \footnotesize
  \bibliographystyle{plain}
  \bibliography{biblio}
+ \nocite{7113396}
+ \nocite{DBLP:journals/corr/WaguihB14}
+ \nocite{laurebook}
 \end{document}
