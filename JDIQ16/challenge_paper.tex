@@ -14,6 +14,8 @@
 \documentclass[prodmode,acmtecs]{acmsmall} % Aptara syntax
 
 % Package to generate and customize Algorithm as per ACM style
+\usepackage{mathptm}
+\usepackage[pdfborder={0 0 0}]{hyperref}
 \usepackage[ruled]{algorithm2e}
 \renewcommand{\algorithmcfname}{ALGORITHM}
 \SetAlFnt{\small}
@@ -42,11 +44,11 @@
 }
 \begin{abstract}
 
-In the Web, a massive amount of user-generated contents, public, open, or crowd-sourced information are available through various channels such as tweets, RSS, websites, DBs, 
+In the World Wide Web, a massive amount of user-generated contents, public, open, or crowd-sourced information are available through various channels such as tweets, RSS, websites, DBs, 
 multimedia-sharing platforms, social media and networks, etc. False information, rumors, and fake contents across multiple sources can be easily spread,  making it hard to distinguish
 between what is true and what is not. Given such a large number of multi-channel information sources and the vast volume of conflicting data, ascertaining the veracity of the information
 available on the Web in a scalable and timely manner is extremely challenging and has only been preliminarily and partly addressed by existing work. In this paper, we present a set of research
-challenges related to truth discovery in the Web   and we propose some potential solutions for verifying the veracity of online information.  We also discuss how an integrative solution should 
+challenges related to truth discovery on the Web and we propose some potential solutions for verifying the veracity of online information.  We also discuss how an integrative solution should 
 benefit from a variety of technologies such as natural language processing, information extraction, data integration, probabilistic inference and data analytics, to help users estimate the reliability 
 of various sources, check the truthfulness of their information, and turn this into actionable knowledge.
 
@@ -57,7 +59,7 @@ of various sources, check the truthfulness of their information, and turn this i
 
 \terms{Algorithms, Management, Verification}
 
-\keywords{truth discovery, fact-checking, data quality, data fusion, information extraction}
+\keywords{Truth Discovery, Fact-checking, Data Quality, Data Fusion, Information Extraction}
 
 \acmformat{Laure Berti-Equille, Mouhamadou Lamine Ba,  2015. Actionable Truth Discovery Challenges.}
 % At a minimum you need to supply the author names, year and a title.
@@ -257,12 +259,15 @@ Relaxing these assumptions constitutes a challenging research project that could
 
 
 
-\subsection{Multimodal Truth Discovery} 
+\subsection{Cross-Modal Truth Discovery} 
 ** Laure to complete **
 
+Truth discovery has vocation to be more and more required in real-world applications with multiple facets.
+Indeed, data used in many applications are of various nature ranging from unstructured information to movies
+and pictures.
 
 
-\subsection{Dynamics of Truth Discovery} 
+\subsection{Data Dynamicity in  Truth Discovery} 
 ** Laure to complete **
 
 \section{Towards An Integrative Solution}
