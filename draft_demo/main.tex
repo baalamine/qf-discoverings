@@ -41,23 +41,23 @@
 \begin{document}
 \conferenceinfo{}{}
 
-\title{Combining Truth Discovery and Open Information\\ Extraction with Active Ensembling}
+\title{VERA: A Platform for Estimating the Veracity of Web Information}
 
-\numberofauthors{2} 
+\numberofauthors{1} 
 \author{
 \alignauthor
-Mouhamadou Lamine BA\\
+Mouhamadou Lamine Ba, Laure Berti-Equille, Hossam M. Hammady, Yasser Idris\\
        \affaddr{Qatar Computing Research Institute}\\
        \affaddr{Tornado Tower, West Bay}\\
        \affaddr{Doha, Qatar}\\
-       \email{mlba@qf.org.qa}
+       \email{\{mlba,lberti,hhammady,yidris\}@qf.org.qa}
 % 2nd. author
-\alignauthor
-Laure Berti-Equille\\
-       \affaddr{Qatar Computing Research Institute}\\
-       \affaddr{Tornado Tower, West Bay}\\
-       \affaddr{Doha; Qatar}\\
-       \email{lberti.qf.org.qa}
+%\alignauthor
+%\\
+%       \affaddr{Qatar Computing Research Institute}\\
+%       \affaddr{Tornado Tower, West Bay}\\
+%       \affaddr{Doha; Qatar}\\
+ %      \email{lberti.qf.org.qa}
 %\and  % use '\and' if you need 'another row' of author names
 }
 
@@ -70,15 +70,11 @@ Laure Berti-Equille\\
 % 1 pages --> Demonstration system
 % 0.25 pages --> references
 \begin{abstract}
-Web search engines or open information extraction systems usually reply to
-users' queries with a set of candidate answers that are often conflicting 
-because they are claimed by multiple information sources. In this context, 
-estimating information veracity is difficult for the users  especially when
-they have no prior knowledge about the trustworthiness of the sources. In this
-demonstration paper, we showcase a system that supports event/entity and relation
-extraction based on keyword-search from the Web, processes the conflicting outputs, 
-combines multiple truth finding algorithms with active learning to provide the most 
-likely true answers and determine the most trustworthy sources. 
+%Over the last decade there's been a substantial growth in the use of fact-checking and truth discovery techniques to detect misinformation available online. 
+Multiple Web information sources often claim conflicting data and estimating data veracity is extremely difficult especially when no prior knowledge about the sources or the claims is available. However, exploring the space of conflicting data and the polarity of Web sources claiming them is relevant in this context.
+This demo presents Vera, a Web-based platform that supports event, entity and relation
+extraction from Web information sources, systematically processes the extracted, conflicting claims, and
+combines multiple truth finding algorithms with active learning to return data veracity and controversy scores and determine the most trustworthy sources. Vera will be demonstrated throught several real-world use cases.
 \end{abstract}
 
 % A category with the (minimum) three required fields
@@ -104,9 +100,9 @@ likely true answers and determine the most trustworthy sources.
 
 % Conclusion
 \section{Conclusion}
-\lamine{L'utilisateur peut faire une erreur sur l'\'etiquette de certains claims. Comment capturer ce ph\'enom\'ene?}
+%\lamine{L'utilisateur peut faire une erreur sur l'\'etiquette de certains claims. Comment capturer ce ph\'enom\'ene?}
 % References
-\cite{*}
+%\cite{*}
 \bibliographystyle{plain}
 \bibliography{biblio}
 
