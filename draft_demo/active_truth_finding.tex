@@ -1,18 +1,35 @@
 % Active Ensembling for Truth Finding
-\section{Ensembling for Truth Finding}\label{ensembling}
-We present in this section an adaptive truth finding approach which uses active ensembling in order to 
-adaptively learn about an optimal set of truth finding algorithms that outperforms any individual
-technique on any given dataset. Our learning approach will actively involve users for the correct
-labels (or answers) of a sample of queries that cause maximal disagreement amongst our classifiers.
+\subsection{Truth Finding}\label{truthfinding}
+{\scshape Vera} supports an adaptive truth finding approach which combines ensembling and active learning in order to 
+adaptively learn and compute the optimal result set from diverse truth finding algorithms. Our approach outperforms any individual truth discovery technique on any given dataset as it actively leverages the user's knowledge if available for finding the true claims. Even when user's knowledge (or ground truth) is not available, {\scshape Vera} operates and provides an ensembling.
 
-\subsection{Ensemble-Based Active Learning}
-\begin{itemize}
-\item donner idée générale pour introduire  ce qu'est l'ensembling
-\item on a besoin de le faire dans le contexte de truth discovery car aucune methode ne bat toutes les autres dans tous les cas de figure
-\item donc on combine les methodes : il y plusieurs façon de combiner par ex. consensus de méthodes, etc.
-\item expliquer quelles méthodes on combine avec leurs avantages et inconvénients
-\end{itemize}
+\subsection{Truth Classifiers}
+In our context, the truth finding algorithms correspond to truth classifiers. The underlying \emph{binary classification} 
+problem consists of assigning the correct truth label to a set of claims about given user queries. Indeed, a truth finding 
+algorithm is formally a mapping $\textsf{TF}:~\claimset \mapsto \{\TRUE, \FALSE\}$ which associates to each claim in $\claimset$
+either $\TRUE$ or $\FALSE$. We  consider the twelve well-established truth finding algorithms from  the literature that can be classified as follows according to \cite{}.
 
+\begin{enumerate}
+ \item \textbf{Agreement-based methods:} TruthFinder~\cite{YinHY08}, Cosine, 2-Estimates and 3-Estimates~\cite{GallandAMS10}, 
+ AccuNoDep~\cite{DongBS09}
+ \item \textbf{MAP Estimation-based methods:} MLE~\cite{WangKLA12}, LTM~\cite{ZhaoRGH12}, SimpleLCA and GuessLCA~\cite{PasternackR13}
+ \item \textbf{Bayesian Inference-based methods:} Depen, Accu, and AccuSim~\cite{DongBS09}
+\end{enumerate}
+
+
+
+\subsection{Ensembling}\label{ensembling}
+\medskip
+
+\laure{ici on peut faire de l'ensembling sans impliquer l'utilisateur il faudrait prendre des parties ci-dessous}
+
+\subsection{Active Learning}\label{activelearning}
+%\begin{itemize}
+%\item donner idée générale pour introduire  ce qu'est l'ensembling
+%\item on a besoin de le faire dans le contexte de truth discovery car aucune methode ne bat toutes les autres dans tous les cas de figure
+%\item donc on combine les methodes : il y plusieurs façon de combiner par ex. consensus de méthodes, etc.
+%\item expliquer quelles méthodes on combine avec leurs avantages et inconvénients
+%\end{itemize}
 \medskip
 An ensemble-based active learning, or commonly ensembling, is a semi-supervised learning approach that tries
 to figure out an optimal ensemble of classifiers for a given classification problem by actively querying an 
@@ -20,10 +37,7 @@ oracle, e.g., a human being, about the labels of a sample of data items. Ensembl
 classification consistently well across datasets without having to determine a \emph{priori} a suitable classifier 
 type.
 
-In our context, the truth finding algorithms correspond to our set of classifiers. The underlying \emph{binary classification} 
-problem consists of assigning the correct truth label to a set of claims about given user queries. Indeed, a truth finding 
-algorithm is formally a mapping $\textsf{TF}:~\claimset \mapsto \{\TRUE, \FALSE\}$ which associates to each claim in $\claimset$
-either $\TRUE$ or $\FALSE$. A good truth finding algorithm provides  predictions that are close to the actual world. Unfortunately, 
+A good truth finding algorithm provides  predictions that are close to the actual world. Unfortunately, 
 a well known property, e.g., as shown in~\cite{Li12, Wagui14}, of existing truth discovering algorithms remains their sentivity
 to certain application domains or datasets. As a consequence, there is no actual approach that outperforms the others on all types 
 of datasets. On the other hand, truth finding is hard in practical scenarios because there is often no prior knowledge guiding to
@@ -41,33 +55,20 @@ ensemble of truth finding algorithms when the OpenIE system is gradually queryin
 As we shall show later, we will actively involve users to obtain the truth about a sample of particular facts during the learning process. The way this sampling is defined and
 chosen is crucial for the effectiveness of the active learning. Several sample selection strategies, e.g., random sampling, query by committee, or support vector machine models,
 have been proposed for the definition of the type of selected data items along the size of the sample; we defer to~\cite{burr12} for more details about active machine learning.
+
 In this study, we use \emph{query by committee} (QBC) for ensemble-based active learning. QBC states that the best data items to select for labels are those that cause 
 the \emph{maximal disagreement} among the predictions of an ensemble of diverse but partially accurate classifiers during active learning. Furthermore, we seek to provide
 an adaptive active learning by looking for an optimal ensemble given a larger set of input classifiers.
-\lamine{Peut \^etre qu'il y a mieux que QBC ?}
-
-To learn about an optimal ensemble from a diverse set of classifiers, we have considered
-twelve well established truth finding algorithms in the literature, having three different types 
-according to their specificities. Note that diversity offers better result in active learning than
-using homogenoeus classifiers (see~\cite{Lu15}). We briefly present each considered class of truth
-discovering algorithms in the following.
-
-\begin{enumerate}
- \item \textbf{Iterative techniques:} TruthFinder~\cite{YinHY08}, Cosine, 2-Estimates and 3-Estimates~\cite{GallandAMS10}, 
- AccuNoDep~\cite{DongBS09}
- \item \textbf{EM based techniques:} MLE~\cite{WangKLA12}, LTM~\cite{ZhaoRGH12}, SimpleLCA and GuessLCA~\cite{PasternackR13}
- \item \textbf{Dependency detection based techniques:} Depen, Accu, and AccuSim~\cite{DongBS09}
-\end{enumerate}
-
-\lamine{Peut \^etre qu'il existe une meilleure classification ?}
 
 
-\subsection{Truth Finding with Active Ensembling}
-\begin{itemize}
- \item notre approche que l'on défend ici dans la démo est  semi supervisée en impliquant de l'utilisateur de façon active
-en lui demandant s'il peut confirmer des faits (facts)
-\item si on a une ground truth partielle on la "rejoue" cas par cas
-\end{itemize}
+%\lamine{Peut \^etre qu'il y a mieux que QBC ?}
+
+%To learn about an optimal ensemble from a diverse set of classifiers,  Note that diversity offers better result in active learning than using homogenoeus classifiers (see~\cite{Lu15}). 
+%\subsection{Truth Finding}
+%\begin{itemize}
+ %\item notre approche que l'on défend ici dans la démo est  semi supervisée en impliquant de l'utilisateur de façon active en lui demandant s'il peut confirmer des faits (facts)
+%\item si on a une ground truth partielle on la "rejoue" cas par cas
+%\end{itemize}
 
 \medskip
 
@@ -97,6 +98,7 @@ Once the labels are acquired from the user, the algorithm adds those labels alon
 discards the claims from the unlabeled set $\claimset{}$. The learning procedure finally determines the accuracy of each input truth finding algorithm
 on the newly labeled claims in order to know the best technique for truth discovery. 
 
+\laure{ici presenter un algo ne semble pas pertinent}
 \begin{enumerate}
 \item The algorithm starts with an initialization phase in which values of the initial parameters of the learner and the different truth 
 finding algorithm are set.
