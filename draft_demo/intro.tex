@@ -1,16 +1,33 @@
 \section{Introduction}
-\lamine{Page allocation}
-\begin{itemize}
- \item 1.25 pages --> abstract + introduction
- \item 1.5 pages --> Open information extraction + Active Ensembling for Truth Discovery 
- \item 1 pages --> Demonstration System + Scenario
- \item 0.25 pages --> References
-\end{itemize}
+%\lamine{Page allocation}
+%\begin{itemize}
+ %\item 1.25 pages --> abstract + introduction
+ %\item 1.5 pages --> Open information extraction + Active Ensembling for Truth Discovery 
+ %\item 1 pages --> Demonstration System + Scenario
+ %\item 0.25 pages --> References
+%\end{itemize}
 
-\paragraph{Use cases}
-\begin{itemize}
- \item \textbf{Information extraction improvement:} Truth discovery over claims returned by OpenIE systems, e.g., TextRunner
- \item \textbf{Online hot news verification:} truth discovery over factual claims in each new's headline and
- content published on the online front page of AlJazeera
-\end{itemize}
+%\paragraph{Use cases}
+%\begin{itemize}
+% \item \textbf{Information extraction improvement:} Truth discovery over claims returned by OpenIE systems, e.g., TextRunner
+% \item \textbf{Online hot news verification:} truth discovery over factual claims in each new's headline and
+% content published on the online front page of AlJazeera
+%\end{itemize}
 
+Online fact-checkers such as FactCheck\footnote{FactCheck, {\small\url{ http://www.factcheck.org/}}}, Snopes\footnote{Snopes, {\small\url{ http://www.snopes.com/}}}, PolitiFact\footnote{PolitiFact,{\small \url{ http://www.politifact.com/}}}, TruthorFiction\footnote{TruthorFiction, {\small\url{ http://www.truthorfiction.com/}}} or OpenSecrets\footnote{OpenSecrets, {\small \url{ http://www.opensecrets.org/}}}) and ClaimBuster\footnote{ClaimBuster, {\small\url{ http://idir-server2.uta.edu/claimbuster}}} 
+ have recently gained  unprecedented attention as their legitimate goal is to verify online information for enlightening public opinion and automate Web-scale fact-checking for assisting journalists \citep{Cohen2011,Hassan:2015}.
+ However, estimating the veracity of data remains a challenging problem: extracting information from large, heterogeneous corpora of textual and multimedia documents and  integrating the extracted, multi-source data are difficult tasks. Data can be noisy, outdated, incorrect, conflicting, and thus unreliable, mainly due to information extraction errors,  low source quality and disagreements between the information sources. 
+ 
+ [ ici: point sur etat de l'art des methods de truth discovery et nécessité de faire ensembling car one-fits-all solution does not exist for open  domain + nécessité d'intégrer/developper full truth discovery pipeline incluant l'extraction]
+ 
+In this demo, we present {\scschape Vera}, a web-platform that supports information extraction, data fusion, truth finding, and visualization of large-scale, multisource data from the Web.
+
+The main contributions of our work are:
+
+ [ici: lister contrib]
+ 
+ 
+{\scschape Vera} platform, REST API and additional information, data sets and material are available at \url{dafna.qcri.org}.
+
+
+ 
