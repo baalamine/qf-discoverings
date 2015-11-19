@@ -1,101 +1,75 @@
-\section{Our Demonstration System}\label{demonstration}
-We describe in this section our system for 
-combining truth discovring and information
-extraction with active ensembling using the procedure described
-in the previous sections. We first 
-present the architecture of our system by
-giving its different modules. Then, we provide
-a typical demonstration scenario of a user interacting
-with our system.
+\section{About the Demonstration }\label{demonstration}
+
 
 
 % Architecture and GUI
-\subsection{System Components}
-The architecture of our demonstration system, given in
-Figure~\ref{system_architecture}, comprises the following
-five main components.
+%\subsection{System Components}
+%The architecture of our demonstration system, given in
+%Figure~\ref{system_architecture}, comprises the following
+%five main components.
 
 % User I/O Interface
-\paragraph*{User Interface}
-The user interface is the main component that enables a given user 
-to interact with our system. Via the user interface component, 
-one has the ability to provide a query (or a key phrase), to
-recieve answers from the truth finding module or  label requests
-from the active ensembling module. When a label request is sent 
-is sent to the user, she (or he) also provides his answers through 
-this component.
+%\paragraph*{User Interface}
+%The user interface is the main component that enables a given user  to interact with our system. Via the user interface component,  one has the ability to provide a query (or a key phrase), to recieve answers from the truth finding module or  label requests from the active ensembling module. When a label request is sent  is sent to the user, she (or he) also provides his answers through  this component.
 
 
 % Information extraction module
-\paragraph*{OpenIE component} OpenIE is responsible to the extraction 
-of information from the Web. It considers, as an input, a user query and queries
-several Web corpus in order to returns the relevant set of candidate answers. Our
-OpenIE component relies on TextRunner engine for the extraction of the set of candidate
-Web claims with respect to a user query about a given real-world fact.
+%\paragraph*{OpenIE component} OpenIE is responsible to the extraction  of information from the Web. It considers, as an input, a user query and queries several Web corpus in order to returns the relevant set of candidate answers. Our OpenIE component relies on TextRunner engine for the extraction of the set of candidate Web claims with respect to a user query about a given real-world fact.
 
 % Learning module
-\paragraph*{Active Ensembling Module} This is the core component of our system which discovers
-an optimal ensemble for truth finding over candidate claims extracted with the OpenIE 
-component. The active ensembling module, as described in Section~3, evaluates set of twelves
-truth finding algorithms on unlabeled claims, figures out the most controversal claims, and requests
-labels from the user. Once it obtained feebacks from the user, it estimates the accuracy of the competing
-algorithms on the labeled claims, and finally decides about the best one to use for each set of claims related 
-to the same query or fact. The module returns an ensemble since one can have distinct good truth finding techniques
-for various sets of claims about different facts.
+%\paragraph*{Active Ensembling Module} This is the core component of our system which discovers an optimal ensemble for truth finding over candidate claims extracted with the OpenIE  component. The active ensembling module, as described in Section~3, evaluates set of twelves truth finding algorithms on unlabeled claims, figures out the most controversal claims, and requests labels from the user. Once it obtained feebacks from the user, it estimates the accuracy of the competing algorithms on the labeled claims, and finally decides about the best one to use for each set of claims related  to the same query or fact. The module returns an ensemble since one can have distinct good truth finding techniques for various sets of claims about different facts.
 
 % Truth finding engine
-\paragraph*{Truth Finding Module} The truth finding module uses the hypotheses found by the active ensembling 
-module about the best algorithm to use for each set input of claims to determine the final result that will 
-maximize the precision of the truth finding discovery. Typically, the module combines the best of each algorithm
-in the ensemble returned by the learning process. It outputs its result to the user through the user interface component.
+%\paragraph*{Truth Finding Module} The truth finding module uses the hypotheses found by the active ensembling  module about the best algorithm to use for each set input of claims to determine the final result that will maximize the precision of the truth finding discovery. Typically, the module combines the best of each algorithm in the ensemble returned by the learning process. It outputs its result to the user through the user interface component.
 
 
 
 % knwoledge bases
-\paragraph*{Storage Module}The storage module consists of a local repository for the system
-that enables to have a dump of labeled claims. This set of labeled claims is a partial valuable
-ground truth. It can be used, if available, in order to boostrap our active learning process. For
-example as we already learnt about the best approach for these labeled claims, they can be compare 
-to new unlabeled claims, in terms of similar involved facts or similar conflict distribution, for 
-directly devising a candidate optimal truth discovery algorithm without having to run again the learning 
-procedure.
+%\paragraph*{Storage Module}The storage module consists of a local repository for the system
+%that enables to have a dump of labeled claims. This set of labeled claims is a partial valuable
+%ground truth. It can be used, if available, in order to boostrap our active learning process. For
+%example as we already learnt about the best approach for these labeled claims, they can be compare 
+%to new unlabeled claims, in terms of similar involved facts or similar conflict distribution, for 
+%directly devising a candidate optimal truth discovery algorithm without having to run again the learning 
+%procedure.
 
-\begin{figure}[ht]
-\begin{tikzpicture}[auto, line/.style ={draw,  thick, shorten <=0pt}]
-  \matrix[matrix of nodes, row sep=5ex, column sep=1em] (mx) {
-    User I/O Interface & Truth Finding Module\\
-    IE Module & Ensembling Module \\
-    & Storage Module (labeled claims)\\ 
-  };
+%\begin{figure}[ht]
+%\begin{tikzpicture}[auto, line/.style ={draw,  thick, shorten <=0pt}]
+ % \matrix[matrix of nodes, row sep=5ex, column sep=1em] (mx) {
+  %  User I/O Interface & Truth Finding Module\\
+   % IE Module & Ensembling Module \\
+    %& Storage Module (labeled claims)\\ 
+%  };
   %\node[ou=(mx-1-3)] (empty) {};
-  \node[ou=(mx-2-1)] (oi) {};
-  \node[ou=(mx-1-2)] (tf) {};
-  \node[ou=(mx-2-2)] (lm) {};
-  \node[ou=(mx-3-2)] (kb) {};
-  {[<-, thick]
-  \draw(mx-1-1)edge(tf);
-  }
-  {[->, thick]
-  \draw(mx-1-1)edge(oi);
-  \draw(oi)edge(lm);
-  }
-  {[<-, thick]
-    \draw(tf)edge(lm);
-  }
-  {[<->, thick]
-    \draw(lm)edge(kb);
-    \draw(mx-1-1)edge(lm);
-  }
+%  \node[ou=(mx-2-1)] (oi) {};
+ % \node[ou=(mx-1-2)] (tf) {};
+  %\node[ou=(mx-2-2)] (lm) {};
+  %\node[ou=(mx-3-2)] (kb) {};
+  %{[<-, thick]
+  %\draw(mx-1-1)edge(tf);
+%  }
+ % {[->, thick]
+  %\draw(mx-1-1)edge(oi);
+ % \draw(oi)edge(lm);
+%  }
+%  {[<-, thick]
+%    \draw(tf)edge(lm);
+%  }
+%  {[<->, thick]
+%    \draw(lm)edge(kb);
+%    \draw(mx-1-1)edge(lm);
+%  }
  % \begin{scope}[every path/.style=line, <-]
   % \path(mx-1-1)  - | (tf);
   % \path(mx-1-3)  - | (lm);
   %\end{scope}
 
-\end{tikzpicture}
-\caption{System Components}\label{system_architecture}
-\end{figure}
+%\end{tikzpicture}
+%\caption{System Components}\label{system_architecture}
+%\end{figure}
 % Demonstration scenario
-\subsection{Demonstration scenario}
+%\subsection{Demonstration scenarios}
+\laure{we need to find at least 2 "catchy" precise scenarios  we need to rework this section}
 A given user that wants to interact with our system
 must do it through the search form. Through the search
 form, she (or he) provides her searched relation, e.g.,
