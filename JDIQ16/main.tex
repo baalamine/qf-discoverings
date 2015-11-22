@@ -17,6 +17,7 @@
 \usepackage{mathptm}
 \usepackage[pdfborder={0 0 0}]{hyperref}
 \usepackage[ruled]{algorithm2e}
+\usepackage{csquotes}
 \renewcommand{\algorithmcfname}{ALGORITHM}
 \SetAlFnt{\small}
 \SetAlCapFnt{\small}
@@ -34,51 +35,25 @@
 % Document starts
 \begin{document}
 
-% Page heads
+% HEADERS
 \markboth{L. Berti-Equille and M. L. BA}{Actionable Truth Discovery Challenges}
-
-% Title portion
+% TITLE
 \title{Actionable Truth Discovery Challenges}
+% AUTHORS AND AFFILIATION
 \author{LAURE BERTI-EQUILLE, MOUHAMADOU LAMINE BA
 \affil{Qatar Computing Research Institute, Hamad Bin Khalifa University, Doha, Qatar}
 }
-\iffalse
-\begin{abstract}
-
-In the World Wide Web, a massive amount of user-generated contents, public, open, or crowd-sourced information are available through various channels such as tweets, RSS, websites, DBs, 
-multimedia-sharing platforms, social media and networks, etc. False information, rumors, and fake contents across multiple sources can be easily spread,  making it hard to distinguish
-between what is true and what is not. Given such a large number of multi-channel information sources and the vast volume of conflicting data, ascertaining the veracity of the information
-available on the Web in a scalable and timely manner is extremely challenging and has only been preliminarily and partly addressed by existing work. In this paper, we present a set of research
-challenges related to truth discovery on the Web and we propose some potential solutions for verifying the veracity of online information.  We also discuss how an integrative solution should 
-benefit from a variety of technologies such as natural language processing, information extraction, data integration, probabilistic inference and data analytics, to help users estimate the reliability 
-of various sources, check the truthfulness of their information, and turn this into actionable knowledge.
-
-\end{abstract}
-\fi 
 
 \category{H.3.3}{Information Storage and Retrieval}{Information Search and Retrieval}
 \category{H.2.0}{Database Management}{General}
-
 \terms{Algorithms, Management, Verification}
-
 \keywords{Truth Discovery, Fact-checking, Data Quality, Data Fusion, Information Extraction}
-
 \acmformat{Laure Berti-Equille, Mouhamadou Lamine Ba,  2015. Actionable Truth Discovery Challenges.}
-% At a minimum you need to supply the author names, year and a title.
-% IMPORTANT:
-% Full first names whenever they are known, surname last, followed by a period.
-% In the case of two authors, 'and' is placed between them.
-% In the case of three or more authors, the serial comma is used, that is, all author names
-% except the last one but including the penultimate author's name are followed by a comma,
-% and then 'and' is placed before the final author's name.
-% If only first and middle initials are known, then each initial
-% is followed by a period and they are separated by a space.
-% The remaining information (journal title, volume, article number, date, etc.) is 'auto-generated'.
+
 
 \begin{bottomstuff}
-
-Author's address: L. Berti-Equille, M. L. Ba, Qatar Computing Research Institute(Current address), Hamad Bin Khalifa University, Tornado Tower 18th, P.O. Box 5825, Doha, Qatar.
-
+Author's address: L. Berti-Equille, M. L. Ba, Qatar Computing Research Institute(Current address), Hamad
+Bin Khalifa University, Tornado Tower 18th, P.O. Box 5825, Doha, Qatar.
 \end{bottomstuff}
 
 \maketitle
@@ -86,25 +61,16 @@ Author's address: L. Berti-Equille, M. L. Ba, Qatar Computing Research Institute
 
 \section{Introduction}
 As online user-generated content grows exponentially, the reliance on Web data and information from social 
-media and social networks is growing in many domains for a variety of private 
-as well as corporate usages. One of the fundamental difficulties is that data can be biased, noisy, 
-outdated, incorrect, misleading and thus unreliable. Massive data coming from multiple sources 
-amplifies this problem since conflicting information have to be ``aligned'', compared  and check to estimate 
-their veracity. For obvious reasons, truth discovery from the Web has significant practical importance: online rumor propagation 
-\cite{rumor-icdm2013}, mis- or disinformation can have tremendous impacts on our society, economy, politics, and homeland 
-security\footnote{\scriptsize{For example, the {\it Fog Computing} project from DARPA is 
-a prototype developed in response to Wikileaks for automatically generating and distributing believable
- misinformation and then tracking access and attempted misuse of it - \url{http://www.dtic.mil/dtic/tr/fulltext/u2/a552461.pdf}}}. 
-Online fact-checkers (e.g., FactCheck\footnote{\scriptsize{\url{www.factcheck.org/}}}, Snopes\footnote{\scriptsize{\url{www.snopes.com/}}}, PolitiFact\footnote{\scriptsize{\url{www.politifact.com/}}}, TruthorFiction\footnote{\scriptsize{\url{www.truthorfiction.com/}}} or OpenSecrets\footnote{\scriptsize{\url{www.opensecrets.org/}}}) and humanitarian initiatives  (e.g., AIDR\footnote{\scriptsize{\url{http://aidr.qcri.org/}}} \cite{ImranECDM13}) have gained 
-unprecedented attention since they play an essential role in classifying and verifying  manually (or semi-automatically) online information.
-
-
-%, leveraging the Web of Data to provide appropriate analysis to support decision-making and timely response to crisis situations. 
-Beyond social media and computational journalism, the problem of truth discovery is also intellectually 
-and technically interesting enough to have attracted a lot of prior studies, from both the artificial 
-intelligence and the database communities, sometimes investigated under the names of  ``fact-checking''~\cite{GoasdoueKKLMZ13},
-``information trustworthiness''~\cite{Thirunarayan2014182}, ``information credibility''~\cite{PasternackR13} 
-or ``information corroboration''~\cite{GallandAMS10}. 
+media and social networks is growing in many domains for a variety of private as well as corporate usages. 
+One of the fundamental difficulties is that data can be biased, noisy, outdated, incorrect, misleading and
+thus unreliable. Massive data coming from multiple sources amplifies this problem since conflicting information
+have to be ``aligned'', compared  and check to estimate their veracity. For obvious reasons, truth discovery from 
+the Web has significant practical importance: online rumor propagation~\cite{rumor-icdm2013}, mis- or disinformation
+can have tremendous impacts on our society, economy, politics, and homeland security\footnote{\url{http://www.dtic.mil/dtic/tr/fulltext/u2/a552461.pdf}}. 
+Online fact-checkers (e.g., FactCheck\footnote{\url{www.factcheck.org/}} and Snopes\footnote{\url{www.snopes.com/}}) and humanitarian initiatives~\cite{ImranECDM13}
+(e.g., AIDR\footnote{\scriptsize{\url{http://aidr.qcri.org/}}}) have gained unprecedented attention since they play an essential role in classifying and verifying  manually (or semi-automatically) online information.
+Beyond social media and computational journalism, the problem of truth discovery is also intellectually and technically interesting enough to have attracted a lot of prior studies, from both the artificial 
+intelligence and the database communities, sometimes investigated under the names of  ``fact-checking''~\cite{GoasdoueKKLMZ13}, ``information trustworthiness''~\cite{Thirunarayan2014182}, ``information credibility''~\cite{PasternackR13} or ``information corroboration''~\cite{GallandAMS10}. 
 
 
 
