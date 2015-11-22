@@ -114,40 +114,36 @@ the management of complex  data structures such as collections of entities in a 
 %To achieve this vision, our goal is to design a truth discovery system to extract information from multi-channel sources in different languages.
 We present in this section a set of actionable open problems related to truth discovery. We start by an illustrative
 example showing the need to deal with in priority these questions.
-\subsection{ An Illustrative Example}
+\paragraph*{ An Illustrative Example}
 
 
 ``The first casualty when war comes, is truth,'' said American Senator Hiram Johnson in 1917. 
 For reporters, photographers, and cameramen captured the realities of wars and armed conflicts, sound 
 and verifiable data is extremely difficult to gather and determining the complete picture of what 
-occurred during a conflict is hard and perilous.
-Data is generally used effectively to answer a specific question (e.g., how many civilian casualties in Syria?) 
-but it is often stretched to answer a broader question for which it was not suited, blurring the 
-lines between ``what was observable'' and  ``what was true''. In this context, 
+occurred during a conflict is hard and perilous. Data is generally used effectively to answer a specific 
+question (e.g., how many civilian casualties in Syria?) but it is often stretched to answer a broader question
+for which it was not suited, blurring the lines between ``what was observable'' and  ``what was true''. In this context, 
 sources of information can include victims or witness reports  and online volunteered information (e.g., in English or Arabic) 
-from personal and institutional Web pages, social and traditional media, NGOs', governmental and 
-administrative records\footnote{\scriptsize{e.g., \url{http://www.correlatesofwar.org/}}}. %The goal of any truth-seeker is to collect all information pieces and evidences available in various languages and formats, from various contexts and point-of-views,  and separate accurate information from the noise, detect collusion, source dependence, and conflicts of interest to understand the information in its context. 
-Seeking the truth is a tedious process manually done by war correspondents, United Nations experts and commissioners, 
-Truth Commissions\footnote{\scriptsize{\url{ http://www.truthcommission.org/}}}, human rights activists, journalists, and historians 
- (e.g., WITNESS\footnote{\scriptsize{\url{http://www.witness.org}}}, StoryFul\footnote{\scriptsize{\url{http://storyful.com/}}}). 
-For this type of application, automating continuous truth discovery from the Web and social media networks to support decision-making and provide timely response to crisis situations goes far beyond data integrity checking, data quality, and data fusion. 
-%This opens up many directions for research.
- % Indeed, we see many interesting research problems  for creating multi-channel truth discovery systems.
+from personal and institutional Web pages, social and traditional media, NGOs', governmental and administrative records\footnote{\scriptsize{e.g., \url{http://www.correlatesofwar.org/}}}. 
+Seeking the truth is a tedious process manually done by war correspondents, United Nations experts and commissioners, Truth 
+Commissions\footnote{\scriptsize{\url{ http://www.truthcommission.org/}}}, human rights activists, journalists, and historians (e.g., WITNESS\footnote{\scriptsize{\url{http://www.witness.org}}}, StoryFul\footnote{\scriptsize{\url{http://storyful.com/}}}). 
+For this type of application, automating continuous truth discovery from the Web and social media networks to support decision-making 
+and provide timely response to crisis situations goes far beyond data integrity checking, data quality, and data fusion. 
 
 
 
 
- While the challenges identified hereafter  are by no means exhaustive, they are certainly important issues to address in priority for designing a suitable truth discovery system.
+ While the challenges identified hereafter  are by no means exhaustive, they are certainly important issues to address in priority for 
+ designing a suitable truth discovery system.
 
 
 \paragraph*{Timely and Actionable Truth Discovery} 
-
 
 Discovering truth from past events and historical data is certainly useful and results may be validated more easily since ground truth and full data sets already exist before the time of analysis. However, from a humanitarian perspective, actionable truth discovery from quasi real-time data could save lives. % or help in determining responsibilities from a legal perspective.
 In this context, information extraction and triage as well as truth discovery computation need to be streamlined, prioritized,  and adjusted to the degree of emergency and incompleteness of available information. This important usage-driven aspect goes beyond consistency checking and constraints. For example, information such as ``The Chrysler building had an explosion and it affected the Empire State building'' can be automatically verified: these buildings are about 2~km away and hence this information can not be true. However, more often what journalists/emergency responders need, is to verify information such as ``The Chrysler building had an explosion'' when there are very few primary sources claiming it initially. Timely and actionable truth discovery requires the prioritization and adjustment of information checking tasks specifically to the communities that will use the data.
 %
 
-\subsection{Data Alignment Across Languages, Formats, and Channels} 
+\paragraph*{Data Alignment Across Languages, Formats, and Channels} 
 
 
 Agility of a truth discovery system is of utmost importance both at the technical, structural, and semantic levels. Agility is defined as the ability of the system to efficiently extract and map information: {\it i)} from various languages, {\it ii)} in various formats and data structures, and {\it iii)} supported by various media and technologies. Traditional information extraction pipelines  require several analysis stages ranging from text preprocessing %(e.g., split the input text into sentences, tokenize the sentences, lemmatize the tokens, tag their part-of-speech, etc.)
@@ -157,74 +153,81 @@ aligning information from various languages, formats or channels.  Moreover, eac
 %These aspects have been somehow disconnected and underexploited in previous research.
 
 
-\subsection{Incomplete and Biased Observations}  
+\paragraph*{Incomplete and Biased Observations}  
 
 
-Observation data may be incomplete 
-and biased for various reasons: 
- some information sources may not give all their data for security or privacy concerns; 
- some sources have format limitations; 
- %some authoritative sources may be implicitly referred to for information;
-when the sources do not explicitly provide temporal or spatial information,
-the time and location values are missing and need to be inferred. % from previous snapshots, 
-%taken only periodically or occasionally.
- Typically, the Open World assumption holds since  not all the real-world entities/events may have been observed and reported by the sources.
-%Missing or incomplete observations can again lead to incorrect conclusions about the truthfulness 
-%of extracted information, mis-inferring the context or ignoring the dependence between sources. 
-%Hence, 
-%any approach for determining truth needs to consider the possibility that the granularity 
-%of observations introduces a degree of uncertainty about the information provided by the sources and observers. 
- Online sources have %different formats, data quality levels and most importantly,
-  various levels of {\it a priori} knowledge on how the observation data have been collected. In many cases, opportunistic (or volunteered) data are {\it biased by  observation effort} and the underlying observation method is unknown. It is thus important to explore how one can retrieve and quantify the observation effort from modeling the data provider's/observers' distribution. 
-%Tracking uncertainties: quantitative data have to deal with uncertainty resulting from sampling protocol design and measurement methods. Such uncertainties may be of various types: error in the raw data, gaps in data, classical statistical errors, and of their propagation in the chain of information processing. We will identify the limits of the spatial and temporal grain beyond which data cannot be extrapolated because of a lack of precision (in the same way that weather forecast have temporal and spatial limits). 
-Data %may lack precision but it 
-can be biased in many other ways. For example, data can be affected by a {\it selection bias} that is the extent to which a piece of information is claimed by a category of individuals who are likely to have access to and choose to use a certain type of media or channel\footnote{\scriptsize{e.g., social media users are usually younger, technologically savvy, motivated individuals versus individuals who are older, more remote, lacking access or ability or motivation to use technology and whose stories/observations are likely missing from this channel. }}. 
-Data may also suffer from the {\it observer's bias} (related to the individual's ability to accurately remember and describe events) and {\it disclosure bias} (related to witness's incentive  (or disincentive) to  include certain events or details). One challenge is to estimate the incompleteness and biases and take them into account in the truth discovery computation.
-%, not only using the set of conflicting and overlapping information but also contextual and historical information about the observers, the sources, and their information collection/production process.
+Observation data may be incomplete and biased for various reasons: 
+some information sources may not give all their data for security or privacy concerns; 
+some sources have format limitations; when the sources do not explicitly provide temporal 
+or spatial information, the time and location values are missing and need to be inferred.
+Typically, the Open World assumption holds since  not all the real-world entities/events 
+may have been observed and reported by the sources. Online sources have  various levels 
+of {\it a priori} knowledge on how the observation data have been collected. In many cases,
+opportunistic (or volunteered) data are {\it biased by  observation effort} and the underlying
+observation method is unknown. It is thus important to explore how one can retrieve and quantify
+the observation effort from modeling the data provider's/observers' distribution. Data  can be biased
+in many other ways. For example, data can be affected by a {\it selection bias} that is the extent to
+which a piece of information is claimed by a category of individuals who are likely to have access to 
+and choose to use a certain type of media or channel\footnote{\scriptsize{e.g., social media users are
+usually younger, technologically savvy, motivated individuals versus individuals who are older, more remote,
+lacking access or ability or motivation to use technology and whose stories/observations are likely missing 
+from this channel. }}. Data may also suffer from the {\it observer's bias} (related to the individual's ability
+to accurately remember and describe events) and {\it disclosure bias} (related to witness's incentive  (or disincentive) 
+to  include certain events or details). One challenge is to estimate the incompleteness and biases and take them into account
+in the truth discovery computation.
 
-\subsection{Decontextualization and Distortion}  
+\paragraph*{Decontextualization and Distortion}  
 
+When a piece of information  is extracted from its original 
+content and channel, it may lose its context along with important 
+``semantic markers'' to understand {\it when, where, how, why,} and
+{\it for which purpose/audience} this particular piece of information 
+has been produced, what it is supposed to mean in the absolute sense and
+also relatively to its particular context and  information channel (e.g., a tweet in a thread).
+Information without context can be easily distorted and misinterpreted. For example, ascertaining
+the veracity of a controversial information that has been re-tweeted many times in different contexts
+by various users with different emotions and motivations is difficult without the description of these
+contexts. Moreover, the pace has to be considered when information  updates from Twitter, Facebook, and 
+Wikipedia have to be ``aligned'' with considering the source granularity ({\it i.e.}, a source can be an
+individual, an organization, a company, a government, etc.). Much research work has studied the formalization 
+of contexts and rich context representations have been proposed \cite{eps270829}. However, current information 
+extraction  methods constrain the context representation and can usually not handle a wide, unpredictable 
+range of topics. Ultimately, all meta-information about the context and sources' characteristics have to be encoded 
+as evidences and analyzed for truth discovery computation.
 
-When a piece of information  is 
-extracted from its original content and channel, it may lose its context along with important 
-``semantic markers'' to understand {\it when, where, how, why,} and {\it for which purpose/audience} this particular piece of information 
-has been produced, what it is supposed to mean in the absolute sense and also relatively to 
-its particular context and  information channel (e.g., a tweet in a thread).  Information without context can be easily 
-distorted and misinterpreted. For example, ascertaining the veracity of a controversial
- information that has been re-tweeted many times in different contexts by various users with different emotions and motivations is difficult without
- the description of these contexts. Moreover, the pace has to be considered when information  updates from Twitter, Facebook, and Wikipedia have to be ``aligned'' with considering the source granularity ({\it i.e.}, a source can be an individual, an organization, a company, a government, etc.). Much research work has studied the formalization of contexts 
- and rich context representations have been proposed \cite{eps270829}. However, current information extraction 
- methods constrain the context representation and can usually not handle a wide, unpredictable 
- range of topics. %;  context-sensitive information extraction methods have  to be also adapted to  the channel specificities. 
- Ultimately, all meta-information about the context and sources' characteristics have to be encoded as evidences and analyzed for truth discovery computation.
-
-\subsection{Source Expertise and Information Correlation} 
+\paragraph*{Source Expertise and Information Correlation} 
 
 In many domains, some sources are more authoritative or specialized, providing
 accurate information for a small subset of real-world objects, while other
 sources are generalist with a wider coverage, providing a huge amount of information,
-some of which may be out-of-date or imprecise. 
-Determining truth between such sources based only on majority voting and similarity of values can easily lead to erroneous conclusions.
-Hence, any approach for determining truth needs to
-consider the possibility that sources have different levels of expertise, various updating policies, and they
-provide different coverages of information over time. Moreover, similar values across many sources may be due to the likelihood that some information items are either very specific (rare) or very general (popular) and/or sometimes highly correlated; this does not necessarily mean that the sources are dependent but information correlation and distribution have to be analyzed before truth discovery computation.
+some of which may be out-of-date or imprecise. Determining truth between such sources
+based only on majority voting and similarity of values can easily lead to erroneous conclusions.
+Hence, any approach for determining truth needs to consider the possibility that sources have different 
+levels of expertise, various updating policies, and they provide different coverages of information over time.
+Moreover, similar values across many sources may be due to the likelihood that some information items are either
+very specific (rare) or very general (popular) and/or sometimes highly correlated; this does not necessarily mean
+that the sources are dependent but information correlation and distribution have to be analyzed before truth discovery
+computation.
 
 
-\subsection{Limitations of Truth Discovery Models} 
+\paragraph{Limitations of Truth Discovery Models} 
 
-Most truth discovery models suffer from limiting assumptions on the claims, referred real-world objects, sources, and truth discovery results. For example, one important assumption on the claims is that the assertions made by the sources (and whose veracity is unknown) are organized into disjoint mutual exclusion sets and exactly one of the claims in each mutual exclusion set is assumed to be true. Claims are also assumed to be positive\footnote{\scriptsize{{\it i.e.,}  Cases such  as ``$S$ claims that $A$ is false'' or ``$S$ does not claim $A$ is true'' are not considered.}} and  independent, as well as real-world objects they refer to. Concerning the sources: a source is supposed to contribute uniformly to all the claims it expresses. Sources are assumed to be independent (except in \cite{DongBHS10a}), to make their assertions independently and do not provide conflicting claims. Moreover, the probability a source asserts a claim is independent of the truth of the claim and there is explicit correspondence 
-between the sources and the claims ({\it i.e.,} the models do not consider cases such that ``$S_1$ claims that $S_2$ claims $A$''). Finally, each claim is assumed to be either true or false. No uncertainty, gradual result or ranking is supported by current models for labeling the truthfulness of claims. 
-% 
-%Information sources are of different qualities and they can  easily copy, reformat, and modify data from other sources 
-%(with or without their consent), propagating eventually  erroneous data and false information (voluntarily or not). 
-%Understanding the information flow between sources, their dependence and 
-Relaxing these assumptions constitutes a challenging research project that could be overreached by formally defining the semantics of truth discovery and making it operational in realistic cases. %This goes far beyond data lineage and provenance management research lines and needs to be addressed more thoroughly by the Database community. 
+Most truth discovery models suffer from limiting assumptions on the claims, referred real-world objects, sources, and truth 
+discovery results. For example, one important assumption on the claims is that the assertions made by the sources (and whose 
+veracity is unknown) are organized into disjoint mutual exclusion sets and exactly one of the claims in each mutual exclusion 
+set is assumed to be true. Claims are also assumed to be positive\footnote{\scriptsize{{\it i.e.,}  Cases such  as ``$S$ claims 
+that $A$ is false'' or ``$S$ does not claim $A$ is true'' are not considered.}} and  independent, as well as real-world objects 
+they refer to. Concerning the sources: a source is supposed to contribute uniformly to all the claims it expresses. Sources are 
+assumed to be independent (except in \cite{DongBHS10a}), to make their assertions independently and do not provide conflicting claims.
+Moreover, the probability a source asserts a claim is independent of the truth of the claim and there is explicit correspondence 
+between the sources and the claims ({\it i.e.,} the models do not consider cases such that ``$S_1$ claims that $S_2$ claims $A$''). Finally,
+each claim is assumed to be either true or false. No uncertainty, gradual result or ranking is supported by current models for labeling the 
+truthfulness of claims. 
 
-%As emphasized in the challenges, error and uncertainty propagation is inherent to the complex, iterative process of truth discovery and it makes truthfulness computation unique and 
+Relaxing these assumptions constitutes a challenging research project that could be overreached by formally defining the semantics of truth 
+discovery and making it operational in realistic cases. 
 
-
-
-\subsection{Cross-Modal Truth Discovery} 
+\paragraph*{Cross-Modal Truth Discovery} 
 ** Laure to complete **
 
 Existing truth discovery studies consider that the information whose veracity must be verified is given 
@@ -236,14 +239,14 @@ Indeed, data used in many applications are of various nature ranging from unstru
 and pictures.
 
 
-\subsection{Data Dynamicity in  Truth Discovery} 
+\paragraph*{Data Dynamicity in  Truth Discovery} 
 ** Laure to complete **
 
 \section{Towards An Integrative Solution}
 To deal with the open problems highlighted above, we propose an integrative solution for truth discovery.
 We detail in this section, the initial development of such solution through the DAFNA system.
 
-\subsection{Semantics for Truth Discovery} 
+\paragraph*{Semantics for Truth Discovery} 
 
 Truth discovery from multi-source data relies on the Open World Assumption with overlapping and conflicting data.
 Designing an appropriate data model for truth discovery requires a fine trade-off between tractability and expressiveness. 
@@ -251,12 +254,12 @@ The vision of DAFNA is to give a concrete and unified semantics to  truth discov
 can: {\it i)} relax most limiting assumptions of previous models, {\it ii)} formally unify existing approaches, and {\it iii)}
 support inference-- is to define formal semantics of truth discovery systems in modal logics through axioms and canonical {\it Kripke}
 sstructures \cite{GorankoOtto06}. However, reasoning in modal logics can quickly become intractable \cite{Gottlob92}. This applies, in
-particular, to information items that include possibility in addition to certainty and impossibility (positive or negative claims). %In the notation of modal logics, statements of the form $\square_{S_1}\neg C$ (source $S_1$ claims that $C$ is impossible or false) 
-can be expressed. %However, complexity would considerably  increase by allowing negations before the modal operators, e.g.: $\neg \square_{S_1}\neg C$ (source $S_1$ does not claim that $C$ is not true), which is equal to  $\square_{S_1} C$ ($S_1$ claims that $C$ is true). 
+particular, to information items that include possibility in addition to certainty and impossibility (positive or negative claims). 
+can be expressed. 
 In this work, we have chosen to define the semantics of a truth discovery system such as it supports fragments of modal logics to allow
 negations on claims (which is sufficient to express conflicts) and we introduce a particular {\it Kripke} structure that allows claim 
 verification procedure and powerful inferring functionalities (for chaining evidences). Few work in databases have considered modal logics
-before: % \cite{CalvaneseGLLR08,GatterbauerBKS09}.
+before: 
 Calvanese {\it et al.} \cite{CalvaneseGLLR08} use the modal logic $K45^A_n$ to allow mappings between peers in the presence of conflicts. 
 Gatterbauer et al. \cite{GatterbauerBKS09} introduce the notion of {\it belief database} to manage conflicting annotations. In our opinion, 
 formal semantics and reasoning based on multi-agent epistemic logic for data integration deserves much more attention than it has received 
@@ -264,7 +267,7 @@ so far from the Database community. In DAFNA, our vision is to leverage modal lo
 discovery and reasoning about multi-source conflicting claims. This constitutes a novel, alternative solution to current approaches in data 
 fusion and integration. 
 
-\subsection{Continuous Truth Discovery, Inference, and Belief Revision }
+\paragraph*{Continuous Truth Discovery, Inference, and Belief Revision }
 
 
 
@@ -282,7 +285,7 @@ system incorporates contexts, evidences, and error estimates in addition to the 
 reasoning and inference with uncertainty and bias estimations and handles, in a scalable way, the complete information processing
 pipeline and truth discovery inference.
 
-\subsection{Diagnostics and Error Propagation Monitoring}
+\paragraph*{Diagnostics and Error Propagation Monitoring}
 
 
 There is a large body of work on managing uncertain and incomplete information \cite{GreenT06,AgrawalSUW10}. Our work shares a similar 
