@@ -66,27 +66,26 @@ One of the fundamental difficulties is that data can be biased, noisy, outdated,
 thus unreliable. Massive data from multiple sources amplifies this problem since conflicting information
 have to be \textquote{aligned}, compared  and check to estimate their veracity. Obviously, truth discovery from 
 the Web has significant practical importance: online rumor propagation~\cite{rumor-icdm2013}, mis- or disinformation
-can have tremendous impacts on our society, economy, politics, and homeland security\footnote{\tiny{\url{http://www.dtic.mil/dtic/tr/fulltext/u2/a552461.pdf}}}. 
-Online fact-checkers (e.g., FactCheck\footnote{\tiny{\url{www.factcheck.org/}}}) and humanitarian initiatives~\cite{ImranECDM13}
-(e.g., AIDR\footnote{\tiny{\url{http://aidr.qcri.org/}}}) have rapidly emerged as unavoidable for classifying and verifying 
-(semi-automatically) online information. Beyond social media and computational journalism, the truth discovery problem, intellectually 
-and technically exciting enough, has been also widely studied in both the artificial intelligence and the database communities,
-sometimes under the names of  \textquote{fact-checking}~\cite{GoasdoueKKLMZ13}, \textquote{information trustworthiness}~\cite{Thirunarayan2014182},
-\textquote{information credibility}~\cite{PasternackR13} or \textquote{information corroboration}~\cite{GallandAMS10}. 
+can have tremendous impacts on our society, economy, politics, and homeland security. 
+%\footnote{\tiny{\url{http://www.dtic.mil/dtic/tr/fulltext/u2/a552461.pdf}}}. 
+Online fact-checkers (e.g., FactCheck\footnote{\tiny{\url{www.factcheck.org/}}}) and humanitarian initiatives~\cite{ImranECDM13} 
+%(e.g., AIDR\footnote{\tiny{\url{http://aidr.qcri.org/}}}) 
+have rapidly emerged as unavoidable for classifying and verifying (semi-automatically) online information. Beyond social media and
+computational journalism, the truth discovery problem, intellectually and technically exciting enough, has been also widely studied
+in both the artificial intelligence and the database communities, sometimes under the names of  \textquote{fact-checking}~\cite{GoasdoueKKLMZ13},
+\textquote{information trustworthiness}~\cite{Thirunarayan2014182}, \textquote{information credibility}~\cite{PasternackR13}, or \textquote{information
+corroboration}~\cite{GallandAMS10}. 
 
 
 
-Given a set of assertions from multiple sources, the ultimate goal of truth discovery is to correctly predict 
-the truth label of the claimed data items and compute sources' reliability with no \emph{a-priori} knowledge about the 
-truthfulness of the assertions and the sources. One major line of previous work, which relaxes this assumption, extended 
-fact-finding models with prior knowledge either about the assertions~\cite{PasternackR13} or about the source 
-reputation via trust assessment~\cite{BalakrishnanK11}. Another line of research aimed at iteratively computing 
-and updating the trustworthiness of a source as a function of the belief in its claims, and then the belief score 
-of each claim as a function of the trustworthiness its sources~\cite{YinHY08}, with some probabilistic models incorporating 
-other domain-specific aspects, e.g., source dependence~\cite{DongBHS10a}, temporality~\cite{DongBS09a}, hardness of 
-certain claims~\cite{GallandAMS10}, or complex data structures~\cite{ZhaoRGH12,GoasdoueKKLMZ13}.
-However, current approaches suffer from restrictive assumptions, opacity, complex model parametrization, and lack of scalability 
-for an easy use to the wide diversity of Web information and realistic scenarios where knowing the truth as soon as possible 
+Given a set of assertions from multiple sources, the ultimate goal of truth discovery is to correctly predict the truth label of the claimed
+data items and compute sources' reliability with no \emph{a-priori} knowledge about the truthfulness of the assertions and the sources. One 
+major line of previous work, which relaxes this assumption, extended fact-finding models with prior knowledge either about the assertions~\cite{PasternackR13} 
+or about the source reputation via trust assessment~\cite{BalakrishnanK11}. Another line of research aimed at iteratively computing and updating the trustworthiness
+of a source as a function of the belief in its claims, and then the belief score of each claim as a function of the trustworthiness its sources~\cite{YinHY08}, with 
+probabilistic models which incorporate domain-specific aspects like source dependence~\cite{DongBHS10a}, temporality~\cite{DongBS09a}, hardness of certain 
+claims~\cite{GallandAMS10}, or complex data structures~\cite{ZhaoRGH12,GoasdoueKKLMZ13}. However, current models suffer from restrictive assumptions, opacity, complex settings,
+and lack of scalability to be easily use for the wide diversity of Web information and realistic scenarios where knowing the truth as soon as possible 
 is critical. 
  We argue that the next-generation data-sharing systems need to manage not only heterogeneity but also unreliable 
  information from various channels, in different languages, formats, and at different paces. Truth discovery systems  have to be designed to help institutions and citizens with providing rigorous, scientific explanations and reports 
@@ -100,31 +99,7 @@ is critical.
 %\vspace{-0.1cm}
 % ****************** ARCHITECTURE ****************************************
 \section{Actionable Truth Discovery Challenges}~\label{sect:challenges-solutions}
-
-\iffalse
-\paragraph*{ An Illustrative Example}
-
-
-``The first casualty when war comes, is truth,'' said American Senator Hiram Johnson in 1917. 
-For reporters, photographers, and cameramen captured the realities of wars and armed conflicts, sound 
-and verifiable data is extremely difficult to gather and determining the complete picture of what 
-occurred during a conflict is hard and perilous. Data is generally used effectively to answer a specific 
-question (e.g., how many civilian casualties in Syria?) but it is often stretched to answer a broader question
-for which it was not suited, blurring the lines between ``what was observable'' and  ``what was true''. In this context, 
-sources of information can include victims or witness reports  and online volunteered information (e.g., in English or Arabic) 
-from personal and institutional Web pages, social and traditional media, NGOs', governmental and administrative records\footnote{\scriptsize{e.g., \url{http://www.correlatesofwar.org/}}}. 
-Seeking the truth is a tedious process manually done by war correspondents, United Nations experts and commissioners, Truth 
-Commissions\footnote{\scriptsize{\url{ http://www.truthcommission.org/}}}, human rights activists, journalists, and historians (e.g., WITNESS\footnote{\scriptsize{\url{http://www.witness.org}}}, StoryFul\footnote{\scriptsize{\url{http://storyful.com/}}}). 
-For this type of application, automating continuous truth discovery from the Web and social media networks to support decision-making 
-and provide timely response to crisis situations goes far beyond data integrity checking, data quality, and data fusion. 
-
-
-
-
- While the challenges identified hereafter  are by no means exhaustive, they are certainly important issues to address in priority for 
- designing a suitable truth discovery system.
-\fi
-
+\vspace*{-0.5cm}
 \paragraph*{Timely and Actionable Truth Discovery} 
 
 Discovering truth from past events and historical data is certainly useful and results may be validated more easily since ground truth and full data sets already exist before the time of analysis. However, from a humanitarian perspective, actionable truth discovery from quasi real-time data could save lives. % or help in determining responsibilities from a legal perspective.
