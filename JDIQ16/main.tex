@@ -69,32 +69,27 @@ the Web has significant practical importance: online rumor propagation~\cite{rum
 can have tremendous impacts on our society, economy, politics, and homeland security\footnote{\tiny{\url{http://www.dtic.mil/dtic/tr/fulltext/u2/a552461.pdf}}}. 
 Online fact-checkers (e.g., FactCheck\footnote{\tiny{\url{www.factcheck.org/}}}) and humanitarian initiatives~\cite{ImranECDM13}
 (e.g., AIDR\footnote{\tiny{\url{http://aidr.qcri.org/}}}) have rapidly emerged as unavoidable for classifying and verifying 
-(semi-automatically) online information. Beyond social media and computational journalism, the truth discovery issue, intellectually 
-and technically interesting enough, has been also widely studied in both the artificial intelligence and the database communities,
+(semi-automatically) online information. Beyond social media and computational journalism, the truth discovery problem, intellectually 
+and technically exciting enough, has been also widely studied in both the artificial intelligence and the database communities,
 sometimes under the names of  \textquote{fact-checking}~\cite{GoasdoueKKLMZ13}, \textquote{information trustworthiness}~\cite{Thirunarayan2014182},
 \textquote{information credibility}~\cite{PasternackR13} or \textquote{information corroboration}~\cite{GallandAMS10}. 
 
 
 
 Given a set of assertions from multiple sources, the ultimate goal of truth discovery is to correctly predict 
-the truth of the claimed data items and compute sources' reliability with no \emph{a-priori} knowledge about the 
-truthfulness of the assertions and the sources. One major line of previous work relaxed such a assumption and extended 
+the truth label of the claimed data items and compute sources' reliability with no \emph{a-priori} knowledge about the 
+truthfulness of the assertions and the sources. One major line of previous work, which relaxes this assumption, extended 
 fact-finding models with prior knowledge either about the assertions~\cite{PasternackR13} or about the source 
 reputation via trust assessment~\cite{BalakrishnanK11}. Another line of research aimed at iteratively computing 
 and updating the trustworthiness of a source as a function of the belief in its claims, and then the belief score 
-of each claim as a function of the trustworthiness its sources~\cite{YinHY08} while sometimes carefully incorporating 
-some domain-specific aspects, e.g., source dependence~\cite{DongBHS10a}, evolving truth~\cite{DongBS09a}, hardness of 
+of each claim as a function of the trustworthiness its sources~\cite{YinHY08}, with some probabilistic models incorporating 
+other domain-specific aspects, e.g., source dependence~\cite{DongBHS10a}, temporality~\cite{DongBS09a}, hardness of 
 certain claims~\cite{GallandAMS10}, or complex data structures~\cite{ZhaoRGH12,GoasdoueKKLMZ13}.
-However, current approaches are still limited in scope and also suffer from substantial drawbacks; restrictive 
-assumptions in the models, opacity, complex model parametrization, and lack of scalability make them hard to use 
-to the wide diversity of Web information and for realistic scenarios where knowing the truth as soon as possible 
+However, current approaches suffer from restrictive assumptions, opacity, complex model parametrization, and lack of scalability 
+for an easy use to the wide diversity of Web information and realistic scenarios where knowing the truth as soon as possible 
 is critical. 
-
-
-
-
- We argue that the next-generation data-sharing systems need to manage not only heterogeneity but also conflicting and false 
- information  coming from various channels, in different languages, formats, and at different paces. Truth discovery systems  have to be designed to help institutions and citizens with providing rigorous, scientific explanations and reports 
+ We argue that the next-generation data-sharing systems need to manage not only heterogeneity but also unreliable 
+ information from various channels, in different languages, formats, and at different paces. Truth discovery systems  have to be designed to help institutions and citizens with providing rigorous, scientific explanations and reports 
  of their findings along with collected evidences.
  Although some preliminary work have addressed parts of this vision, e.g., \cite{DongS2013,DongBHS10a,LiDLMS12}, we argue that there is a need for a more fundamental paradigm shift in data management  to address the truth discovery problem natively. Formally, this goes beyond adding layers and extensions to data fusion heuristics, data provenance or truth discovery models. Technically, the challenges are not only to  design techniques and prototypes of truth discovery systems but also to democratize operational tools for Web scale {\it information  triage} and veracity verification.
   
