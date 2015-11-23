@@ -18,6 +18,7 @@
 \usepackage[pdfborder={0 0 0}]{hyperref}
 \usepackage[ruled]{algorithm2e}
 \usepackage{csquotes}
+\usepackage{paralist}
 \renewcommand{\algorithmcfname}{ALGORITHM}
 \SetAlFnt{\small}
 \SetAlCapFnt{\small}
@@ -106,29 +107,43 @@ the truth discovery problem in real-world over-information scenarios. We also br
 our vision of a preliminary solution.
 
 \paragraph*{Timely and Actionable Truth Discovery} 
-
-Discovering truth from past events and historical data is certainly useful and results may be validated 
-more easily since ground truth and full data sets already exist before the time of analysis. However, from 
-a humanitarian perspective, actionable truth discovery from quasi real-time data could save lives.
-In this context, information extraction and triage as well as truth discovery computation need to be streamlined, 
-prioritized,  and adjusted to the degree of emergency and incompleteness of available information. This important 
-usage-driven aspect goes beyond consistency checking and constraints. 
-%For example, information such as ``The Chrysler building had an explosion and it affected the Empire State building''
-%can be automatically verified: these buildings are about 2~km away and hence this information can not be true.
-%However, more often what journalists/emergency responders need, is to verify information such as ``The Chrysler building
-%had an explosion'' when there are very few primary sources claiming it initially. 
+Discovering truth over past events and historical data is certainty useful as one has access to 
+a ground truth and full data sets for estimating the precision of the results.
+From a humanitarian perspective, actionable truth discovery 
+from quasi real-time data could save lives, and thereby information extraction and triage as well
+as truth discovery computation need to be streamlined, prioritized,  and adjusted to the degree of emergency 
+and incompleteness of available information. This important usage-driven aspect goes beyond consistency checking and constraints. 
 Timely and actionable truth discovery requires the prioritization and adjustment of information checking tasks specifically
-to the communities that will use the data.
+to the communities that will consume them.
+
+%Discovering truth from past events and historical data is certainly useful and results may be validated 
+%more easily since ground truth and full data sets already exist before the time of analysis. 
+
 %
 
 \paragraph*{Data Alignment Across Languages, Formats, and Channels} 
 
 
-Agility of a truth discovery system is of utmost importance both at the technical, structural, and semantic levels. Agility is defined as the ability of the system to efficiently extract and map information: {\it i)} from various languages, {\it ii)} in various formats and data structures, and {\it iii)} supported by various media and technologies. Traditional information extraction pipelines  require several analysis stages ranging from text preprocessing %(e.g., split the input text into sentences, tokenize the sentences, lemmatize the tokens, tag their part-of-speech, etc.)
- to entity resolution and normalization.  
-For each content, once entities, attributes, and relations are recognized and extracted, statements are identified, and sentences are classified (e.g., forecast or not), they have to be linked across multiple contents in different languages and eventually translated into a common language (e.g., English). A number of applications have been deployed\footnote{\scriptsize{For example, Europe Media Monitor's News Explorer (\url{http://emm.newsexplorer.eu}) gathers news, clusters related news stories, and extracts names, locations, general person-person relations, and event types; Open-Calais from Thomson Reuters (\url{http://www.opencalais.com}) extracts a range of entity, relation, and event types from general and business news.}} for information extraction, but most of them have used hand-crafted lists of terms and regular expressions, rather than corpus-trained approaches. They are usually specific to a single channel/application/language and cannot be considered ``agile'' enough for extracting, gathering and 
-aligning information from various languages, formats or channels.  Moreover, each stage of textual content analysis (from preprocessing, entity matching to classification) produces systematic and random errors that need to be considered in truth discovery computation. None of the very few attempts  to couple these applications to truth discovery systems (e.g., \cite{GoasdoueKKLMZ13}) has considered the uncertainty from information extraction and processing affecting the truth discovery results. Tracing and estimating the errors of information extraction, formatting, and linking  is one of the main challenges for automating truth discovery. 
-%These aspects have been somehow disconnected and underexploited in previous research.
+Agility of a truth discovery system is of utmost importance both at the technical, structural, and semantic levels. Agility is 
+defined as the ability of the system to efficiently extract and map information: 
+\begin{inparaenum}[(i)]
+\item from various languages;
+\item various formats and data structures; and
+\item supported by various media and technologies.
+\end{inparaenum}
+Traditional information extraction
+pipelines  require several analysis stages ranging from text preprocessing to entity resolution and normalization.  
+For each content, once entities, attributes, and relations are recognized and extracted, statements are identified, and sentences are
+classified (e.g., forecast or not), they have to be linked across multiple contents in different languages and eventually translated into
+a common language (e.g., English). A number of applications have been deployed (e.g., Europe Media Monitor's News Explorer (\url{http://emm.newsexplorer.eu}) 
+or Open-Calais from Thomson Reuters (\url{http://www.opencalais.com}))  
+for information extraction, but most of them have used hand-crafted lists of terms and regular expressions, rather than corpus-trained approaches. They 
+are usually specific to a single channel/application/language and cannot be considered ``agile'' enough for extracting, gathering and aligning information
+from various languages, formats or channels.  Moreover, each stage of textual content analysis (from preprocessing, entity matching to classification) produces
+systematic and random errors that need to be considered in truth discovery computation. None of the very few attempts  to couple these applications to truth discovery
+systems (e.g., \cite{GoasdoueKKLMZ13}) has considered the uncertainty from information extraction and processing affecting the truth discovery results. Tracing and estimating 
+the errors of information extraction, formatting, and linking  is one of the main challenges for automating truth discovery. 
+
 
 
 \paragraph*{Incomplete and Biased Observations}  
