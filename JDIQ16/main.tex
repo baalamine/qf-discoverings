@@ -68,29 +68,28 @@ have to be \textquote{aligned}, compared  and check to estimate their veracity. 
 the Web has significant practical importance: online rumor propagation~\cite{rumor-icdm2013}, mis- or disinformation
 can have tremendous impacts on our society, economy, politics, and homeland security\footnote{\scriptsize{\url{http://www.dtic.mil/dtic/tr/fulltext/u2/a552461.pdf}}}. 
 Online fact-checkers (e.g., FactCheck\footnote{\scriptsize{\url{www.factcheck.org/}}}) and humanitarian initiatives~\cite{ImranECDM13}
-(e.g., AIDR\footnote{\scriptsize{\url{http://aidr.qcri.org/}}}) have rapidly appeared as unavoidable for classifying and verifying 
-(semi-automatically) online information. Beyond social media and computational journalism, the truth discovery problem, intellectually 
-and technically interesting enough, has been also extensively studied in both the artificial intelligence and the database communities,
+(e.g., AIDR\footnote{\scriptsize{\url{http://aidr.qcri.org/}}}) have rapidly emerged as unavoidable for classifying and verifying 
+(semi-automatically) online information. Beyond social media and computational journalism, the truth discovery issue, intellectually 
+and technically interesting enough, has been also widely studied in both the artificial intelligence and the database communities,
 sometimes under the names of  \textquote{fact-checking}~\cite{GoasdoueKKLMZ13}, \textquote{information trustworthiness}~\cite{Thirunarayan2014182},
 \textquote{information credibility}~\cite{PasternackR13} or \textquote{information corroboration}~\cite{GallandAMS10}. 
 
 
 
 Given a set of assertions from multiple sources, the ultimate goal of truth discovery is to label the claimed
-information items as true or false and compute the reliability of their sources without any {\it a priori} knowledge
-about the truthfulness of the individual assertions and sources. Relaxing this assumption has led to one major line of
-previous work which proposed and extended fact-finding 
-models by incorporating prior knowledge either about the claimed assertions \cite{PasternackR13} or about the source 
-reputation via trust assessment \cite{BalakrishnanK11}. Another line of research aimed at iteratively computing 
-and updating the trustworthiness of a source as a function of the belief in its claims, and then the belief score of each 
-claim as a function of the trustworthiness of the 
-sources asserting it \cite{YinHY08}. In this line, several probabilistic models have been proposed to incorporate various aspects beyond source 
-trustworthiness and claim belief, namely: the dependence between sources \cite{DongBHS10a}, the temporal 
-dimension in discovering evolving truth  \cite{DongBS09a}, the difficulty of ascertaining the veracity of certain claims \cite{GallandAMS10}, 
-the management of complex  data structures such as collections of entities in a claim \cite{ZhaoRGH12} or linked data \cite{GoasdoueKKLMZ13}.
- However, current approaches are still limited in scope and also suffer from substantial drawbacks: limiting  
- assumptions in the truth discovery models, opacity, complex model parametrization, and lack of scalability  make them difficult to adapt or apply to the 
- wide diversity of information available on the Web and for realistic scenarios where knowing the truth as soon as possible is critical. 
+data items as true or false and compute sources' reliability with no \emph{a-priori} knowledge of the 
+truthfulness of the input arguments. One major line of previous work relaxed such a assumption and extended 
+fact-finding models with prior knowledge either about the claimed assertions~\cite{PasternackR13} or about the source 
+reputation via trust assessment~\cite{BalakrishnanK11}. Another line of research aimed at iteratively computing 
+and updating the trustworthiness of a source as a function of the belief in its claims, and then the belief score 
+of each claim as a function of the trustworthiness its sources~\cite{YinHY08}. In this line, several probabilistic
+models have been proposed to incorporate various aspects beyond source trustworthiness and claim belief, namely: the 
+dependence between sources \cite{DongBHS10a}, the temporal dimension in discovering evolving truth  \cite{DongBS09a}, 
+the difficulty of ascertaining the veracity of certain claims \cite{GallandAMS10}, the management of complex  data structures
+such as collections of entities in a claim \cite{ZhaoRGH12} or linked data \cite{GoasdoueKKLMZ13}.
+However, current approaches are still limited in scope and also suffer from substantial drawbacks: limiting  
+assumptions in the truth discovery models, opacity, complex model parametrization, and lack of scalability  make them difficult to adapt or apply to the 
+wide diversity of information available on the Web and for realistic scenarios where knowing the truth as soon as possible is critical. 
 
 
 
