@@ -82,9 +82,9 @@ truthfulness of the assertions and the sources. One major line of previous work 
 fact-finding models with prior knowledge either about the assertions~\cite{PasternackR13} or about the source 
 reputation via trust assessment~\cite{BalakrishnanK11}. Another line of research aimed at iteratively computing 
 and updating the trustworthiness of a source as a function of the belief in its claims, and then the belief score 
-of each claim as a function of the trustworthiness its sources~\cite{YinHY08}, several probabilistic models carefully 
-incorporating other domain specific aspects such as source dependence~\cite{DongBHS10a}, temporal dimension in evolving 
-truth~\cite{DongBS09a}, hardness of certain claims~\cite{GallandAMS10},  or complex data structures~\cite{ZhaoRGH12,GoasdoueKKLMZ13}.
+of each claim as a function of the trustworthiness its sources~\cite{YinHY08} while sometimes carefully incorporating 
+some domain-specific aspects, e.g., source dependence~\cite{DongBHS10a}, evolving truth~\cite{DongBS09a}, hardness of 
+certain claims~\cite{GallandAMS10}, or complex data structures~\cite{ZhaoRGH12,GoasdoueKKLMZ13}.
 However, current approaches are still limited in scope and also suffer from substantial drawbacks; restrictive 
 assumptions in the models, opacity, complex model parametrization, and lack of scalability make them hard to use 
 to the wide diversity of Web information and for realistic scenarios where knowing the truth as soon as possible 
@@ -95,25 +95,18 @@ is critical.
 
  We argue that the next-generation data-sharing systems need to manage not only heterogeneity but also conflicting and false 
  information  coming from various channels, in different languages, formats, and at different paces. Truth discovery systems  have to be designed to help institutions and citizens with providing rigorous, scientific explanations and reports 
- of their findings along with collected evidences. % (that can have a potential value in court similarly to data forensics outcomes). 
-  Although some preliminary work have addressed parts of this vision, e.g., \cite{DongS2013,DongBHS10a,LiDLMS12}, we argue that there is a need for a more fundamental paradigm shift in data management  to address the truth discovery problem natively. Formally, this goes beyond adding layers and extensions to data fusion heuristics, data provenance or truth discovery models. Technically, the challenges are not only to  design techniques and prototypes of truth discovery systems but also to democratize operational tools for Web scale {\it information  triage} and veracity verification.
+ of their findings along with collected evidences.
+ Although some preliminary work have addressed parts of this vision, e.g., \cite{DongS2013,DongBHS10a,LiDLMS12}, we argue that there is a need for a more fundamental paradigm shift in data management  to address the truth discovery problem natively. Formally, this goes beyond adding layers and extensions to data fusion heuristics, data provenance or truth discovery models. Technically, the challenges are not only to  design techniques and prototypes of truth discovery systems but also to democratize operational tools for Web scale {\it information  triage} and veracity verification.
   
   
   
-  
-%In this paper, we present a set of research chaleenges that together
-%aim to effectively address the problem of truth discovery in real-world over-information scenarios. 
-%We describe the challenges we face, propose our vision of a preliminary solution, and lay down a research agenda that goes beyond the Database community.
-
 
  
 %\vspace{-0.1cm}
 % ****************** ARCHITECTURE ****************************************
 \section{Actionable Truth Discovery Challenges}~\label{sect:challenges-solutions}
-%\vspace{-0.2cm}
-%To achieve this vision, our goal is to design a truth discovery system to extract information from multi-channel sources in different languages.
-We present in this section a set of actionable open problems related to truth discovery. We start by an illustrative
-example showing the need to deal with in priority these questions.
+
+\iffalse
 \paragraph*{ An Illustrative Example}
 
 
@@ -135,7 +128,7 @@ and provide timely response to crisis situations goes far beyond data integrity 
 
  While the challenges identified hereafter  are by no means exhaustive, they are certainly important issues to address in priority for 
  designing a suitable truth discovery system.
-
+\fi
 
 \paragraph*{Timely and Actionable Truth Discovery} 
 
