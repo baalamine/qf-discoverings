@@ -126,19 +126,12 @@ to efficiently extract and map information:
 \item various formats and data structures; and
 \item supported by various media and technologies.
 \end{inparaenum}
-%Traditional information extraction
-%pipelines  require several analysis stages ranging from text preprocessing to entity resolution and normalization.  
-%For each content, once entities, attributes, and relations are recognized and extracted, statements are identified, and sentences are
-%classified (e.g., forecast or not), they have to be linked across multiple contents in different languages and eventually translated into
-%a common language (e.g., English). 
 Actual information extraction applications (e.g., Open-Calais -- \url{http://www.opencalais.com})  
-%(e.g., Europe Media Monitor's News Explorer -- \url{http://emm.newsexplorer.eu}) 
-mostly use hand-crafted terms and are specific to a single channel/application/language to be considered as ``agile''.
+are moslty specific to a single channel/application/language and cannot be considered as ``agile''.
 Moreover, each step of textual content analysis (from preprocessing, entity matching to classification) produces
-systematic and random errors that need to be considered in truth discovery computation. None of the very few attempts 
-to couple these applications to truth discovery systems (e.g., \cite{GoasdoueKKLMZ13}) has considered the uncertainty 
-from information extraction and processing affecting the truth discovery results. Tracing and estimating  the errors 
-of information extraction, formatting, and linking  is one of the main challenges for automating truth discovery. 
+systematic and random errors that need to be considered in truth discovery computation  in a deeper manner than the
+very few attempts like \cite{GoasdoueKKLMZ13}). Tracing and estimating  the errors of information extraction, formatting, 
+and linking  is one of the main challenges for automating truth discovery. 
 
 
 
