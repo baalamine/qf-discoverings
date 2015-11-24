@@ -82,8 +82,9 @@ major line of previous work, which relaxes this assumption, extended fact-findin
 or about the source reputation via trust assessment~\cite{BalakrishnanK11}. Another line of research aimed at iteratively computing and updating the trustworthiness
 of a source as a belief function in its claims, and then the belief score of each claim as a function of the trustworthiness its sources~\cite{YinHY08}, with 
 probabilistic models which incorporate domain-specific aspects like source dependence~\cite{DongBHS10a}, evolving truth~\cite{DongBS09a}, hardness of certain 
-claims~\cite{GallandAMS10}, or complex data structures~\cite{ZhaoRGH12,GoasdoueKKLMZ13}. However, current models suffer from restrictive assumptions, opacity, complex model
-settings, and lack of scalability, limiting their usability to the wide diversity of Web information and realistic scenarios where knowing the truth as soon as possible 
+claims~\cite{GallandAMS10}, or complex data structures~\cite{ZhaoRGH12,GoasdoueKKLMZ13}. However, current models suffer from various drawbacks that 
+%restrictive assumptions, opacity, complex model settings, and lack of scalability, 
+limit their usability to the wide diversity of Web information and realistic scenarios where knowing the truth as soon as possible 
 is critical. 
  We argue that the next-generation data-sharing systems need to manage not only heterogeneity but also unreliable 
  information from various channels, in different languages, formats, and at different paces. Truth discovery systems 
@@ -126,7 +127,7 @@ to efficiently extract and map information:
 \item supported by various media and technologies.
 \end{inparaenum}
 For instance, actual information extraction applications (e.g., Open-Calais -- \url{http://www.opencalais.com})  
-are often specific to a single channel/application/language and cannot be considered as ``agile''. Moreover,
+are often specific to a single channel/application/language and cannot be considered as \textquote{agile}. Moreover,
 each step of textual content analysis produces systematic and random errors that 
 require to be considered in truth discovery unlike previous attempts like~\cite{GoasdoueKKLMZ13}). 
 Tracing and estimating  the errors of data extraction, formatting, and linking
@@ -134,23 +135,29 @@ is one of the main challenges for automating truth discovery.
 %
 
 \paragraph*{Incomplete and Biased Observations}  
-
-Observation data may be incomplete and biased for various reasons: 
-some information sources may not give all their data for security or privacy concerns; 
-some sources have format limitations; when the sources do not explicitly provide temporal 
-or spatial information, the time and location values are missing and need to be inferred.
-Typically, the Open World assumption holds since  not all the real-world entities/events 
-may have been observed and reported by the sources. Online sources have  various levels 
+The Open World Assumption often holds in truth discovery
+because observed data sources may be incomplete and biased for various 
+reasons, e.g., security and privacy concerns, format limitations, and values 
+unspecified  but inferred.
+%Observation data may be incomplete and biased for various reasons: 
+%some information sources may not give all their data for security or privacy concerns; 
+%some sources have format limitations; when the sources do not explicitly provide temporal 
+%or spatial information, the time and location values are missing and need to be inferred.
+%Typically, the Open World assumption holds since  not all the real-world entities/events 
+%may have been observed and reported by the sources.
+Online sources have  various levels 
 of {\it a priori} knowledge on how the observation data have been collected. In many cases,
 opportunistic (or volunteered) data are {\it biased by  observation effort} and the underlying
 observation method is unknown. It is thus important to explore how one can retrieve and quantify
 the observation effort from modeling the data provider's/observers' distribution. Data  can be biased
-in many other ways. For example, data can be affected by a {\it selection bias} that is the extent to
-which a piece of information is claimed by a category of individuals who are likely to have access to 
-and choose to use a certain type of media or channel\footnote{\scriptsize{e.g., social media users are
-usually younger, technologically savvy, motivated individuals versus individuals who are older, more remote,
-lacking access or ability or motivation to use technology and whose stories/observations are likely missing 
-from this channel. }}. Data may also suffer from the {\it observer's bias} (related to the individual's ability
+in many other ways. 
+%For example, data can be affected by a {\it selection bias} that is the extent to
+%which a piece of information is claimed by a category of individuals who are likely to have access to 
+%and choose to use a certain type of media or channel\footnote{\scriptsize{e.g., social media users are
+%usually younger, technologically savvy, motivated individuals versus individuals who are older, more remote,
+%lacking access or ability or motivation to use technology and whose stories/observations are likely missing 
+%from this channel. }}. 
+Data may also suffer from the {\it observer's bias} (related to the individual's ability
 to accurately remember and describe events) and {\it disclosure bias} (related to witness's incentive  (or disincentive) 
 to  include certain events or details). One challenge is to estimate the incompleteness and biases and take them into account
 in the truth discovery computation.
