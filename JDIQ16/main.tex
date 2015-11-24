@@ -135,48 +135,31 @@ is one of the main challenges for automating truth discovery.
 %
 
 \paragraph*{Incomplete and Biased Observations}  
-The Open World Assumption often holds in truth discovery contexts
-because observation data may be incomplete and biased for various 
-reasons, e.g., security and privacy concerns, format limitations, and values 
-unspecified  but inferred.
-%Observation data may be incomplete and biased for various reasons: 
-%some information sources may not give all their data for security or privacy concerns; 
-%some sources have format limitations; when the sources do not explicitly provide temporal 
-%or spatial information, the time and location values are missing and need to be inferred.
-%Typically, the Open World assumption holds since  not all the real-world entities/events 
-%may have been observed and reported by the sources.
-Modeling the data provider's/observer's is crucial since online sources have  various levels of 
-{\it a priori} knowledge about the observation data 
+Observation data may be incomplete and biased for various 
+reasons, e.g., security and privacy concerns, format limitations, and 
+(unspecified) inferred values, leading to a truth discovery context where Open World
+Assumption must hold. Modeling the data provider's/observer's is crucial since online 
+sources have  various levels of {\it a priori} knowledge about the observation data 
 collection technique, opportunistic data are {\it biased by  observation effort}, and the underlying
 observation method is unknown. In addition, information may also suffer from \emph{observer's bias} and
 \emph{disclosure bias}. One challenge is thus to estimate the incompleteness and biases and take them into
 account in the truth discovery computation.
-%It is thus important to explore how one can retrieve and quantify
-%the observation effort from modeling the data provider's/observers' distribution. Data  can be biased
-%in many other ways. 
-%For example, data can be affected by a {\it selection bias} that is the extent to
-%which a piece of information is claimed by a category of individuals who are likely to have access to 
-%and choose to use a certain type of media or channel\footnote{\scriptsize{e.g., social media users are
-%usually younger, technologically savvy, motivated individuals versus individuals who are older, more remote,
-%lacking access or ability or motivation to use technology and whose stories/observations are likely missing 
-%from this channel. }}. 
-%Data may also suffer from the {\it observer's bias} (related to the individual's ability
-%to accurately remember and describe events) and {\it disclosure bias} (related to witness's incentive  (or disincentive) 
-%to  include certain events or details). 
 
 \paragraph*{Decontextualization and Distortion}  
-
-When a piece of information  is extracted from its original 
+When a piece of information is extracted from its original 
 content and channel, it may lose its context along with important 
-``semantic markers'' to understand {\it when, where, how, why,} and
-{\it for which purpose/audience} this particular piece of information 
-has been produced, what it is supposed to mean in the absolute sense and
-also relatively to its particular context and  information channel (e.g., a tweet in a thread).
-Information without context can be easily distorted and misinterpreted. For example, ascertaining
-the veracity of a controversial information that has been re-tweeted many times in different contexts
-by various users with different emotions and motivations is difficult without the description of these
-contexts. Moreover, the pace has to be considered when information  updates from Twitter, Facebook, and 
-Wikipedia have to be ``aligned'' with considering the source granularity ({\it i.e.}, a source can be an
+\textquote{semantic markers} which explain {\it when, where, how, why,} and
+{\it for which purpose/audience} it has been produced.
+%, what it is supposed 
+%to mean in the absolute sense and
+%also relatively to its particular context and  information channel (e.g., a tweet in a thread).
+Information without context can be easily distorted and misinterpreted. 
+%For example, ascertaining
+%the veracity of a controversial information that has been re-tweeted many times in different contexts
+%by various users with different emotions and motivations is difficult without the description of these
+%contexts. 
+Moreover, the pace has to be considered when information  updates from Twitter, Facebook, and 
+Wikipedia have to be \emph{aligned} with considering the source granularity ({\it i.e.}, a source can be an
 individual, an organization, a company, a government, etc.). Much research work has studied the formalization 
 of contexts and rich context representations have been proposed \cite{eps270829}. However, current information 
 extraction  methods constrain the context representation and can usually not handle a wide, unpredictable 
