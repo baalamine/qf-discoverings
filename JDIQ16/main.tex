@@ -31,7 +31,7 @@
 \acmNumber{6}
 \acmArticle{6}
 \acmYear{2015}
-\acmMonth{1}
+\acmMonth{11}
 
 % Document starts
 \begin{document}
@@ -71,23 +71,23 @@ have to be \textquote{aligned}, compared  and check to estimate their veracity. 
 the Web has significant practical importance: online rumor propagation~\cite{rumor-icdm2013}, mis- or disinformation
 can have tremendous impacts on our society, economy, politics, and homeland security. Online fact-checkers (e.g., FactCheck -- \url{http://www.factcheck.org/}) 
 and humanitarian initiatives~\cite{ImranECDM13} have rapidly appeared as unavoidable for 
-classifying and verifying (semi-automatically) online information. Beyond social media and computational journalism, the truth
-discovery problem, intellectually and technically exciting enough, has been also widely studied in both the artificial intelligence
-and the database communities, sometimes under the names of  \textquote{fact-checking}~\cite{GoasdoueKKLMZ13}, \textquote{information 
-trustworthiness}~\cite{Thirunarayan2014182}, \textquote{information credibility}~\cite{PasternackR13}, or \textquote{information corroboration}~\cite{GallandAMS10}. 
+classifying and verifying (semi-automatically) online information. Beyond social media and computational journalism, 
+the truth discovery problem has been also largely studied in both the artificial intelligence and the database communities, sometimes under the 
+names of  \textquote{fact-checking}~\cite{GoasdoueKKLMZ13}, \textquote{information trustworthiness}~\cite{Thirunarayan2014182},
+\textquote{information credibility}~\cite{PasternackR13}, or \textquote{information corroboration}~\cite{GallandAMS10}. 
 
 
 
-Given a set of assertions from multiple sources, the ultimate goal of truth discovery is to correctly predict the truth label of the claimed
-data items and compute sources' reliability with no \emph{a-priori} knowledge about the truthfulness of the assertions and the sources. One 
+Given a set of assertions from multiple sources, the ultimate goal of truth discovery is to predict the truth label of each claimed
+data item and compute sources' reliability with no \emph{a priori} knowledge about the truthfulness of the assertions and the sources. One 
 major line of previous work, which relaxes this assumption, extended fact-finding models with prior knowledge either about the assertions~\cite{PasternackR13} 
-or about the source reputation via trust assessment~\cite{BalakrishnanK11}. Another line of research aimed at iteratively computing and updating the trustworthiness
-of a source as a belief function in its claims, and then the belief score of each claim as a function of the trustworthiness its sources~\cite{YinHY08}, with 
+or about the source reputation via trust assessment~\cite{BalakrishnanK11}. Another line of research aimed at iteratively computing and updating the source's
+trustworthiness as a belief function in its claims, and then the belief score of each claim as a function of its sources' trustworthiness~\cite{YinHY08}, with 
 probabilistic models which incorporate domain-specific aspects like source dependence~\cite{DongBHS10a}, evolving truth~\cite{DongBS09a}, hardness of certain 
-claims~\cite{GallandAMS10}, complex data structures~\cite{ZhaoRGH12,GoasdoueKKLMZ13}, or multiple source's expertise. However, current models suffer from various 
-drawbacks, e.g., strong assumptions about claims and sources, that 
+claims~\cite{GallandAMS10}, complex data structures~\cite{ZhaoRGH12,GoasdoueKKLMZ13}, or multiple source's expertise~\cite{Ma15}. However, current models suffer 
+from various limitations, e.g., strong assumptions about claims and sources, that restrict
 %restrictive assumptions, opacity, complex model settings, and lack of scalability, 
-limit their usability to the wide diversity of Web information and realistic scenarios where knowing the truth as soon as possible 
+their usability to the wide diversity of Web information and realistic scenarios where knowing the truth as soon as possible 
 is critical. 
  We argue that the next-generation data-sharing systems need to manage not only heterogeneity but also unreliable 
  information from various channels, in different languages, formats, and at different paces. Truth discovery systems 
