@@ -14,7 +14,7 @@
 \documentclass[prodmode,acmtecs]{acmsmall} % Aptara syntax
 
 % Package to generate and customize Algorithm as per ACM style
-\usepackage{mathptm}
+%\usepackage{mathptm}
 \usepackage[pdfborder={0 0 0}]{hyperref}
 \usepackage[ruled]{algorithm2e}
 \usepackage{csquotes}
@@ -82,15 +82,15 @@ major line of previous work, which relaxes this assumption, extended fact-findin
 or about the source reputation via trust assessment~\cite{BalakrishnanK11}. Another line of research aimed at iteratively computing and updating the trustworthiness
 of a source as a belief function in its claims, and then the belief score of each claim as a function of the trustworthiness its sources~\cite{YinHY08}, with 
 probabilistic models which incorporate domain-specific aspects like source dependence~\cite{DongBHS10a}, evolving truth~\cite{DongBS09a}, hardness of certain 
-claims~\cite{GallandAMS10}, or complex data structures~\cite{ZhaoRGH12,GoasdoueKKLMZ13}. However, current models suffer from various drawbacks, e.g., strong assumptions
-about claims and sources, that 
+claims~\cite{GallandAMS10}, complex data structures~\cite{ZhaoRGH12,GoasdoueKKLMZ13}, or multiple source's expertise. However, current models suffer from various 
+drawbacks, e.g., strong assumptions about claims and sources, that 
 %restrictive assumptions, opacity, complex model settings, and lack of scalability, 
 limit their usability to the wide diversity of Web information and realistic scenarios where knowing the truth as soon as possible 
 is critical. 
  We argue that the next-generation data-sharing systems need to manage not only heterogeneity but also unreliable 
  information from various channels, in different languages, formats, and at different paces. Truth discovery systems 
  have to be set up to help institutions and citizens by providing rigorous, scientific explanations and reports 
- of their findings and collected evidences. Although some initial work towards such a vision,
+ of their findings and collected evidences. Although some initial effort towards such a vision,
  e.g., \cite{DongS2013,DongBHS10a,LiDLMS12}, there is still a need for a more fundamental paradigm shift in data
  management to address the truth discovery problem natively. Formally, this goes beyond adding layers and extensions to
  data fusion heuristics, data provenance or truth discovery models. Technically, the challenges are not only to  design 
@@ -109,8 +109,8 @@ the truth discovery problem in real-world over-information scenarios. We also br
 our vision of a preliminary solution.
 
 \paragraph*{Timely and Actionable Truth Discovery} 
-Discovering truth from past events and historical data is certainty useful, but
-from a humanitarian perspective, actionable truth discovery from quasi real-time data 
+Accessing past events and historical data in truth discovery is certainty useful, however,
+from a humanitarian perspective, discovering truth from quasi real-time data 
 could save lives. As a consequence, information extraction and triage as well as actionable
 truth discovery computation need to be streamlined, prioritized,  and adjusted to the level 
 of emergency and incompleteness of available information regarding the communities that will 
@@ -161,11 +161,13 @@ context representation and can usually not handle a wide, unpredictable range of
 all meta-information about the context and sources' 
 characteristics have to be encoded as evidences and analyzed for truth discovery computation.
 
-Beyond challenges above, \emph{cross-modality} and \emph{dynamicity} in truth discovery are
-also open problems. Cross-modality is required because of the multiple different facets, e.g.,
-textual, pictures, and movies, of information. Dynamicity is due by the fact recieved information
-could be subjet to multiple transformations through the transmission media or intermediate applications
-during its life cycle.
+Beyond challenges detailled above, \emph{cross-modality} and \emph{dynamicity} in truth discovery
+are also open problems. Cross-modality is needed because of the multiple possible facets,
+e.g., textual, pictures, and movies, of the same information that need to be reconcilied.
+Dynamicity is due by the fact recieved information could be subjet to multiple transformations
+through the transmission media or intermediate applications during its life cycle.  
+ 
+
 
 % Bibliography
 \bibliographystyle{ACM-Reference-Format-Journals}
