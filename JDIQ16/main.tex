@@ -19,6 +19,7 @@
 \usepackage[ruled]{algorithm2e}
 \usepackage{csquotes}
 \usepackage{paralist}
+\usepackage{needspace}
 \renewcommand{\algorithmcfname}{ALGORITHM}
 \SetAlFnt{\small}
 \SetAlCapFnt{\small}
@@ -31,6 +32,15 @@
 \acmArticle{6}
 \acmYear{2015}
 \acmMonth{11}
+
+% Space crunch
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+                                       {2ex \@plus1ex \@minus .2ex}%
+                                       {-1em}%
+                                      {\sffamily\normalsize\bfseries}}                                      
+\makeatother
+
 
 % Document starts
 \begin{document}
@@ -114,7 +124,7 @@ truth discovery computation need to be streamlined, prioritized,  and adjusted t
 of emergency and incompleteness of available information regarding the communities that will 
 use it. This important usage-driven aspect goes beyond consistency checking and constraints.
 %
-
+\vspace*{-0.23cm}
 \paragraph*{Data Alignment Across Languages, Formats, and Channels} 
 Agility of a truth discovery system is of utmost importance both at 
 the technical, structural, and semantic levels. 
@@ -125,25 +135,25 @@ to efficiently extract and map information:
 \item various formats and data structures; and
 \item supported by various media and technologies.
 \end{inparaenum}
-For instance, actual information extraction applications (e.g., Open-Calais -- \url{http://www.opencalais.com})  
+For instance, existing information extractors (e.g., Open-Calais -- \url{http://www.opencalais.com})  
 are often specific to a single channel/application/language and cannot be considered as \textquote{agile}. Moreover,
-each step of textual content analysis produces systematic and random errors that 
+each step of content analysis produces systematic and random errors that 
 require to be considered in truth discovery unlike previous attempts like~\cite{GoasdoueKKLMZ13}). 
-Tracing and estimating  the errors of data extraction, formatting, and linking
-is one of the main challenges for automating truth discovery. 
+Tracing and estimating  these errors is one of the main challenges for automating truth discovery. 
 %
-
+\vspace*{-0.23cm}
 \paragraph*{Incomplete and Biased Observations}  
-Observation data may be incomplete and biased for various 
+Observation may be incomplete and biased for various 
 reasons, e.g., security and privacy concerns, format limitations, and 
-(unspecified) inferred values, leading to a truth discovery context where Open World
+(unspecified) inferred values, yielding a truth discovery context where Open World
 Assumption must hold. Modeling the data provider's/observer's is crucial since online 
 sources have  various levels of {\it a priori} knowledge about the observation data 
 collection technique, opportunistic data are {\it biased by  observation effort}, and the underlying
 observation method is unknown. In addition, information may also suffer from \emph{observer's bias} and
 \emph{disclosure bias}. One challenge is thus to estimate the incompleteness and biases and take them into
 account in the truth discovery computation.
-
+%
+\vspace*{-0.23cm}
 \paragraph*{Decontextualization and Distortion}  
 Information without context can be easily distorted and misinterpreted.
 Indeed, when a piece of information is extracted from its original 
@@ -151,7 +161,7 @@ content and channel, it may lose its context along with important
 \textquote{semantic markers} that explain \emph{when, where, how, why,} and
 \emph{for which purpose/audience} it has been produced.
 Moreover, the pace has to be taken into account when information updates from 
-various sources have to be \emph{aligned} with considering the source granularity 
+various sources have to be \emph{aligned} by considering the source granularity 
 (e.g., an individual or an organization). 
 Despites much research effort~\cite{eps270829} in modeling contexts, current information
 extraction techniques constraint the 
@@ -159,29 +169,21 @@ context representation and can usually not handle a wide, unpredictable range of
 all meta-information about the context and sources' 
 characteristics have to be encoded as evidences and analyzed for truth discovery computation.
 
-\iffalse
-Besides challenges given above, \emph{cross-modal} and \emph{dynamic} truth discovery
-are also in their infancy. Cross-modality is needed because of the multiple possible facets,
-e.g., textual, pictures, and movies, of the same information that need to be reconcilied.
-Dynamicity is due by the fact recieved information could be subjet to multiple transformations
-through the transmission media or intermediate applications during its life cycle. We believe that directions
-for tacking these appealing truth discovery problems could be 
-\fi
 
-To overcome truth discovery challenges above, we believe that one needs an integrative solution that
+To overcome aformentioned truth discovery challenges, we believe that one needs an integrative solution that
 \begin{inparaenum}[(i)]
 \item defines, in a principled way, a concrete and unified semantics of truth discovery systems, e.g., using
 modal logics via axioms and canonical 
 \emph{Kripke} structures~\cite{GorankoOtto06};
-\item supports continuous inferrence and belief revision from new evidences, contextual data, and knowledge, inspired by recent development
-in continuous cleaning~\cite{VCSM14};
+\item supports continuous inferrence and belief revision from new evidences, contextual data, and knowledge, 
+similarly to recent development in continuous cleaning~\cite{VCSM14};
 \item and finally monitors and reports uncertainty generated by a given truth discovery process.
 \end{inparaenum}
 
 
 
 
-% Bibliography
+% Bibliography 
 \bibliographystyle{ACM-Reference-Format-Journals}
 \bibliography{references}
                              % Sample .bib file with references that match those in
