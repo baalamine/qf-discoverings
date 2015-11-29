@@ -39,11 +39,11 @@
       {[}{{{\color{delim}{[}}}}{1}
       {]}{{{\color{delim}{]}}}}{1},
 }
-
+\newcommand{\lamine}[1]{\textcolor{blue}{#1}}
 %opening
 \title{\mbox{DAFNA -- Data Forensics with Analytics}}
 \subtitle{API DOCUMENTATION}
-\author{Mouhamadou Lamine Ba\\ Laure BERTI-EQUILLE}
+%\author{Mouhamadou Lamine Ba\\ Laure BERTI-EQUILLE}
 \date{\begin{tabular}{ll}Creation date:&\today\end{tabular}}
 
 \begin{document}
@@ -77,7 +77,7 @@ The 3rd party client will receive from DAFNA developpers the following access cr
  \item Authentication token: API user's Access Key
  \item Encrypted password: User's Secret Key
 \end{itemize}
-
+\lamine{Is the description of the authentication phase correct?}
 % Request format
 \section{Request Format}
 % Scheme
@@ -86,23 +86,25 @@ Requests to the API endpoints are done using plain HTTP. While HTTPS requests ar
 supported by the API, it should do in the future to guarantee a more secure transmission of
 the Access Token. However, supporting HTTPS might yield requests/responses little bit slower.
 
+\lamine{Is it right that https is not yet supported by the API?}
 % Methods
 \subsection{Methods}
 The current version of DAFNA API supports three HTTP Requests, i.e., \textbf{GET}, \textbf{POST}, and \textbf{DELETE}, 
 with respect to the operations, for instance creation, listing, or removal of datasets, the 3rd party applications would
 like to perform on the behalf on the client.
 % Base Url
-\subsection{Base URL}
+\subsection{Base URLs}
+\lamine{What's the main difference between the two base URLs? In which scenario, each of the two should be used? Production or development?}
 \begin{itemize}
  \item \href{http://dafna.qrci.org/}{http://dafna.qrci.org/}
- %\item \href{http://localhost:4000/}{http://localhost:4000/}
+ \item \href{http://localhost:4000/}{http://localhost:4000/}
 \end{itemize}
-All the endpoint provided by the API are appended to the base URL.
+All the endpoint provided by the API are appended to the base URLs.
 To respectively create and list the datasets, one must use the following URLs with some parameters
 as we will see in the next. 
 \begin{description}
 \item GET \href{http://dafna.qcri.org/datasets/}{http://dafna.qcri.org/datasets/} \\
- \item POST \href{http://dafna.qcri.org/datasets/}{http://dafna.qcri.org/datasets/}
+ \item POST \href{http://localhost:4000/datasets/}{http://localhost:4000/datasets/}
 \end{description}
 
 % Access Token Exchange
@@ -115,7 +117,7 @@ Normally, it is a unique token that identifies the client and the user on which
 requests are to be made on behalf of. Continuing with the example above, the complete
 URLs should be (using query string): 
 \begin{itemize}
- \item POST \href{http://dafna.qcri.org/datasets?user\_token=some\_string\_here}{http://dafna.qcri.org/datasets?user\_token=some\_string\_here} \\
+ \item POST \href{http://localhost:4000/datasets?user\_token=some\_string\_here}{http://dafna.qcri.org/datasets?user\_token=some\_string\_here} \\
   \item GET \href{http://dafna.qcri.org/datasets?user\_token=some\_string\_here}{http://dafna.qcri.org/datasets?user\_token=some\_string\_here} 
 \end{itemize}
 
@@ -128,9 +130,9 @@ be a well-formed JSON object.
 
 \begin{description}
  \item url-encoded form:
- \item POST \href{http://dafna.qcri.org/runsets?checked\_algo=array\_of\_parameters}{http://dafna.qcri.org/runsets?checked\_algo=array\_of\_parameters}
+ \item POST \href{http://localhost:4000/runsets?checked\_algo=array\_of\_parameters}{http://dafna.qcri.org/runsets?checked\_algo=array\_of\_parameters}
  \item json formatting:
- \item POST \href{http://dafna.qcri.org/runsets}{http://dafna.qcri.org/runsets}
+ \item POST \href{http://localhost:4000/runsets}{http://dafna.qcri.org/runsets}
  \item \{checked\_algo: array\_of\_parameters, general\_config: array\_numerical\_values\}
 \end{description}
 
@@ -139,9 +141,9 @@ Note that the method used to pass the parameters of a given request is somehow d
 For instance, if a given 3rd party client uses
 \href{http://curl.haxx.se/}{'Curl'} to issue his requests, the following two syntaxes are both valid.
 \begin{description}
- \item curl -X DELETE http://dafna.qcri.org/runsets/1/ -d ``user\_token=some\_string\_here"\\
+ \item curl -X DELETE http://localhost:4000/runsets/1/ -d ``user\_token=some\_string\_here"\\
  \item and \\
- \item curl -X POST http://dafna.qcri.org/runsets -H ``Content-type: application/json" -d `\{``user\_token": ``some\_string\_here" , ``checked\_algo": \{``Accu": [``0.2", ``0", ``100", ``0.5", ``false", ``true", ``true", ``false"] \}, ``general\_config":[``0.001", ``0.8", ``1", ``0.4"]\}' 
+ \item curl -X POST http://localhost:4000/runsets -H ``Content-type: application/json" -d `\{``user\_token": ``some\_string\_here" , ``checked\_algo": \{``Accu": [``0.2", ``0", ``100", ``0.5", ``false", ``true", ``true", ``false"] \}, ``general\_config":[``0.001", ``0.8", ``1", ``0.4"]\}' 
 \end{description}
 % Response format
 \section{Response Format}
