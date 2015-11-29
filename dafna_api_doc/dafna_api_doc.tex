@@ -59,27 +59,26 @@
 Data Forensics with Analytics, or for short DAFNA, is a project initiated by the Data Analytics Group in Qatar Computing Research Institute, 
 Hamad Bin Khalifa University.
 One of its various facets aims at providing efficient algorithms and tools for verifying the veracity of information provided by multiple conflicting
-sources. The DAFNA API for truth discovery is a RestFul one that enables end user applications to access to twelve existing truth discovery algorithms
-for fact checking and truth discovery when they have to face the integration of information coming from untrustworthy sources. The present documentation 
-goes in deep on the use of this API.
+sources. The DAFNA API for truth discovery is a RestFul one that enables end user applications to access and use twelve existing truth discovery algorithms
+for fact checking and truth discovery when they have to integrate heterogeneous information coming from untrustworthy sources.  This documentation details
+the use of the API for third-party applications.
 
 
 % Authentication
 \section{Authentication}
-Users who would like to use DAFNA API, or integrate it in their own applications,
-need to first get the necessary credentials to access the API.
-DAFNA uses the standard
-\href{http://oauth.net/2/}{oAuth2} protocol to authenticate 3rd party 
-API clients on behalf of the end users. Every 3rd party developper must request
-for an access token, consisting of
-a pair of API Access Key and Secret Key from DAFNA developpers by contacting
-\href{dafna@qcri.org}{dafna@qcri.org} after registration on \href{http://dafna.qcri.org/allegatortrack}{http://dafna.qcri.org/allegatortrack}.
-The 3rd party client will receive from DAFNA developpers the following access credentials.
+Third party developers wanting to test DAFNA API for truth discovery, or use it in its own applications,
+need to first get the necessary access credentials. To obtain credentials, every 3rd party developer must
+follows the process below.
 \begin{itemize}
- \item Authentication token: API user's Access Key
- \item Encrypted password: User's Secret Key
+ \item Go to \href{http://dafna.qcri.org/users/sign_in}{AllegatorTrack}
+ \item Register using a valid email id and email confirmation
+ \item Contact DAFNA developers on \href{http://dafna.qcri.org/allegatortrack}{http://dafna.qcri.org/allegatortrack} for token access.
 \end{itemize}
-\lamine{Is the description of the authentication phase correct?}
+ Upon token access request done, the user will receive from DAFNA developpers the following access credentials.
+\begin{itemize}
+ \item \textbf{Authentication Token}: API user's access key
+ \item \textbf{Encrypted Password}: user's secret key
+\end{itemize}
 % Request format
 \section{Request Format}
 % Scheme
