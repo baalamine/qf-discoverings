@@ -41,9 +41,9 @@
 }
 \newcommand{\lamine}[1]{\textcolor{blue}{#1}}
 %opening
-\title{\mbox{DAFNA -- Data Forensics with Analytics}}
+\title{DAFNA -- RestFul API for Truth Discovery Algorithms}
 \subtitle{API DOCUMENTATION}
-%\author{Mouhamadou Lamine Ba\\ Laure BERTI-EQUILLE}
+\author{Mouhamadou Lamine Ba\\ Hossam. H. HAMMADY\\ Laure BERTI-EQUILLE}
 \date{\begin{tabular}{ll}Creation date:&\today\end{tabular}}
 
 \begin{document}
@@ -56,10 +56,12 @@
 
 % Introduction
 \section{Introduction}
-DAFNA, meaning Data Forensics with Analytics, is a project initiated by the Data Analytics Group in Qatar Computing Research Institute.
-It aims at providing efficient algorithms and tools for checking the veracity of information provided by multiple conflicting sources. 
-The DAFNA API is a RestFul API which enables end user applications to access to twelve existing truth discovery algorithms for fact checking 
-and truth discovery when consumed information come from untrustworthy sources. The present documentation goes in deep on the use of the API.
+Data Forensics with Analytics, or for short DAFNA, is a project initiated by the Data Analytics Group in Qatar Computing Research Institute, 
+Hamad Bin Khalifa University.
+One of its various facets aims at providing efficient algorithms and tools for verifying the veracity of information provided by multiple conflicting
+sources. The DAFNA API for truth discovery is a RestFul one that enables end user applications to access to twelve existing truth discovery algorithms
+for fact checking and truth discovery when they have to face the integration of information coming from untrustworthy sources. The present documentation 
+goes in deep on the use of this API.
 
 
 % Authentication
@@ -97,31 +99,15 @@ like to perform on the behalf on the client.
 \lamine{What's the main difference between the two base URLs? In which scenario, each of the two should be used? Production or development?}
 \begin{itemize}
  \item \href{http://dafna.qrci.org/}{http://dafna.qrci.org/}
- \item \href{http://localhost:4000/}{http://localhost:4000/}
+ \item \href{http://dafna.qcri.org/}{http://dafna.qcri.org/}
 \end{itemize}
 All the endpoint provided by the API are appended to the base URLs.
 To respectively create and list the datasets, one must use the following URLs with some parameters
 as we will see in the next. 
 \begin{description}
 \item GET \href{http://dafna.qcri.org/datasets/}{http://dafna.qcri.org/datasets/} \\
- \item POST \href{http://localhost:4000/datasets/}{http://localhost:4000/datasets/}
+ \item POST \href{http://dafna.qcri.org/datasets/}{http://localhost:4000/datasets/}
 \end{description}
-
-% Access Token Exchange
-\subsection{Access Token Exchange}
-All requests should send the Access Token using the \href{http://oauth2.thephpleague.com/token-types/}{Bearer Token}
-mechanism that requires clients to send it either as query string (?user\_token=some\_string\_here)
-or as an HTTP header (Authorization: Bearer some\_string\_here): some\_string\_here is the
-token placeholder and should be replaced by the real token acquired in the authentication phase.
-Normally, it is a unique token that identifies the client and the user on which
-requests are to be made on behalf of. Continuing with the example above, the complete
-URLs should be (using query string): 
-\begin{itemize}
- \item POST \href{http://localhost:4000/datasets?user\_token=some\_string\_here}{http://dafna.qcri.org/datasets?user\_token=some\_string\_here} \\
-  \item GET \href{http://dafna.qcri.org/datasets?user\_token=some\_string\_here}{http://dafna.qcri.org/datasets?user\_token=some\_string\_here} 
-\end{itemize}
-
-
 % Request content type
 \subsection{Request Content Type}
 Either (1) ``application/x-www-form-urlencoded” or (2) ``application/json” can be used as the request content type (HTTP request “Content-Type” header value). 
@@ -357,7 +343,7 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \end{enumerate}
 
 % Job Monitoring 
-\section{Job Monitoring}
+\section{Pusher for Job Monitoring}
 Some of the jobs you submit (for e.g. dataset upload, run algorithm(s)) take time to finish. 
 To make the things easier for your application, we have a channel on \href{https://pusher.com/}{Pusher},
 which your application can subscribe to and be notified for the events it has been binded to. If there is any notification 
@@ -381,14 +367,14 @@ You may find the following pages to be particularly useful:
 \end{enumerate}
 
 % Ongoing development
-\section{Ongoing Development}
+\section{Further Development}
 Currently, the API is still in improvements and many new other aspects of truth finding and endpoints are still under investigation, based on recent
 proposed development in the field, discussions with early adopter developers, and users' feedbacks. For example, the scheme may support HTTPS in the 
 future, the response body format may support other output formatting like XML.Most importantly, the API must be extended in order to propose broader 
 class of truth finding algorithms, in particular the new ones.
 in the future.
 % AllegatorTrack application
-\section{AllegatorTrack Application}
+\section{Online Tool}
 The main goal of DAFNA project is to design a scalable and accurate truth discovery system to score the veracity of information extracted from multiple 
 online sources.  We design DAFNA API as the first proposed API that allows users to tests and compares a large class of well-known truth finding algorithms
 on different scenarios and datasets. AllegatorTrack is the first application that uses DAFNA API and provides to users
