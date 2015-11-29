@@ -5,6 +5,7 @@
 \usepackage{bera}% optional: just to have a nice mono-spaced font
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{csquotes}
 
 \colorlet{punct}{red!60!black}
 \definecolor{background}{HTML}{EEEEEE}
@@ -105,8 +106,8 @@ the following URL.
 \end{description}
 % Request content type
 \subsection{Request Content Type}
-Either (1) ``application/x-www-form-urlencoded” or (2) ``application/json” can be used as the request content type (HTTP request “Content-Type” header value). 
-If (1) is used, all parameters should be encoded in the URL as a query string with proper escapes and separated by \&. If (2) is used, the request body should 
+Either (1) \textquote{application/x-www-form-urlencoded} or (2) \textquote{application/json} can be used as the request content type (HTTP request \textquote{Content-Type}
+header value). If (1) is used, all parameters should be encoded in the URL as a query string with proper escapes and separated by \&. If (2) is used, the request body should 
 be a well-formed JSON object. 
 
 \begin{enumerate}
@@ -121,14 +122,13 @@ be a well-formed JSON object.
 \end{description}
 \end{enumerate}
 
-
-Note that the method used to pass the parameters of a given request is somehow dictated by the manner the request is issued.
-For instance, if a given 3rd party client uses
-\href{http://curl.haxx.se/}{'Curl'} to issue his requests, the following two syntaxes are both valid.
+Note that when using some command line tools to issue your requests, the way the body content is passed could be slighted different.
+For example, when a particular user issues requests through command lines via
+\href{http://curl.haxx.se/}{\textquote{Curl}}, (1) and (2) argument passing techniques are respectively implemented as follows.
 \begin{description}
- \item curl -X DELETE http://localhost:4000/runsets/1/ -d ``user\_token=some\_string\_here"\\
+ \item curl -X DELETE http://dafna.qcri.org/runsets/1/ -d \textquote{user\_token=some\_string\_here}\\
  \item and \\
- \item curl -X POST http://localhost:4000/runsets -H ``Content-type: application/json" -d `\{``user\_token": ``some\_string\_here" , ``checked\_algo": \{``Accu": [``0.2", ``0", ``100", ``0.5", ``false", ``true", ``true", ``false"] \}, ``general\_config":[``0.001", ``0.8", ``1", ``0.4"]\}' 
+ \item curl -X POST http://dafna.qcri.org/runsets -H ``Content-type: application/json" -d `\{\textquote{user\_token}: \textquote{some\_string\_here} , \textquote{checked\_algo}: \{\textquote{Accu}: [\textquote{0.2}, \textquote{0}, \textquote{100}, \textquote{0.5}, \textquote{false}, \textquote{true}, \textquote{true}, \textquote{false}] \}, \textquote{general\_config}:[\textquote{0.001}, \textquote{0.8}, \textquote{1}, \textquote{0.4}]\}' 
 \end{description}
 % Response format
 \section{Response Format}
