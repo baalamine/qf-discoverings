@@ -98,8 +98,8 @@ The API is accessible through the following base URL.
  \item \href{http://dafna.qrci.org/}{http://dafna.qrci.org/}
 \end{itemize}
 Every endpoint of the API must be appended to this given base URL.
-For instance, to list of created datasets, one must use the following
-URL with some input parameters, as we will see further. 
+For instance, to list the set of available datasets, client must use 
+the following URL.
 \begin{description}
 \item GET \href{http://dafna.qcri.org/datasets/}{http://dafna.qcri.org/datasets/} 
 \end{description}
@@ -109,13 +109,17 @@ Either (1) ``application/x-www-form-urlencoded” or (2) ``application/json” c
 If (1) is used, all parameters should be encoded in the URL as a query string with proper escapes and separated by \&. If (2) is used, the request body should 
 be a well-formed JSON object. 
 
+\begin{enumerate}
+ \item \textbf{Url-Encoded Form}
 \begin{description}
- \item url-encoded form:
  \item POST \href{http://localhost:4000/runsets?checked\_algo=array\_of\_parameters}{http://dafna.qcri.org/runsets?checked\_algo=array\_of\_parameters}
- \item json formatting:
- \item POST \href{http://localhost:4000/runsets}{http://dafna.qcri.org/runsets}
- \item \{checked\_algo: array\_of\_parameters, general\_config: array\_numerical\_values\}
 \end{description}
+ \item \textbf{Json Formatting}
+\begin{description}
+ \item POST \href{http://localhost:4000/runsets}{http://dafna.qcri.org/runsets}~
+ \{checked\_algo: array\_of\_parameters, general\_config: array\_numerical\_values\}
+\end{description}
+\end{enumerate}
 
 
 Note that the method used to pass the parameters of a given request is somehow dictated by the manner the request is issued.
