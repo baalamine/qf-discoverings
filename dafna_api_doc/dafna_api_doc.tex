@@ -83,29 +83,26 @@ follows the process below.
 \section{Request Format}
 % Scheme
 \subsection{Scheme}
-Requests to the API endpoints are done using plain HTTP. While HTTPS requests are not yet
-supported by the API, it should do in the future to guarantee a more secure transmission of
-the Access Token. However, supporting HTTPS might yield requests/responses little bit slower.
-
-\lamine{Is it right that https is not yet supported by the API?}
+Requests to the API endpoints are done using plain HTTP. HTTPS is planned to be supported 
+in the future development of the API for ensuring a more secure transmission of the Access 
+Token.
 % Methods
 \subsection{Methods}
 The current version of DAFNA API supports three HTTP Requests, i.e., \textbf{GET}, \textbf{POST}, and \textbf{DELETE}, 
 with respect to the operations, for instance creation, listing, or removal of datasets, the 3rd party applications would
 like to perform on the behalf on the client.
 % Base Url
-\subsection{Base URLs}
-\lamine{What's the main difference between the two base URLs? In which scenario, each of the two should be used? Production or development?}
+\subsection{Base URL}
+The API is accessible through the following base URL.
 \begin{itemize}
  \item \href{http://dafna.qrci.org/}{http://dafna.qrci.org/}
- \item \href{http://dafna.qcri.org/}{http://dafna.qcri.org/}
 \end{itemize}
-All the endpoint provided by the API are appended to the base URLs.
-To respectively create and list the datasets, one must use the following URLs with some parameters
-as we will see in the next. 
+Every endpoint of the API must be appended to this given base URL.
+For instance, to respectively create and list the datasets, one must use the following
+URLs with some input parameters, as we will see further. 
 \begin{description}
 \item GET \href{http://dafna.qcri.org/datasets/}{http://dafna.qcri.org/datasets/} \\
- \item POST \href{http://dafna.qcri.org/datasets/}{http://localhost:4000/datasets/}
+ \item POST \href{http://dafna.qcri.org/datasets/}{http://dafna.qcri.org/datasets/}
 \end{description}
 % Request content type
 \subsection{Request Content Type}
