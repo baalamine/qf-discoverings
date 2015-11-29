@@ -59,7 +59,7 @@
 Data Forensics with Analytics, or for short DAFNA, is a project initiated by the Data Analytics Group in Qatar Computing Research Institute, 
 Hamad Bin Khalifa University.
 One of its various facets aims at providing efficient algorithms and tools for verifying the veracity of information provided by multiple conflicting
-sources. The DAFNA API for truth discovery is a RestFul one that enables end user applications to access and use twelve existing truth discovery algorithms
+sources. The DAFNA API for truth discovery is a \emph{RestFul API} that enables end user applications to access and use twelve existing truth discovery algorithms
 for fact checking and truth discovery when they have to integrate heterogeneous information coming from untrustworthy sources.  This documentation details
 the use of the API for third-party applications.
 
@@ -98,11 +98,10 @@ The API is accessible through the following base URL.
  \item \href{http://dafna.qrci.org/}{http://dafna.qrci.org/}
 \end{itemize}
 Every endpoint of the API must be appended to this given base URL.
-For instance, to respectively create and list the datasets, one must use the following
-URLs with some input parameters, as we will see further. 
+For instance, to list of created datasets, one must use the following
+URL with some input parameters, as we will see further. 
 \begin{description}
-\item GET \href{http://dafna.qcri.org/datasets/}{http://dafna.qcri.org/datasets/} \\
- \item POST \href{http://dafna.qcri.org/datasets/}{http://dafna.qcri.org/datasets/}
+\item GET \href{http://dafna.qcri.org/datasets/}{http://dafna.qcri.org/datasets/} 
 \end{description}
 % Request content type
 \subsection{Request Content Type}
