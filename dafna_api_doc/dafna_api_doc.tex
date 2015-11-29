@@ -145,12 +145,8 @@ For example, when a particular user issues requests through command lines via
 
 % Response body format
 \subsection{Response Body Format}
-Currently, all responses are returned in JSON format. In the future, more formats could be 
-supported (like XML). The requested format can be explicitly specified in the request, but if omitted,
-JSON will be assumed. The example above can be written as:
-\begin{description}
- \item GET \href{http://dafna.qcri.org/datasets.json?user\_token=some\_string\_here}{http://dafna.qcri.org/datasets.json?user\_token=some\_string\_here}
-\end{description}
+Responses to user queries are returned in JSON format. For now, JSON is the only supported format by the API for query output.
+Further development might consider other formats such as XML.
 
 % endpoints 
 \section{Endpoints}
@@ -206,6 +202,7 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \begin{itemize}
 \item \textbf{user\_token}: Secret Token provided to client for authentication
 \item \textbf{kind}: either claims or truth (the type of requested datasets)
+\item \textbf{draw}:
 \item \textsf{start} 
 \item \textsf{length}
 \end{itemize}
