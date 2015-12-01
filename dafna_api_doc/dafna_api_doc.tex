@@ -168,27 +168,36 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \end{itemize}
 \textbf{Response}
 \begin{description}
- \item None. It is enough to check for HTTP status code of 200 for success.	
+ \item No data. 
+ \item \textbf{200} status code when request succeed	
 \end{description}
 \textbf{Notes}
-\begin{description}
+\begin{enumerate}
  \item The \textbf{s3\_key} and \textbf{other\_url} parameters are both optional.
-\end{description}
+\end{enumerate}
+\lamine{POST not yet finish !}
 %
  \item \textbf{/runsets}
  \begin{description}
- \item Creating a Runset, i.e., performing truth discovering over a given dataset
+ \item Creating a Runset, i.e., a truth discovery job over a given dataset
 \end{description}
 \textbf{Parameters}
 \begin{itemize}
  \item \textbf{user\_token}: Secret Token provided to client for authentication 
- \item  \textbf{checked\_algo}: Algorithm name(s) followed by respective arrays of parameters. E.g. ``checked\_algo": \{``Accu": [``0.2", ``0", ``100", ``0.5", ``false", ``true", ``true", ``false"] , ``Cosine": [``1", ``0.2"] \}
- \item \textbf{general\_config}: an array of numerical values, e.g. [``0.001", ``0.8", ``1", ``0.4"]
+ \item  \textbf{checked\_algo}: Algorithm name(s) followed by respective arrays of parameters, e.g. \textquote{checked\_algo}: \{\textquote{Accu}: [\textquote{0.2}, \textquote{0}, \textquote{100}, \textquote{0.5}, \textquote{false}, \textquote{true}, \textquote{true}, \textquote{false}] , \textquote{cosine}: [\textquote{1}, \textquote{0.2}] \}
+ \item \textbf{general\_config}: an array of numerical values, e.g. [\textquote{0.001}, \textquote{0.8}, \textquote{1}, \textquote{0.4}]
 \end{itemize}
 \textbf{Response}
 \begin{description}
- \item None. It is enough to check for HTTP status code of 200 for success.	
+\item No data. 
+ \item \textbf{200} status code when request succeed.	
 \end{description}
+\textbf{Notes}
+\begin{enumerate}
+ \item \textbf{checked\_algo} enables to specify used truth discovery algorithms together with their specific input values. To see the 
+ details of all truth discovery algorithms supported by the API, please visit the following page: \href{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/home.html}{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/home.html}.
+\item \textbf{general\_config} enables to specify the values of the general parameter of a given truth discovery process, that is, the convergence thresold, the initial sources' trusworthiness scores, ect.
+ \end{enumerate}
 \end{enumerate}
 
 % get endpoints
@@ -202,13 +211,12 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \begin{itemize}
 \item \textbf{user\_token}: Secret Token provided to client for authentication
 \item \textbf{kind}: either \textquote{claims} or \textquote{ground} which correspond to the different types of available datasets
-\item \textbf{draw}:
-\item \textbf{start} 
-\item \textbf{length}
+\item \textbf{start}: An integer number specifying the index from which the listing of available datasets must start 
+\item \textbf{length}: An integer specifying the maximum number of datasets to be listed
 \end{itemize}
 \textbf{Response}
 \begin{description}
- \item \{DS1, DS22, ...\} where the format of DSn is:\\
+ \item \{DS$_1$, DS$_2$, $\ldots$, DS$_n$\} where every DS$_n$ is formatted as follows.\\ \\
  \{
   draw: $<$draw$>$,
   recordsTotal: $<$Number of Records$>$,
@@ -216,18 +224,21 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
   data: $<$data$>$,
   s3\_direct\_post: $<$date\_time$>$,
   fields: $<$date\_time$>$,
-  key: $<$date\_tim$e>$,
+  key: $<$date\_time$>$,
   policy: $<$policy$>$,
   signature: $<$signatur$>$,
-  success\_action\_status: $<$status$>$,
-\}
+  success\_action\_status: $<$status$>$
+\}\\ \\
+\hspace*{-1cm} where $<$data$>$ contains all the information about to the available datasets.
 \end{description}
 \textsf{Notes}
-\begin{description}
- \item \textsf{start} and \textsf{end} parameters are optional. Note that 
- when the parameter \textsf{kind} is not provided, the user will get an empty 
- set of datasets.
-\end{description}
+\begin{enumerate}
+ \item \textbf{start} and \textbf{length} parameters are optional. 
+ \item When the parameter \textbf{kind} is not provided, the user will get an empty 
+ set of datasets. 
+ \item In addition, when the arguments \textbf{start} and \textbf{length} 
+ are not specified, all the available datasets of the specified type is returned.
+\end{enumerate}
 
 %
 \item \textbf{/runsets}
