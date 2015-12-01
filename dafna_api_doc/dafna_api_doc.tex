@@ -163,8 +163,8 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \item \textbf{user\_token}: Secret Token provided to client for authentication 
 \item \textbf{s3\_key}: your file's s3 key if uploaded at Amazon's s3
 \item \textbf{other\_url}: URL if dataset file is located somewhere else
-\item \textbf{kind}: claims, truth (type of dataset)
-\item \textbf{original\_filename}: name of the file 
+\item \textbf{kind}: either \textquote{claims} or \textquote{ground} corresponding to the different types of handled datasets
+\item \textbf{original\_filename}: name of the uploaded file 
 \end{itemize}
 \textbf{Response}
 \begin{description}
@@ -201,10 +201,10 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \textbf{Parameters}
 \begin{itemize}
 \item \textbf{user\_token}: Secret Token provided to client for authentication
-\item \textbf{kind}: either claims or truth (the type of requested datasets)
+\item \textbf{kind}: either \textquote{claims} or \textquote{ground} which correspond to the different types of available datasets
 \item \textbf{draw}:
-\item \textsf{start} 
-\item \textsf{length}
+\item \textbf{start} 
+\item \textbf{length}
 \end{itemize}
 \textbf{Response}
 \begin{description}
