@@ -366,20 +366,32 @@ specifies two algorithms \textbf{Accu} and \textbf{Cosine}
 
 % Algorithm names
 \section{Supported Algorithms}\label{algorithms}
-\begin{itemize}
- \item \textbf{Cosine}
- \item \textbf{2-Estimates}
- \item \textbf{3-Estimates}
- \item \textbf{Accu}
- \item \textbf{AccuSim}
- \item \textbf{AccuNoDep}
- \item \textbf{TruthFinder}
- \item \textbf{SimpleLCA}
- \item \textbf{GuessLCA}
- \item \textbf{MLE(multi-valued property values)}
- \item \textbf{LTM(multi-valued property values)}
-\end{itemize}
+The main interest of using the API is to create a truth discovery job which is possible with an instantiation 
+of a runset. Such a instantiation requires to specify one or more truth discovery algorithms to use through the
+argument \textbf{checked\_algo}. We detail below (see Table~\ref{table:tfa}) the twelve truth discovery algorithms 
+and their specific input parameters supported by DAFNA API.
 
+\begin{table}[!ht]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Name}&\textbf{Input Parameters}\\
+\midrule
+Cosine&\\
+2-Estimates&\\
+3-Estimates&\\
+Accu&\\
+AccuSim&\\
+AccuNoDep&\\
+TruthFinder&\\
+SimpleLCA&\\
+GuessLCA&\\
+MLE(multi-valued property values)&\\
+LTM(multi-valued property values)&\\
+\bottomrule
+\end{tabular}
+\caption{Truth Discovery Algorithms: Names and Input Parameters}\label{table:tfa}
+\end{table}
 % Job Monitoring 
 \section{Monitoring Tasks Using Pusher}
 Some of the jobs you submit (e.g. uploading datasets or running algorithm(s)) might take time to complete
@@ -406,7 +418,7 @@ You may find the following pages to be particularly useful:
 \end{enumerate}
 
 % AllegatorTrack application
-\section{Online Tool: AllegatorTracks}
+\section{Online Tool: AllegatorTrack}
 The main goal of DAFNA project is to design a scalable and accurate truth discovery system to score the veracity of information extracted from multiple 
 online sources.  We design DAFNA API as the first proposed API that allows users to tests and compares a large class of well-known truth finding algorithms
 on different scenarios and datasets. AllegatorTrack is the first application that uses DAFNA API and provides to users
