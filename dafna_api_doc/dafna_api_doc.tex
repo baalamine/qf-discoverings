@@ -374,10 +374,11 @@ and their specific input parameters supported by DAFNA API.
 
 \begin{table}[!ht]
 \centering
+\scriptsize
 \begin{tabular}{ll}
 \toprule
 \textbf{Name}&\textbf{Input Parameters}\\
-\midrule
+\midrule \\
 \textbf{Cosine}&\begin{tabular}{@{}l@{}}Initial Value Confidence $c\in[0,1]$\\ Prediction constant $\psi\in[0,1]$\\\end{tabular}\\
 \hline \\
 \textbf{2-Estimates}&\begin{tabular}{@{}l@{}}Normalization Factor $norm\in[0,1]$\\\end{tabular}\\
@@ -394,12 +395,13 @@ and their specific input parameters supported by DAFNA API.
 \hline \\
 \textbf{TruthFinder}&\begin{tabular}{@{}l@{}}Similarity Constant $s\in[0,1]$\\Dampening Factor $d\in [0,1]$\\\end{tabular}\\
 \hline \\
-SimpleLCA&\begin{tabular}{@{}l@{}}Prior Truth Probability $pt\in[0,1]$\\\end{tabular}\\
+\textbf{SimpleLCA}&\begin{tabular}{@{}l@{}}Prior Truth Probability $pt\in[0,1]$\\\end{tabular}\\
 \hline \\
-GuessLCA&\begin{tabular}{@{}l@{}}Prior Truth Probability $pt\in[0,1]$\\\end{tabular}\\
+\textbf{GuessLCA}&\begin{tabular}{@{}l@{}}Prior Truth Probability $pt\in[0,1]$\\\end{tabular}\\
 \hline \\
-MLE(multi-valued property values)&\begin{tabular}{@{}c@{}}Three \\ Drie\end{tabular}\\
-LTM(multi-valued property values)&\begin{tabular}{@{}c@{}}Three \\ Drie\end{tabular}\\
+\textbf{MLE(multi-valued property values)}&\begin{tabular}{@{}l@{}}Prior Truth Probability $pt\in[0,1]$\\\end{tabular}\\
+\hline \\
+\textbf{LTM(multi-valued property values)}&\begin{tabular}{@{}l@{}}Prior Truth Probability $pt\in[0,1]$\\Prior Falsehood Probability $pf\in[0,1]$\\prior True Negative Count $p_1\in[0,1]$\\Prior False Positive Count $p_2\in[0,1]$\\Prior False Negative Count $p_3\in[0,1]$\\Prior True Positive Count $p_4\in[0,1]$\\Number of Iterations $iter\in \mathbb{N}^{\ast}$\\Burn-in $b\in \mathbb{N}^{\ast}$\\Thinning $t\in \mathbb{N}^{\ast}$\\\end{tabular}\\
 \bottomrule
 \end{tabular}
 \caption{Truth Discovery Algorithms: Names and Input Parameters}\label{table:tfa}
