@@ -160,23 +160,28 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \end{description}
 \textbf{Parameters}
 \begin{itemize}
-\item \textbf{user\_token}: Secret Token provided to client for authentication 
-\item \textbf{s3\_key}: your file's s3 key if uploaded at Amazon's s3
-\item \textbf{other\_url}: URL if dataset file is located somewhere else
+\item \textbf{user\_token}: secret token provided to the client for authentication 
+\item \textbf{s3\_key}: a file's s3 key if the file is uploaded at Amazon's s3 official. Right access to this bucket 
+is needed.
+\item \textbf{other\_url}: URL (other than the s3 key) if the dataset file is located somewhere else, e.g. in a local computer.
 \item \textbf{kind}: either \textquote{claims} or \textquote{ground} corresponding to the different types of handled datasets
-\item \textbf{original\_filename}: name of the uploaded file 
+\item \textbf{original\_filename}: name of the uploaded file. It corresponds to any name that you want to give for identification
+in future
 \end{itemize}
 \textbf{Response}
 \begin{description}
  \item No data. 
- \item \textbf{200} status code when request succeed	
+ \item \textbf{200} status code when the request succeeds	
 \end{description}
 \textbf{Notes}
 \begin{enumerate}
- \item The \textbf{s3\_key} and \textbf{other\_url} parameters are both optional.
+ \item One of \textbf{s3\_key} or \textbf{other\_url} parameters are mandatory for parsing dataset. 
+ \item All uploaded files should be encoded in \textbf{UTF-8}.
  \item Be sure that your dataset respects the required format, i.e., it is a CSV file 
  having a header consisting of the following column names in order: \textbf{ObjectID},
- \textbf{PropertyID}, \textbf{PropertyValue}, \textbf{SourceID}, \textbf{TimeStamp}.
+ \textbf{PropertyID}, \textbf{PropertyValue}, \textbf{SourceID}, \textbf{TimeStamp}. 
+ A sample example of datasets accepted by the API is available at:\\
+ \href{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/realworldDS/book.html}{\small{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/realworldDS/book.html}}
  %Note that you can replace \textbf{PropertyValue} by \textbf{PropertyValues} and the system will automatically split the contents of this column on the comma when running multi-valued algorithms.
 \end{enumerate}
 %\lamine{POST not yet finish !}
@@ -187,8 +192,8 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \end{description}
 \textbf{Parameters}
 \begin{itemize}
- \item \textbf{user\_token}: Secret Token provided to client for authentication 
- \item  \textbf{checked\_algo}: Algorithm name(s) followed by respective arrays of parameters, e.g. \textquote{checked\_algo}: \{\textquote{Accu}: [\textquote{0.2}, \textquote{0}, \textquote{100}, \textquote{0.5}, \textquote{false}, \textquote{true}, \textquote{true}, \textquote{false}] , \textquote{cosine}: [\textquote{1}, \textquote{0.2}] \}
+ \item \textbf{user\_token}: secret token provided to the client for authentication 
+ \item  \textbf{checked\_algo}: set of algorithm name(s) followed by respective arrays of parameters, e.g. \textquote{checked\_algo}: \{\textquote{Accu}: [\textquote{0.2}, \textquote{0}, \textquote{100}, \textquote{0.5}, \textquote{false}, \textquote{true}, \textquote{true}, \textquote{false}] , \textquote{cosine}: [\textquote{1}, \textquote{0.2}] \}
  \item \textbf{general\_config}: an array of numerical values, e.g. [\textquote{0.001}, \textquote{0.8}, \textquote{1}, \textquote{0.4}]
 \end{itemize}
 \textbf{Response}
@@ -213,10 +218,10 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \end{description}
 \textbf{Parameters}
 \begin{itemize}
-\item \textbf{user\_token}: Secret Token provided to client for authentication
+\item \textbf{user\_token}: secret token provided to the client for authentication
 \item \textbf{kind}: either \textquote{claims} or \textquote{ground} which correspond to the different types of available datasets
-\item \textbf{start}: An integer number specifying the index from which the listing of available datasets must start 
-\item \textbf{length}: An integer specifying the maximum number of datasets to be listed
+\item \textbf{start}: an integer number specifying the index from which the listing of available datasets must start 
+\item \textbf{length}: an integer specifying the maximum number of datasets to be listed
 \end{itemize}
 \textbf{Response}
 \begin{description}
@@ -251,11 +256,11 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \end{description}
 \textbf{Parameters}
 \begin{itemize}
- \item \textbf{user\_token}: Secret Token provided to client for authentication
+ \item \textbf{user\_token}: secret token provided to the client for authentication
 \end{itemize}
 \textbf{Response:}
 \begin{description}
- \item \{RS1, RS22, ...\} where the format of RSn is:\\
+ \item \{RS$_1$, RS$_2$, $\cdots$, RS$_n$\} where the format of RS$_n$ is:\\
 \{
   id: $<$runset id$>$,
   created\_at: $<$Time of creation$>$,
@@ -277,8 +282,8 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \end{description}
 \textbf{Parameters}
 \begin{itemize}
- \item \textbf{user\_token}: Secret Token provided to client for authentication
- \item \textbf{id}: identier of the runsets
+ \item \textbf{user\_token}: secret token provided to the client for authentication
+ \item \textbf{id}: an existing identier of the runset whose results must be listed
 \end{itemize}
 \textbf{Response}
 \begin{description}
@@ -298,7 +303,7 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \end{description}
 \textbf{Parameters}
 \begin{itemize}
- \item \textbf{user\_token}: Secret Token provided to client for authentication
+ \item \textbf{user\_token}: secret token provided to the client for authentication
 \end{itemize}
 \textbf{Response}
 \begin{description}
@@ -330,13 +335,13 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \end{description}
 \textbf{Parameters}
 \begin{itemize}
- \item \textbf{user\_token}: Secret Token provided to client for authentication
- \item \textbf{id}: identier of the dataset to be deleted 
+ \item \textbf{user\_token}: secret token provided to the client for authentication
+ \item \textbf{id}: an existing identier of the dataset to be deleted 
 \end{itemize}
 \textbf{Response}
 \begin{description}
- \item None.
-\item  \textbf{200} status code when request succeed
+ \item No data.
+\item  \textbf{200} status code when the request succeeds.
 \end{description}
 %
 \item \textbf{/runsets/<id>}
@@ -345,17 +350,32 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \end{description}
 \textbf{Parameters}
 \begin{itemize}
-  \item \textbf{user\_token}: Secret Token provided to client for authentication
- \item \textbf{id}: identier of the runset to be deleted 
+  \item \textbf{user\_token}: secret token provided to the client for authentication
+ \item \textbf{id}: an existing identier of the runset to be deleted 
 \end{itemize}
 \textbf{Response}
 \begin{description}
-\item  None. 
-\item \textbf{200} status code when request succeed.	
+\item  No data.
+\item \textbf{200} status code when the request succeeds.	
 \end{description}
 \end{enumerate}
 
-% 
+% Algorithm names
+\section{Supported Algorithms}
+\begin{itemize}
+ \item \textbf{Cosine}
+ \item \textbf{2-Estimates}
+ \item \textbf{3-Estimates}
+ \item \textbf{Accu}
+ \item \textbf{AccuSim}
+ \item \textbf{AccuNoDep}
+ \item \textbf{TruthFinder}
+ \item \textbf{SimpleLCA}
+ \item \textbf{GuessLCA}
+ \item \textbf{MLE(multi-valued property values)}
+ \item \textbf{LTM(multi-valued property values)}
+\end{itemize}
+
 % Job Monitoring 
 \section{Monitoring Tasks Using Pusher}
 Some of the jobs you submit (e.g. uploading datasets or running algorithm(s)) might take time to complete
@@ -382,7 +402,7 @@ You may find the following pages to be particularly useful:
 \end{enumerate}
 
 % AllegatorTrack application
-\section{Online Tool: AllegatorTrack}
+\section{Online Tool: AllegatorTracks}
 The main goal of DAFNA project is to design a scalable and accurate truth discovery system to score the veracity of information extracted from multiple 
 online sources.  We design DAFNA API as the first proposed API that allows users to tests and compares a large class of well-known truth finding algorithms
 on different scenarios and datasets. AllegatorTrack is the first application that uses DAFNA API and provides to users
