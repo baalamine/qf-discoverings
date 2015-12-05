@@ -6,6 +6,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{csquotes}
+\usepackage{booktabs}
 
 \colorlet{punct}{red!60!black}
 \definecolor{background}{HTML}{EEEEEE}
@@ -67,7 +68,7 @@ the use of the API for third-party applications.
 
 % Authentication
 \section{Authentication}
-Third party developers wanting to test DAFNA API for truth discovery, or use it in its own applications,
+Third party developers wanting to test DAFNA API for truth discovery, or integrate it in their own applications,
 need to first get the necessary access credentials. To obtain credentials, every 3rd party developer must
 follows the process below.
 \begin{itemize}
@@ -115,7 +116,7 @@ be a well-formed JSON object.
 \begin{description}
  \item POST \href{http://localhost:4000/runsets?checked\_algo=array\_of\_parameters}{http://dafna.qcri.org/runsets?checked\_algo=array\_of\_parameters}
 \end{description}
- \item \textbf{json body}
+ \item \textbf{json encoding}
 \begin{description}
  \item POST \href{http://localhost:4000/runsets}{http://dafna.qcri.org/runsets}~
  \{checked\_algo: array\_of\_parameters, general\_config: array\_numerical\_values\}
@@ -180,7 +181,7 @@ in future
  \item Be sure that your dataset respects the required format, i.e., it is a CSV file 
  having a header consisting of the following column names in order: \textbf{ObjectID},
  \textbf{PropertyID}, \textbf{PropertyValue}, \textbf{SourceID}, \textbf{TimeStamp}. 
- A sample example of datasets accepted by the API is available at:\\
+ A sample example of datasets properly formatted for the API is available at:
  \href{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/realworldDS/book.html}{\small{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/realworldDS/book.html}}
  %Note that you can replace \textbf{PropertyValue} by \textbf{PropertyValues} and the system will automatically split the contents of this column on the comma when running multi-valued algorithms.
 \end{enumerate}
@@ -193,8 +194,10 @@ in future
 \textbf{Parameters}
 \begin{itemize}
  \item \textbf{user\_token}: secret token provided to the client for authentication 
- \item  \textbf{checked\_algo}: set of algorithm name(s) followed by respective arrays of parameters, e.g. \textquote{checked\_algo}: \{\textquote{Accu}: [\textquote{0.2}, \textquote{0}, \textquote{100}, \textquote{0.5}, \textquote{false}, \textquote{true}, \textquote{true}, \textquote{false}] , \textquote{cosine}: [\textquote{1}, \textquote{0.2}] \}
- \item \textbf{general\_config}: an array of numerical values, e.g. [\textquote{0.001}, \textquote{0.8}, \textquote{1}, \textquote{0.4}]
+ \item  \textbf{checked\_algo}: set of algorithm name(s), each followed by an array of numerical values 
+ for its different input parameters, e.g., \textquote{checked\_algo}: \{\textquote{Accu}: [\textquote{0.2}, \textquote{0}, \textquote{100}, \textquote{0.5}, \textquote{false}, \textquote{true}, \textquote{true}, \textquote{false}] , \textquote{Cosine}: [\textquote{1}, \textquote{0.2}] \}
+specifies two algorithms \textbf{Accu} and \textbf{Cosine}
+ \item \textbf{general\_config}: an array of numerical values, e.g., [\textquote{0.001}, \textquote{0.8}, \textquote{1}, \textquote{0.4}]
 \end{itemize}
 \textbf{Response}
 \begin{description}
@@ -203,8 +206,9 @@ in future
 \end{description}
 \textbf{Notes}
 \begin{enumerate}
- \item \textbf{checked\_algo} enables to specify used truth discovery algorithms together with their specific input values. To see the 
- details of all truth discovery algorithms supported by the API, please visit the following page: \href{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/home.html}{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/home.html}.
+ \item \textbf{checked\_algo} allows to specify the set of truth discovery algorithms along with the values of their input arguments to be used for the truth discovery process. At least one algorithm must be provided, and when several algorithms
+ are specified their results are combined by the system for a better accuracy. We detail in Section~\ref{algorithms} the set of supported truth discovery algorithms together with their input arguments.
+ %To see the details of all truth discovery algorithms supported by the API, please visit the following page: \href{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/home.html}{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/home.html}.
 \item \textbf{general\_config} enables to specify the values of the general parameter of a given truth discovery process, that is, the convergence thresold, the initial sources' trusworthiness scores, ect.
  \end{enumerate}
 \end{enumerate}
@@ -361,7 +365,7 @@ in future
 \end{enumerate}
 
 % Algorithm names
-\section{Supported Algorithms}
+\section{Supported Algorithms}\label{algorithms}
 \begin{itemize}
  \item \textbf{Cosine}
  \item \textbf{2-Estimates}
