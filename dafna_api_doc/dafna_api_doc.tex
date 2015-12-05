@@ -209,7 +209,7 @@ specifies two algorithms \textbf{Accu} and \textbf{Cosine}
  \item \textbf{checked\_algo} allows to specify the set of truth discovery algorithms along with the values of their input arguments to be used for the truth discovery process. At least one algorithm must be provided, and when several algorithms
  are specified their results are combined by the system for a better accuracy. We detail in Section~\ref{algorithms} the set of supported truth discovery algorithms together with their input arguments.
  %To see the details of all truth discovery algorithms supported by the API, please visit the following page: \href{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/home.html}{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/home.html}.
-\item \textbf{general\_config} enables to specify the values of the general parameter of a given truth discovery process, that is, the convergence thresold, the initial sources' trusworthiness scores, ect.
+\item \textbf{general\_config} allows to specify the values of the general parameters of the runset, i.e., a given truth discovery job, such as the convergence thresold and the initial sources' trusworthiness scores.
  \end{enumerate}
 \end{enumerate}
 
@@ -249,8 +249,8 @@ specifies two algorithms \textbf{Accu} and \textbf{Cosine}
  \item \textbf{start} and \textbf{length} parameters are optional. 
  \item When the parameter \textbf{kind} is not provided, the user will get an empty 
  set of datasets. 
- \item In addition, when the arguments \textbf{start} and \textbf{length} 
- are not specified, all the available datasets of the specified type is returned.
+ \item When the arguments \textbf{start} and \textbf{length} 
+ are not specified, all the available datasets of the specified kind are returned.
 \end{enumerate}
 
 %
@@ -287,7 +287,7 @@ specifies two algorithms \textbf{Accu} and \textbf{Cosine}
 \textbf{Parameters}
 \begin{itemize}
  \item \textbf{user\_token}: secret token provided to the client for authentication
- \item \textbf{id}: an existing identier of the runset whose results must be listed
+ \item \textbf{id}: an existing identier of the runset whose results should be listed
 \end{itemize}
 \textbf{Response}
 \begin{description}
@@ -423,8 +423,7 @@ in the future.
 % Questions or Feebacks
 \section{Questions or Feebacks}
 For any questions or feebacks about the API, please feel free to contact us by email on \href{mailto:lberti@qf.org.qa}{dafna.qf.org.qa}
-or visit the website of the DAFNA project for more details by following the link below.
-
-\href{http://daqcri.github.io/dafna/\#/dafna/home\_sections/home.html}{http://daqcri.github.io/dafna/\#/dafna/home\_sections/home.html}.
+or visit the website of the DAFNA project for more details by following the link below:
+\href{http://daqcri.github.io/dafna/\#/dafna/home\_sections/home.html}{\small{http://daqcri.github.io/dafna/\#/dafna/home\_sections/home.html}}.
 
 \end{document}
