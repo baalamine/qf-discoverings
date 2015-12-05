@@ -7,6 +7,7 @@
 \usepackage{xcolor}
 \usepackage{csquotes}
 \usepackage{booktabs}
+\usepackage{amsfonts}
 
 \colorlet{punct}{red!60!black}
 \definecolor{background}{HTML}{EEEEEE}
@@ -377,17 +378,26 @@ and their specific input parameters supported by DAFNA API.
 \toprule
 \textbf{Name}&\textbf{Input Parameters}\\
 \midrule
-Cosine&\\
-2-Estimates&\\
-3-Estimates&\\
-Accu&\\
-AccuSim&\\
-AccuNoDep&\\
-TruthFinder&\\
-SimpleLCA&\\
-GuessLCA&\\
-MLE(multi-valued property values)&\\
-LTM(multi-valued property values)&\\
+\textbf{Cosine}&\begin{tabular}{@{}l@{}}Initial Value Confidence $c\in[0,1]$\\ Prediction constant $\psi\in[0,1]$\\\end{tabular}\\
+\hline \\
+\textbf{2-Estimates}&\begin{tabular}{@{}l@{}}Normalization Factor $norm\in[0,1]$\\\end{tabular}\\
+\hline \\
+\textbf{3-Estimates}&\begin{tabular}{@{}l@{}}Initial Error Factor $\epsilon\in[0,1]$ \\Normalization Factor $norm\in[0,1]$\\ \end{tabular}\\
+\hline \\
+\textbf{Depen}&\begin{tabular}{@{}l@{}}Dependence a priori probability $p\in[0,1]$\\ Copied value probability $c\in[0,1]$\\Number of false values $n\in \mathbb{N}^{\ast}$\\\end{tabular}\\
+\hline \\
+\textbf{Accu}&\begin{tabular}{@{}l@{}}Dependence a priori probability $p\in[0,1]$\\ Copied value probability $c\in[0,1]$\\Number of false values $n\in \mathbb{N}^{\ast}$\\\end{tabular}\\
+\hline \\      
+\textbf{AccuSim}&\begin{tabular}{@{}l@{}}Dependence a priori probability $p\in[0,1]$\\ Copied value probability $c\in[0,1]$\\Number of false values $n\in \mathbb{N}^{\ast}$\\Similarity Constant $s\in[0,1]$\\\end{tabular}\\
+\hline \\
+\textbf{AccuNoDep}&\begin{tabular}{@{}l@{}}Copied value probability $c\in[0,1]$\\Number of false values $n\in \mathbb{N}^{\ast}$\\\end{tabular}\\
+\hline \\
+\textbf{TruthFinder}&\begin{tabular}{@{}l@{}}Similarity Constant $s\in[0,1]$\\Dampening Factor $d\in [0,1]$\\\end{tabular}\\
+\hline \\
+SimpleLCA&\begin{tabular}{@{}c@{}}Three \\ Drie\end{tabular}\\
+GuessLCA&\begin{tabular}{@{}c@{}}Three \\ Drie\end{tabular}\\
+MLE(multi-valued property values)&\begin{tabular}{@{}c@{}}Three \\ Drie\end{tabular}\\
+LTM(multi-valued property values)&\begin{tabular}{@{}c@{}}Three \\ Drie\end{tabular}\\
 \bottomrule
 \end{tabular}
 \caption{Truth Discovery Algorithms: Names and Input Parameters}\label{table:tfa}
