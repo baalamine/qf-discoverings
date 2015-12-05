@@ -45,7 +45,7 @@
 \title{DAFNA -- RestFul API for Truth Discovery Algorithms}
 \subtitle{API DOCUMENTATION}
 \author{Mouhamadou Lamine Ba\\ Hossam. H. HAMMADY\\ Laure BERTI-EQUILLE}
-\date{\begin{tabular}{ll}Creation date:&\today\end{tabular}}
+\date{\begin{tabular}{ll}Creation date:&November 5, 2015\\Revision date:&December 4, 2015\end{tabular}}
 
 \begin{document}
 
@@ -174,8 +174,12 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \textbf{Notes}
 \begin{enumerate}
  \item The \textbf{s3\_key} and \textbf{other\_url} parameters are both optional.
+ \item Be sure that your dataset respects the required format, i.e., it is a CSV file 
+ having a header consisting of the following column names in order: \textbf{ObjectID},
+ \textbf{PropertyID}, \textbf{PropertyValue}, \textbf{SourceID}, \textbf{TimeStamp}.
+ %Note that you can replace \textbf{PropertyValue} by \textbf{PropertyValues} and the system will automatically split the contents of this column on the comma when running multi-valued algorithms.
 \end{enumerate}
-\lamine{POST not yet finish !}
+%\lamine{POST not yet finish !}
 %
  \item \textbf{/runsets}
  \begin{description}
@@ -331,7 +335,8 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \end{itemize}
 \textbf{Response}
 \begin{description}
- \item None. It is enough to check for HTTP status code of 200 for success.	
+ \item None.
+\item  \textbf{200} status code when request succeed
 \end{description}
 %
 \item \textbf{/runsets/<id>}
@@ -345,21 +350,24 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \end{itemize}
 \textbf{Response}
 \begin{description}
-\item  None. It is enough to check for HTTP status code of 200 for success.	
+\item  None. 
+\item \textbf{200} status code when request succeed.	
 \end{description}
 \end{enumerate}
 
+% 
 % Job Monitoring 
-\section{Pusher for Job Monitoring}
-Some of the jobs you submit (for e.g. dataset upload, run algorithm(s)) take time to finish. 
-To make the things easier for your application, we have a channel on \href{https://pusher.com/}{Pusher},
-which your application can subscribe to and be notified for the events it has been binded to. If there is any notification 
-(such as job completion), your applicaton will be notified of this. Please note that, repeatedly requesting
-run statuses rather than listening to the push messages will eventually overwhelm our server, and we may choose
-to suspend your account. So, please go through the documentation of Pusher to get a sense of how things work. Your 
-application can subscribe to the notifications using app\_id = "79143". You need to contact us for a key. We will send 
-you the key through email to enable you to subscribe to the channel. Once you have configured your application using the 
-app\_id and key, you can bind to particular events, you wish to be notified for. for e.g. 
+\section{Monitoring Tasks Using Pusher}
+Some of the jobs you submit (e.g. uploading datasets or running algorithm(s)) might take time to complete
+for various reasons. Instead of letting users periodically pinging the server to verify the status of their
+ongoing jobs, we provide a manner to make things easier for user applications by setting up a channel on \href{https://pusher.com/}{Pusher}.
+User applications can subscribe to this channel in oder to be automatically notify for the events they have been binded to.
+When any event like task completion occurs, a user applicaton will be notified of this. Kindly note that the unexpected
+approach of repeatedly requesting run statuses rather than listening to the push messages will eventually overwhelm our 
+server, and we may choose to suspend your account. So, please go through the documentation of Pusher to get a sense of how
+things work. An client can subscribe to the notifications for her application using \textbf{app\_id = \textquote{79143}}.
+To this end, a client needs to contact us for a key, which will be sent by email, to enable him to subscribe to the channel. Once you 
+have configured your application using the app\_id and key, you can bind to particular events (see examples below), you wish to be notified for.
 
 \begin{itemize}
  \item \textbf{channel.bind(`run\_change', function(run){}):} will notifiy in case of any change in the status of a run.
@@ -373,6 +381,13 @@ You may find the following pages to be particularly useful:
  \item \href{https://pusher.com/docs/client_api_guide/client_events}{Client Events}
 \end{enumerate}
 
+% AllegatorTrack application
+\section{Online Tool}
+The main goal of DAFNA project is to design a scalable and accurate truth discovery system to score the veracity of information extracted from multiple 
+online sources.  We design DAFNA API as the first proposed API that allows users to tests and compares a large class of well-known truth finding algorithms
+on different scenarios and datasets. AllegatorTrack is the first application that uses DAFNA API and provides to users
+an online plateform for testing the different features of the API. AllegatorTrack application is accessible via \href{http://dafna.qcri.org/users/sign\_in}{http://dafna.qcri.org/users/sign\_in}.
+
 % Ongoing development
 \section{Further Development}
 Currently, the API is still in improvements and many new other aspects of truth finding and endpoints are still under investigation, based on recent
@@ -380,10 +395,12 @@ proposed development in the field, discussions with early adopter developers, an
 future, the response body format may support other output formatting like XML.Most importantly, the API must be extended in order to propose broader 
 class of truth finding algorithms, in particular the new ones.
 in the future.
-% AllegatorTrack application
-\section{Online Tool}
-The main goal of DAFNA project is to design a scalable and accurate truth discovery system to score the veracity of information extracted from multiple 
-online sources.  We design DAFNA API as the first proposed API that allows users to tests and compares a large class of well-known truth finding algorithms
-on different scenarios and datasets. AllegatorTrack is the first application that uses DAFNA API and provides to users
-an online plateform for testing the different features of the API. AllegatorTrack application is accessible via \href{http://dafna.qcri.org/users/sign\_in}{http://dafna.qcri.org/users/sign\_in}.
+
+% Questions or Feebacks
+\section{Questions or Feebacks}
+For any questions or feebacks about the API, please feel free to contact us by email on \href{mailto:lberti@qf.org.qa}{dafna.qf.org.qa}
+or visit the website of the DAFNA project for more details by following the link below.
+
+\href{http://daqcri.github.io/dafna/\#/dafna/home\_sections/home.html}{http://daqcri.github.io/dafna/\#/dafna/home\_sections/home.html}.
+
 \end{document}
