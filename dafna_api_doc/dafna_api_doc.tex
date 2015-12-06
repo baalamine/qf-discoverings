@@ -186,6 +186,15 @@ in future
  \href{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/realworldDS/book.html}{\small{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/realworldDS/book.html}}
  %Note that you can replace \textbf{PropertyValue} by \textbf{PropertyValues} and the system will automatically split the contents of this column on the comma when running multi-valued algorithms.
 \end{enumerate}
+%\textbf{Example}
+%\begin{description}
+% \item Curl -X POST \textquote{http://dafna.qcri.org/datasets}
+% -H \textquote{Content-Type: application/x-www-form-urlencoded; charset=UTF-8}
+% -d \textquote{user\_token=oMeqs5h\_zfsTXnTks4PS}
+% -d \textquote{s3\_key=import\%2F1fa3e133-365e-427f-b490-8753c42f1478\%2Fclaims4.csv}
+% -d \textquote{original\_filename=claims4.csv} -d \textquote{kind=claim}
+%\end{description}
+  
 %\lamine{POST not yet finish !}
 %
  \item \textbf{/runsets}
@@ -210,7 +219,7 @@ specifies two algorithms \textbf{Accu} and \textbf{Cosine}
  \item \textbf{checked\_algo} allows to specify the set of truth discovery algorithms along with the values of their input arguments to be used for the truth discovery process. At least one algorithm must be provided, and when several algorithms
  are specified their results are combined by the system for a better accuracy. We detail in Section~\ref{algorithms} the set of supported truth discovery algorithms together with their input arguments.
  %To see the details of all truth discovery algorithms supported by the API, please visit the following page: \href{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/home.html}{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/home.html}.
-\item \textbf{general\_config} allows to specify the values of the general parameters of the runset, i.e., a given truth discovery job, such as the convergence thresold and the initial sources' trusworthiness scores.
+\item \textbf{general\_config} allows to specify the values of the general parameters of a runset, i.e., the convergence test thresold and the initial sources' trusworthiness scores.
  \end{enumerate}
 \end{enumerate}
 
@@ -370,7 +379,8 @@ specifies two algorithms \textbf{Accu} and \textbf{Cosine}
 The main interest of using the API is to create a truth discovery job which is possible with an instantiation 
 of a runset. Such a instantiation requires to specify one or more truth discovery algorithms to use through the
 argument \textbf{checked\_algo}. We detail below (see Table~\ref{table:tfa}) the twelve truth discovery algorithms 
-and their specific input parameters supported by DAFNA API.
+and their specific input parameters supported by DAFNA API. Additional materials about these algorithms are available
+at: \href{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/home.html}{\small{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/home.html}}
 
 \begin{table}[!ht]
 \centering
