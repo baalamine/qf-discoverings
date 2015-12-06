@@ -566,6 +566,9 @@ Parameters needed for all Truth Discovery Algorithms (specified via the \textbf{
 The combiner of selected truth discovery algorithms. It is automatically selected if you select more than 1 algorithm and 1 ground truth dataset. It is based on Bayes combination from P. Domingos and M. Pazzani. On the optimality of the simple Bayesian classifier under zero-one loss. Machine Learning, 29:103–130, 1997.
 % API Usage : use case
 \section{DAFNA API Usage: Use Case}
+Let us consider a typical scenario where a given user, holding an access token \textbf{\textquote{\_XYH128PL04}} to the DAFNA API, would 
+like to discover the correct list of authors of a set of books. The user has first extracted the candidate authors of
+these books from different Web sources and has stored them into a csv file \textbf{book.csv} in a local directory named \textbf{./datasets/}.
 % Job Monitoring 
 \section{Job Monitoring using Pusher}
 Some of the jobs you submit (e.g. uploading datasets or running algorithm(s)) might take time to complete
