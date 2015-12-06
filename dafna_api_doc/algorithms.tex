@@ -1,0 +1,182 @@
+\documentclass[a4paper,10pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\title{Truth Discovery Algorithms}
+\subtitle{Documentation}
+\author{Mouhamadou Lamine BA}
+\date{\today}
+\begin{document}
+\maketitle
+\section{Supported Algorithms}
+\begin{itemize}
+\item \textbf{Cosine}
+\begin{description}
+\item \textbf{Description}: Cosine is a heuristic approach for estimating a value confidence and source trustworthiness, based on the cosine similarity measure proposed by A. Galland, S. Abiteboul, A. Marian, and P. Senellart. Corroborating Information from Disagreeing Views. In WSDM, pp. 131–140, 2010.
+\item \textbf{Parameters}
+\begin{itemize}
+\item \textbf{Initial Value Confidence}: Initialization of value confidence for all properties values.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1.0, \textbf{default-value: }1\item \textbf{Prediction constant}: Constant that gives more weight to predictable views (eg, sources with consistently often correct claims or consistently often wrong claims).
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.2\end{itemize}
+\end{description}
+\item \textbf{2-Estimates}
+\begin{description}
+\item \textbf{Description}: 2-Estimates is a probabilistic model built over the heuristic model, Cosine and proposed by A. Galland, S. Abiteboul, A. Marian, and P. Senellart. Corroborating Information from Disagreeing Views. In WSDM, pp. 131–140, 2010.
+\item \textbf{Parameters}
+\begin{itemize}
+\item \textbf{Normalization Factor}: The weight used for normalizing sources' trustworthiness and values' confidence.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5\end{itemize}
+\end{description}
+\item \textbf{3-Estimates}
+\begin{description}
+\item \textbf{Description}: 3-Estimates extends 2-Estimates proposed by A. Galland, S. Abiteboul, A. Marian, and P. Senellart. Corroborating Information from Disagreeing Views. In WSDM, pp. 131–140, 2010.
+\item \textbf{Parameters}
+\begin{itemize}
+\item \textbf{Initial Error Factor}: Initialization of value's error factor for all properties values.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1.0, \textbf{default-value: }0.4\item \textbf{Normalization Factor}: The constant used for normalizing source truthworthiness and value confidence.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5\end{itemize}
+\end{description}
+\item \textbf{Depen}
+\begin{description}
+\item \textbf{Description}: First Bayesian truth discovery model that takes into cosideration the copying relationship between sources, proposed by X. L. Dong, L. Berti-Equille, and D. Srivastava. Integrating conflicting data: The role of source dependence. PVLDB, 2(1):550–561, 2009.
+\item \textbf{Parameters}
+\begin{itemize}
+\item \textbf{Dependence priori probability}: The a priori probability that two data sources are dependent.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }0.5, \textbf{default-value: }0.2\item \textbf{Copied value probability}: The probability that a value provided by a copier is copied.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0\item \textbf{Number of false values}: The number of false values in the underlying domain for each object.
+\item[]\textbf{dataType: }int, \textbf{min-value: }1, \textbf{max-value: }1, \textbf{default-value: }100\item \textbf{Similarity Constant}: The similarity betwen values is weighted for the value confidence computation.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5, \textbf{hidden: }True
+\item \textbf{considerSimilarity}: False for Depen: the model does not take into account value similarity.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }False, \textbf{hidden: }True
+\item \textbf{considerSourcesAccuracy}: False for Depen: the model does not take into account the accuracy of the sources.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }False, \textbf{hidden: }True
+\item \textbf{considerDependence}: True for Depen: the model takes into account the dependence between sources.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }True, \textbf{hidden: }True
+\item \textbf{orderSrcByDependence}: If true, Depen model is based on source dependence ordering, otherwise on lexicographic ordering.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }False, \textbf{hidden: }True
+\end{itemize}
+\end{description}
+\item \textbf{Accu}
+\begin{description}
+\item \textbf{Description}: Accu extends Depen model and considers the source accuracy in addition to the source dependence, proposed by X. L. Dong, L. Berti-Equille, and D. Srivastava. Integrating conflicting data: The role of source dependence. PVLDB, 2(1):550–561, 2009.
+\item \textbf{Parameters}
+\begin{itemize}
+\item \textbf{Dependence a priori probability}: The a priori probability that two data sources are dependent.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }0.5, \textbf{default-value: }0.2\item \textbf{Copied value probability}: The probability that a value provided by a copier is copied.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0\item \textbf{Number of false values}: The number of false values in the underlying domain for each object.
+\item[]\textbf{dataType: }int, \textbf{min-value: }1, \textbf{max-value: }1, \textbf{default-value: }100\item \textbf{Similarity Constant}: The similarity betwen values is weighted for the value confidence computation.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5, \textbf{hidden: }True
+\item \textbf{considerSimilarity}: False for Accu: the model does not take into account value similarity.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }False, \textbf{hidden: }True
+\item \textbf{considerSourcesAccuracy}: True for Accu: the model takes into account the accuracy of the sources.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }True, \textbf{hidden: }True
+\item \textbf{considerDependency}: True for Accu: the model takes into account the dependence between sources.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }True, \textbf{hidden: }True
+\item \textbf{orderSrcByDependence}: If true, Accu model is based on source dependence ordering, otherwise on lexicographic ordering.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }False, \textbf{hidden: }True
+\end{itemize}
+\end{description}
+\item \textbf{AccuSim}
+\begin{description}
+\item \textbf{Description}: Accusim extends Accu model and considers the value similarity, proposed by X. L. Dong, L. Berti-Equille, and D. Srivastava. Integrating conflicting data: The role of source dependence. PVLDB, 2(1):550–561, 2009.
+\item \textbf{Parameters}
+\begin{itemize}
+\item \textbf{Dependence a priori probability}: The a priori probability that two data sources are dependent.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }0.5, \textbf{default-value: }0.2\item \textbf{Copied value probability}: The probability that a value provided by a copier is copied.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0\item \textbf{Number of false values}: The number of false values in the underlying domain for each object.
+\item[]\textbf{dataType: }int, \textbf{min-value: }1, \textbf{max-value: }1, \textbf{default-value: }100\item \textbf{Similarity Constant}: The similarity betwen values is weighted for the value confidence computation.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5\item \textbf{considerSimilarity}: True for AccuSim: the model takes into account value similarity.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }True, \textbf{hidden: }True
+\item \textbf{considerSourcesAccuracy}: True for AccuSim: the model takes into account the accuracy of the sources.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }True, \textbf{hidden: }True
+\item \textbf{considerDependency}: True for Accusim: the model takes into account the dependence between sources.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }True, \textbf{hidden: }True
+\item \textbf{orderSrcByDependence}: If true, AccuSim model is based on source dependence ordering, otherwise on lexicographic ordering.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }False, \textbf{hidden: }True
+\end{itemize}
+\end{description}
+\item \textbf{AccuNoDep}
+\begin{description}
+\item \textbf{Description}: AccuNoDep extends Accu model while assuming all sources are independent, proposed by X. L. Dong, L. Berti-Equille, and D. Srivastava. Integrating conflicting data: The role of source dependence. PVLDB, 2(1):550–561, 2009.
+\item \textbf{Parameters}
+\begin{itemize}
+\item \textbf{Dependence a priori probability}: The a priori probability that two data sources are dependent.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }0.5, \textbf{default-value: }0.2\item \textbf{Copied value probability}: The probability that a value provided by a copier is copied.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0\item \textbf{Number of false values}: The number of false values in the underlying domain for each object.
+\item[]\textbf{dataType: }int, \textbf{min-value: }1, \textbf{max-value: }1, \textbf{default-value: }100\item \textbf{Similarity Constant}: The similarity betwen values is weighted for the value confidence computation.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5, \textbf{hidden: }True
+\item \textbf{considerSimilarity}: False for AccuNoDep: the model does not take into account value similarity.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }False, \textbf{hidden: }True
+\item \textbf{considerSourcesAccuracy}: True for AccuNoDep: the model takes into account the accuracy of the sources.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }True, \textbf{hidden: }True
+\item \textbf{considerDependency}: False for AccuNoDep: the model considers that all sources are independent.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }False, \textbf{hidden: }True
+\item \textbf{orderSrcByDependence}: If true, AccuNoDep model is based on source dependence ordering, otherwise on lexicographic ordering.
+\item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }False, \textbf{hidden: }True
+\end{itemize}
+\end{description}
+\item \textbf{TruthFinder}
+\begin{description}
+\item \textbf{Description}: TruthFinder, proposed by X. Yin, J. Han, and P. S. Yu. Truth Discovery with Multiple Conflicting Information Providers on the Web. TKDE, 20(6):796–808, 2008, is a Bayesian model that iteratively computes and updates the trustworthiness of a source as a function of the belief in its claims, and then the belief score of each claim as a function of the trustworthiness of the sources asserting it.
+\item \textbf{Parameters}
+\begin{itemize}
+\item \textbf{Similarity Constant}: The similarity betwen values is weighted for the value confidence computation.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5\item \textbf{Dampening Factor}: The damping factor compensates the effect when sources with similar values are actually dependent.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.1\end{itemize}
+\end{description}
+\item \textbf{SimpleLCA}
+\begin{description}
+\item \textbf{Description}: SimpleLCA (Latent Credibility Analysis) is a probabilistic model proposed by J. Pasternack and D. Roth. Latent Credibility Analysis. In WWW, pp. 1009–1020, 2013. Each source has a probability of being honest, and all sources are considered independent.
+\item \textbf{Parameters}
+\begin{itemize}
+\item \textbf{Prior truth probability}: Prior probability of a claim being the true claim.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5\end{itemize}
+\end{description}
+\item \textbf{GuessLCA}
+\begin{description}
+\item \textbf{Description}: GuessLCA extends SimpleLCA by adding a probability of a source guessing the true value while being honest.
+\item \textbf{Parameters}
+\begin{itemize}
+\item \textbf{Prior truth probability}: Prior probability of a claim being the true claim.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5\end{itemize}
+\end{description}
+\item \textbf{MLE}
+\begin{description}
+\item \textbf{Description}: MLE (Maximum Likelihood Estimation) proposed by D. Wang, L. M. Kaplan, H. K. Le, and T. F. Abdelzaher. On Truth Discovery in Social Sensing: a Maximum Likelihood Estimation Approach. In IPSN, pp. 233–244, 2012, is based on the Expectation Maximization (EM) algorithm to quantify the reliability of sources and the correctness of their observations. It only deals with boolean positive attributes observations.
+\item \textbf{Parameters}
+\begin{itemize}
+\item \textbf{Prior truth probability}: Overall prior probability of the claims being the true claims.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5\item \textbf{r}: The probability that a source provides a value for all data items.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5\end{itemize}
+\end{description}
+\item \textbf{LTM}
+\begin{description}
+\item \textbf{Description}: LTM (Latent Truth Model) proposed by B. Zhao, B. I. P. Rubinstein, J. Gemmell, and J. Han. A Bayesian Approach to Discovering Truth from Conflicting Sources for Data Integration. PVLDB, 5(6):550–561, 2012, uses Bayesian Networks for estimating the truth. LTM iterates over a fixed number of iterations, and compute the value confidence using Collapsed Gibbs Sampling process.
+\item \textbf{Parameters}
+\begin{itemize}
+\item \textbf{Prior truth probability}: Prior probability of how likely each claim is to be true.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0.0, \textbf{max-value: }1.0, \textbf{default-value: }0.5\item \textbf{Prior falsehood probability}: Prior probability of how likely each claim is to be false.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0.0, \textbf{max-value: }1.0, \textbf{default-value: }0.5\item \textbf{Prior true negative count}: Prior number of true negatives for the sources.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0.0, \textbf{max-value: }1.0, \textbf{default-value: }0.1\item \textbf{Prior false positive count}: Prior number of false positives for the sources.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0.0, \textbf{max-value: }1.0, \textbf{default-value: }0.9\item \textbf{Prior false negative count}: Prior number of false negatives for the sources.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0.0, \textbf{max-value: }1.0, \textbf{default-value: }0.1\item \textbf{Prior true positive count}: Prior number of true positives for the sources.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0.0, \textbf{max-value: }1.0, \textbf{default-value: }0.9\item \textbf{Number Of Iterations}: Number of Iterations.
+\item[]\textbf{dataType: }int, \textbf{min-value: }1, \textbf{max-value: }10000, \textbf{default-value: }500\item \textbf{Burn-in}: Collapsed Gibbs Sampling burn-in period (ie, the number of discarded first set of iterations) Must be significantly less than the number of iterations.
+\item[]\textbf{dataType: }int, \textbf{min-value: }0, \textbf{max-value: }1000, \textbf{default-value: }100\item \textbf{Thinning}: Collapsed Gibbs Sampling thinning parameter (ie, the number of iterations to be skipped every time before considering the resul of a selected iteration) Must be significantly less than the number of iterations.
+\item[]\textbf{dataType: }int, \textbf{min-value: }0, \textbf{max-value: }1000, \textbf{default-value: }9\end{itemize}
+\end{description}
+\end{itemize}
+\section{General Parameters}
+Parameters needed for all Truth Discovery Algorithms
+\begin{description}
+\item \textbf{Parameters}
+\begin{itemize}
+\item \textbf{Convergence test threshold}: The difference of source truthworthiness cosine similarity between two successive iterations should be less than the user-defined threshold.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }0.1, \textbf{default-value: }0.001, \textbf{step: }0.001\item \textbf{Initial sources truthworthiness}: Initialization of all sources truthworthiness.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1.0, \textbf{default-value: }0.8\item \textbf{Initial Value Confidence}: Initialization of value confidence for all properties values.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1.0, \textbf{default-value: }1, \textbf{hidden: }True
+\item \textbf{Initial Error Factor}: Initialization of error factor for all properties values.
+\item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1.0, \textbf{default-value: }0.4, \textbf{hidden: }True
+\end{itemize}
+\end{description}
+\section{Combiner}
+The combiner of selected truth discovery algorithms. It is automatically selected if you select more than 1 algorithm and 1 ground truth dataset. It is based on Bayes combination from P. Domingos and M. Pazzani. On the optimality of the simple Bayesian classifier under zero-one loss. Machine Learning, 29:103–130, 1997.
+\end{document}
