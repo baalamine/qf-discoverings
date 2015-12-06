@@ -8,7 +8,7 @@
 \usepackage{csquotes}
 \usepackage{booktabs}
 \usepackage{amsfonts}
-
+\usepackage{graphicx}
 \colorlet{punct}{red!60!black}
 \definecolor{background}{HTML}{EEEEEE}
 \definecolor{delim}{RGB}{20,105,176}
@@ -42,32 +42,13 @@
       {[}{{{\color{delim}{[}}}}{1}
       {]}{{{\color{delim}{]}}}}{1},
 }
-\makeatletter
-\def\@maketitle{%
-  \newpage
-  \null
-  \vskip 2em%
-  \begin{center}%
-  \let \footnote \thanks
-    {\Large\bfseries \@title \par}%
-    \vskip 1.5em%
-    {\normalsize
-      \lineskip .5em%
-      \begin{tabular}[t]{c}%
-        \@author
-      \end{tabular}\par}%
-    \vskip 1em%
-    {\normalsize \@date}%
-  \end{center}%
-  \par
-  \vskip 1.5em}
-\makeatother
+
 
 \newcommand{\lamine}[1]{\textcolor{blue}{#1}}
 %opening
 \title{DAFNA -- RestFul API for Truth Discovery Algorithms}
 \subtitle{API DOCUMENTATION}
-\author{Mouhamadou Lamine BA, Hossam. H. HAMMAD, Laure BERTI-EQUILLE\\ \\ \it{Hamad Bin Khalifa University}}
+\author{\hspace*{-0.5cm}M. Lamine Ba, Hossam. H. Hammady, Laure Berti-Equille\\ \\ \sf{Hamad Bin Khalifa University}\\ \includegraphics[scale=0.3]{qf}}
 
 \date{\begin{tabular}{ll}Creation date:&November 5, 2015\\Revision date:&\today\end{tabular}}
 
@@ -84,11 +65,11 @@
 Data Forensics with Analytics, or for short DAFNA, is a project initiated by the Data Analytics Group in Qatar Computing Research Institute, 
 Hamad Bin Khalifa University.
 One of its various facets aims at providing efficient algorithms and tools for verifying the veracity of information provided by multiple conflicting
-sources. The DAFNA API for truth discovery is a \emph{RestFul API} that enables end user applications to access and use twelve existing truth discovery algorithms
+sources. The DAFNA API for truth discovery is a RestFul API that enables end user applications to access and use twelve existing truth discovery algorithms
 for fact checking and truth discovery when they have to integrate heterogeneous information coming from untrustworthy sources.  This documentation details
 the use of the API for third-party applications.
 
-If you use this API or our online tool AllegatorTrack, please do not forget to aknowledge the authors by citing \textquote{Dalia Attia Waguih, Naman Goel, Hossam M. Hammady,
+If you use this API or related achievements such as the online tool AllegatorTrack, please do not forget to aknowledge the authors by citing \textquote{Dalia Attia Waguih, Naman Goel, Hossam M. Hammady,
 Laure Berti-Equille. AllegatorTrack: Combining and Reporting Results of Truth Discovery from Multi-source Data. The 31th International Conference on Data Engineering (ICDE), 
 Seoul, Korea, 2015}. 
 
@@ -103,7 +84,7 @@ follows the process below.
 \begin{itemize}
  \item Go to \href{http://dafna.qcri.org/users/sign_in}{AllegatorTrack}
  \item Register using a valid email id and email confirmation
- \item Contact DAFNA developers on \href{http://dafna.qcri.org/allegatortrack}{http://dafna.qcri.org/allegatortrack} for token access.
+ \item Contact DAFNA developers for token access.
 \end{itemize}
  Upon token access request done, the user will receive from DAFNA developpers the following access credentials.
 \begin{itemize}
@@ -567,7 +548,7 @@ and their specific input parameters supported by DAFNA API.
 \item[]\textbf{dataType: }int, \textbf{min-value: }0, \textbf{max-value: }1000, \textbf{default-value: }100\item \textbf{Thinning}: Collapsed Gibbs Sampling thinning parameter (ie, the number of iterations to be skipped every time before considering the resul of a selected iteration) Must be significantly less than the number of iterations.
 \item[]\textbf{dataType: }int, \textbf{min-value: }0, \textbf{max-value: }1000, \textbf{default-value: }9\end{itemize}
 \end{description}
-\paragraph*{$^{\ast}$General Parameters.}
+\paragraph*{$^{\dagger}$General Parameters.}
 Parameters needed for all Truth Discovery Algorithms (specified via the \textbf{general\_config} parameter)
 \begin{description}
 \item \textbf{Parameters}
@@ -580,7 +561,7 @@ Parameters needed for all Truth Discovery Algorithms (specified via the \textbf{
 \item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1.0, \textbf{default-value: }0.4, \textbf{hidden: }True
 \end{itemize}
 \end{description}
-\paragraph*{$^{\ast}$Combiner.}
+\paragraph*{$^{\dagger}$Combiner.}
 The combiner of selected truth discovery algorithms. It is automatically selected if you select more than 1 algorithm and 1 ground truth dataset. It is based on Bayes combination from P. Domingos and M. Pazzani. On the optimality of the simple Bayesian classifier under zero-one loss. Machine Learning, 29:103–130, 1997.
 % Job Monitoring 
 \section{Job Monitoring Using Pusher}
@@ -611,20 +592,26 @@ You may find the following pages to be particularly useful:
 \section{Online Tool: AllegatorTrack}
 The main goal of DAFNA project is to design a scalable and accurate truth discovery system to score the veracity of information extracted from multiple 
 online sources.  We design DAFNA API as the first proposed API that allows users to tests and compares a large class of well-known truth finding algorithms
-on different scenarios and datasets. AllegatorTrack is the first application that uses DAFNA API and provides to users
+on different scenarios and datasets. AllegatorTrack, whose the interface is depicted in Figure~\ref{allegatortrack}, is the first application that uses DAFNA API and provides to users
 an online plateform for testing the different features of the API. AllegatorTrack application is accessible at: \href{http://dafna.qcri.org/users/sign\_in}{\small{http://dafna.qcri.org/users/sign\_in}}.
+
+% snapshot
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.45]{snapshot} 
+\caption{AllegatorTrack System}\label{allegatortrack}
+\end{figure}
 
 % Ongoing development
 \section{Further Development}
 Currently, the API is still in improvements and many new other aspects of truth finding and endpoints are still under investigation, based on recent
 proposed development in the field, discussions with early adopter developers, and users' feedbacks. For example, the scheme may support HTTPS in the 
-future, the response body format may support other output formatting like XML.Most importantly, the API must be extended in order to propose broader 
-class of truth finding algorithms, in particular the new ones.
-in the future.
+future, the response body format may support other output formatting like XML.Most importantly, the API must be extended in the future in order to propose
+broader class of truth finding algorithms, in particular the new ones.
 
 % Questions or Feebacks
 \section{Questions or Feebacks}
-For any questions or feebacks about the API, please feel free to contact us by email on \href{mailto:lberti@qf.org.qa}{dafna.qf.org.qa}
+For any questions or feebacks about the API, please feel free to contact us %by email on \href{mailto:lberti@qf.org.qa}{dafna.qf.org.qa}
 or visit the website of the DAFNA project for more details by following the link below:
 \href{http://dafna.qcri.org}{\small{http://dafna.qcri.org}}.
 
