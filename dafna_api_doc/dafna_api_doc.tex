@@ -42,11 +42,33 @@
       {[}{{{\color{delim}{[}}}}{1}
       {]}{{{\color{delim}{]}}}}{1},
 }
+\makeatletter
+\def\@maketitle{%
+  \newpage
+  \null
+  \vskip 2em%
+  \begin{center}%
+  \let \footnote \thanks
+    {\Large\bfseries \@title \par}%
+    \vskip 1.5em%
+    {\normalsize
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    \vskip 1em%
+    {\normalsize \@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em}
+\makeatother
+
 \newcommand{\lamine}[1]{\textcolor{blue}{#1}}
 %opening
 \title{DAFNA -- RestFul API for Truth Discovery Algorithms}
 \subtitle{API DOCUMENTATION}
-\author{Mouhamadou Lamine Ba\\ Hossam. H. HAMMADY\\ Laure BERTI-EQUILLE}
+\author{Mouhamadou Lamine BA, Hossam. H. HAMMAD, Laure BERTI-EQUILLE\\ \\ \it{Hamad Bin Khalifa University}}
+
 \date{\begin{tabular}{ll}Creation date:&November 5, 2015\\Revision date:&\today\end{tabular}}
 
 \begin{document}
@@ -65,6 +87,12 @@ One of its various facets aims at providing efficient algorithms and tools for v
 sources. The DAFNA API for truth discovery is a \emph{RestFul API} that enables end user applications to access and use twelve existing truth discovery algorithms
 for fact checking and truth discovery when they have to integrate heterogeneous information coming from untrustworthy sources.  This documentation details
 the use of the API for third-party applications.
+
+If you use this API or our online tool AllegatorTrack, please do not forget to aknowledge the authors by citing \textquote{Dalia Attia Waguih, Naman Goel, Hossam M. Hammady,
+Laure Berti-Equille. AllegatorTrack: Combining and Reporting Results of Truth Discovery from Multi-source Data. The 31th International Conference on Data Engineering (ICDE), 
+Seoul, Korea, 2015}. 
+
+
 
 
 % Authentication
@@ -383,8 +411,8 @@ The main interest of using the API is to create a truth discovery job which is p
 of a runset. Such a instantiation requires to specify one or more truth discovery algorithms to use through the
 argument \textbf{checked\_algo}. In the following, we detail the twelve truth discovery algorithms 
 and their specific input parameters supported by DAFNA API. 
-\begin{itemize}
-\item \textbf{Cosine}
+
+\subsection{Cosine}
 \begin{description}
 \item \textbf{Description}: Cosine is a heuristic approach for estimating a value confidence and source trustworthiness, based on the cosine similarity measure proposed by A. Galland, S. Abiteboul, A. Marian, and P. Senellart. Corroborating Information from Disagreeing Views. In WSDM, pp. 131–140, 2010.
 \item \textbf{Parameters}
@@ -393,7 +421,7 @@ and their specific input parameters supported by DAFNA API.
 \item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1.0, \textbf{default-value: }1\item \textbf{Prediction constant}: Constant that gives more weight to predictable views (eg, sources with consistently often correct claims or consistently often wrong claims).
 \item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.2\end{itemize}
 \end{description}
-\item \textbf{2-Estimates}
+\subsection{2-Estimates}
 \begin{description}
 \item \textbf{Description}: 2-Estimates is a probabilistic model built over the heuristic model, Cosine and proposed by A. Galland, S. Abiteboul, A. Marian, and P. Senellart. Corroborating Information from Disagreeing Views. In WSDM, pp. 131–140, 2010.
 \item \textbf{Parameters}
@@ -401,7 +429,7 @@ and their specific input parameters supported by DAFNA API.
 \item \textbf{Normalization Factor}: The weight used for normalizing sources' trustworthiness and values' confidence.
 \item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5\end{itemize}
 \end{description}
-\item \textbf{3-Estimates}
+\subsection{3-Estimates}
 \begin{description}
 \item \textbf{Description}: 3-Estimates extends 2-Estimates proposed by A. Galland, S. Abiteboul, A. Marian, and P. Senellart. Corroborating Information from Disagreeing Views. In WSDM, pp. 131–140, 2010.
 \item \textbf{Parameters}
@@ -410,7 +438,7 @@ and their specific input parameters supported by DAFNA API.
 \item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1.0, \textbf{default-value: }0.4\item \textbf{Normalization Factor}: The constant used for normalizing source truthworthiness and value confidence.
 \item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5\end{itemize}
 \end{description}
-\item \textbf{Depen}
+\subsection{Depen}
 \begin{description}
 \item \textbf{Description}: First Bayesian truth discovery model that takes into cosideration the copying relationship between sources, proposed by X. L. Dong, L. Berti-Equille, and D. Srivastava. Integrating conflicting data: The role of source dependence. PVLDB, 2(1):550–561, 2009.
 \item \textbf{Parameters}
@@ -430,7 +458,7 @@ and their specific input parameters supported by DAFNA API.
 \item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }False, \textbf{hidden: }True
 \end{itemize}
 \end{description}
-\item \textbf{Accu}
+\subsection{Accu}
 \begin{description}
 \item \textbf{Description}: Accu extends Depen model and considers the source accuracy in addition to the source dependence, proposed by X. L. Dong, L. Berti-Equille, and D. Srivastava. Integrating conflicting data: The role of source dependence. PVLDB, 2(1):550–561, 2009.
 \item \textbf{Parameters}
@@ -450,7 +478,7 @@ and their specific input parameters supported by DAFNA API.
 \item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }False, \textbf{hidden: }True
 \end{itemize}
 \end{description}
-\item \textbf{AccuSim}
+\subsection{AccuSim}
 \begin{description}
 \item \textbf{Description}: Accusim extends Accu model and considers the value similarity, proposed by X. L. Dong, L. Berti-Equille, and D. Srivastava. Integrating conflicting data: The role of source dependence. PVLDB, 2(1):550–561, 2009.
 \item \textbf{Parameters}
@@ -469,7 +497,7 @@ and their specific input parameters supported by DAFNA API.
 \item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }False, \textbf{hidden: }True
 \end{itemize}
 \end{description}
-\item \textbf{AccuNoDep}
+\subsection{AccuNoDep}
 \begin{description}
 \item \textbf{Description}: AccuNoDep extends Accu model while assuming all sources are independent, proposed by X. L. Dong, L. Berti-Equille, and D. Srivastava. Integrating conflicting data: The role of source dependence. PVLDB, 2(1):550–561, 2009.
 \item \textbf{Parameters}
@@ -489,7 +517,7 @@ and their specific input parameters supported by DAFNA API.
 \item[]\textbf{dataType: }boolean, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }False, \textbf{hidden: }True
 \end{itemize}
 \end{description}
-\item \textbf{TruthFinder}
+\subsection{TruthFinder}
 \begin{description}
 \item \textbf{Description}: TruthFinder, proposed by X. Yin, J. Han, and P. S. Yu. Truth Discovery with Multiple Conflicting Information Providers on the Web. TKDE, 20(6):796–808, 2008, is a Bayesian model that iteratively computes and updates the trustworthiness of a source as a function of the belief in its claims, and then the belief score of each claim as a function of the trustworthiness of the sources asserting it.
 \item \textbf{Parameters}
@@ -498,7 +526,7 @@ and their specific input parameters supported by DAFNA API.
 \item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5\item \textbf{Dampening Factor}: The damping factor compensates the effect when sources with similar values are actually dependent.
 \item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.1\end{itemize}
 \end{description}
-\item \textbf{SimpleLCA}
+\subsection{SimpleLCA}
 \begin{description}
 \item \textbf{Description}: SimpleLCA (Latent Credibility Analysis) is a probabilistic model proposed by J. Pasternack and D. Roth. Latent Credibility Analysis. In WWW, pp. 1009–1020, 2013. Each source has a probability of being honest, and all sources are considered independent.
 \item \textbf{Parameters}
@@ -506,7 +534,7 @@ and their specific input parameters supported by DAFNA API.
 \item \textbf{Prior truth probability}: Prior probability of a claim being the true claim.
 \item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5\end{itemize}
 \end{description}
-\item \textbf{GuessLCA}
+\subsection{GuessLCA}
 \begin{description}
 \item \textbf{Description}: GuessLCA extends SimpleLCA by adding a probability of a source guessing the true value while being honest.
 \item \textbf{Parameters}
@@ -514,7 +542,7 @@ and their specific input parameters supported by DAFNA API.
 \item \textbf{Prior truth probability}: Prior probability of a claim being the true claim.
 \item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5\end{itemize}
 \end{description}
-\item \textbf{MLE}
+\subsection{MLE}
 \begin{description}
 \item \textbf{Description}: MLE (Maximum Likelihood Estimation) proposed by D. Wang, L. M. Kaplan, H. K. Le, and T. F. Abdelzaher. On Truth Discovery in Social Sensing: a Maximum Likelihood Estimation Approach. In IPSN, pp. 233–244, 2012, is based on the Expectation Maximization (EM) algorithm to quantify the reliability of sources and the correctness of their observations. It only deals with boolean positive attributes observations.
 \item \textbf{Parameters}
@@ -523,7 +551,7 @@ and their specific input parameters supported by DAFNA API.
 \item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5\item \textbf{r}: The probability that a source provides a value for all data items.
 \item[]\textbf{dataType: }double, \textbf{min-value: }0, \textbf{max-value: }1, \textbf{default-value: }0.5\end{itemize}
 \end{description}
-\item \textbf{LTM}
+\subsection{LTM}
 \begin{description}
 \item \textbf{Description}: LTM (Latent Truth Model) proposed by B. Zhao, B. I. P. Rubinstein, J. Gemmell, and J. Han. A Bayesian Approach to Discovering Truth from Conflicting Sources for Data Integration. PVLDB, 5(6):550–561, 2012, uses Bayesian Networks for estimating the truth. LTM iterates over a fixed number of iterations, and compute the value confidence using Collapsed Gibbs Sampling process.
 \item \textbf{Parameters}
@@ -539,7 +567,6 @@ and their specific input parameters supported by DAFNA API.
 \item[]\textbf{dataType: }int, \textbf{min-value: }0, \textbf{max-value: }1000, \textbf{default-value: }100\item \textbf{Thinning}: Collapsed Gibbs Sampling thinning parameter (ie, the number of iterations to be skipped every time before considering the resul of a selected iteration) Must be significantly less than the number of iterations.
 \item[]\textbf{dataType: }int, \textbf{min-value: }0, \textbf{max-value: }1000, \textbf{default-value: }9\end{itemize}
 \end{description}
-\end{itemize}
 \paragraph*{$^{\ast}$General Parameters.}
 Parameters needed for all Truth Discovery Algorithms (specified via the \textbf{general\_config} parameter)
 \begin{description}
@@ -599,6 +626,6 @@ in the future.
 \section{Questions or Feebacks}
 For any questions or feebacks about the API, please feel free to contact us by email on \href{mailto:lberti@qf.org.qa}{dafna.qf.org.qa}
 or visit the website of the DAFNA project for more details by following the link below:
-\href{http://daqcri.github.io/dafna/\#/dafna/home\_sections/home.html}{\small{http://daqcri.github.io/dafna/\#/dafna/home\_sections/home.html}}.
+\href{http://dafna.qcri.org}{\small{http://dafna.qcri.org}}.
 
 \end{document}
