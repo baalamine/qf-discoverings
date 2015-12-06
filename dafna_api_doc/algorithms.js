@@ -1,4 +1,4 @@
-var algorithms = [
+[
   {name: "Cosine", description: "Cosine is a heuristic approach for estimating a value confidence and source trustworthiness, based on the cosine similarity measure proposed by A. Galland, S. Abiteboul, A. Marian, and P. Senellart. Corroborating Information from Disagreeing Views. In WSDM, pp. 131–140, 2010.", params: [
     {name: 'Initial Value Confidence', value: 1, dataType: 'double', min: 0, max: 1.0, desc: "Initialization of value confidence for all properties values."},
     {name: 'Prediction constant', value: 0.2, dataType: 'double', min: 0, max: 1, desc: 'Constant that gives more weight to predictable views (e.g., sources with consistently often correct claims or consistently often wrong claims).'},
