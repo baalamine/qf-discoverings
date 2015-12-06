@@ -569,6 +569,21 @@ The combiner of selected truth discovery algorithms. It is automatically selecte
 Let us consider a typical scenario where a given user, holding an access token \textbf{\textquote{\_XYH128PL04}} to the DAFNA API, would 
 like to discover the correct list of authors of a set of books. The user has first extracted the candidate authors of
 these books from different Web sources and has stored them into a csv file \textbf{book.csv} in a local directory named \textbf{./datasets/}.
+To discover the truth using our API, the user needs to upload (or create) the dataset, get the dataset identifier, create a runset (using \textbf{Accu} algorithm),
+get the runset identifier, and finally view the result of this runset. The user can further decide to delete the copy of the dataset on the server. To this end, 
+she (or he) should issues following sequence of requests.
+\begin{enumerate}
+ \item curl -X POST http://dafna.qcri.org/datasets -H  \textquote{Content-Type: application/x-www-form-urlencoded; charset=UTF-8} 
+  -d \textquote{user\_token=\_XYH128PL04} -d \textquote{other\_url=./dataset/book.csv} -d \textquote{original\_filename=book.csv\&kind=claims} (upload the dataset of the server)
+ \item curl -X GET http://dafna.qcri.org/datasets -d \textquote{user\_token=\_XYH128PL04} -d \textquote{kind=claims} -d \textquote{start=0} 
+ -d \textquote{length=54} (list the set of datasets on the server: let's assume that this returns the book dataset with the identifier \textbf{\textquote{120}})
+ \item curl -X POST http://dafna.qcri.org/runsets -H ``Content-type: application/json" -d `\{\textquote{user\_token}: \textquote{\_XYH128PL04}, \textquote{datasets}: \{\textquote{120}:\textquote{1}\}, \textquote{checked\_algo}: \{\textquote{Accu}: [\textquote{0.2}, \textquote{0}, \textquote{100}, \textquote{0.5}, \textquote{false}, \textquote{true}, \textquote{true}, \textquote{false}] \}, \textquote{general\_config}:[\textquote{0.001}, \textquote{0.8}, \textquote{1}, \textquote{0.4}]\}' 
+(execute a truth discovery on book.csv using \textbf{Accu} algorithm)
+ \item  curl -X GET http://dafna.qcri.org/runsets -d \textquote{user\_token=\_XYH128PL04} (list the set of current runsets: let's assume it returns our runset with the identier \textbf{\textquote{1}})
+\item curl -X GET http://dafna.qcri.org/runsets/1/results -d \textquote{user\_token=\_XYH128PL04} (view the result of the truth discovery process over book.csv)
+\item curl -X DELETE http://dafna.qcri.org/datasets/120 -d \textquote{user\_token=\_XYH128PL04} (remove the copy of the dataset on the server)
+ \end{enumerate}
+
 % Job Monitoring 
 \section{Job Monitoring using Pusher}
 Some of the jobs you submit (e.g. uploading datasets or running algorithm(s)) might take time to complete
