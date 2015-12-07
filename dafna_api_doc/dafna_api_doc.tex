@@ -118,7 +118,7 @@ For instance given in a flight dataset, we obtain using (1):\\
  \item[2.] \textbf{ObjectID, PropertyID, PropertyValues, SourceID, TimeStamp}
 \end{enumerate}
 
-Given a book dataset with a property having multiple, we obtain using (2):\\
+Given a book dataset with a property having multiple values, we obtain using (2):\\
 
  \scriptsize
 {
@@ -136,11 +136,24 @@ Given a book dataset with a property having multiple, we obtain using (2):\\
 If the dataset adopts the second type of header line, the system will automatically split the contents of this 
 column on the comma when running multi-valued algorithms.
 
-Similarly, any given ground truth dataset must be a CSV file with a header line having the following column
-names in any order: \textbf{ObjectID, PropertyID, PropertyValue}. Values in \textbf{ObjectID} should match those in the 
-corresponding dataset file so that objects are correctly matched (case sensitive). As for datasets, you can replace
+As for the ground truth datasets they must be a CSV file with a header line having the following column
+names in any order: \textbf{ObjectID, PropertyID, PropertyValue}. Note that the values in \textbf{ObjectID} should match those in the 
+corresponding dataset file so that objects are correctly matched (case sensitive). Again, you can replace
 \textbf{PropertyValue} by \textbf{PropertyValues} and the system will automatically split the contents of this column on the 
-comma when running multi-valued algorithms.
+comma when running multi-valued algorithms. Below is an example of a ground truth dataset formatting.\\
+
+\scriptsize
+{
+\begin{tabular}{l}
+\textquote{\textbf{ObjectID}},~\textquote{\textbf{PropertyID}},~\textquote{\textbf{PropertyValue}}\\
+\textquote{AA-1221-MCO-ORD2011-12-01},~\textquote{ExpectedDepartureTime},~\textquote{12/01/2011 08:00 PM}\\
+\textquote{AA-1221-MCO-ORD2011-12-01},~\textquote{ActualDepartureTime},~\textquote{12/01/2011 08:23 PM}\\
+\textquote{AA-1221-MCO-ORD2011-12-01},~\textquote{DepartureGate},~\textquote{17}\\
+\textquote{AA-1221-MCO-ORD2011-12-01},~\textquote{ExpectedArrivalTime},\textquote{12/01/2011 09:45 PM}\\
+\end{tabular}
+}
+
+\normalsize
 
 
 % Request format
