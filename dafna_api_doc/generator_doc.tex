@@ -6,6 +6,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{graphicx}
+\usepackage{csquotes}
 \usepackage{filemod}
 \colorlet{punct}{red!60!black}
 \definecolor{background}{HTML}{EEEEEE}
@@ -49,9 +50,9 @@
 \newcommand{\gt}[1]{\ensuremath{\mathrm{GT}(#1)}}
 
 %opening
-\title{Synthetic Dataset Generator for Truth Discovery Scenarios}
+\title{DAFNA API -- Synthetic Dataset Generator for Truth Discovery}
 \subtitle{Documentation}
-\author{Mouhamadou Lamine Ba, Laure Berti-Equille\\ \\ \sf{Qatar Computing Research Institute}\\ \sf{Hamad Bin Khalifa University}\\ \includegraphics[scale=0.3]{qf}}
+\author{\hspace*{-0.5cm}M. Lamine Ba, Hossam. H. Hammady, Laure Berti-Equille\\\\ \\ \sf{Qatar Computing Research Institute}\\ \sf{Hamad Bin Khalifa University}\\ \includegraphics[scale=0.3]{qf}}
 \date{\begin{tabular}{ll}Creation date~:& November 5, 2015 \\ Revision date~:& \today \\\end{tabular}}
 
 \begin{document}
@@ -64,11 +65,31 @@
 
 % Introduction
 \section{Introduction}
-In order to provide to users the ability to test and compare multiple truth finding algorithms on various dataset settings, some of them 
+Data Forensics with Analytics, or for short DAFNA, is a project initiated by the Data Analytics Group in Qatar Computing Research Institute, 
+Hamad Bin Khalifa University. One of its various facets aims at providing efficient algorithms and tools for verifying the veracity of information
+provided by multiple conflicting sources. 
+In order to provide to users the ability to test and compare multiple truth discovery algorithms on various dataset settings, some of them 
 being not easy to obtain in practice, we provide the \href{http://dafna.qcri.org}{DAFNA API} 
 together with a synthetic dataset generator. The synthetic dataset generator allows to simulate a large variety of scenarios where sources
 present different behaviors in terms of coverage, error rate, reliability level, conflicting information, ect. More importantly, the generator
-guarantees a ground truth for the evaluation of the accuracy of compared truth finding algorithms. 
+guarantees a ground truth for the evaluation of the accuracy of compared truth discovery algorithms. 
+
+If you use this API or related achievements such as the synthetic dataset generator, please do not forget to aknowledge the authors by citing \textquote{Dalia Attia Waguih, Naman Goel, Hossam M. Hammady,
+Laure Berti-Equille. AllegatorTrack: Combining and Reporting Results of Truth Discovery from Multi-source Data. The 31th International Conference on Data Engineering (ICDE), 
+Seoul, Korea, 2015}. 
+
+\subsection*{Bibtex.}
+
+@INPROCEEDINGS\{7113396, \\
+author=\{Waguih, D.A. and Goel, N. and Hammady, H.M. and Berti-Equille, L.\},\\
+booktitle=\{Data Engineering (ICDE), 2015 IEEE 31st International Conference on Data Engineering\},\\
+title=\{AllegatorTrack: Combining and reporting results of truth discovery from multi-source data\},\\ 
+year=\{2015\},\\ 
+pages=\{1440-1443\},\  
+doi=\{10.1109/ICDE.2015.7113396\},\\ 
+month=\{April\}
+\}
+
 % Free Jar
 \section{JAVA Set Up}
 The synthetic dataset generator has been implemented under JAVA version 7. The corresponding jar file is made available for free download at:
