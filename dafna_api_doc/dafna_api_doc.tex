@@ -48,7 +48,7 @@
 %opening
 \title{DAFNA -- RestFul API for Truth Discovery Algorithms}
 \subtitle{API DOCUMENTATION}
-\author{\hspace*{-0.5cm}M. Lamine Ba, Hossam. H. Hammady, Laure Berti-Equille\\ \\ \sf{Hamad Bin Khalifa University}\\ \includegraphics[scale=0.3]{qf}}
+\author{\hspace*{-0.5cm}M. Lamine Ba, Hossam. H. Hammady, Laure Berti-Equille\\ \\ \sf{Qatar Computing Research institute}\\ \sf{Hamad Bin Khalifa University}\\ \includegraphics[scale=0.3]{qf}}
 
 \date{\begin{tabular}{ll}Creation date:&November 5, 2015\\Revision date:&\today\end{tabular}}
 
@@ -91,6 +91,58 @@ follows the process below.
  \item \textbf{Authentication Token}: API user's access key
  \item \textbf{Encrypted Password}: user's secret key
 \end{itemize}
+
+% Dataset Format
+\section{Dataset Format}\label{dataset_format}
+All the datasets used as input through the API must be CVS files having one of the two following header lines (the order between column names is important
+and must be respected).
+\begin{enumerate}
+ \item[1.] \textbf{ObjectID, PropertyID, PropertyValue, SourceID, TimeStamp}
+\end{enumerate}
+
+For instance given in a flight dataset, we obtain using (1):\\ 
+
+ \scriptsize
+{
+ \begin{tabular}{l}
+\textquote{\textbf{ObjectID}},~\textquote{\textbf{PropertyID}},~\textquote{\textbf{PropertyValue}},~\textquote{\textbf{SourceID}},~\textquote{\textbf{TimeStamp}}\\
+\textquote{AA-1623-EWR-MIA2011-12-18},~\textquote{ActualDepartureTime},~\textquote{12/18/11 2:58 PM (-05:00)},~\textquote{myrateplan},~\textquote{2011-12-18}\\
+\textquote{AA-1623-EWR-MIA2011-12-18},~\textquote{ActualArrivalTime},~\textquote{12/18/11 5:14 PM (-05:00)},~\textquote{myrateplan},~\textquote{2011-12-18}\\
+\textquote{AA-1623-EWR-MIA2011-12-18},~\textquote{ActualDepartureTime},~\textquote{12/18/11 2:58 PM (-05:00)},~\textquote{helloflight},~\textquote{2011-12-18}\\
+\textquote{AA-1623-EWR-MIA2011-12-18},~\textquote{ActualArrivalTime},~\textquote{12/18/11 5:14 PM (-05:00)},~\textquote{helloflight},~\textquote{2011-12-18}
+\end{tabular}
+}
+
+\normalsize
+\begin{enumerate}
+ \item[2.] \textbf{ObjectID, PropertyID, PropertyValues, SourceID, TimeStamp}
+\end{enumerate}
+
+Given a book dataset with a property having multiple, we obtain using (2):\\
+
+ \scriptsize
+{
+ \begin{tabular}{l}
+\textquote{\textbf{ObjectID}},~\textquote{\textbf{PropertyID}},~\textquote{\textbf{PropertyValues}},~\textquote{\textbf{SourceID}},~\textquote{\textbf{TimeStamp}}\\
+\textquote{0023606924},~\textquote{AuthorName},~\textquote{schaefer.~marcus, johnsonbaugh.~richard},~\textquote{a1books},~\textquote{null}\\
+\textquote{0023606924},~\textquote{AuthorName},~\textquote{schaefer.~marcus, johnsonbaugh.~richard},~\textquote{alinonline},~\textquote{null}\\
+\textquote{0023606924},~\textquote{AuthorName},~\textquote{schaefer,~marcus, johnsonbaugh.~richard},~\textquote{california textbooks},~\textquote{null}\\
+\textquote{0023606924},~\textquote{AuthorName},~\textquote{johnsonbaugh.~richard},~\textquote{deepak sachdeva},~\textquote{null}\\ \\
+\end{tabular}
+}
+
+
+\normalsize
+If the dataset adopts the second type of header line, the system will automatically split the contents of this 
+column on the comma when running multi-valued algorithms.
+
+Similarly, any given ground truth dataset must be a CSV file with a header line having the following column
+names in any order: \textbf{ObjectID, PropertyID, PropertyValue}. Values in \textbf{ObjectID} should match those in the 
+corresponding dataset file so that objects are correctly matched (case sensitive). As for datasets, you can replace
+\textbf{PropertyValue} by \textbf{PropertyValues} and the system will automatically split the contents of this column on the 
+comma when running multi-valued algorithms.
+
+
 % Request format
 \section{Request Format}
 % Scheme
@@ -188,12 +240,7 @@ in future
 \begin{enumerate}
  \item One of \textbf{s3\_key} or \textbf{other\_url} parameters are mandatory for parsing dataset. 
  \item All uploaded files should be encoded in \textbf{UTF-8}.
- \item Be sure that your dataset respects the required format, i.e., it is a CSV file 
- having a header consisting of the following column names in order: \textbf{ObjectID},
- \textbf{PropertyID}, \textbf{PropertyValue}, \textbf{SourceID}, \textbf{TimeStamp}. 
- A sample example of datasets properly formatted for the API is available at:
- \href{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/realworldDS/book.html}{\small{http://daqcri.github.io/dafna/\#/dafna/exp\_sections/realworldDS/book.html}}
- %Note that you can replace \textbf{PropertyValue} by \textbf{PropertyValues} and the system will automatically split the contents of this column on the comma when running multi-valued algorithms.
+ \item Be sure that your dataset fulfills the required format as described in Section~\ref{dataset_format}.
 \end{enumerate}
 %\textbf{Example}
 %\begin{description}
