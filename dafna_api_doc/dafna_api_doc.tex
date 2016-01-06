@@ -250,7 +250,9 @@ The current version of the API provides 8 endpoints, 4 among them are accessed v
 \item \textbf{user\_token}: secret token provided to the client for authentication 
 \item \textbf{s3\_key}: a file's s3 key if the file is uploaded at Amazon's s3 official. Right access to this bucket 
 is needed.
-\item \textbf{other\_url}: URL (other than the s3 key) if the dataset file is located somewhere else, e.g. in a local computer.
+\item \textbf{other\_url}: URL (other than the s3 key) if the dataset file is located somewhere else, e.g. in your personnal
+server. Make sure to provide a public url, e.g. an url from online storage services like Dropbox, Google Drive, or ICloud Drive.
+If the url is not public, your dataset will not be processed properly.
 \item \textbf{kind}: either \textquote{claims} or \textquote{ground} corresponding to the different types of handled datasets
 \item \textbf{original\_filename}: name of the uploaded file. It corresponds to any name that you want to give for identification
 in future
