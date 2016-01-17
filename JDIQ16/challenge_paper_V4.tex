@@ -67,7 +67,7 @@
 \begin{document}
 
 % HEADERS
-\markboth{L. Berti-Equille, M. L. BA, H. M. Hammady}{Veracity of Big Data: Challenges of Cross-modal Truth Discovery}
+\markboth{L. Berti-Equille, M. L. BA}{Veracity of Big Data: Challenges of Cross-modal Truth Discovery}
 % TITLE
 \title{Veracity of Big Data: Challenges of Cross-modal Truth Discovery}
 % AUTHORS AND AFFILIATION
@@ -116,11 +116,15 @@ and applications in the context of social media and crowd-sourcing~\cite{GaoLZFH
  However, some studies showed that most of prior work suffers from scalability issues, complex parameter setting and non repeatability 
  of the results due to randomized initialization (see~\cite{BW2014} for a thorough analysis). Moreover, it is unlikely that one method dominates
  all others across all application domains and most approaches, relying on majority voting, fall short for pessimistic scenarios where most of the 
- sources are malicious and falsify information. It is currently unclear which techniques are the best suited as they are highly data-dependent and 
- quality performance evaluation depends on the available samples of ground truth data. 
+ sources are malicious and falsify information. As a consequence, it is currently unclear which techniques are the best suited as they are highly 
+ data-dependent and quality performance evaluation depends on the available samples of ground truth data. 
 
  In this challenge paper, we argue that the next generation of data management systems need to 
- manage not only volume and variety of Big Data but most importantly veracity of data. Designing end-to-end truth discovery systems requires a fundamental paradigm shift largely driven by Machine Learning advances. It goes beyond adding new layers of data fusion heuristics or developing yet another probabilistic graphical truth discovery model. Actionable, cross-modal, and Web-scale truth discovery requires a transdisciplinary approach to analyze the dynamic and cross-modal dimensions of rapidly evolving networks of sources and multi-media contents. 
+ manage not only volume and variety of Big Data but most importantly veracity of data. Designing
+ end-to-end truth discovery systems requires a fundamental paradigm shift largely driven by Machine Learning advances.
+ It goes beyond adding new layers of data fusion heuristics or developing yet another probabilistic graphical truth discovery model. 
+ Actionable, cross-modal, and Web-scale truth discovery requires a transdisciplinary approach to analyze the dynamic and cross-modal
+ dimensions of rapidly evolving networks of sources and multi-media contents. 
 %\vspace{-0.1cm}
 % ****************** ARCHITECTURE ****************************************
 %\section{Challenges of Actionable Web-scale Truth Discovery}
@@ -135,12 +139,18 @@ The agility of a truth discovery system is of utmost importance to efficiently e
 \item in various data formats, structures, and semantics (e.g., texts, Web tables, structured data, etc.); and
 \item  conveyed by various media and technologies (e.g., tweets, Instagram images, Youtube videos, Web pages, RSS feeds, etc.).
 \end{inparaenum}
-The main challenge is to address cross-modality and cross-language issues in the context of truth discovery where the linkage of various evidences in audio, image, video, text formats ad languages has to be achieved as accurately as possible to corroborate events. This refers to cross-media entity and event linking where Deep Learning has just started to demonstrate some interesting results and can be leveraged for cross-modal truth discovery.
+The main challenge is to address cross-modality and cross-language issues in the context of truth discovery where the linkage of various 
+evidences in audio, image, video, text formats ad languages has to be achieved as accurately as possible to corroborate events. This refers
+to cross-media entity and event linking where Deep Learning has just started to demonstrate some interesting results and can be leveraged for
+cross-modal truth discovery.
 \vspace*{-0.23cm}
 
 \paragraph*{Timely and Actionable Truth Discovery} 
-In a humanitarian context for example, truth discovery from quasi real-time data could save lives. To be actionable, information extraction and truth discovery computation need to be streamlined, prioritized depending on the level of emergency and incompleteness of available information, and finally adjusted to the communities that will 
-use the data (e.g., rescue team, NGOs). Time-dependent estimation and correction of observer bias, selection bias and long-tail phenomenon problem (e.g., where very few sources provide the first information after a disaster) are challenging tasks for quasi real-time truth discovery.
+In a humanitarian context for example, truth discovery from quasi real-time data could save lives. To be actionable, information extraction and 
+truth discovery computation need to be streamlined, prioritized depending on the level of emergency and incompleteness of available information,
+and finally adjusted to the communities that will 
+use the data (e.g., rescue team, NGOs). Time-dependent estimation and correction of observer bias, selection bias and long-tail phenomenon problem
+(e.g., where very few sources provide the first information after a disaster) are challenging tasks for quasi real-time truth discovery.
 \vspace*{-0.23cm}
 
 \paragraph*{ Estimation of Incompleteness, Biases and Errors in the Truth Discovery Process}  
