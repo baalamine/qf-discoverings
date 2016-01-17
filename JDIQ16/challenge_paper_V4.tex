@@ -97,16 +97,27 @@ media data is increasing.  Truth discovery from
 the Web has significant practical importance as online rumor and misinformation
 can have tremendous impacts on our society and everyday life.
 One of the fundamental difficulties is that data can be biased, noisy, outdated, incorrect, misleading and
-thus unreliable. Conflicting data from multiple sources amplifies this problem and veracity of data has to be estimated.
+thus unreliable. Conflicting data from multiple sources amplifies this problem and veracity of data has to 
+be estimated.
 
 Beyond the emerging field of computational journalism and the success of online fact-checkers (e.g., FactCheck\footnote{\url{www.factcheck.org/}}, ClaimBuster\footnote{\url{idir.uta.edu/claimbuster}}), 
  truth discovery is a long-standing and challenging problem studied by many research communities in artificial intelligence, databases, and complex systems, and under various 
 names: fact-checking, data and knowledge fusion,  information trustworthiness, credibility or information corroboration (see \cite{Berti2015} for a survey).  The ultimate goal  is to predict the truth label of a set of assertions claimed by multiple information sources
  and to infer sources' reliability with no or few prior knowledge. One 
 major line of previous work aimed at iteratively computing and updating the source's
-trustworthiness as a belief function in its claims, and then the belief score of each claim as a function of its sources' trustworthiness~\cite{YinHY08}. More complex probabilistic models have then incorporated various aspects beyond source trustworthiness and claim belief such as the dependence between sources~\cite{Dong:2010,DongBHS10a}, the correlation of claims~\cite{Pochampally2014}, the notion of evolving truth~\cite{DongBS09a}.  Recent contributions have further relaxed prior modeling assumptions to deal with truth existence~\cite{ZhiZTGYJH15}, approximate truth discovery~\cite{Wang2015a,LiLGSZDFH14},  truth evolution~\cite{LiLGSZFH15,JiaWLG13}, and applications in the context of social media and  crowd sourcing~\cite{GaoLZFH15,MaLLQGZSZJH15}
+trustworthiness as a belief function in its claims, and then the belief score of each 
+claim as a function of its sources' trustworthiness~\cite{YinHY08}. More complex probabilistic
+models have then incorporated various aspects beyond source trustworthiness and claim belief such
+as the dependence between sources~\cite{Dong:2010,DongBHS10a}, the correlation of claims~\cite{Pochampally2014},
+the notion of evolving truth~\cite{DongBS09a}.  Recent contributions have further relaxed prior modeling assumptions
+to deal with truth existence~\cite{ZhiZTGYJH15}, approximate truth discovery~\cite{Wang2015a,LiLGSZDFH14},  truth evolution~\cite{LiLGSZFH15,JiaWLG13},
+and applications in the context of social media and crowd-sourcing~\cite{GaoLZFH15,MaLLQGZSZJH15}
 
- However, some studies showed that most of prior work suffers from scalability issues, complex parameter setting and non repeatability of the results due to randomized initialization (see~\cite{BW2014} for a thorough analysis). Moreover, it is unlikely that one method dominates all others across all datasets and most approaches relying on majority voting fall short for pessimistic scenarios where most of the sources are malicious and falsify information. It is currently unclear which techniques are the best suited as they are highly data-dependent and quality performance evaluation depends on the available samples of ground truth data. 
+ However, some studies showed that most of prior work suffers from scalability issues, complex parameter setting and non repeatability 
+ of the results due to randomized initialization (see~\cite{BW2014} for a thorough analysis). Moreover, it is unlikely that one method dominates
+ all others across all application domains and most approaches, relying on majority voting, fall short for pessimistic scenarios where most of the 
+ sources are malicious and falsify information. It is currently unclear which techniques are the best suited as they are highly data-dependent and 
+ quality performance evaluation depends on the available samples of ground truth data. 
 
  In this challenge paper, we argue that the next generation of data management systems need to 
  manage not only volume and variety of Big Data but most importantly veracity of data. Designing end-to-end truth discovery systems requires a fundamental paradigm shift largely driven by Machine Learning advances. It goes beyond adding new layers of data fusion heuristics or developing yet another probabilistic graphical truth discovery model. Actionable, cross-modal, and Web-scale truth discovery requires a transdisciplinary approach to analyze the dynamic and cross-modal dimensions of rapidly evolving networks of sources and multi-media contents. 
