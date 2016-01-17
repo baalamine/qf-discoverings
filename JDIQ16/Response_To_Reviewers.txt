@@ -1,0 +1,23 @@
+Dear Editor,
+
+We thank the editor and the reviewers for their constructive comments, which helped us to improve the manuscript. 
+Below, we address all comments point-by-point within the 3-pages limit for challenge papers, discussing the subsequent 
+modifications we made on the new version of our submission. 
+
+
+On behalf of all co-authors,
+
+Reviewer #1
+- Within the 3-pages limit, we better explained actual challenges in paragraphs 5, 6 and 7 respectively.
+- The limitations of current truth discovery methods have been explicitly mentioned in the third paragraph.
+- Suggested changes to the bibliographic citations have been incorporated, i.e., reference entries are numbered now.
+- A more detailled description of DAFNA project was not included although it was suggested by Reviewer #1 
+mainly due to space limitation. However, we have pointed to the DAFNA project's Website for more details.
+
+
+Reviewer #2
+- The need for a paradigm shift has been better motivated and explained in the fourth paragraph.
+- The limitations of current truth discovery methods have been explicitly mentioned in the third paragraph.
+- Suggested changes to the bibliographic citations have been incorporated, i.e., reference entries are numbered now.
+
+
