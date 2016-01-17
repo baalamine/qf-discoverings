@@ -38,7 +38,28 @@
 \renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
                                        {2ex \@plus1ex \@minus .2ex}%
                                        {-1em}%
-                                      {\sffamily\normalsize\bfseries}}                                      
+                                      {\sffamily\normalsize\bfseries}}        
+\def\@biblabel#1{[#1]} % restore basic form of \@biblabel macro
+\def\thebibliography#1{%
+    \footnotesize
+    \refsection*{{\refname}
+        \@mkboth{\uppercase{\refname}}{\uppercase{\refname}}%
+    }
+    \list{\@biblabel{\@arabic\c@enumiv}}% %the default form of first arg is {}
+       {\settowidth\labelwidth{\@biblabel{#1}}%
+        \leftmargin\labelwidth
+        \advance\leftmargin\bibindent
+        \itemindent-\bibindent
+        \itemsep2pt
+        \parsep \z@
+        \usecounter{enumiv}% % default is to use enumi
+        \let\p@enumiv\@empty
+        \renewcommand\theenumiv{\@arabic\c@enumiv}%
+    }%
+    \let\newblock\@empty
+    \sloppy
+    \sfcode`\.=1000\relax
+}                                    
 \makeatother
 
 
@@ -136,7 +157,7 @@ To address these challenges, we have proposed DAFNA (\emph{Data Forensics with A
  
 % Bibliography 
 
-\bibliographystyle{ACM-Reference-Format-Journals}
+\bibliographystyle{abbrv}
 \bibliography{references2}
                              % Sample .bib file with references that match those in
                              % the 'Specifications Document (V1.5)' as well containing
