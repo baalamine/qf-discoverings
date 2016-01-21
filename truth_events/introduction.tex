@@ -1,0 +1,38 @@
+\section{Introduction}
+
+In recent years, vast amounts of volunteered information have been posted through social media  and Web platforms. Such platforms have sparked an exponential growth of user-generated content in various formats and modalities mixing images, videos, texts, and structured data.  Citizens around the world actively capture own observations of events they may (or may not) witness and make them publicly available on the Web. 
+Information about places of interest, events, traffic jams, aggressions are examples of this user-generated content. 
+Usually the content consists of a multimedia content with an incomplete description of the place, time, phenomenon or event  eventually with metadata collected by technical devices, e.g., camera type in Flickr images, EXIF.
+
+
+Evaluating the veracity of such information coming both from volunteering observers or  Web news media is a challenging problem due to many reasons. First, information may be uncertain, incomplete and decorrelated in time and place from the considered real-world event; textual description, keywords or hashtags may be missing/incomplete or ambiguous; conflicting information may be reported by non reliable observers; the duration of some real-world events may be so short that no or very few observers actually witnessed them; not only some events may not be reported but also some observations may not be `linkable' to any of the known events.  Practical settings are far from the best case scenario where many observations have accurate georeferences and timestamps, and  complete descriptions that enable their mapping to one single real-world event with no ambiguity and no conflict.  
+
+To overcome these problems, various methods have been recently proposed to discover
+the true value from those provided by a large number of conflicting data sources.  These solutions extend
+vote counting strategy with probabilistic inference and Maximum A Posterior (MAP) estimation via Expectation-Maximization and compute iteratively
+the accuracy of the sources claiming some data as a function of the confidence of the data they claims (see \cite{} for a complete survey of the current
+approaches).
+
+However, current truth discovery methods --mainly applied to structured data extracted from texts-- can not be straighforwardly applied to spatio-temporal and cross-modal data. 
+Moreover, they  suffer from data spasity problem also called long-tail phenomenon where very few sources actually report information about all the events whereas the majority of sources report information about very few events.
+
+
+At a city-scale, local events occuring in urban spaces can be detected using various sources of data: {\it (i)} from social media and social networks 
+(e.g., with  Instagram, Filckr, Twitter data), {\it (ii)} from traffic sensors and other monitoring devices operating all over the city (e.g., air pollution, bluetooth sensors), and {\it (iii)} from the blogosphere and Web news. This paper is a first attempt to leverage data cross-modality to infer the truth of  real-world events' occurence and to propagate replacement labels for missing or uncertain information.
+
+
+ %At a macro-scale, GDELT event database records over 300 categories of physical activities around the world, from riots and protests to peace appeals and diplomatic exchanges, georeferenced to the city or mountaintop, across the entire planet dating back to January 1, 1979 and updated daily.
+
+ 
+
+ In summary, this paper makes the following contributions:
+ \begin{enumerate}
+\item We propose to address the truth discovery problem in the context of cross-modal data for detecting and corroborating of spatio-temporal events.
+\item We propose an unsupervised  probabilistic approach  which models the truth of observations and reports related to spatial events and the reliability of the observers. 
+\item We develop an efficient optimization algorithm for model inference based on gradient descent and we show that our approach converges faster than EM-based methods with better quality performances.
+ \end{enumerate}
+
+The remainder of this paper is organized as follows. We formalize the problem in Section 2.  
+We then introduce our proposed model and develop the optimization algorithm in Section 3. 
+Experimental setup and results are presented in Section 4. 
+Related work is discussed in Section 5. Finally, we conclude the paper in Section 6.

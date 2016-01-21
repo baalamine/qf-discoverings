@@ -1,0 +1,85 @@
+\documentclass{sig-alternate-05-2015}
+\usepackage[utf8]{inputenc}
+\usepackage[english, francais]{babel}
+\usepackage{microtype}
+\usepackage{xspace}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{paralist}
+\usepackage{booktabs}
+\usepackage{wrapfig}
+\usepackage{subfigure}
+\usepackage{csquotes}
+\usepackage{tikz}
+\usepackage[pdfborder={0 0 0}, pdfpagelabels=false]{hyperref}
+\usetikzlibrary{matrix,shapes.multipart, arrows, shapes.geometric,fit,scopes}
+\tikzset{
+  >= latex,
+  el/.style={ellipse, draw, text width=8em, align=center},
+  rs/.style={rectangle split, draw, rectangle split parts=#1},
+  ou/.style={draw, inner xsep=1em, inner ysep=1ex, fit=#1}
+}
+\definecolor{marron}{rgb}{0.8,0.6,0.4}
+\newcommand{\lamine}[1]{\textbf{[Lamine: {\textcolor{red}{#1}}]}}
+\newcommand{\laure}[1]{\textbf{[Laure: \textcolor{marron}{#1}]}}
+\newcommand{\tbd}[1]{\textbf{[TODO: \textcolor{blue}{#1}]}}
+\newcommand{\qset}{\ensuremath{\mathcal{Q}}}
+\newcommand{\query}{\ensuremath{\mathit{q}}}
+\newcommand{\fact}[1]{\ensuremath{\mathit{f}_{#1}}}
+\newcommand{\e}[1]{\ensuremath{\mathit{e_{#1}}}}
+\newcommand{\claim}[1]{\ensuremath{\mathit{c_{#1}}}}
+\newcommand{\claimset}{\ensuremath{\mathcal{C}}}
+\newcommand{\rel}[1]{\ensuremath{\mathit{r}_{#1}}}
+\newcommand{\source}[1]{\ensuremath{\mathit{s}_{#1}}}
+\newcommand{\sset}[1]{\ensuremath{\mathcal{S}_{#1}}}
+\newcommand{\TRUE}{\ensuremath{\mathsf{true}}}
+\newcommand{\FALSE}{\ensuremath{\mathsf{false}}}
+
+
+\begin{document}
+\conferenceinfo{}{}
+
+\title{Cross-Modal Truth Discovery for Detecting and Corroborating Spatio-Temporal Events in the City}
+
+\numberofauthors{1} 
+\author{
+\alignauthor
+***\\
+       \affaddr{Qatar Computing Research Institute}\\
+       \affaddr{Tornado Tower, West Bay}\\
+       \affaddr{Doha, Qatar}\\
+       \email{\{*,*,*\}@qf.org.qa}
+}
+
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+% A category with the (minimum) three required fields
+%\category{H.4}{Information Systems Applications}{Miscellaneous}
+%A category including the fourth, optional field follows...
+%\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
+
+%\terms{Theory}
+
+%\keywords{ACM proceedings, \LaTeX, text tagging}
+
+% Introduction
+\input{introduction}
+\input{problem-definition}
+\input{algo}
+\input{related-work}
+\input{conclusion}
+
+
+% References
+%\cite{*}
+
+\bibliographystyle{plain}
+\small\bibliography{references}
+\end{document}
