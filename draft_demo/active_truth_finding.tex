@@ -1,117 +1,96 @@
 % Active Ensembling for Truth Finding
-\subsection{Truth Finding}\label{truthfinding}
-{\scshape Vera} supports an adaptive truth finding approach which combines ensembling and active learning in order to 
-adaptively learn and compute the optimal result set from diverse truth finding algorithms. Our approach outperforms any individual truth discovery technique on any given dataset as it actively leverages the user's knowledge if available for finding the true claims. Even when user's knowledge (or ground truth) is not available, {\scshape Vera} operates and provides an ensembling.
+\subsection{Truth Discovery}\label{truthfinding}
+$\VERA$ supports an adaptive truth discovery approach based on ensembling and active learning to compute the optimal labeling and scoring results from a set of truth discovery algorithms. Our approach outperforms individual truth discovery technique on any given data set. It actively leverages the user's knowledge when available for finding the true claims and update the trustworthiness score of the sources. When user's knowledge or training data are not available, $\VERA$ still provides meaningful results using ensembling of methods with minimizing the disagreement between methods.
 
-\subsection{Truth Classifiers}
-In our context, the truth finding algorithms correspond to truth classifiers. The underlying \emph{binary classification} 
-problem consists of assigning the correct truth label to a set of claims about given user queries. Indeed, a truth finding 
-algorithm is formally a mapping $\textsf{TF}:~\claimset \mapsto \{\TRUE, \FALSE\}$ which associates to each claim in $\claimset$
-either $\TRUE$ or $\FALSE$. We  consider the twelve well-established truth finding algorithms from  the literature that can be classified as follows according to \cite{}.
+\noindent{\bf Competing Classifiers.} 
+In our context, the truth discovery algorithms are considered as  binary classifiers whose goal is to label each conflicting value as a true or false answer to the user query.
 
-\begin{enumerate}
- \item \textbf{Agreement-based methods:} TruthFinder~\cite{YinHY08}, Cosine, 2-Estimates and 3-Estimates~\cite{GallandAMS10}, 
- AccuNoDep~\cite{DongBS09}
- \item \textbf{MAP Estimation-based methods:} MLE~\cite{WangKLA12}, LTM~\cite{ZhaoRGH12}, SimpleLCA and GuessLCA~\cite{PasternackR13}
- \item \textbf{Bayesian Inference-based methods:} Depen, Accu, and AccuSim~\cite{DongBS09}
-\end{enumerate}
+$\VERA$ integrates and combines  twelve state-of-the art truth discovery algorithms that can be classified in three categories as follows:
+\begin{inparaenum}[(1)]
+\item Agreement-based methods including  TruthFinder~\cite{YinHY08}, Cosine, 2-Estimates and 3-Estimates~\cite{GallandAMS10}, AccuNoDep~\cite{DongBS09}; 
+\item MAP Estimation-based methods including  MLE~\cite{WangKLA12}, LTM~\cite{ZhaoRGH12}, SimpleLCA and GuessLCA~\cite{PasternackR13}; and
+ \item Bayesian Inference-based methods including  Depen, Accu, and AccuSim~\cite{DongBS09}.
+\end{inparaenum}
 
 
 
-\subsection{Ensembling}\label{ensembling}
-\medskip
+\noindent{\bf Ensembling.} 
+\label{ensembling} Ensembling is a semi-supervised learning approach  combining various competing models that has been demonstrated to be very effective in many disciplines~\cite{Burr12}. $\VERA$ ensembling method discovers the optimal set (ensemble) of classifiers for the truth discovery classification problem by actively learning from an oracle, e.g., the user or a reference model over a sample of data. Ensembling  enables to perform
+classification consistently well across various data sets without having to determine \emph{a priori} a suitable classifier 
+type.  $\VERA$ exploits ensembling for combining truth discovery methods in the two following cases:
+\begin{inparaenum}[(1)]
+\item  When the user can provide either \emph{a priori} or \emph{a posteriori} truth labels for few claims as instances of the ground truth (under a limited budget and with expected guarantees); 
+\item When no ground truth training data are available.
+\end{inparaenum}
 
-\laure{ici on peut faire de l'ensembling sans impliquer l'utilisateur il faudrait prendre des parties ci-dessous}
+In the first case, $\VERA$  actively learns from the user's labels over the training data, finds the best ensemble of classifiers and returns the veracity labels and scores for the rest of the data. 
 
-\subsection{Active Learning}\label{activelearning}
-%\begin{itemize}
-%\item donner idée générale pour introduire  ce qu'est l'ensembling
-%\item on a besoin de le faire dans le contexte de truth discovery car aucune methode ne bat toutes les autres dans tous les cas de figure
-%\item donc on combine les methodes : il y plusieurs façon de combiner par ex. consensus de méthodes, etc.
-%\item expliquer quelles méthodes on combine avec leurs avantages et inconvénients
-%\end{itemize}
-\medskip
-An ensemble-based active learning, or commonly ensembling, is a semi-supervised learning approach that tries
-to figure out an optimal ensemble of classifiers for a given classification problem by actively querying an 
-oracle, e.g., a human being, about the labels of a sample of data items. Ensembling, thereby, enables to perform
-classification consistently well across datasets without having to determine a \emph{priori} a suitable classifier 
-type.
+In the second case, $\VERA$ selects the candidate ensembling which satisfies our time-dependent consensus model. This model captures three intuitive ideas: 
+\begin{inparaenum}[(i)]
+\item Initially, very few sources with diverse authoritativeness degrees may observe an event and report information  (e.g., in case of disaster or  bombing). As long as the information is  not confirmed (or denied)  by a sufficient number of other independent sources, unknown or non-reputable  sources should not be penalized and the authoritativeness of the sources should not influence the veracity estimation;
+\item The number of conflicting information claimed by multiple sources has a decreasing variability in time; and
+\item  The majority of sources cannot be trusted until a certain time-point where a consensus on the fact (i.e., the true value) is reached as illustrated in Figure 2.
+\end{inparaenum}
 
-A good truth finding algorithm provides  predictions that are close to the actual world. Unfortunately, 
-a well known property, e.g., as shown in~\cite{Li12, Wagui14}, of existing truth discovering algorithms remains their sentivity
-to certain application domains or datasets. As a consequence, there is no actual approach that outperforms the others on all types 
-of datasets. On the other hand, truth finding is hard in practical scenarios because there is often no prior knowledge guiding to
-the selection, beforehand, of an optimal algorithm, in particular when the context is dynamic. More importantly, a large set of labeled 
-examples (or ground truth) for evaluating the precisions of the algorithms is expensive to obtain in real applications. 
+Truth discovery is hard in practical scenarios because there is often no prior ground truth guiding
+the selection of an algorithm, in particular when the context is dynamic. More importantly, a large set of labeled 
+data (or training data) is generally out-of-reach in the context of Web and social media data. As a consequence, it remains usually
+hard to evaluate the precision/recall of existing algorithms on real-world data. %
 
-In general, human being has a certain background knowledge about some real-world facts. Such a knowledge can serve as a valuable and inexpensive source of labels for a 
-rather reasonable number of data items. However, having this partial ground truth from users is not sufficient in order to definitively decide about an optimal truth
-finding strategy because it can change over time as we obtain more information from sources, e.g. when claims are continuously extracted by TextRunner for answering
-new incoming queries. Therefore, there is a need for an adaptive approach able to dynamically figure out the optimal truth finding strategy when users' feedbacks and 
-new knowledge about the world are available. We believe that active ensembling should be helpful to this end.
+However, users may have background knowledge about some real-world facts or about the reliability of particular sources. Such knowledge can be very valuable not only \emph{a priori} for guiding $\VERA$ truth discovery computation, but also \emph{a posteriori} 
+for evaluating and backtracking the errors.
 
-We put forward and demonstrate an approach which combines truth discovery and open information extraction with ensemble-based active learning for adaptively learning about the optimal 
-ensemble of truth finding algorithms when the OpenIE system is gradually querying and labeled examples from users are available.
-As we shall show later, we will actively involve users to obtain the truth about a sample of particular facts during the learning process. The way this sampling is defined and
-chosen is crucial for the effectiveness of the active learning. Several sample selection strategies, e.g., random sampling, query by committee, or support vector machine models,
-have been proposed for the definition of the type of selected data items along the size of the sample; we defer to~\cite{burr12} for more details about active machine learning.
+In our demonstration scenarios, we will show the two operational modes of $\VERA$ which combines truth discovery and open information extraction with ensemble-based active learning for estimating data veracity with  and without prior knowledge of the user, also learning from posterior knowledge in order to improve the next truth discovery computations.% 
 
-In this study, we use \emph{query by committee} (QBC) for ensemble-based active learning. QBC states that the best data items to select for labels are those that cause 
-the \emph{maximal disagreement} among the predictions of an ensemble of diverse but partially accurate classifiers during active learning. Furthermore, we seek to provide
-an adaptive active learning by looking for an optimal ensemble given a larger set of input classifiers.
+\subsection{Result Exploration}\label{visu}
+$\VERA$ features a layer for result visualization and explanation
+basically consisting of a set of Web user interfaces (panels and
+option widgets) and decision algorithms which respectively enable
+ viewing and browsing the truth discovery results 
+  to obtain more deeper insights and understand 
+how the estimation of the veracity of each claim has been computed
+by the system. This layer also provides the ability to input truth
+labels for a limited subset of claims. Explanation is accomplished
+in $\VERA$ through APIs whereas result visualization
+renders the output of the truth discovery process to ease
+user exploration and interaction with the system, as we will detail hereafter.
 
 
-%\lamine{Peut \^etre qu'il y a mieux que QBC ?}
+\noindent{\bf Visualization.}
+$\VERA$ currently supports three artifacts to visualize
+and browse  the results of query answering. When a  user query is submitted to $\VERA$,
+candidate claims are extracted and truth discovery computation is performed. 
+A list-based artifact then presents the candidate
+answers to the user. For each object property 
+related to the user query, the candidate answers are ranked
+ in a decreasing order of veracity scores, 
+ i.e., the answer with the highest veracity score (the most likely to be true) is listed
+first, then the answer with the second highest veracity score is given,
+and so on. Each  line of the result list contains a claimed
+answer, its  veracity score and label (\url{True} or \url{False})
+returned by the Truth Discovery layer, with the option widget to view 
+the set of sources supporting it (\url{view_sources}), and an illustrative
+excerpt from the content of the Web document or tweet from which the answer has
+been extracted. Candidate claims are presented to the user with an
+additional widget option \url{user_input_label} that enables the user
+to eventually propose a labelling or add background knowledge. 
+For further result exploration, $\VERA$ 
+has set two other visualization artifacts. Indeed, when the user
+chooses the option widget \url{view_sources}, $\VERA$  presents the
+complete list of sources which support the corresponding claim, their
+trustworthiness scores computed by the Truth Discovery layer, and their
+associated corpus. Finally, the user can access to the explanation
+window to better understand the  estimation of the veracity
+score of a particular answer by clicking on it.
 
-%To learn about an optimal ensemble from a diverse set of classifiers,  Note that diversity offers better result in active learning than using homogenoeus classifiers (see~\cite{Lu15}). 
-%\subsection{Truth Finding}
-%\begin{itemize}
- %\item notre approche que l'on défend ici dans la démo est  semi supervisée en impliquant de l'utilisateur de façon active en lui demandant s'il peut confirmer des faits (facts)
-%\item si on a une ground truth partielle on la "rejoue" cas par cas
-%\end{itemize}
 
-\medskip
+\noindent{\bf Explanation.}
+$\VERA$ relies on DAFNA API \cite{Wagui15} to generate explanations for the results of the truth discovery process. 
+It is accessible via its endpoint \textbf{runs}. Given a claim identifier, the system can explain how the returned score of veracity has been
+computed using the  ensemble of truth discovery algorithms. %
 
-We present an adaptive truth finding algorithm based on active ensembling in order to learn about an optimal
-ensemble over a set of existing truth finding algorithms, on which one can efficiently find the truth for the output 
-of OpenIE systems. Our approach first obtains from the learning procedure intuitions about the best algorithm to use 
-for each incoming fact (or a query about it) and then it performs the union of the result of the ensemble of best truth finding
-algorithms returned for a collection of facts. The best truth finding algorithm for a fact, i.e., the algorithm that has the highest
-chance to reliability discover the truth among a set of candidates claims about this fact, will be found by the learner by evaluating
-the accuracy of each competing technique on labeled claims from the user. We sketch in the following the procedure by assuming that all
-the input truth finding algorithms are used with their optimal initial parameters which are deemed known beforehand.
-
-\lamine{A sketch of the active learning process for truth finding}
-Our ensemble-based learning process relies on QBC for label querying and aims at finding an optimal combination of the results
-of the different truth finding algorithms involved in the process. Such a learning process is iterative and considers, as input,
-the set of unlabeled claims $\claimset{}$ and the set of labeled claims $\claimset_{GT}$. The claims in $\claimset{}$ are progressively
-obtained and processed, like in a streaming setting, from the information extraction system as it continuously receives queries.
-The set $\claimset_{GT}$, initially empty, contains
-claims whose labels are known for sure by asking the user. We also assume a stop criteria, e.g., a predefined number of iterations 
-or accuracy changes between two iterations, for our iterative learning algorithm for truth finding and the set of optimal initial
-parameters for each truth finding algorithm.
-The algorithm starts by evaluating the truth finding algorithms on the available unlabeled claims in $\claimset{}$ for determining
-the prediction of each technique. It then compares those label predictions on each set of claims about the same query (thereby, an identical fact)
-and determines the queries causing the maximal disagreement among the members of the committee. Those queries are determined by computing 
-the vote entropy of each query. The algorithm requests to the user labels for the set of candidates claims of those highly controversial queries.
-Once the labels are acquired from the user, the algorithm adds those labels along the associated claims into the labeled set $\claimset_{GT}$ and 
-discards the claims from the unlabeled set $\claimset{}$. The learning procedure finally determines the accuracy of each input truth finding algorithm
-on the newly labeled claims in order to know the best technique for truth discovery. 
-
-\laure{ici presenter un algo ne semble pas pertinent}
-\begin{enumerate}
-\item The algorithm starts with an initialization phase in which values of the initial parameters of the learner and the different truth 
-finding algorithm are set.
- \item The algorithm pursues by giving the claims in $\claimset{}$ to the set of truth finding algorithms for label predictions and then 
- it records the vote entropy of each query (thereby the underlying fact) according to the predictions of the committee.
- \item It chooses the set of claims associated to the query having the maximum vote entropy for label querying
- \item The set of acquired truth labels, together with the corresponding claims, are added into  $\claimset_{GT}$ and then discarded from $\claimset{}$.
- \item At this stage the algorithm estimates the accuracy of the different truth finding algorithm on  $\claimset_{GT}$ in order to determine the best one
- for truth discover over those claims.
-\end{enumerate}
-
-The steps 2--5 of the active learning algorithm are repeated until the stop criteria is satisfied. 
-At the end of the active learning process, the truth discovery is finally realized by performing 
-the union of the predictions of the ensemble of best truth finding algorithms for the collection 
-of claims. 
-
+To this end, DAFNA builds an explanation decision tree representing the different
+choices made by the ensemble applied to the candidate answers. 
+Every decision tree is  built from the
+number of supporting vs. disagreeing sources,  their trustworthy levels, and the set of conflicting values. $\VERA$ leverages the explanation functionality of DAFNA  to provide insights of the results when requested by the
+user.

@@ -1,86 +1,77 @@
 % Information Extraction Technique
 \selectlanguage{english}
-\section{{\scshape Vera} Platform}
-%\begin{itemize}
-% \item décrire le type d'information auquel on s'intéresse par exemple "factoid claim"
-% \item decrire le systeme sur lequel on se base
-% \item décrire comment on transforme l'output de OpenIE
-% \item donner qq exemples
-%\end{itemize}
-
-\medskip
-
-Vera platform architecture is depicted in Figure 1. Our system is composed of three layers: 
-(1) The Information Extraction layer continuously queries a corpora of Web resources selected based on user-specified topics (e.g., terrorist attacks, number of people killed, U.S. president travels, etc.) and it applies various text processing and data formatting and cleaning techniques to extract relevant information items and transform them into structured data ({\it i.e.}, formatted claims with their respective identified source);
-(2) The Truth Discovery layer is responsible for executing and ensembling various truth discovery methods to figure out which claims are true or false  and determine the trustworthiness of the sources. This layer  can possibly get the user a priori knowledge if available either about the reliabiliy of certain sources, or the hardness of certain claims, or some ground truth fact that the user may know and wants to explicitly label.
-(3) The Result Exploration layer provides the results in terms of veracity labels for each claim along with veracity and controversy scores, source trustworthiness scores and provides additional explanations of the results and visualization.
-
-\begin{figure*}[!ht]
- \begin{center}
-  \includegraphics[width=.88\linewidth]{archi.pdf}
-   \end{center}
-\label{archi}\caption{{\scshape Vera} Platform Architecture }
-\end{figure*}
-
-\subsection{Information Extraction}\label{openie}
-%We are seeking to demonstrate in this paper the usefulness of truth discovery on large sets of \emph{``factoid" claims} about real-world facts which are obtained when querying \emph{open information extraction} (OpenIE) systems. These claims are usually extracted by information extractors from unreliable and conflicting Web sources. A ``factoid" claim, e.g.,  \textsf{Barack Obama was born in Kenya}, often refers to a piece of information that is accepted as true, without any prior verification, because of its frequent redundancy  over numerous sources. Multiple conflicting Web claims of such a type related to a specific real life fact are simultaneously available in practice. We draw, therefore, our attention on those conflicting claims  returned by a common open Web information extraction system, \emph{TextRunner} in our special case, as possible answers to users' queries.  Concretely speaking, given a user input query (or key phrase), our main goal is to consider and improve the result of TextRunner~\footnote{\href{http://openie.allenai.o, rg/}{http://openie.allenai.org/}} by running truth discovery in order to provide to the user the most reliable information. We next briefly present TextRunner system. Then, we detail how we format its output in such a that  it fits the input of our truth discovering process.
-
-%\begin{figure*}[!ht]
-%\begin{subfigure}[TextRunner Extraction]{Un exemple d'extraction avec TextRunner}
-%\end{subfigure}
-%\hfill
-%\begin{subfigure}[Extracted Triplets]{Un exemple de tripl\'es extraites}
-%\end{subfigure}
-%\label{open}\caption{Data collection and formatting}
-%\end{figure*}
-% OIE Input and Ouput
-%\paragraph*{Information extraction} 
-
-For information extraction, we use TextRunner~\cite{Yates07, Etzioni08} and DeepDive ***
-
-\laure{ il faut simplifier le texte ci-dessous sur Textrunner + ajouter un descriptif rapide de Deepdive: en indiquant s'ils sont complémentaires et si c'est le cas cela justifiera  pourquoi on les utilise tous les deux }
-
-TextRunner is  an Open Information Extraction (OpenIE) system relying 
-on an unsupervised Web extraction process over the predefined 
-set of Web corpus consisting of \emph{Google}, \emph{ClueWeb}, \emph{News}, \emph{Nell}, and 
-\emph{Wikipedia} corpus. Each particular corpus aggregates data from multiple 
-other Web sources which are of various nature, for instance domain-specific Websites.
-Queries are sent to TextRunner by users through a form where 
-they also can optionally specify their trusted corpus on the predefined set.
-When a user query arrives, TextRunner first finds the relevant
-sources in the set of corpus, and then it extracts each possible answer from them
-using natural language processing techniques and ontologies. 
-To do so, it performs, for efficiency concerns, a single data-driven
-pass on the corpus to obtain the list of candidate relational tuples 
-which might satisfy the arguments of the user input query. 
-A typical user query in TextRunner is often about 
-two real-world \emph{entities} and a certain \emph{relation} between them.
-As a consequence, such a user query $\query$ can be defined formally as a triplet $(\e{1}, \rel{}, \e{2})$
-where $\e{1}$ and $\e{2}$ are real-world entities and $\rel{}$ is a relation. The argument $\rel{}$ 
-specifies a possible relationship between the two given entities $\e{1}$ and $\e{2}$. In general,
-at least one among the three arguments is unkown, which captures a partial knowledge about the real world. 
-In this context, TextRunner tries to find out the actual possible values of unkown arguments given 
-known ones by querying the Web. The outcome of TextRunner, given a user query, is indeed a set of candidate answers which is ranked according 
-to the number of sources supporting each. TextRunner  enables to access, via Web hyperlinks, to the source
-and the document associated to each extracted answer. 
-% Our demonstration system (see Section~\ref{demonstration})  will follow these links and will extract the different sources of each potential answer for truth finding purposes.
-
-\subsection{Information Processing}
-Once information is extracted, it is transformed into structured claims 
-in the form of quadruplets $(\textsf{claimID}, \textsf{sourceID}, \textsf{Object:Attribute},\textsf{claimedValue})$, input data of the Truth Discovery layer. For example, 
+\section{VERA Platform}
 
 
-\laure{ idem il faut reprendre simplifier le texte ci-dessous avec un exemple de 3 sources textuelles par exemple "bombing in paris", avec l'extraction correspondante et les claims structurées correspondantes pour montrer le bruit entre texte original et information extraite et enfin claim structurée
-et il faut aussi etre plus générique (actuellement c'est spécifique à   Textrunner  les idées à développer sont : desambiguization pour determiner qu'il s'agit bien du meme evènement ; data cleaning ; extraction error, noise removal}
+$\VERA$ platform architecture and its workflow (from 1 to 9) are depicted in Figure 1. Our system is composed of four layers:
+\begin{inparaenum}[(1)]
+\item Information Extraction layer is in charge of querying the corpus of Web documents and tweets, discovering new resources and expanding the user query (e.g., the query \textquote{number of people killed in November 2015 Paris attacks} is expanded by related keywords queries such as  \textquote{how many dead in Paris terrorist attacks},
+\textquote{Paris victims}, and \textquote{Paris shootings  casualties}); this layer applies various text processing techniques to extract relevant information items; 
+\item Data Fusion layer is in charge of   transforming extracted information  into structured claims and applies various data formatting and curation techniques including deduplication and entity resolution; it groups together the structured claims referring to the same real-world event or entity property; 
+\item Truth Discovery layer is responsible for executing and ensembling various truth discovery methods; it determines  which claims are true or false by computing their veracity scores and estimating the trustworthiness scores of the sources. This layer can integrate users' a priori knowledge (when available), e.g., about the reliability of certain sources or the hardness of certain claims;
+\item Result Exploration and Visualization layer provides three  types of result: 
+\begin{inparaenum}[(i)]
+\item veracity score and label for each claim and trustworthiness score for each source;
+\item explanations of the truth discovery results;
+\item and various visualization artifacts for exploring source polarity and claim controversy.
+\end{inparaenum}
+\end{inparaenum}
+
+\subsection{Information Extraction and Data Fusion}\label{openie}
+
+\noindent{\bf Information Extraction. } 
+Information extraction in $\VERA$ is modular and  various information extractors can be added depending on the initial set of resources  and the application domain of the query. Currently, $\VERA$ uses four extractors: TextRunner~\cite{Yates07}, TweetIE~\cite{twitie}, DeepDive~\cite{Zha15}, and {\small\texttt{import.io}}\footnote{\scriptsize{\url{https://import.io}}}. TextRunner is  used as an open information extraction system from a predefined set of Web corpus including \emph{Google}, \emph{ClueWeb}, \emph{News}, \emph{Nell}, and 
+\emph{Wikipedia} corpus. Each particular corpus aggregates data from various  
+ Web sources and domain-specific Websites.
+
+When a user query is submitted to $\VERA$, it is reformulated and submitted to user-selected extractors to query the 
+sources of the corpora. Then, each extractor extracts a set of candidate answers using natural language processing techniques and other external resources: for example, in the case of TextRunner, Freebase ontology\footnote{\scriptsize{\url{https://www.freebase.com/}}} is leveraged and the user query is transformed into a triplet $(\e{1}, \rel{}, \e{2})$ and sent to TextRunner. The argument $\rel{}$  specifies a possible relationship between the two entities $\e{1}$ and $\e{2}$. 
+Partial knowledge about the real-world can be captured when  one  argument is unknown and TextRunner  finds out every possible candidate values.  $\VERA$ then transforms the set of candidate answers and completes the output of TextRunner with its respective identified sources. 
 
 
-%and infer, as outputs result, a \emph{Boolean truth label} for each claim in which \textsf{claimQuery} is  the query the claim is referred to and \textsf{claimValue} is the answer given by the source for the query.  We detail below how these claims are inferred from the outcome of OpenIE TextRunner.
-
-%Assume a user query $\query$ about a real-word fact $\fact{\query}$ and the set of $n$ answers $v_1^{\query}\ldots v_n^{\query}$ returned by TextRunner for $\query$. Let now denote by $\sset{i}^{\query}$ the set of sources supporting each answer $v_i^{\query}$,  for $1\leq i\leq n$. Recall that we extract this set of sources by following Web hyperlinks attached to answers by TextRunner and by  using hand-written mapping rules. In addition note that for the same query, TextRunner returns only one answer per source, i.e. $\sset{i}^{\query} \cap \sset{j}^{\query}=\emptyset$ for all $i\neq j$ with $1\leq i\leq j\leq n$. We have the set of potential answers along with their respective sets of sources for the user query $\query$ about the fact $\fact{\query}$. We can now proceed to the generation of the corresponding claims.  To do so, we consider each answer $v_i^{\query}$, for each $1\leq i\leq n$, and loop on its set of sources $\sset{i}^{\query}$. For each source $\source{} \in \sset{i}^{\query}$, we create a new claim $(\textsf{claimID}, \source{}, \query, v_i^{\query})$ with an automatically generated unique claim identifier $\textsf{claimID}$, a claim source $\textsf{source}$ corresponding to $s$,  $\query$ as the claim query $\textsf{claimQuery}$, and a claim value $\textsf{claimValue}$ equals  to  $v_i^{\query}$. In other words, we create as many claims as the number of sources of a given answer from TextRunner. The total number of generated claims for the query $\query$ being  equals to $\sum_{1\leq i\leq n} | \sset{i}^{\query} |$. Let us assume the set of $m$ successive user queries $\query_1,\ldots, \query_m$. We finally suppose that when the  query is successively issued in TextRunner and answered by the system, the aforementioned formatting procedure transforms its set  of possible answers to the corresponding set of claims. We refer to the overall set of resulting claims for queries $\query_1,\ldots, \query_m$ with $\claimset$.
+To expand the Web corpus, one can specify DeepDive extractors or use external APIs such as {\small\texttt{import.io}}. In the case of DeepDive, each predefined extractor takes as input a collection of textual documents and a set of labeled examples of relations (using DBpedia knowledge base, for example). DeepDive extractor instance first extracts entities and candidates relationships by leveraging the outputs of natural language processing over the training examples. Then, it uses statistical learning with  user-defined inference rules and training examples of the relations to extract.
  
+As for TwitIE, it is applied, when chosen, to the set of tweets collected on-demand regarding a given user query. It is used for natural language and micro-text processing, named entity recognition, and relation extraction from tweets. Additional scripts have been developed for filtering non-textual contents and  tweets that are irrelevant to the user query.
 
-%\lamine{Types de requ\^etes \'a supporter?} factuelle
+\noindent{\bf Data Fusion. }
+Once information is extracted by the extractor instances of TextRunner, DeepDive, {\small\texttt{import.io}}, and TwitIE, 
+it is transformed into a  structured  claim such as: 
+{\small\texttt{(\textsf{claimID}, \textsf{sourceID}, \textsf{Object:Property}, \textsf{claimedValue}, \textsf{timestamp},\textsf{evidence})}}. Each claim has an identifier, a source identifier, a value for a particular property of the queried object, a timestamp and the content from which the claim has been extracted as a textual evidence.
+Entity resolution is achieved to group the claims referring to the same real-world entity and  property into the same cluster.
+The clusters of quadruplets constitute the input data of the Truth Discovery layer. 
+An illustrative example of cluster for the property {\small\texttt{NumberOfVictims}} for the object {\small\texttt{November\_2015\_France\_Terrorist\_Attack}}  is given in Table 1.
+\begin{table*}[ht]
+ \begin{minipage}[b]{0.66\textwidth}
+    \centering
+  \scriptsize  
+\begin{tabular}{|p{.8cm}|p{2cm}|p{1.2cm}|p{4.5cm}|p{1.5cm}|}
+\hline
+{\bf Claim}  & {\bf Source}&{\bf Extracted Value} & {\bf Textual Evidence}&{\bf Timestamp} \\
+\hline
+$C_5$& \scriptsize{\url{cnn.com}} &At least 128&  Paris massacre: At least 128 killed in gunfire and blasts, French officials say&Nov 27, 2015\\
+\hline
+$C_4$& \scriptsize{\url{theguardian}}&120&Paris attacks kill more than 120 people -- as it happened& Nov 26, 2015\\
+\hline
+$C_3$& \scriptsize{\url{news.sky.com}}&130&Number Of Paris Attacks Victims Rises To 130&Nov 20, 2015\\
+\hline
+$C_2$& \scriptsize{\url{bbc.com}}&130&Tributes have been paid to the 130 people who lost their lives in the Paris terror attacks.&Nov 16, 2015\\
+\hline
+$C_1$& \scriptsize{\url{@TBurgesWatson}}&35& BREAKING.This is what we know: 35 dead, 100 hostages taken at a concert venue. Various drive by shootings. Explosions at a \#Paris stadium. & Nov 13, 2015\\
+\hline
+      \end{tabular}
+    \captionof{table}{Example of conflicting answers for the query "How many victims in Paris Attacks"}
+  %    \caption{Example of conflicting answers for the query "How many victims in Paris Attacks"}
+    \end{minipage}
+   \hfill
+  \begin{minipage}[b]{0.3\textwidth}
+    \centering
+ 
+  \includegraphics[width=.98\linewidth]{fig-2.pdf}
+ 
+    \captionof{figure}{Illustration of Time-dependent Consensus}
+  \end{minipage}
+\end{table*}
 
-%\lamine{Traitement de requ\^etes en batch ou traitement une par une?} une à une
 
-%\lamine{Regarder la distribution du nombre de conflits per query sur TextRunner pour mieux motiver l'utilité du truth finding?} pour moi cela doit etre fait dans la partie exploration visualization
+\noindent{\bf Storage. }
+Queries, claims,  labels and scores are stored in a PostgreSQL database instance through Amazon S3 for result exploration tasks or truth discovery processes.

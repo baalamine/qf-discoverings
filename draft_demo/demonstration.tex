@@ -1,94 +1,23 @@
-\section{About the Demonstration }\label{demonstration}
+\begin{figure*}[t!]
+ \begin{center}
+  \includegraphics[width=.75\linewidth]{screenshot.png}
+   \end{center}
+\label{screenshot}\caption{$\VERA$: Behind the Scene}
+\end{figure*}
+
+\section{demonstration scenarios}
+During the demo we will show how $\VERA$  estimates the veracity
+of multi-source information from  Web sources and tweets.
+The audience will see two main truth discovery scenarios that can
+not be accomplished using conventional search engines or existing
+truth discovery methods and we will show how they can be handled
+using $\VERA$.
 
 
-
-% Architecture and GUI
-%\subsection{System Components}
-%The architecture of our demonstration system, given in
-%Figure~\ref{system_architecture}, comprises the following
-%five main components.
-
-% User I/O Interface
-%\paragraph*{User Interface}
-%The user interface is the main component that enables a given user  to interact with our system. Via the user interface component,  one has the ability to provide a query (or a key phrase), to recieve answers from the truth finding module or  label requests from the active ensembling module. When a label request is sent  is sent to the user, she (or he) also provides his answers through  this component.
+\textbf{Real-Time Fact-Checking for Crisis Situations.}
+In crisis situations, time is critical when  an emergency response must be issued as soon as possible. Often the only information the public receives about the situation or the disaster is through the media (usually by authoritative sources) only once it is verified and but also immediately through social media as volunteered information that still needs to be checked. In this demonstration scenario,  $\VERA$ is combined to AIDR~\cite{AIDR} to estimate the veracity of  claims extracted from the content of tweets. Figure 3 presents  $\VERA$ behind the scene and shows the results of multiple truth discovery methods. These methods have been applied to the claims extracted  by TwitIE and structured by $\VERA$ from a collection of tweets related to Nepal earth quake  on April 25, 2015 in the time window 10:06AM--10:23AM as presented in the figure; the tweets were classified through AIDR in the category \textquote{injured or dead people}. As the time goes by, more information corroborate the true number of casualties. $\VERA$ source view  also provides the trustworthiness scoring  and ranking of the sources (twitter ids and Web sources) evolving in time.
 
 
-% Information extraction module
-%\paragraph*{OpenIE component} OpenIE is responsible to the extraction  of information from the Web. It considers, as an input, a user query and queries several Web corpus in order to returns the relevant set of candidate answers. Our OpenIE component relies on TextRunner engine for the extraction of the set of candidate Web claims with respect to a user query about a given real-world fact.
+\textbf{Rumors.} Nowadays, rumors about facts related to persons (e.g., celebrities) or hot events are ubiquitous on the Web.
+Some rumors are purposely propagated for misinformation or propaganda, (e.g., Barack Obama is born in Kenya) and others are tied to a certain context which requires to have more information as soon as possible to confirm or deny them (e.g., the rumor of the bombing of \textquote{Les Halles shopping center} during Paris attacks in November 2015). Such kinds of rumors often spread out very quickly in  social media due to the lack of effective means to detect them. This scenario will show how $\VERA$ operates on rumors  by leveraging the sources' trustworthiness and time-dependent consensus in truth discovery computation.
 
-% Learning module
-%\paragraph*{Active Ensembling Module} This is the core component of our system which discovers an optimal ensemble for truth finding over candidate claims extracted with the OpenIE  component. The active ensembling module, as described in Section~3, evaluates set of twelves truth finding algorithms on unlabeled claims, figures out the most controversal claims, and requests labels from the user. Once it obtained feebacks from the user, it estimates the accuracy of the competing algorithms on the labeled claims, and finally decides about the best one to use for each set of claims related  to the same query or fact. The module returns an ensemble since one can have distinct good truth finding techniques for various sets of claims about different facts.
-
-% Truth finding engine
-%\paragraph*{Truth Finding Module} The truth finding module uses the hypotheses found by the active ensembling  module about the best algorithm to use for each set input of claims to determine the final result that will maximize the precision of the truth finding discovery. Typically, the module combines the best of each algorithm in the ensemble returned by the learning process. It outputs its result to the user through the user interface component.
-
-
-
-% knwoledge bases
-%\paragraph*{Storage Module}The storage module consists of a local repository for the system
-%that enables to have a dump of labeled claims. This set of labeled claims is a partial valuable
-%ground truth. It can be used, if available, in order to boostrap our active learning process. For
-%example as we already learnt about the best approach for these labeled claims, they can be compare 
-%to new unlabeled claims, in terms of similar involved facts or similar conflict distribution, for 
-%directly devising a candidate optimal truth discovery algorithm without having to run again the learning 
-%procedure.
-
-%\begin{figure}[ht]
-%\begin{tikzpicture}[auto, line/.style ={draw,  thick, shorten <=0pt}]
- % \matrix[matrix of nodes, row sep=5ex, column sep=1em] (mx) {
-  %  User I/O Interface & Truth Finding Module\\
-   % IE Module & Ensembling Module \\
-    %& Storage Module (labeled claims)\\ 
-%  };
-  %\node[ou=(mx-1-3)] (empty) {};
-%  \node[ou=(mx-2-1)] (oi) {};
- % \node[ou=(mx-1-2)] (tf) {};
-  %\node[ou=(mx-2-2)] (lm) {};
-  %\node[ou=(mx-3-2)] (kb) {};
-  %{[<-, thick]
-  %\draw(mx-1-1)edge(tf);
-%  }
- % {[->, thick]
-  %\draw(mx-1-1)edge(oi);
- % \draw(oi)edge(lm);
-%  }
-%  {[<-, thick]
-%    \draw(tf)edge(lm);
-%  }
-%  {[<->, thick]
-%    \draw(lm)edge(kb);
-%    \draw(mx-1-1)edge(lm);
-%  }
- % \begin{scope}[every path/.style=line, <-]
-  % \path(mx-1-1)  - | (tf);
-  % \path(mx-1-3)  - | (lm);
-  %\end{scope}
-
-%\end{tikzpicture}
-%\caption{System Components}\label{system_architecture}
-%\end{figure}
-% Demonstration scenario
-%\subsection{Demonstration scenarios}
-\laure{we need to find at least 2 "catchy" precise scenarios  we need to rework this section}
-A given user that wants to interact with our system
-must do it through the search form. Through the search
-form, she (or he) provides her searched relation, e.g.,
-``Where is born Barack Obama?".
-The searched relation is then 
-passed to the information extraction engine,  TextRunner system
-in our case, which returns a set of answers considered to be 
-relevant for the user's request. Each claim in the returned list is
-processed in order to extract the corresponding sources along a detailed
-description of the claim which we format in a certain manner. The 
-set of sources and the formatted versions of all claims are then passed
-to the truth finding module which integrate all the claims and compute the
-most probable answer together with the reliability scores of participated 
-sources for the searched relation. Finally, the output of the truth finding
-process is returned to the user. The user can also want to review the output
-of our system by definitively validiting it or not through its knwoledge of the
-modeled world. For example when the system has totally wrong, it may be interesting
-to get such a kind of feedbacks from the user in order to change the used method, as
-there are many available with our system, and to enhance the process for the further 
-search about the same world. The user gives feedbacks using the option buttons on the 
-left-hand side of the outputted claims or the text form. The feebacks given by the user
-is saved in knwoledge bases within our system for further processes.

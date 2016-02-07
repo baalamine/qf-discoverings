@@ -1,30 +1,22 @@
 \documentclass{sig-alternate}
-\usepackage[utf8]{inputenc}
-\usepackage[english, francais]{babel}
+\usepackage[english]{babel}
+\usepackage{graphicx}
 \usepackage{microtype}
-\usepackage{xspace}
-\usepackage{amsfonts}
+\usepackage{balance}  % for  \balance command ON LAST PAGE  (only there!)
+\usepackage{epsfig}
 \usepackage{amssymb}
-\usepackage{mathtools}
-\usepackage{xcolor}
-\usepackage{paralist}
-\usepackage{booktabs}
-\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
 \usepackage{subfigure}
+\usepackage{times}
+\usepackage[sort, compress]{cite}
+\usepackage{needspace}
+\usepackage{url}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{booktabs}
 \usepackage{csquotes}
-\usepackage{tikz}
-\usepackage[pdfborder={0 0 0}, pdfpagelabels=false]{hyperref}
-\usetikzlibrary{matrix,shapes.multipart, arrows, shapes.geometric,fit,scopes}
-\tikzset{
-  >= latex,
-  el/.style={ellipse, draw, text width=8em, align=center},
-  rs/.style={rectangle split, draw, rectangle split parts=#1},
-  ou/.style={draw, inner xsep=1em, inner ysep=1ex, fit=#1}
-}
-\definecolor{marron}{rgb}{0.8,0.6,0.4}
-\newcommand{\lamine}[1]{\textbf{[Lamine: {\textcolor{red}{#1}}]}}
-\newcommand{\laure}[1]{\textbf{[Laure: \textcolor{marron}{#1}]}}
-\newcommand{\tbd}[1]{\textbf{[TODO: \textcolor{blue}{#1}]}}
+\usepackage{paralist}
+
 \newcommand{\qset}{\ensuremath{\mathcal{Q}}}
 \newcommand{\query}{\ensuremath{\mathit{q}}}
 \newcommand{\fact}[1]{\ensuremath{\mathit{f}_{#1}}}
@@ -36,45 +28,52 @@
 \newcommand{\sset}[1]{\ensuremath{\mathcal{S}_{#1}}}
 \newcommand{\TRUE}{\ensuremath{\mathsf{true}}}
 \newcommand{\FALSE}{\ensuremath{\mathsf{false}}}
+\newcommand{\VERA}{\ensuremath{\mathsf{VERA}}}
 
 
 \begin{document}
-\conferenceinfo{}{}
+%\conferenceinfo{WWW'16,} {April 11--15, Montreal, Canada}
+% \CopyrightYear{2016}
+% \crdata{-------}
+ \clubpenalty=10000
+ \widowpenalty = 10000
 
-\title{{\scshape Vera}: A Platform for Estimating the Veracity of Web Information}
+
+
+\title{VERA: A Platform for Veracity Estimation over Web Data}
+
+%\iffalse
+%*** Lamine: proposition for another title ***
+%\title{VERA: A Platform for Structured Web Data Extraction and Veracity Estimation}
+%\fi
 
 \numberofauthors{1} 
 \author{
 \alignauthor
-Mouhamadou Lamine Ba, Laure Berti-Equille, Hossam M. Hammady, Yasser Idris\\
+Mouhamadou Lamine Ba, Laure Berti-Equille, Hossam M. Hammady\\
        \affaddr{Qatar Computing Research Institute}\\
-       \affaddr{Tornado Tower, West Bay}\\
+       \affaddr{Hamad Bin Khalifa University}\\
+       %\affaddr{Tornado Tower, West Bay}\\
        \affaddr{Doha, Qatar}\\
-       \email{\{mlba,lberti,hhammady,yidris\}@qf.org.qa}
-% 2nd. author
-%\alignauthor
-%\\
-%       \affaddr{Qatar Computing Research Institute}\\
-%       \affaddr{Tornado Tower, West Bay}\\
-%       \affaddr{Doha; Qatar}\\
- %      \email{lberti.qf.org.qa}
-%\and  % use '\and' if you need 'another row' of author names
+       \email{\{mlba,lberti,hhammady\}@qf.org.qa}
 }
-
 
 \maketitle
 
-% Page allocation for this demo
-% 1.25 pages --> abstract + introduction
-% 1.5 pages --> Active Truth finding Process
-% 1 pages --> Demonstration system
-% 0.25 pages --> references
+
+
+\begin{sloppypar}
+{
 \begin{abstract}
-%Over the last decade there's been a substantial growth in the use of fact-checking and truth discovery techniques to detect misinformation available online. 
-Multiple Web information sources often claim conflicting data and estimating data veracity is extremely difficult especially when no prior knowledge about the sources or the claims is available. However, exploring the space of conflicting data and the polarity of Web sources claiming them is relevant in this context.
-This demo presents Vera, a Web-based platform that supports event, entity and relation
-extraction from Web information sources, systematically processes the extracted, conflicting claims, and
-combines multiple truth finding algorithms with active learning to return data veracity and controversy scores. Vera also determines the most trustworthy sources. Vera will be demonstrated throught several real-world use cases.
+Social networks and the Web in general are characterized by multiple information sources often claiming conflicting data values.
+Data veracity is hard to estimate, especially when there is no prior knowledge about the sources or the claims and in 
+time-dependent scenarios where initially very few observers can report first information. Despite the wide set of recently proposed truth
+discovery approaches, \textquote{no-one-fits-all} solution emerges for estimating the veracity of on-line information in open contexts.
+However, analyzing the space of information conflicts and sources' agreements might be relevant, as well as ensembling multiple
+truth discovery methods. This demonstration presents $\VERA$, a Web-based platform that supports information extraction from Web textual data 
+and micro-texts from Twitter and estimates data veracity. Given a user query, $\VERA$  systematically extracts entities and relations from Web content, structures them as claims relevant to the query,  expands the query  for gathering more evidences and conflicting/corroborating information. 
+Finally, $\VERA$ combines multiple truth discovery algorithms through active learning and returns the  veracity label and score of each data value  and the trustworthiness scores of the sources. $\VERA$ will be demonstrated through several real-world scenarios to show its potential
+value for on-line time-dependent fact-checking.
 \end{abstract}
 
 % A category with the (minimum) three required fields
@@ -89,21 +88,22 @@ combines multiple truth finding algorithms with active learning to return data v
 % Introduction
 \input{intro}
 
+
 % Open Information Extraction
 \input{open_extraction}
 
 % Active ensembling for Truth Finding
 \input{active_truth_finding}
 
+
 % Demonstration system
 \input{demonstration}
 
-% Conclusion
-%\section{Conclusion}
-%\lamine{L'utilisateur peut faire une erreur sur l'\'etiquette de certains claims. Comment capturer ce ph\'enom\'ene?}
-% References
-%\cite{*}
 
-\bibliographystyle{plain}
-\small\bibliography{biblio}
+\begin{small}
+\bibliographystyle{abbrv}
+\bibliography{biblio}
+\end{small}
+}
+\end{sloppypar}
 \end{document}
