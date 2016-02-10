@@ -1,56 +1,57 @@
-% Active Ensembling for Truth Finding
+
 \subsection{Truth Discovery}\label{truthfinding}
-$\VERA$ supports an adaptive truth discovery approach based on ensembling and active learning to compute the optimal labeling and scoring results from a set of truth discovery algorithms. Our approach outperforms individual truth discovery technique on any given data set. It actively leverages the user's knowledge when available for finding the true claims and update the trustworthiness score of the sources. When user's knowledge or training data are not available, $\VERA$ still provides meaningful results using ensembling of methods with minimizing the disagreement between methods.
+
+Truth discovery is hard in practical scenarios because there is often no prior ground truth guiding
+the selection of an algorithm. Moreover, a large set of labeled 
+data (or training data) is generally out-of-reach in the context of Web and social media data. As a consequence, it remains usually difficult to evaluate the precision/recall of existing algorithms on real-world data, in particular when very few sources may actually provide first information in a highly dynamic context.%
+
+
+
+ $\VERA$'s  approach to these problems is to support  adaptive truth discovery based on ensembling and active learning for computing and combining veracity scores from a set of truth discovery algorithms. Preliminary experiments  showed that our approach outperforms individual truth discovery technique on any given data set  \cite{BigData15}. It actively leverages the user's available knowledge  for finding the true claims and updating the trustworthiness scores of the sources. When user's knowledge or training data are not available, $\VERA$ still provides meaningful results using ensembling of methods with minimizing the disagreement between methods.
 
 \noindent{\bf Competing Classifiers.} 
 In our context, the truth discovery algorithms are considered as  binary classifiers whose goal is to label each conflicting value as a true or false answer to the user query.
 
-$\VERA$ integrates and combines  twelve state-of-the art truth discovery algorithms that can be classified in three categories as follows:
+$\VERA$ integrates and combines  twelve state-of-the art truth discovery algorithms classified as follows:
 \begin{inparaenum}[(1)]
-\item Agreement-based methods including  TruthFinder~\cite{YinHY08}, Cosine, 2-Estimates and 3-Estimates~\cite{GallandAMS10}, AccuNoDep~\cite{DongBS09}; 
-\item MAP Estimation-based methods including  MLE~\cite{WangKLA12}, LTM~\cite{ZhaoRGH12}, SimpleLCA and GuessLCA~\cite{PasternackR13}; and
- \item Bayesian Inference-based methods including  Depen, Accu, and AccuSim~\cite{DongBS09}.
+\item Agreement-based methods including  {\scshape TruthFinder}~\cite{YinHY08},
+  {\scshape Cosine, 2-Estimates and 3-Estimates}~\cite{GallandAMS10}; 
+\item MAP Estimation-based methods including  MLE~\cite{WangKLA12}, 
+ LTM~\cite{ZhaoRGH12}, 
+LCA models~\cite{PasternackR13}; and
+ \item Bayesian Inference-based methods including  four variants of {\scshape Depen} models~\cite{DongBS09}.
 \end{inparaenum}
 
 
-
 \noindent{\bf Ensembling.} 
-\label{ensembling} Ensembling is a semi-supervised learning approach  combining various competing models that has been demonstrated to be very effective in many disciplines~\cite{Burr12}. $\VERA$ ensembling method discovers the optimal set (ensemble) of classifiers for the truth discovery classification problem by actively learning from an oracle, e.g., the user or a reference model over a sample of data. Ensembling  enables to perform
+\label{ensembling} Ensembling is a semi-supervised learning approach  combining various competing models that has been demonstrated to be very effective in many disciplines.%~\cite{Burr12}. 
+$\VERA$ ensembling method discovers the optimal set (ensemble) of classifiers for the truth discovery classification problem by actively learning from an oracle, e.g., the user or a reference model over a data sample. Ensembling  enables to perform
 classification consistently well across various data sets without having to determine \emph{a priori} a suitable classifier 
 type.  $\VERA$ exploits ensembling for combining truth discovery methods in the two following cases:
 \begin{inparaenum}[(1)]
-\item  When the user can provide either \emph{a priori} or \emph{a posteriori} truth labels for few claims as instances of the ground truth (under a limited budget and with expected guarantees); 
+\item  When the user can provide  \emph{a priori} a limited number of truth labels for certain claims; 
 \item When no ground truth training data are available.
 \end{inparaenum}
 
 In the first case, $\VERA$  actively learns from the user's labels over the training data, finds the best ensemble of classifiers and returns the veracity labels and scores for the rest of the data. 
 
-In the second case, $\VERA$ selects the candidate ensembling which satisfies our time-dependent consensus model. This model captures three intuitive ideas: 
+In the second case, $\VERA$ selects the candidate ensembling which satisfies a time-dependent consensus model. This model captures three intuitive ideas: 
 \begin{inparaenum}[(i)]
 \item Initially, very few sources with diverse authoritativeness degrees may observe an event and report information  (e.g., in case of disaster or  bombing). As long as the information is  not confirmed (or denied)  by a sufficient number of other independent sources, unknown or non-reputable  sources should not be penalized and the authoritativeness of the sources should not influence the veracity estimation;
 \item The number of conflicting information claimed by multiple sources has a decreasing variability in time; and
-\item  The majority of sources cannot be trusted until a certain time-point where a consensus on the fact (i.e., the true value) is reached as illustrated in Figure 2.
+\item  The majority of sources cannot be trusted until a certain time-point where a consensus of the values and the fact (i.e., the true value) is reached.
 \end{inparaenum}
 
-Truth discovery is hard in practical scenarios because there is often no prior ground truth guiding
-the selection of an algorithm, in particular when the context is dynamic. More importantly, a large set of labeled 
-data (or training data) is generally out-of-reach in the context of Web and social media data. As a consequence, it remains usually
-hard to evaluate the precision/recall of existing algorithms on real-world data. %
-
-However, users may have background knowledge about some real-world facts or about the reliability of particular sources. Such knowledge can be very valuable not only \emph{a priori} for guiding $\VERA$ truth discovery computation, but also \emph{a posteriori} 
-for evaluating and backtracking the errors.
-
-In our demonstration scenarios, we will show the two operational modes of $\VERA$ which combines truth discovery and open information extraction with ensemble-based active learning for estimating data veracity with  and without prior knowledge of the user, also learning from posterior knowledge in order to improve the next truth discovery computations.% 
+Once the  truth discovery methods have been applied to the set of claims (illustrated in \circled{7} of Figure 1) and  ensembling is  achieved to combine the results  in \circled{8}, the final veracity scores of the claims as well as the trustworthiness scores of the sources are stored in the relational database. Finally, the user  can  visualize, filter,  and export  the results and get in-depth explanation in \circled{9}.
 
 \subsection{Result Exploration}\label{visu}
-$\VERA$ features a layer for result visualization and explanation
-basically consisting of a set of Web user interfaces (panels and
-option widgets) and decision algorithms which respectively enable
- viewing and browsing the truth discovery results 
-  to obtain more deeper insights and understand 
+$\VERA$  result visualization and explanation
+ consists of a set of Web user interfaces (panels and
+option widgets) to explore the truth discovery results 
+ and obtain more deeper insights and understanding of 
 how the estimation of the veracity of each claim has been computed
-by the system. This layer also provides the ability to input truth
-labels for a limited subset of claims. Explanation is accomplished
+by the system.   
+Explanation is accomplished
 in $\VERA$ through APIs whereas result visualization
 renders the output of the truth discovery process to ease
 user exploration and interaction with the system, as we will detail hereafter.
@@ -58,9 +59,8 @@ user exploration and interaction with the system, as we will detail hereafter.
 
 \noindent{\bf Visualization.}
 $\VERA$ currently supports three artifacts to visualize
-and browse  the results of query answering. When a  user query is submitted to $\VERA$,
-candidate claims are extracted and truth discovery computation is performed. 
-A list-based artifact then presents the candidate
+and browse  the results of query answering.
+A list-based artifact presents the candidate
 answers to the user. For each object property 
 related to the user query, the candidate answers are ranked
  in a decreasing order of veracity scores, 
@@ -71,26 +71,24 @@ answer, its  veracity score and label (\url{True} or \url{False})
 returned by the Truth Discovery layer, with the option widget to view 
 the set of sources supporting it (\url{view_sources}), and an illustrative
 excerpt from the content of the Web document or tweet from which the answer has
-been extracted. Candidate claims are presented to the user with an
-additional widget option \url{user_input_label} that enables the user
-to eventually propose a labelling or add background knowledge. 
+been extracted (as a textual evidence).  As illustrated in Figure 2, the user can also visualize source polarity represented as a Sankey diagram where sources on the left side propose common false (red) and true (green) values on the right side of the diagram for object properties with a given number of conflicting values. 
 For further result exploration, $\VERA$ 
 has set two other visualization artifacts. Indeed, when the user
 chooses the option widget \url{view_sources}, $\VERA$  presents the
 complete list of sources which support the corresponding claim, their
 trustworthiness scores computed by the Truth Discovery layer, and their
-associated corpus. Finally, the user can access to the explanation
+associated corpora. Finally, the user can access to the explanation
 window to better understand the  estimation of the veracity
 score of a particular answer by clicking on it.
 
 
 \noindent{\bf Explanation.}
 $\VERA$ relies on DAFNA API \cite{Wagui15} to generate explanations for the results of the truth discovery process. 
-It is accessible via its endpoint \textbf{runs}. Given a claim identifier, the system can explain how the returned score of veracity has been
-computed using the  ensemble of truth discovery algorithms. %
+It is accessible via its endpoint \texttt{runs}. Given a claim identifier, the system can explain how the returned scores of veracity have been
+computed by the  ensemble of truth discovery algorithms.  
 
 To this end, DAFNA builds an explanation decision tree representing the different
-choices made by the ensemble applied to the candidate answers. 
+choices made by the methods applied to the candidate answers. 
 Every decision tree is  built from the
 number of supporting vs. disagreeing sources,  their trustworthy levels, and the set of conflicting values. $\VERA$ leverages the explanation functionality of DAFNA  to provide insights of the results when requested by the
 user.

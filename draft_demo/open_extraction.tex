@@ -1,77 +1,99 @@
 % Information Extraction Technique
 \selectlanguage{english}
-\section{VERA Platform}
+\section{VERA Architecture}
 
 
-$\VERA$ platform architecture and its workflow (from 1 to 9) are depicted in Figure 1. Our system is composed of four layers:
+$\VERA$ platform architecture and its workflow (from \circled{1} to \circled{9}) are depicted in Figure 1. Our system is composed of four layers:
 \begin{inparaenum}[(1)]
-\item Information Extraction layer is in charge of querying the corpus of Web documents and tweets, discovering new resources and expanding the user query (e.g., the query \textquote{number of people killed in November 2015 Paris attacks} is expanded by related keywords queries such as  \textquote{how many dead in Paris terrorist attacks},
-\textquote{Paris victims}, and \textquote{Paris shootings  casualties}); this layer applies various text processing techniques to extract relevant information items; 
-\item Data Fusion layer is in charge of   transforming extracted information  into structured claims and applies various data formatting and curation techniques including deduplication and entity resolution; it groups together the structured claims referring to the same real-world event or entity property; 
-\item Truth Discovery layer is responsible for executing and ensembling various truth discovery methods; it determines  which claims are true or false by computing their veracity scores and estimating the trustworthiness scores of the sources. This layer can integrate users' a priori knowledge (when available), e.g., about the reliability of certain sources or the hardness of certain claims;
+\item Information Extraction layer is in charge of querying the corpus of Web documents and tweets, discovering new resources and expanding the user query --e.g., the query \textquote{number of people killed in November 2015 Paris attacks} is expanded by related keywords queries such as  \textquote{how many dead in Paris terrorist attacks},
+\textquote{Paris victims}, and \textquote{Paris shootings  casualties}; this layer applies various text processing techniques to extract relevant information items; 
+\item Data Fusion layer is in charge of   transforming extracted information  into structured claims and it applies various data formatting and curation techniques including deduplication and entity resolution; it groups together the structured claims referring to the same real-world event or entity property; 
+\item Truth Discovery layer is responsible for executing and ensembling various truth discovery methods; it determines  which claims are true or false by computing their veracity scores and estimating the trustworthiness scores of the sources. This layer can integrate users' a priori knowledge (when available), e.g., reliability score of certain sources or  hardness of certain claims;
 \item Result Exploration and Visualization layer provides three  types of result: 
 \begin{inparaenum}[(i)]
-\item veracity score and label for each claim and trustworthiness score for each source;
-\item explanations of the truth discovery results;
-\item and various visualization artifacts for exploring source polarity and claim controversy.
+\item veracity score and label for each claim and trustworthiness score for each source; 
+\item explanations of the truth discovery results; and
+\item visualization artifacts for exploring source polarity, claim controversy, and textual evidences.
 \end{inparaenum}
 \end{inparaenum}
 
 \subsection{Information Extraction and Data Fusion}\label{openie}
 
 \noindent{\bf Information Extraction. } 
-Information extraction in $\VERA$ is modular and  various information extractors can be added depending on the initial set of resources  and the application domain of the query. Currently, $\VERA$ uses four extractors: TextRunner~\cite{Yates07}, TweetIE~\cite{twitie}, DeepDive~\cite{Zha15}, and {\small\texttt{import.io}}\footnote{\scriptsize{\url{https://import.io}}}. TextRunner is  used as an open information extraction system from a predefined set of Web corpus including \emph{Google}, \emph{ClueWeb}, \emph{News}, \emph{Nell}, and 
+Information extraction in $\VERA$ is modular and  various information extractors can be added depending on the initial set of resources  and the application domain of the query scenarios. Currently, $\VERA$ can use three  extractors: TextRunner\footnote{\scriptsize{\url{http://openie.allenai.org/}}}
+%~\cite{Yates07}, 
+TweetIE\footnote{\scriptsize{\url{https://gate.ac.uk/wiki/twitie.html}}}, and 
+%~\cite{twitie}, 
+DeepDive\footnote{\scriptsize{\url{http://deepdive.stanford.edu/}}}.
+%~\cite{Zha15}, 
+%and {\small\texttt{import.io}}\footnote{\scriptsize{\url{https://import.io}}}. 
+
+TextRunner is an open information extraction system applied to a predefined set of Web corpus including \emph{Google}, \emph{ClueWeb}, \emph{News}, \emph{Nell}, and 
 \emph{Wikipedia} corpus. Each particular corpus aggregates data from various  
- Web sources and domain-specific Websites.
+ Web sources and domain-specific Websites.  When a user query is submitted to $\VERA$ in \circled{1} of Figure 1, it is reformulated and expanded based on a dictionary \circled{2}. Relevant information sources are identified in \circled{3}  and submitted to information extractors. Then, the extractor extracts a set of candidate answers to the query using natural language processing techniques and other external resources in \circled{4}. For example, in the case of TextRunner, Freebase ontology\footnote{\scriptsize{\url{https://www.freebase.com/}}} is leveraged and the user query is transformed into a triplet $(\e{1}, \rel{}, \e{2})$ and sent to TextRunner. The argument $\rel{}$  specifies a possible relationship between the two entities $\e{1}$ and $\e{2}$. 
+Partial knowledge about the real-world can be captured when  one  argument is unknown and TextRunner extracts  the candidate values.  $\VERA$ then transforms the set of candidate answers and completes the output of TextRunner with the identifiers of its respective sources. 
 
-When a user query is submitted to $\VERA$, it is reformulated and submitted to user-selected extractors to query the 
-sources of the corpora. Then, each extractor extracts a set of candidate answers using natural language processing techniques and other external resources: for example, in the case of TextRunner, Freebase ontology\footnote{\scriptsize{\url{https://www.freebase.com/}}} is leveraged and the user query is transformed into a triplet $(\e{1}, \rel{}, \e{2})$ and sent to TextRunner. The argument $\rel{}$  specifies a possible relationship between the two entities $\e{1}$ and $\e{2}$. 
-Partial knowledge about the real-world can be captured when  one  argument is unknown and TextRunner  finds out every possible candidate values.  $\VERA$ then transforms the set of candidate answers and completes the output of TextRunner with its respective identified sources. 
-
-
-To expand the Web corpus, one can specify DeepDive extractors or use external APIs such as {\small\texttt{import.io}}. In the case of DeepDive, each predefined extractor takes as input a collection of textual documents and a set of labeled examples of relations (using DBpedia knowledge base, for example). DeepDive extractor instance first extracts entities and candidates relationships by leveraging the outputs of natural language processing over the training examples. Then, it uses statistical learning with  user-defined inference rules and training examples of the relations to extract.
+To expand the Web corpus,  DeepDive extractors can be specified and used as well as other external APIs. % such as {\small\texttt{import.io}}.
+In the case of DeepDive, each predefined extractor takes as input a collection of textual documents and a set of labeled examples of relations (using DBpedia knowledge base, for example). DeepDive extractor instance first extracts entities and candidates relationships by leveraging the outputs of natural language processing over the training examples. Then, it uses statistical learning with  user-defined inference rules and training examples of the relations to extract.
  
-As for TwitIE, it is applied, when chosen, to the set of tweets collected on-demand regarding a given user query. It is used for natural language and micro-text processing, named entity recognition, and relation extraction from tweets. Additional scripts have been developed for filtering non-textual contents and  tweets that are irrelevant to the user query.
+For information extraction from micro-texts, TwitIE  can be applied to a set of tweets previously collected regarding a particular event. Real-time extraction is currently not supported. TwitIE is used for natural language and micro-text processing, named entity recognition, and relation extraction from tweets. Additional scripts have been developed for filtering non-textual contents and  tweets that are irrelevant to the user query.
 
-\noindent{\bf Data Fusion. }
-Once information is extracted by the extractor instances of TextRunner, DeepDive, {\small\texttt{import.io}}, and TwitIE, 
-it is transformed into a  structured  claim such as: 
-{\small\texttt{(\textsf{claimID}, \textsf{sourceID}, \textsf{Object:Property}, \textsf{claimedValue}, \textsf{timestamp},\textsf{evidence})}}. Each claim has an identifier, a source identifier, a value for a particular property of the queried object, a timestamp and the content from which the claim has been extracted as a textual evidence.
-Entity resolution is achieved to group the claims referring to the same real-world entity and  property into the same cluster.
-The clusters of quadruplets constitute the input data of the Truth Discovery layer. 
-An illustrative example of cluster for the property {\small\texttt{NumberOfVictims}} for the object {\small\texttt{November\_2015\_France\_Terrorist\_Attack}}  is given in Table 1.
-\begin{table*}[ht]
- \begin{minipage}[b]{0.66\textwidth}
+\noindent{\bf Data Fusion.} 
+Once information is extracted by the extractor instances of TextRunner, DeepDive, %{\small\texttt{import.io}}, 
+or TwitIE, 
+it is transformed into a  structured  claim (in \circled{5} of Figure 1) in the following form of a quadruplet: 
+{\small\texttt{(\textsf{claimID}, \textsf{sourceID}, \textsf{Object:Property}, \textsf{claimedValue}, \textsf{timestamp})}}. Each claim has an identifier, a source identifier, a value for a particular property of the queried object, and a timestamp. %with the content from which the claim has been extracted as a textual evidence. 
+Entity resolution is achieved to group the claims referring to the same real-world entity and  property into the same cluster. Table 1 gives an illustrative example of the claims related to the same event collected from Tweeter and Web sources answering the query  "How many victims in Paris Attacks in November 2015?". Claim quadruplets are stored in  a PostgreSQL database instance through Amazon S3 for result exploration tasks and truth discovery processes in \circled{6}. 
+Claims constitute the input data of the Truth Discovery layer  in \circled{7}. 
+
+
+  %{\small\texttt{November\_2015\_France\_Terrorist\_Attack}}.
+\begin{table*}[t]
+% \begin{minipage}[b]{0.66\textwidth}
     \centering
-  \scriptsize  
-\begin{tabular}{|p{.8cm}|p{2cm}|p{1.2cm}|p{4.5cm}|p{1.5cm}|}
+  \begin{scriptsize}
+\begin{tabular}{|p{4cm}|p{.8cm}|p{2cm}|p{1.2cm}|p{5.5cm}|p{1.5cm}|}
 \hline
-{\bf Claim}  & {\bf Source}&{\bf Extracted Value} & {\bf Textual Evidence}&{\bf Timestamp} \\
+{\bf Object:Property}  & {\bf Claim}  & {\bf Source}&{\bf  Value} & {\bf Textual Evidence}&{\bf Timestamp} \\
 \hline
-$C_5$& \scriptsize{\url{cnn.com}} &At least 128&  Paris massacre: At least 128 killed in gunfire and blasts, French officials say&Nov 27, 2015\\
+&$C_5$& \scriptsize{\url{cnn.com}} &At least 128&  Paris massacre: At least 128 killed in gunfire and blasts, French officials say&Nov 27, 2015\\
+\cline{2-6}
+&$C_4$& \scriptsize{\url{theguardian}}&120&Paris attacks kill more than 120 people -- as it happened& Nov 26, 2015\\
+\cline{2-6}
+Nov2015\_Paris\_Attacks:NbOfVictims&$C_3$& \scriptsize{\url{news.sky.com}}&130&Number Of Paris Attacks Victims Rises To 130&Nov 20, 2015\\
+\cline{2-6}
+&$C_2$& \scriptsize{\url{bbc.com}}&130&Tributes have been paid to the 130 people who lost their lives in the Paris terror attacks.&Nov 16, 2015\\
+\cline{2-6}
+&$C_1$& \scriptsize{\url{@TBurgesWatson}}&35& BREAKING.This is what we know: 35 dead, 100 hostages taken at a concert venue. Various drive by shootings. Explosions at a \#Paris stadium. & Nov 13, 2015\\
 \hline
-$C_4$& \scriptsize{\url{theguardian}}&120&Paris attacks kill more than 120 people -- as it happened& Nov 26, 2015\\
-\hline
-$C_3$& \scriptsize{\url{news.sky.com}}&130&Number Of Paris Attacks Victims Rises To 130&Nov 20, 2015\\
-\hline
-$C_2$& \scriptsize{\url{bbc.com}}&130&Tributes have been paid to the 130 people who lost their lives in the Paris terror attacks.&Nov 16, 2015\\
-\hline
-$C_1$& \scriptsize{\url{@TBurgesWatson}}&35& BREAKING.This is what we know: 35 dead, 100 hostages taken at a concert venue. Various drive by shootings. Explosions at a \#Paris stadium. & Nov 13, 2015\\
-\hline
-      \end{tabular}
-    \captionof{table}{Example of conflicting answers for the query "How many victims in Paris Attacks"}
-  %    \caption{Example of conflicting answers for the query "How many victims in Paris Attacks"}
-    \end{minipage}
-   \hfill
-  \begin{minipage}[b]{0.3\textwidth}
-    \centering
+%
+%
+%\begin{tabular}{|p{.8cm}|p{2cm}|p{1cm}|p{3.3cm}|}
+%\hline
+%{\bf Claim}  & {\bf Source}&{\bf Extracted Value} & {\bf Textual Evidence} \\
+%\hline
+%$C_5$& \scriptsize{\url{cnn.com}} &At least 128&  Paris massacre: At least 128 killed in gunfire and blasts, French officials say\\
+%\hline
+%$C_4$& \scriptsize{\url{theguardian}}&120&Paris attacks kill more than 120 people -- as it happened\\
+%\hline
+%$C_3$& \scriptsize{\url{news.sky.com}}&130&Number Of Paris Attacks Victims Rises To 130\\
+%\hline
+%$C_2$& \scriptsize{\url{bbc.com}}&130&Tributes have been paid to the 130 people who lost their lives in the Paris terror attacks.\\
+%\hline
+%$C_1$& \scriptsize{\url{@TBurgesWatson}}&35& BREAKING.This is what we know: 35 dead, 100 hostages taken at a concert venue. Various drive by shootings. Explosions at a \#Paris stadium. \\
+%\hline
+ \end{tabular}
+\end{scriptsize}
+    \captionof{table}{Example of conflicting answers for the query "How many victims in Paris Attacks in November 2015?"}
+%    \end{minipage}
+%   \hfill
+%  \begin{minipage}[b]{0.3\textwidth}
+%    \centering
+% 
+%  \includegraphics[width=.98\linewidth]{fig-2.pdf}
  
-  \includegraphics[width=.98\linewidth]{fig-2.pdf}
- 
-    \captionof{figure}{Illustration of Time-dependent Consensus}
-  \end{minipage}
+ %   \captionof{figure}{Illustration of Time-dependent Consensus}
+ % \end{minipage}
 \end{table*}
 
 
-\noindent{\bf Storage. }
-Queries, claims,  labels and scores are stored in a PostgreSQL database instance through Amazon S3 for result exploration tasks or truth discovery processes.

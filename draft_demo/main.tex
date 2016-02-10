@@ -1,4 +1,4 @@
-\documentclass{sig-alternate}
+\documentclass{sig-alternate-2013}
 \usepackage[english]{babel}
 \usepackage{graphicx}
 \usepackage{microtype}
@@ -16,6 +16,9 @@
 \usepackage{booktabs}
 \usepackage{csquotes}
 \usepackage{paralist}
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
 
 \newcommand{\qset}{\ensuremath{\mathcal{Q}}}
 \newcommand{\query}{\ensuremath{\mathit{q}}}
@@ -30,32 +33,33 @@
 \newcommand{\FALSE}{\ensuremath{\mathsf{false}}}
 \newcommand{\VERA}{\ensuremath{\mathsf{VERA}}}
 
+\permission{Copyright is held by the author/owners.}
+\conferenceinfo{WWW'16 Companion,}{April 11--15, 2016, Montr\'eal, Qu\'ebec, Canada.}
+\copyrightetc{ACM \the\acmcopyr}
+\crdata{978-1-4503-4144-8/16/04. \\
+http://dx.doi.org/10.1145/2872518.2890536}
+% be sure to update the red text with your assigned DOI from ACM
+
+\clubpenalty=10000
+\widowpenalty = 10000
+
 
 \begin{document}
-%\conferenceinfo{WWW'16,} {April 11--15, Montreal, Canada}
-% \CopyrightYear{2016}
-% \crdata{-------}
- \clubpenalty=10000
- \widowpenalty = 10000
 
 
 
 \title{VERA: A Platform for Veracity Estimation over Web Data}
 
-%\iffalse
-%*** Lamine: proposition for another title ***
-%\title{VERA: A Platform for Structured Web Data Extraction and Veracity Estimation}
-%\fi
+
 
 \numberofauthors{1} 
 \author{
 \alignauthor
-Mouhamadou Lamine Ba, Laure Berti-Equille, Hossam M. Hammady\\
+Mouhamadou Lamine Ba, Laure Berti-Equille, Kushal Shah, Hossam M. Hammady\\
        \affaddr{Qatar Computing Research Institute}\\
        \affaddr{Hamad Bin Khalifa University}\\
-       %\affaddr{Tornado Tower, West Bay}\\
        \affaddr{Doha, Qatar}\\
-       \email{\{mlba,lberti,hhammady\}@qf.org.qa}
+       \email{\{mlba,lberti,kshah,hhammady\}@qf.org.qa}
 }
 
 \maketitle
@@ -66,26 +70,16 @@ Mouhamadou Lamine Ba, Laure Berti-Equille, Hossam M. Hammady\\
 {
 \begin{abstract}
 Social networks and the Web in general are characterized by multiple information sources often claiming conflicting data values.
-Data veracity is hard to estimate, especially when there is no prior knowledge about the sources or the claims and in 
-time-dependent scenarios where initially very few observers can report first information. Despite the wide set of recently proposed truth
+Data veracity is hard to estimate, especially when there is no prior knowledge about the sources or the claims in 
+time-dependent scenarios (e.g., crisis situation) where initially very few observers can report first information. Despite the wide set of recently proposed truth
 discovery approaches, \textquote{no-one-fits-all} solution emerges for estimating the veracity of on-line information in open contexts.
-However, analyzing the space of information conflicts and sources' agreements might be relevant, as well as ensembling multiple
+However, analyzing the space of conflicting information and disagreeing sources might be relevant, as well as ensembling multiple
 truth discovery methods. This demonstration presents $\VERA$, a Web-based platform that supports information extraction from Web textual data 
-and micro-texts from Twitter and estimates data veracity. Given a user query, $\VERA$  systematically extracts entities and relations from Web content, structures them as claims relevant to the query,  expands the query  for gathering more evidences and conflicting/corroborating information. 
-Finally, $\VERA$ combines multiple truth discovery algorithms through active learning and returns the  veracity label and score of each data value  and the trustworthiness scores of the sources. $\VERA$ will be demonstrated through several real-world scenarios to show its potential
-value for on-line time-dependent fact-checking.
+and micro-texts from Twitter and estimates data veracity. Given a user query, $\VERA$  systematically extracts entities and relations from Web content, structures them as claims relevant to the query and gathers more conflicting/corroborating information. $\VERA$ combines multiple truth discovery algorithms through ensembling  and  returns the  veracity label and score of each data value  as well as the trustworthiness scores of the sources. $\VERA$ will be demonstrated through several real-world scenarios to show its potential
+value for fact-checking from Web data.
 \end{abstract}
 
-% A category with the (minimum) three required fields
-%\category{H.4}{Information Systems Applications}{Miscellaneous}
-%A category including the fourth, optional field follows...
-%\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
 
-%\terms{Theory}
-
-%\keywords{ACM proceedings, \LaTeX, text tagging}
-
-% Introduction
 \input{intro}
 
 
@@ -100,10 +94,10 @@ value for on-line time-dependent fact-checking.
 \input{demonstration}
 
 
-\begin{small}
+%\begin{small}
 \bibliographystyle{abbrv}
 \bibliography{biblio}
-\end{small}
+%\end{small}
 }
 \end{sloppypar}
 \end{document}
